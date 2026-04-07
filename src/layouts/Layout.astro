@@ -1,0 +1,145 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description?: string;
+  canonicalURL?: string;
+}
+
+const { 
+  title, 
+  description = "Hospital Christus Sur - Excelencia Médica a tu alcance.",
+  canonicalURL = Astro.url.href 
+} = Astro.props;
+
+const schemaMarkup = {
+  "@context": "https://schema.org",
+  "@type": "MedicalOrganization",
+  "name": "Hospital Christus Sur",
+  "url": canonicalURL,
+  "logo": "/images/logo.png",
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "telephone": "+52-81-0000-0000",
+    "contactType": "Urgencias",
+    "availableLanguage": ["es", "en"]
+  }
+};
+---
+
+<!doctype html>
+<html lang="es" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    
+    <!-- SEO Meta Tags -->
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalURL} />
+    
+    <!-- Google Fonts: Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    
+    <!-- CDNs (Phosphor Icons, Swiper) -->
+    <script src="https://unpkg.com/@phosphor-icons/web" defer></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    
+    <!-- Schema.org JSON-LD -->
+    <script type="application/ld+json" set:html={JSON.stringify(schemaMarkup)} />
+  </head>
+  <body class="font-sans antialiased bg-slate-50 text-slate-900 overflow-x-hidden">
+    
+    <!-- Header (Sticky & Glassmorphism) -->
+    <header class="fixed top-0 w-full z-50 glass-card">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center h-20">
+          <a href="/" class="flex-shrink-0 flex items-center">
+            <img class="h-10 w-auto" src="/images/logo.png" alt="Hospital Christus Sur Logo" width="150" height="40" />
+          </a>
+          
+          <!-- Mega Menú -->
+          <nav class="hidden md:flex space-x-8 items-center">
+            <a href="/cirugias" class="text-sm font-semibold hover:text-brand-blue transition-colors">Cirugías</a>
+            <a href="/maternidad" class="text-sm font-semibold hover:text-brand-blue transition-colors">Maternidad</a>
+            <a href="/directorio-medico" class="text-sm font-semibold hover:text-brand-blue transition-colors">Directorio Médico</a>
+            <a href="/blog" class="text-sm font-semibold hover:text-brand-blue transition-colors">Blog</a>
+          </nav>
+
+          <!-- Botón de Urgencias -->
+          <div class="flex items-center">
+            <a href="/urgencias" class="inline-flex items-center justify-center px-6 py-2.5 border border-transparent text-sm font-bold rounded-full text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 transition-all shadow-md">
+              <i class="ph ph-warning-circle text-lg mr-2"></i>
+              Urgencias
+            </a>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Slot Content wrapped in GSAP animation container -->
+    <main id="main-content" class="min-h-screen pt-20 opacity-0 transform scale-95">
+      <slot />
+    </main>
+
+    <!-- Footer Minimalista Arquitectura de Enlaces SEO -->
+    <footer class="bg-gray-900 text-white py-12">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div>
+          <img src="/images/logo.png" alt="Logo White" class="h-8 mb-4 grayscale brightness-200">
+          <p class="text-gray-400 text-sm">Excelencia médica y cuidado humano a tu alcance.</p>
+        </div>
+        <div>
+          <h3 class="text-sm font-semibold tracking-wider text-gray-300 mb-4 uppercase">Servicios</h3>
+          <ul class="space-y-2 text-sm text-gray-400">
+            <li><a href="/cirugias" class="hover:text-brand-cyan transition-colors">Especialidades Quirúrgicas</a></li>
+            <li><a href="/maternidad" class="hover:text-brand-cyan transition-colors">Maternidad</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="text-sm font-semibold tracking-wider text-gray-300 mb-4 uppercase">Hospital</h3>
+          <ul class="space-y-2 text-sm text-gray-400">
+            <li><a href="/directorio-medico" class="hover:text-brand-cyan transition-colors">Directorio Médico</a></li>
+            <li><a href="/blog" class="hover:text-brand-cyan transition-colors">Blog y Educación</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="text-sm font-semibold tracking-wider text-gray-300 mb-4 uppercase">Contacto</h3>
+          <ul class="space-y-2 text-sm text-gray-400">
+            <li><a href="/contacto" class="hover:text-brand-cyan transition-colors">Ubicación y Teléfonos</a></li>
+            <li><a href="/urgencias" class="text-red-400 font-medium hover:text-red-300 transition-colors">Urgencias Médicas</a></li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+
+    <!-- GSAP & Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js" defer></script>
+
+    <script is:inline>
+      document.addEventListener('DOMContentLoaded', () => {
+        // En Astro este event listener asegura que se ejecute después de cargar el DOM
+        if (typeof window.gsap !== 'undefined') {
+          // Registra plugins
+          window.gsap.registerPlugin(window.ScrollTrigger);
+
+          // Animación inicial Fade-in + Scale
+          window.gsap.to('#main-content', {
+            duration: 1,
+            opacity: 1,
+            scale: 1,
+            ease: 'power3.out',
+            clearProps: 'all'
+          });
+        }
+      });
+    </script>
+  </body>
+</html>

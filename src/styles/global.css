@@ -1,0 +1,13 @@
+@import "tailwindcss";
+
+@theme {
+  --color-brand-blue: #004b87;
+  --color-brand-cyan: #00a3e0;
+  --color-glass: rgba(255, 255, 255, 0.7);
+
+  --font-sans: "Plus Jakarta Sans", sans-serif;
+}
+
+@utility glass-card {
+  @apply backdrop-blur-md border border-white/20 bg-glass hover:bg-white/80 transition-all duration-300;
+}

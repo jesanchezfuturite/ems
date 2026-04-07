@@ -1,0 +1,69 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Inicio - Hospital Christus Sur">
+  <section class="relative bg-brand-blue overflow-hidden min-h-[600px] flex items-center mt-20">
+    <div class="absolute inset-0 bg-gradient-to-r from-brand-blue to-brand-cyan/80 mix-blend-multiply pointer-events-none"></div>
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-white z-10 w-full py-24">
+      <div class="max-w-3xl">
+        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight mb-6 mt-12 md:mt-0">
+          Cuidado humano<br /> y excelencia médica.
+        </h1>
+        <p class="text-xl sm:text-2xl text-white/90 mb-10 max-w-2xl font-light">
+          Innovación tecnológica para la salud y el bienestar de tu familia en el sur de la ciudad.
+        </p>
+        <div class="flex flex-wrap gap-4">
+          <a href="/directorio-medico" class="bg-white text-brand-blue px-8 py-3 rounded-full font-bold hover:bg-slate-100 transition-colors shadow-lg">
+            Encuentra un Especialista
+          </a>
+          <a href="/contacto" class="glass-card text-white px-8 py-3 rounded-full font-bold hover:bg-white/20 transition-colors shadow-lg">
+            Agendar Cita
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Servicios Rápidos -->
+  <section class="py-20 bg-slate-50 relative -mt-16 z-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        
+        <div class="bg-white rounded-2xl p-8 shadow-xl shadow-slate-200/50 hover:-translate-y-2 transition-transform duration-300 border border-slate-100">
+          <div class="bg-blue-50 w-14 h-14 rounded-xl flex items-center justify-center mb-6 text-brand-blue">
+            <i class="ph ph-heartbeat text-3xl"></i>
+          </div>
+          <h3 class="text-xl font-bold text-slate-900 mb-3">Especialidades</h3>
+          <p class="text-slate-600 mb-6 font-medium">Contamos con un equipo multidisciplinario altamente calificado.</p>
+          <a href="/especialidades" class="text-brand-cyan font-bold hover:text-brand-blue transition-colors flex items-center">
+            Ver todas <i class="ph ph-arrow-right ml-2"></i>
+          </a>
+        </div>
+
+        <div class="bg-white rounded-2xl p-8 shadow-xl shadow-slate-200/50 hover:-translate-y-2 transition-transform duration-300 border border-slate-100">
+          <div class="bg-blue-50 w-14 h-14 rounded-xl flex items-center justify-center mb-6 text-brand-blue">
+            <i class="ph ph-baby text-3xl"></i>
+          </div>
+          <h3 class="text-xl font-bold text-slate-900 mb-3">Maternidad</h3>
+          <p class="text-slate-600 mb-6 font-medium">Instalaciones de primer nivel para recibir a tu bebé.</p>
+          <a href="/maternidad" class="text-brand-cyan font-bold hover:text-brand-blue transition-colors flex items-center">
+            Conocer paquetes <i class="ph ph-arrow-right ml-2"></i>
+          </a>
+        </div>
+
+        <div class="bg-white rounded-2xl p-8 shadow-xl shadow-slate-200/50 hover:-translate-y-2 transition-transform duration-300 border border-slate-100">
+          <div class="bg-blue-50 w-14 h-14 rounded-xl flex items-center justify-center mb-6 text-brand-blue">
+            <i class="ph ph-first-aid text-3xl"></i>
+          </div>
+          <h3 class="text-xl font-bold text-slate-900 mb-3">Cirugía Ambulatoria</h3>
+          <p class="text-slate-600 mb-6 font-medium">Procedimientos seguros con la más rápida recuperación.</p>
+          <a href="/cirugias" class="text-brand-cyan font-bold hover:text-brand-blue transition-colors flex items-center">
+            Tipos de cirugías <i class="ph ph-arrow-right ml-2"></i>
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+</Layout>
