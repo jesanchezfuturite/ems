@@ -1,0 +1,235 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+// Llamada al API
+let articles: any[] = [];
+try {
+  const res = await fetch('https://hospital.futurite.info/api/v1/public/blog-articles');
+  const json = await res.json();
+  if (json.Code === 200 && json.data) {
+    articles = json.data;
+  }
+} catch (err) {
+  console.error("Error fetching articles", err);
+}
+
+// Asegurar ordenamiento (más reciente primero)
+articles.sort((a, b) => new Date(b.created_at).valueOf() - new Date(a.created_at).valueOf());
+
+// Función auxiliar para extraer extractos (excerpts) seguros desde HTML (limpiando tags rudimentariamente)
+const stripHtml = (html: string) => {
+  if (!html) return "";
+  return html.replace(/<[^>]*>?/gm, '').substring(0, 160) + '...';
+};
+
+// Datos del Post destacado (Hero)
+const featuredPost = articles.length > 0 ? articles[0] : null;
+const regularPosts = articles.length > 0 ? articles.slice(1) : [];
+
+// Categorías únicas basadas en los tags de cada post devuelto por la API
+const allTagsSet = new Set<string>();
+articles.forEach(article => {
+  if (article.tags && Array.isArray(article.tags)) {
+    article.tags.forEach(t => allTagsSet.add(t));
+  }
+});
+const categories = ['Todas', ...Array.from(allTagsSet)];
+---
+
+<Layout 
+  title="Revista Médica Digital | Centro de Especialidades Médicas"
+  description="Mantente informado con los artículos médicos más recientes sobre nuestro catálogo de especialidades: maternidad, bariatría, salud y tecnología quirúrgica."
+>
+  <section class="bg-slate-50 pt-20 pb-12 overflow-hidden relative border-b border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div class="text-center mb-10">
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-brand-blue tracking-tight mb-4">Revista Médica Digital</h1>
+        <p class="text-lg text-slate-600 max-w-2xl mx-auto leading-relaxed">Conocimiento, innovación y prevención directamente de nuestros especialistas para el cuidado de tu salud.</p>
+      </div>
+
+      <!-- Filtros (Pills) -->
+      <div class="flex flex-wrap items-center justify-center gap-3 mb-10" id="blog-filters">
+        {categories.map((cat, index) => (
+          <button 
+            class={`blog-chip px-5 py-2 rounded-full text-sm font-semibold transition-colors shadow-sm ${index === 0 ? 'bg-brand-blue text-white shadow-md' : 'bg-white text-slate-600 border border-slate-200 hover:border-brand-cyan hover:text-brand-cyan'}`}
+            data-filter={cat}
+          >
+            {cat}
+          </button>
+        ))}
+      </div>
+
+      <!-- Hero Featured Post (Último artículo) -->
+      {featuredPost && (
+        <a href={`/blog/${featuredPost.slug}`} class="block group featured-post-link">
+          <div class="relative w-full h-[400px] md:h-[500px] rounded-[32px] overflow-hidden shadow-2xl">
+            <!-- Imagen Blur Background -->
+            <img 
+              src={featuredPost.cover_image} 
+              alt={featuredPost.title} 
+              class="absolute inset-0 w-full h-full object-cover transform scale-105 group-hover:scale-110 transition-transform duration-1000 ease-in-out" 
+            />
+            <div class="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/40 to-transparent"></div>
+            
+            <!-- Contenido Glassmorphism inferior -->
+            <div class="absolute bottom-0 left-0 right-0 p-6 md:p-10">
+              <div class="bg-white/10 backdrop-blur-md border border-white/20 p-6 md:p-8 rounded-[24px] max-w-3xl">
+                <span class="inline-block bg-brand-cyan text-white px-3 py-1 rounded-md text-xs font-bold tracking-widest uppercase mb-4">
+                  {featuredPost.tags && featuredPost.tags.length > 0 ? featuredPost.tags[0] : 'Salud General'}
+                </span>
+                <h2 class="text-2xl md:text-4xl font-bold text-white mb-3 group-hover:text-cyan-200 transition-colors leading-tight">
+                  {featuredPost.title}
+                </h2>
+                <p class="text-white/80 line-clamp-2 md:line-clamp-3 mb-4 text-base md:text-lg">
+                  {stripHtml(featuredPost.content)}
+                </p>
+                <div class="flex items-center text-white/90 text-sm font-semibold mt-4">
+                  <div class="w-8 h-8 rounded-full bg-slate-300 mr-3 flex items-center justify-center overflow-hidden border border-white/50">
+                    <i class="ph ph-user text-slate-500"></i>
+                  </div>
+                  <span>Christus Muguerza</span>
+                  <span class="mx-3 text-white/50">•</span>
+                  <span>{new Date(featuredPost.created_at).toLocaleDateString('es-MX', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </a>
+      )}
+    </div>
+  </section>
+
+  <!-- Article Grid -->
+  <section class="py-20 bg-white min-h-[50vh]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div id="blog-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+        
+        {regularPosts.map((post) => (
+          <article class="blog-card flex flex-col bg-white rounded-3xl overflow-hidden border border-slate-100 shadow-sm hover:shadow-xl hover:border-brand-cyan/20 transition-all duration-300 group" data-category={post.tags && post.tags.length > 0 ? post.tags.join(',') : 'Salud General'}>
+            <a href={`/blog/${post.slug}`} class="block relative overflow-hidden aspect-[16/9]">
+              <img 
+                src={post.cover_image} 
+                alt={post.title} 
+                loading="lazy"
+                class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700 ease-in-out" 
+              />
+              <div class="absolute inset-0 bg-brand-blue/0 group-hover:bg-brand-blue/10 transition-colors duration-300"></div>
+              <div class="absolute top-4 left-4">
+                <span class="bg-white/95 backdrop-blur-sm text-brand-blue border border-slate-200 px-3 py-1 rounded-md text-xs font-bold tracking-widest uppercase shadow-sm">
+                  {post.tags && post.tags.length > 0 ? post.tags[0] : 'Salud General'}
+                </span>
+              </div>
+            </a>
+            
+            <div class="p-6 flex flex-col flex-grow">
+              <div class="flex items-center space-x-2 text-xs font-semibold text-slate-400 mb-3">
+                <i class="ph ph-clock"></i>
+                <span>Lectura de 5 min</span>
+              </div>
+              <a href={`/blog/${post.slug}`} class="block mb-3 flex-grow">
+                <h3 class="text-xl font-bold text-brand-blue group-hover:text-brand-cyan transition-colors leading-tight">
+                  {post.title}
+                </h3>
+              </a>
+              <p class="text-sm text-slate-600 line-clamp-2 mb-4 leading-relaxed">
+                {stripHtml(post.content)}
+              </p>
+              
+              <div class="flex items-center justify-between border-t border-slate-100 pt-4 mt-auto">
+                <div class="text-xs text-slate-500 font-medium truncate pr-4">
+                  Por CMS
+                </div>
+                <div class="text-xs text-slate-400 font-medium flex-shrink-0">
+                  {new Date(post.created_at).toLocaleDateString('es-MX', { month: 'short', day: 'numeric', year: 'numeric' })}
+                </div>
+              </div>
+            </div>
+          </article>
+        ))}
+
+      </div>
+
+      <!-- Empty State For Filters -->
+      <div id="no-articles-msg" class={articles.length === 0 ? "text-center py-16" : "hidden text-center py-16"}>
+        <div class="bg-slate-50 w-20 h-20 mx-auto rounded-full flex items-center justify-center mb-4 text-slate-400">
+           <i class="ph ph-article text-4xl"></i>
+        </div>
+        <h3 class="text-xl font-bold text-slate-800 mb-2">Aún no hay artículos disponibles</h3>
+        <p class="text-slate-500">Pronto nuestros especialistas publicarán contenido en esta categoría.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Filters Logic & JS Animations -->
+  <script is:inline>
+    document.addEventListener('DOMContentLoaded', () => {
+      // 1. Filtrado
+      const chips = document.querySelectorAll('.blog-chip');
+      const articles = document.querySelectorAll('.blog-card');
+      const emptyMsg = document.getElementById('no-articles-msg');
+
+      chips.forEach(chip => {
+        chip.addEventListener('click', (e) => {
+          const btn = e.target;
+          const filter = btn.getAttribute('data-filter');
+
+          // Reset Chips Style
+          chips.forEach(c => {
+             c.classList.remove('bg-brand-blue', 'text-white', 'shadow-md');
+             c.classList.add('bg-white', 'text-slate-600', 'border', 'border-slate-200');
+          });
+          // Set Active
+          btn.classList.remove('bg-white', 'text-slate-600', 'border', 'border-slate-200');
+          btn.classList.add('bg-brand-blue', 'text-white', 'shadow-md');
+
+          // Filter logic
+          let visibleCount = 0;
+          articles.forEach(article => {
+            const cat = article.getAttribute('data-category');
+            if (!cat) return;
+            const tags = cat.split(',');
+            if (filter === 'Todas' || tags.includes(filter)) {
+              article.style.display = 'flex';
+              visibleCount++;
+            } else {
+              article.style.display = 'none';
+            }
+          });
+
+          // Toggle empty message
+          if(visibleCount === 0) {
+            emptyMsg.classList.remove('hidden');
+          } else {
+            emptyMsg.classList.add('hidden');
+          }
+        });
+      });
+
+      // 2. Animaciones simples nativas para evitar parpadeos y bugs
+      const heroEl = document.querySelector('.featured-post-link');
+      if (heroEl) {
+        heroEl.style.opacity = '0';
+        heroEl.style.transform = 'translateY(20px)';
+        heroEl.style.transition = 'opacity 0.8s ease-out, transform 0.8s ease-out';
+        setTimeout(() => {
+          heroEl.style.opacity = '1';
+          heroEl.style.transform = 'translateY(0)';
+        }, 100);
+      }
+
+      const cards = document.querySelectorAll('.blog-card');
+      if (cards.length > 0) {
+        cards.forEach((c, idx) => {
+          c.style.opacity = '0';
+          c.style.transform = 'translateY(20px)';
+          c.style.transition = `opacity 0.6s ease-out ${idx*100}ms, transform 0.6s ease-out ${idx*100}ms`;
+          setTimeout(() => {
+             c.style.opacity = '1';
+             c.style.transform = 'translateY(0)';
+          }, 200 + (idx * 50));
+        });
+      }
+    });
+  </script>
+</Layout>

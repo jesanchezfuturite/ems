@@ -1,0 +1,82 @@
+---
+const pathname = Astro.url.pathname;
+const isEmergencyPage = pathname === '/urgencias' || pathname === '/urgencias/';
+---
+
+<header class="sticky top-0 z-50 w-full border-b border-white/10 bg-white/70 backdrop-blur-md transition-all duration-300 py-4" id="main-header">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between items-center">
+      <!-- Logo -->
+      <a href="/" class="flex-shrink-0 flex items-center">
+        <img
+          class="h-10 w-auto"
+          src="/images/logo.webp"
+          alt="Centro de Especialidades Médicas Logo"
+          width="150"
+          height="40"
+        />
+      </a>
+
+      <!-- Desktop Menu -->
+      <nav class="hidden md:flex space-x-8 items-center">
+        <a href="/cirugias" class="text-sm font-semibold hover:text-brand-blue transition-colors">Especialidades</a>
+        <a href="/maternidad" class="text-sm font-semibold hover:text-brand-blue transition-colors">Maternidad</a>
+        <a href="/directorio" class="text-sm font-semibold hover:text-brand-blue transition-colors">Directorio Médico</a>
+        <a href="/blog" class="text-sm font-semibold hover:text-brand-blue transition-colors">Blog</a>
+      </nav>
+
+      <!-- Actions -->
+      <div class="hidden md:flex items-center space-x-4">
+        <a href="/portal" class="text-sm font-semibold text-brand-blue hover:text-brand-cyan transition-colors">Mi Portal Paciente</a>
+        <a href="/urgencias" class="bg-[#e11d48] text-white font-bold px-6 py-2 rounded-full hover:bg-red-700 transition-colors inline-flex items-center shadow-md">
+          <i class="ph ph-warning-circle text-lg mr-2"></i> URGENCIAS
+        </a>
+      </div>
+
+      <!-- Mobile Button -->
+      <div class="flex items-center md:hidden">
+        <button id="mobile-menu-btn" class="text-gray-500 hover:text-brand-blue focus:outline-none">
+          <i class="ph ph-list text-3xl"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile Menu -->
+  <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-200 mt-4 absolute w-full left-0 shadow-lg top-full">
+    <div class="px-4 pt-2 pb-6 space-y-2">
+      <a href="/cirugias" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-brand-blue hover:bg-gray-50">Especialidades</a>
+      <a href="/maternidad" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-brand-blue hover:bg-gray-50">Maternidad</a>
+      <a href="/directorio" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-brand-blue hover:bg-gray-50">Directorio Médico</a>
+      <a href="/blog" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-brand-blue hover:bg-gray-50">Blog</a>
+      <hr class="my-2 border-gray-100" />
+      <a href="/portal" class="block px-3 py-2 rounded-md text-base font-medium text-brand-blue hover:bg-gray-50">Mi Portal Paciente</a>
+      <a href="/urgencias" class="block px-3 py-2 rounded-md text-base font-bold text-red-600 bg-red-50 hover:bg-red-100 mt-2 text-center">URGENCIAS</a>
+    </div>
+  </div>
+</header>
+
+<script is:inline>
+  document.addEventListener('DOMContentLoaded', () => {
+    // Scroll header logic
+    const header = document.querySelector('#main-header');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 50) {
+        header.classList.add('py-2', 'shadow-sm');
+        header.classList.remove('py-4');
+      } else {
+        header.classList.add('py-4');
+        header.classList.remove('py-2', 'shadow-sm');
+      }
+    });
+
+    // Mobile menu logic
+    const btn = document.getElementById('mobile-menu-btn');
+    const menu = document.getElementById('mobile-menu');
+    if(btn && menu) {
+      btn.addEventListener('click', () => {
+        menu.classList.toggle('hidden');
+      });
+    }
+  });
+</script>

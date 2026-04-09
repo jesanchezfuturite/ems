@@ -1,0 +1,491 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  serviceType: "Surgical Services",
+  provider: {
+    "@type": "MedicalOrganization",
+    name: "Centro de Especialidades Médicas",
+    url: "https://christus.mx/sur",
+  },
+  areaServed: "Monterrey",
+  hasOfferCatalog: {
+    "@type": "OfferCatalog",
+    name: "Especialidades Quirúrgicas",
+    itemListElement: [
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: "Bariatric Surgery",
+        },
+      },
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: "Orthopedic Surgery",
+        },
+      },
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: "Laparoscopy",
+        },
+      },
+    ],
+  },
+};
+---
+
+<Layout
+  title="Cirugía de Alta Especialidad en Monterrey | Centro de Especialidades Médicas"
+  description="Líderes en cirugía robótica, bariátrica y de mínima invasión. Contamos con quirófanos inteligentes y especialistas certificados para tu seguridad."
+>
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+
+  <!-- 1. Hero Section "Surgical Excellence" -->
+  <section class="relative bg-slate-50 pt-32 pb-16 lg:pb-32 overflow-hidden">
+    <!-- Adornos de Background -->
+    <div
+      class="absolute top-0 left-0 w-full h-full bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-brand-cyan/10 via-transparent to-transparent"
+    >
+    </div>
+
+    <div
+      class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 flex flex-col md:flex-row items-center gap-12 lg:gap-20"
+    >
+      <!-- Izquierda: Textos y CTA -->
+      <div class="w-full md:w-1/2 flex flex-col items-start text-left md:pt-10">
+        <span
+          class="inline-block bg-brand-blue text-white px-4 py-1.5 rounded-md text-xs font-bold tracking-widest uppercase mb-6 shadow-sm"
+        >
+          Tecnología de Grado Internacional
+        </span>
+        <h1
+          class="text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 mb-6 tracking-tight leading-[1.1]"
+        >
+          Cirugía Avanzada: <span class="text-brand-blue block"
+            >Precisión que transforma vidas.</span
+          >
+        </h1>
+        <p class="text-lg text-slate-600 mb-8 max-w-lg leading-relaxed">
+          Equipamos a los mejores cirujanos de la región con quirófanos
+          inteligentes y tecnología robótica para garantizar procedimientos más
+          seguros y recuperaciones más breves.
+        </p>
+        <a
+          href="/contacto"
+          class="inline-flex items-center justify-center px-8 py-4 bg-brand-cyan text-white text-lg font-bold rounded-2xl hover:bg-cyan-600 transition-all shadow-lg shadow-brand-cyan/30 transform hover:-translate-y-1"
+        >
+          <i class="ph ph-chat-circle-dots text-2xl mr-2"></i> Hablar con un Asesor Quirúrgico
+        </a>
+      </div>
+
+      <!-- Derecha: Imagen Asimétrica -->
+      <div class="w-full md:w-1/2 relative mt-10 md:mt-0">
+        <!-- Glow trasero -->
+        <div
+          class="absolute inset-0 bg-brand-cyan/20 blur-3xl rounded-full transform translate-y-10 scale-90"
+        >
+        </div>
+        <!-- Imagen con clip-path asimetrico vía utilidades de Tailwind v4 adaptadas -->
+        <div
+          class="relative z-10 w-full h-[400px] lg:h-[550px] shadow-2xl rounded-bl-[100px] rounded-tr-[100px] rounded-tl-2xl rounded-br-2xl overflow-hidden border-8 border-white"
+        >
+          <!-- Fallback usando unsplash as placeholder instead of empty image -->
+          <img
+            src="https://images.unsplash.com/photo-1551076805-e1869033e561?q=80&w=2699&auto=format&fit=crop"
+            alt="Quirófano de alta tecnología médica"
+            class="w-full h-full object-cover"
+            onerror="this.src='/images/doctor-placeholder.jpg'"
+          />
+          <div
+            class="absolute inset-0 bg-gradient-to-t from-brand-blue/60 to-transparent"
+          >
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. CIRUGÍA BENTO-GRID (The Moneymakers) -->
+  <section class="py-24 bg-white relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16 max-w-3xl mx-auto">
+        <h2 class="text-3xl md:text-5xl font-bold text-brand-blue mb-4">
+          Nuestras Principales Especialidades
+        </h2>
+        <p class="text-slate-600 text-lg">
+          Dominio técnico y clínico en las intervenciones quirúrgicas de mayor
+          impacto en la calidad de vida.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 surgery-grid">
+        <!-- Bariatría (Card Grande 2 columnas) -->
+        <div
+          class="surgery-card lg:col-span-2 group relative rounded-[32px] overflow-hidden bg-white border border-slate-100 shadow-lg hover:shadow-cyan-500/20 hover:border-brand-cyan/50 transition-all duration-500 flex flex-col md:flex-row items-center"
+        >
+          <!-- Glass Effect background base -->
+          <div
+            class="absolute inset-0 bg-gradient-to-br from-white/90 to-slate-50/90 z-0"
+          >
+          </div>
+          <div
+            class="relative z-10 p-8 lg:p-12 md:w-1/2 flex flex-col justify-center h-full"
+          >
+            <div
+              class="w-12 h-12 bg-cyan-50 rounded-xl flex items-center justify-center text-brand-cyan mb-6 group-hover:scale-110 transition-transform"
+            >
+              <i class="ph ph-stomach text-2xl"></i>
+            </div>
+            <h3 class="text-3xl font-bold text-slate-800 mb-3">
+              Cirugía Bariátrica
+            </h3>
+            <p class="text-slate-600 mb-6 leading-relaxed">
+              Pérdida de peso segura y efectiva mediante Manga o Bypass Gástrico
+              por mínima invasión. Acompañamiento nutricional y psicológico
+              integral.
+            </p>
+            <div class="mt-auto">
+              <a
+                href="/directorio"
+                class="text-brand-cyan font-bold hover:text-brand-blue flex items-center transition-colors"
+                >Conoce a nuestros especialistas <i
+                  class="ph ph-arrow-right ml-2"></i></a
+              >
+            </div>
+          </div>
+          <div class="relative z-10 w-full md:w-1/2 h-64 md:h-full p-4">
+            <img
+              src="https://images.unsplash.com/photo-1579684385127-1ef15d508118?q=80&w=1480&auto=format&fit=crop"
+              loading="lazy"
+              class="w-full h-full object-cover rounded-[20px]"
+              alt="Cirugía Bariátrica"
+            />
+          </div>
+        </div>
+
+        <!-- Traumatología (Card Cuadrada 1 columna) -->
+        <div
+          class="surgery-card lg:col-span-1 group relative rounded-[32px] overflow-hidden bg-brand-blue text-white shadow-xl hover:shadow-brand-blue/30 hover:ring-2 hover:ring-brand-cyan/50 transition-all duration-500 flex flex-col"
+        >
+          <div
+            class="p-8 lg:p-10 flex flex-col h-full bg-gradient-to-t from-black/40 to-transparent relative z-10"
+          >
+            <div
+              class="w-12 h-12 bg-white/20 backdrop-blur-md rounded-xl flex items-center justify-center text-brand-cyan mb-6 group-hover:scale-110 transition-transform"
+            >
+              <i class="ph ph-bone text-2xl"></i>
+            </div>
+            <h3 class="text-2xl font-bold mb-3">Traumatología y Ortopedia</h3>
+            <p class="text-white/80 leading-relaxed mb-6">
+              Restauración de movilidad con enfoque en reemplazos articulares e
+              intervenciones de medicina deportiva.
+            </p>
+            <div class="mt-auto pt-4 relative z-20">
+              <a
+                href="/directorio"
+                class="text-brand-cyan font-bold hover:text-white flex items-center transition-colors"
+                >Buscar Ortopedista <i class="ph ph-arrow-right ml-2"></i></a
+              >
+            </div>
+          </div>
+          <!-- BG img blendeada -->
+          <img
+            src="https://images.unsplash.com/photo-1551076805-e1869033e561?q=80&w=2699&auto=format&fit=crop"
+            loading="lazy"
+            class="absolute inset-0 w-full h-full object-cover opacity-20 mix-blend-overlay"
+            alt="Traqumatología"
+          />
+        </div>
+
+        <!-- Mínima Invasión (Card Full width debajo) -->
+        <div
+          class="surgery-card lg:col-span-3 group relative rounded-[32px] overflow-hidden bg-slate-50 border border-slate-200 shadow-md hover:shadow-cyan-500/20 hover:border-brand-cyan/50 transition-all duration-500 flex flex-col md:flex-row items-center"
+        >
+          <div
+            class="relative z-10 w-full md:w-5/12 h-64 md:h-[350px] p-4 order-2 md:order-1"
+          >
+            <img
+              src="https://images.unsplash.com/photo-1703809047424-ec4ea5fb6339?q=80&w=2787&auto=format&fit=crop"
+              loading="lazy"
+              class="w-full h-full object-cover rounded-[20px]"
+              alt="Mínima Invasión"
+            />
+          </div>
+          <div
+            class="relative z-10 p-8 lg:p-12 md:w-7/12 flex flex-col justify-center h-full order-1 md:order-2"
+          >
+            <div
+              class="w-12 h-12 bg-white rounded-xl shadow-sm flex items-center justify-center text-brand-cyan mb-6 group-hover:scale-110 transition-transform"
+            >
+              <i class="ph ph-activity text-2xl"></i>
+            </div>
+            <h3 class="text-3xl font-bold text-slate-800 mb-3">
+              Cirugía de Mínima Invasión y Laparoscopia
+            </h3>
+            <p class="text-slate-600 mb-6 leading-relaxed max-w-xl">
+              Enfoque clínico enfocado en realizar incisiones milimétricas,
+              reduciendo el daño tisular. Disfruta de beneficios como:
+              cicatrices mínimas, menos dolor postoperatorio, menor riesgo de
+              infecciones y una probabilidad de alta hospitalaria inmediata o
+              muy temprana.
+            </p>
+            <div class="mt-auto">
+              <a
+                href="/directorio"
+                class="text-brand-cyan font-bold hover:text-brand-blue flex items-center transition-colors"
+                >Programar consulta previa <i class="ph ph-arrow-right ml-2"
+                ></i></a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. AUTHORITY BUILDER: Nuestra Infraestructura -->
+  <section
+    class="py-20 bg-brand-blue relative border-y border-white/10 overflow-hidden"
+  >
+    <div
+      class="absolute inset-0 bg-[url('/images/tech-pattern.svg')] opacity-5"
+    >
+    </div>
+    <div
+      class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center"
+    >
+      <h2 class="text-3xl md:text-5xl font-bold text-white mb-16">
+        Nuestra Infraestructura Técnica
+      </h2>
+
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+        <div class="flex flex-col items-center group">
+          <div
+            class="w-20 h-20 rounded-full bg-white/10 border border-white/20 flex items-center justify-center text-brand-cyan mb-6 group-hover:bg-brand-cyan group-hover:text-white transition-all shadow-lg backdrop-blur-md"
+          >
+            <i class="ph ph-monitor text-4xl"></i>
+          </div>
+          <h4 class="text-white font-bold text-lg leading-tight w-3/4">
+            Torres de Laparoscopia 4K
+          </h4>
+        </div>
+
+        <div class="flex flex-col items-center group">
+          <div
+            class="w-20 h-20 rounded-full bg-white/10 border border-white/20 flex items-center justify-center text-brand-cyan mb-6 group-hover:bg-brand-cyan group-hover:text-white transition-all shadow-lg backdrop-blur-md"
+          >
+            <i class="ph ph-shield-check text-4xl"></i>
+          </div>
+          <h4 class="text-white font-bold text-lg leading-tight w-3/4">
+            Protocolos de Seguridad Internacional
+          </h4>
+        </div>
+
+        <div class="flex flex-col items-center group">
+          <div
+            class="w-20 h-20 rounded-full bg-white/10 border border-white/20 flex items-center justify-center text-brand-cyan mb-6 group-hover:bg-brand-cyan group-hover:text-white transition-all shadow-lg backdrop-blur-md"
+          >
+            <i class="ph ph-activity text-4xl"></i>
+          </div>
+          <h4 class="text-white font-bold text-lg leading-tight w-3/4">
+            Monitoreo Anestésico Avanzado
+          </h4>
+        </div>
+
+        <div class="flex flex-col items-center group">
+          <div
+            class="w-20 h-20 rounded-full bg-white/10 border border-white/20 flex items-center justify-center text-brand-cyan mb-6 group-hover:bg-brand-cyan group-hover:text-white transition-all shadow-lg backdrop-blur-md"
+          >
+            <i class="ph ph-first-aid text-4xl"></i>
+          </div>
+          <h4 class="text-white font-bold text-lg leading-tight w-3/4">
+            Central de Esterilización Certificada
+          </h4>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. LÓGICA DE NAVEGACIÓN: Timeline/Proceso del Paciente -->
+  <section class="py-24 bg-slate-50 process-section">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-5xl font-bold text-brand-blue mb-4">
+          El Camino hacia tu Bienestar
+        </h2>
+        <p class="text-slate-600 text-lg">
+          Acompañamiento holístico paso a paso, diseñado para reducir cualquier
+          nivel de fricción clínica.
+        </p>
+      </div>
+
+      <div class="relative max-w-4xl mx-auto">
+        <!-- Connecting Line -->
+        <div
+          class="hidden md:block absolute top-[50px] left-8 right-8 h-1 bg-slate-200"
+        >
+          <div class="absolute top-0 left-0 h-full bg-brand-cyan/40 w-1/2">
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+          <!-- Step 1 -->
+          <div
+            class="process-step relative flex flex-col items-center text-center"
+          >
+            <div
+              class="w-24 h-24 rounded-full bg-white shadow-xl flex flex-col items-center justify-center mb-6 relative z-10 border-4 border-slate-50"
+            >
+              <span class="text-brand-cyan font-black text-2xl">01</span>
+              <span
+                class="text-[10px] uppercase font-bold text-slate-400 tracking-wider"
+                >Fase</span
+              >
+            </div>
+            <h4 class="text-xl font-bold text-slate-800 mb-2">
+              Valoración Inicial
+            </h4>
+            <p class="text-slate-500 text-sm leading-relaxed px-2">
+              Consulta inicial para conocer tus antecedentes y evaluar tus
+              opciones físicas de manera profesional.
+            </p>
+          </div>
+
+          <!-- Step 2 -->
+          <div
+            class="process-step relative flex flex-col items-center text-center"
+          >
+            <div
+              class="w-24 h-24 rounded-full bg-brand-cyan shadow-xl shadow-brand-cyan/20 flex flex-col items-center justify-center mb-6 relative z-10 border-4 border-slate-50 text-white"
+            >
+              <span class="font-black text-2xl">02</span>
+              <span
+                class="text-[10px] uppercase font-bold text-white/80 tracking-wider"
+                >Fase</span
+              >
+            </div>
+            <h4 class="text-xl font-bold text-slate-800 mb-2">
+              Diagnóstico Preciso
+            </h4>
+            <p class="text-slate-500 text-sm leading-relaxed px-2">
+              Estudios preoperatorios de alta resolución para asegurar una
+              visibilidad 100% certera de la zona.
+            </p>
+          </div>
+
+          <!-- Step 3 -->
+          <div
+            class="process-step relative flex flex-col items-center text-center"
+          >
+            <div
+              class="w-24 h-24 rounded-full bg-white shadow-xl flex flex-col items-center justify-center mb-6 relative z-10 border-4 border-slate-50"
+            >
+              <span class="text-brand-cyan font-black text-2xl">03</span>
+              <span
+                class="text-[10px] uppercase font-bold text-slate-400 tracking-wider"
+                >Fase</span
+              >
+            </div>
+            <h4 class="text-xl font-bold text-slate-800 mb-2">Procedimiento</h4>
+            <p class="text-slate-500 text-sm leading-relaxed px-2">
+              Intervención de máxima seguridad en nuestros quirófanos
+              inteligentes con equipo certificado.
+            </p>
+          </div>
+
+          <!-- Step 4 -->
+          <div
+            class="process-step relative flex flex-col items-center text-center"
+          >
+            <div
+              class="w-24 h-24 rounded-full bg-white shadow-xl flex flex-col items-center justify-center mb-6 relative z-10 border-4 border-slate-50"
+            >
+              <span class="text-brand-cyan font-black text-2xl">04</span>
+              <span
+                class="text-[10px] uppercase font-bold text-slate-400 tracking-wider"
+                >Fase</span
+              >
+            </div>
+            <h4 class="text-xl font-bold text-slate-800 mb-2">Recuperación</h4>
+            <p class="text-slate-500 text-sm leading-relaxed px-2">
+              Estancia monitoreada en habitación suite y seguimiento
+              postoperatorio continuo.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. Footer Call-to-Action -->
+  <section
+    class="bg-brand-blue bg-gradient-to-r from-brand-blue to-blue-900 py-16 relative overflow-hidden"
+  >
+    <div
+      class="absolute inset-0 bg-[url('/images/tech-pattern.svg')] opacity-10 mix-blend-overlay"
+    >
+    </div>
+    <div
+      class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center"
+    >
+      <h2 class="text-3xl md:text-5xl font-bold text-white mb-6">
+        ¿Tienes una orden de cirugía?
+      </h2>
+      <p class="text-xl text-white/80 mb-10 font-light">
+        Cotiza con nosotros en menos de 24 horas y conoce nuestros convenios
+        directos con las principales aseguradoras nacionales.
+      </p>
+      <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
+        <a
+          href="/contacto"
+          class="w-full sm:w-auto px-8 py-4 bg-brand-cyan text-white text-lg font-bold rounded-full hover:bg-cyan-500 transition-all shadow-lg shadow-brand-cyan/40"
+        >
+          Solicitar Cotización Inmediata
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Lógica de Animaciones GSAP -->
+  <script is:inline>
+    document.addEventListener("DOMContentLoaded", () => {
+      if (typeof window.gsap !== "undefined" && window.ScrollTrigger) {
+        // Animación de las cards Bento con ScrollTrigger
+        window.gsap.from(".surgery-card", {
+          scrollTrigger: {
+            trigger: ".surgery-grid",
+            start: "top 80%",
+          },
+          x: -50,
+          opacity: 0,
+          duration: 0.8,
+          stagger: 0.2,
+          ease: "power2.out",
+          clearProps: "all",
+        });
+
+        // Animación de la línea de tiempo
+        window.gsap.from(".process-step", {
+          scrollTrigger: {
+            trigger: ".process-section",
+            start: "top 75%",
+          },
+          scale: 0.8,
+          opacity: 0,
+          y: 30,
+          duration: 0.5,
+          stagger: 0.2,
+          ease: "back.out(1.7)",
+          clearProps: "all",
+        });
+      }
+    });
+  </script>
+</Layout>

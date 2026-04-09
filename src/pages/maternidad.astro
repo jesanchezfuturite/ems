@@ -1,0 +1,279 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout 
+  title="Maternidad | El comienzo perfecto para tu bebé | Centro de Especialidades Médicas"
+  description="En el Centro de Especialidades Médicas, cada detalle está diseñado para vivir el milagro del nacimiento con máxima seguridad y calidez humana."
+>
+  <!-- 1. Hero Section "El Comienzo Perfecto" -->
+  <section class="relative w-full h-[85vh] min-h-[600px] flex items-center justify-center overflow-hidden bg-slate-900">
+    <!-- Backgound Image with fallback -->
+    <div 
+      class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1544281679-450f75e2eb22?q=80&w=2670&auto=format&fit=crop')] bg-cover bg-center bg-no-repeat z-0 transform scale-105"
+      style="background-image: url('/images/maternity-hero.webp'), url('https://images.unsplash.com/photo-1544281679-450f75e2eb22?q=80&w=2670&auto=format&fit=crop');"
+    ></div>
+    
+    <!-- Overlays para contraste y legibilidad -->
+    <div class="absolute inset-0 bg-brand-blue/50 z-10 mix-blend-multiply"></div>
+    <div class="absolute inset-0 bg-gradient-to-t from-brand-blue/90 via-transparent to-transparent z-10"></div>
+    <div class="absolute inset-0 bg-gradient-to-r from-brand-blue/70 via-transparent to-transparent z-10"></div>
+    
+    <div class="relative z-20 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center md:text-left hero-maternity-content">
+      <span class="inline-block py-1 px-4 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white text-xs md:text-sm font-semibold tracking-widest uppercase mb-6 shadow-sm">
+        Maternidad
+      </span>
+      <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-6 tracking-tight max-w-4xl leading-tight">
+        El recibimiento más cálido y seguro para tu bebé.
+      </h1>
+      <p class="text-lg md:text-xl text-white/90 mb-10 max-w-2xl font-light leading-relaxed">
+        En el Centro de Especialidades Médicas, cada detalle está diseñado para que vivas el milagro del nacimiento con la tranquilidad de estar en manos de expertos.
+      </p>
+      <div class="flex flex-col sm:flex-row items-center gap-4">
+        <a href="#paquetes" class="w-full sm:w-auto px-8 py-4 bg-brand-cyan text-white text-lg font-bold rounded-full hover:bg-cyan-600 transition-colors shadow-lg shadow-brand-cyan/30 text-center">
+          Ver Paquetes de Parto
+        </a>
+        <a href="#instalaciones" class="w-full sm:w-auto px-8 py-4 bg-white/10 backdrop-blur-md border border-white/20 text-white text-lg font-bold rounded-full hover:bg-white/20 transition-all flex items-center justify-center leading-none">
+          <i class="ph ph-play-circle text-2xl mr-2"></i> Tour Virtual por las Suites
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. Tu Seguridad es Primero (E-E-A-T) -->
+  <section class="py-20 bg-slate-50 relative z-30 -mt-10 rounded-t-[40px] shadow-[0_-10px_40px_-15px_rgba(0,0,0,0.1)]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-4xl font-bold text-brand-blue mb-4">Tu Seguridad es Primero</h2>
+        <p class="text-slate-600 max-w-2xl mx-auto text-lg hover:text-slate-900 transition-colors">Acompañamiento integral desde el primer síntoma, con tecnología y protocolos de clase mundial.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <!-- Badge 1 -->
+        <div class="bg-white p-8 rounded-3xl border border-slate-100 shadow-sm hover:shadow-xl hover:border-brand-cyan/20 transition-all duration-300 group">
+          <div class="w-14 h-14 bg-blue-50 text-brand-blue rounded-2xl flex items-center justify-center mb-6 group-hover:bg-brand-blue group-hover:text-white transition-colors">
+            <i class="ph ph-baby text-3xl"></i>
+          </div>
+          <h3 class="text-xl font-bold text-slate-800 mb-3">Terapia Intensiva Neonatal (UCIN) Nivel III</h3>
+          <p class="text-slate-600 leading-relaxed">Área especializada con equipos de soporte de vida continuo para recién nacidos que requieren cuidados críticos.</p>
+        </div>
+        
+        <!-- Badge 2 -->
+        <div class="bg-white p-8 rounded-3xl border border-slate-100 shadow-sm hover:shadow-xl hover:border-brand-cyan/20 transition-all duration-300 group">
+          <div class="w-14 h-14 bg-cyan-50 text-brand-cyan rounded-2xl flex items-center justify-center mb-6 group-hover:bg-brand-cyan group-hover:text-white transition-colors">
+            <i class="ph ph-stethoscope text-3xl"></i>
+          </div>
+          <h3 class="text-xl font-bold text-slate-800 mb-3">Expertos Certificados 24/7</h3>
+          <p class="text-slate-600 leading-relaxed">Ginecólogos, pediatras y especialistas certificados de guardia permanente para garantizar atención inmediata y oportuna ante cualquier eventualidad.</p>
+        </div>
+
+        <!-- Badge 3 -->
+        <div class="bg-white p-8 rounded-3xl border border-slate-100 shadow-sm hover:shadow-xl hover:border-brand-cyan/20 transition-all duration-300 group">
+          <div class="w-14 h-14 bg-indigo-50 text-indigo-600 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-indigo-600 group-hover:text-white transition-colors">
+            <i class="ph ph-shield-check text-3xl"></i>
+          </div>
+          <h3 class="text-xl font-bold text-slate-800 mb-3">Protocolos Internacionales</h3>
+          <p class="text-slate-600 leading-relaxed">Instalaciones estructuradas bajo los estrictos protocolos de la Joint Commission International para la seguridad madre e hijo.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. Paquetes Section (Pricing & Benefits) -->
+  <section id="paquetes" class="py-24 bg-white packages-section overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-5xl font-bold text-brand-blue mb-4">Nuestros Paquetes de Parto</h2>
+        <p class="text-slate-600 max-w-2xl mx-auto text-lg">Planes todo-incluido diseñados con una meta simple: que solo te enfoques en darle la bienvenida a tu bebé.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+        <!-- Natural -->
+        <div class="package-card bg-white p-10 rounded-[40px] border border-slate-200 shadow-lg relative flex flex-col h-full">
+          <h3 class="text-3xl font-bold text-brand-blue mb-2">Parto Natural</h3>
+          <p class="text-slate-500 mb-8 border-b border-slate-100 pb-8 tracking-wide">Para una experiencia tradicional, respetada e intervenida solo bajo tus propios términos médicos.</p>
+          
+          <ul class="space-y-5 flex-grow">
+            <li class="flex items-start">
+              <i class="ph ph-check-circle text-brand-cyan text-xl mr-3 mt-0.5"></i>
+              <span class="text-slate-700 font-medium tracking-tight">Habitación tipo Suite por 1 noche</span>
+            </li>
+            <li class="flex items-start">
+              <i class="ph ph-check-circle text-brand-cyan text-xl mr-3 mt-0.5"></i>
+              <span class="text-slate-700 font-medium tracking-tight">Derecho de Sala de Labor y Recuperación LPR</span>
+            </li>
+            <li class="flex items-start">
+              <i class="ph ph-check-circle text-brand-cyan text-xl mr-3 mt-0.5"></i>
+              <span class="text-slate-700 font-medium tracking-tight">Atención Neonatal 24/7 en cuneros</span>
+            </li>
+            <li class="flex items-start">
+              <i class="ph ph-check-circle text-brand-cyan text-xl mr-3 mt-0.5"></i>
+              <span class="text-slate-700 font-medium tracking-tight">Tamiz Auditivo Neonatal</span>
+            </li>
+            <li class="flex items-start">
+              <i class="ph ph-check-circle text-brand-cyan text-xl mr-3 mt-0.5"></i>
+              <span class="text-slate-700 font-medium tracking-tight">Kit de Bienvenida Maternidad</span>
+            </li>
+          </ul>
+
+          <div class="mt-10 pt-8 border-t border-slate-100">
+            <a href="#" class="w-full block text-center py-4 rounded-2xl bg-white text-brand-blue font-bold hover:bg-slate-50 border border-brand-blue transition-all">Más Información</a>
+          </div>
+        </div>
+
+        <!-- Cesárea (Premium Highlighted) -->
+        <div class="package-card bg-brand-blue p-10 rounded-[40px] border-2 border-brand-cyan/20 shadow-2xl relative flex flex-col h-full transform md:-translate-y-4">
+          <!-- Badge -->
+          <div class="absolute -top-5 left-1/2 transform -translate-x-1/2 bg-brand-cyan text-white px-6 py-2 rounded-full font-bold text-sm tracking-widest uppercase shadow-lg shadow-brand-cyan/30">
+            Más Elegido
+          </div>
+          
+          <h3 class="text-3xl font-bold text-white mb-2">Cesárea</h3>
+          <p class="text-white/70 mb-8 border-b border-white/10 pb-8 tracking-wide">Máxima seguridad clínica y confort con monitoreo extendido para una recuperación post-quirúrgica impecable.</p>
+          
+          <ul class="space-y-5 flex-grow">
+             <li class="flex items-start">
+              <i class="ph ph-check-circle text-brand-cyan text-xl mr-3 mt-0.5"></i>
+              <span class="text-white font-medium tracking-tight">Habitación tipo Suite por 2 noches</span>
+            </li>
+            <li class="flex items-start">
+              <i class="ph ph-check-circle text-brand-cyan text-xl mr-3 mt-0.5"></i>
+              <span class="text-white font-medium tracking-tight">Uso de Quirófano certificado</span>
+            </li>
+            <li class="flex items-start">
+              <i class="ph ph-check-circle text-brand-cyan text-xl mr-3 mt-0.5"></i>
+              <span class="text-white font-medium tracking-tight">Atención Neonatal 24/7 en cuneros</span>
+            </li>
+             <li class="flex items-start">
+              <i class="ph ph-check-circle text-brand-cyan text-xl mr-3 mt-0.5"></i>
+              <span class="text-white font-medium tracking-tight">Tamiz Auditivo Metabólico</span>
+            </li>
+            <li class="flex items-start">
+              <i class="ph ph-check-circle text-brand-cyan text-xl mr-3 mt-0.5"></i>
+              <span class="text-white font-medium tracking-tight">Kit de Bienvenida Premium</span>
+            </li>
+          </ul>
+
+          <div class="mt-10 pt-8 border-t border-white/10">
+            <a href="#" class="w-full block text-center py-4 rounded-2xl bg-brand-cyan text-white font-bold hover:bg-cyan-400 transition-all shadow-lg shadow-brand-cyan/20">Solicitar Paquete</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. Slider de Instalaciones -->
+  <section id="instalaciones" class="py-24 bg-slate-50 overflow-hidden relative">
+    <!-- Adorno gráfico de fondo -->
+    <div class="absolute top-0 right-0 w-64 h-64 bg-brand-cyan/5 rounded-full blur-3xl"></div>
+    <div class="absolute bottom-0 left-0 w-96 h-96 bg-brand-blue/5 rounded-full blur-3xl"></div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center mb-16 relative z-10">
+      <h2 class="text-3xl md:text-5xl font-bold text-brand-blue mb-4">Conoce tu Suite</h2>
+      <p class="text-slate-600 max-w-2xl mx-auto text-lg">Espacios acogedores diseñados para fomentar el apego inmediato contando con equipamiento de última generación para casos de alta complejidad.</p>
+    </div>
+
+    <!-- Swiper Container -->
+    <div class="swiper swiper-maternity w-full pb-16 relative z-10">
+      <div class="swiper-wrapper">
+        <!-- Slide 1 -->
+        <div class="swiper-slide px-4 transition-all duration-300">
+          <div class="bg-white rounded-[32px] p-3 md:p-4 shadow-lg h-[400px] md:h-[500px] relative overflow-hidden group">
+            <img src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?q=80&w=1453&auto=format&fit=crop" loading="lazy" alt="Suites de Lujo" class="w-full h-full object-cover rounded-[24px] transition-transform duration-700 group-hover:scale-105" />
+            <div class="absolute bottom-6 md:bottom-8 left-6 md:left-8 right-6 md:right-8 bg-white/90 backdrop-blur-md p-6 rounded-2xl shadow-xl border border-white/50">
+              <h4 class="text-xl md:text-2xl font-bold text-brand-blue mb-1 tracking-tight">Suites Privadas LPR</h4>
+              <p class="text-sm md:text-base text-slate-600">Amplitud y comodidad para fomentar el contacto piel a piel seguro.</p>
+            </div>
+          </div>
+        </div>
+        <!-- Slide 2 -->
+        <div class="swiper-slide px-4 transition-all duration-300">
+          <div class="bg-white rounded-[32px] p-3 md:p-4 shadow-lg h-[400px] md:h-[500px] relative overflow-hidden group">
+            <img src="https://images.unsplash.com/photo-1584515933487-779824d29309?q=80&w=2670&auto=format&fit=crop" loading="lazy" alt="Área de Cuneros" class="w-full h-full object-cover rounded-[24px] transition-transform duration-700 group-hover:scale-105" />
+            <div class="absolute bottom-6 md:bottom-8 left-6 md:left-8 right-6 md:right-8 bg-white/90 backdrop-blur-md p-6 rounded-2xl shadow-xl border border-white/50">
+               <h4 class="text-xl md:text-2xl font-bold text-brand-blue mb-1 tracking-tight">Área de Cuneros</h4>
+              <p class="text-sm md:text-base text-slate-600">Monitoreo experto y continuo 24/7 con los pediatras de mayor jerarquía.</p>
+            </div>
+          </div>
+        </div>
+        <!-- Slide 3 -->
+        <div class="swiper-slide px-4 transition-all duration-300">
+          <div class="bg-white rounded-[32px] p-3 md:p-4 shadow-lg h-[400px] md:h-[500px] relative overflow-hidden group">
+            <img src="https://images.unsplash.com/photo-1555252333-9f8e92e65df9?q=80&w=1470&auto=format&fit=crop" loading="lazy" alt="Sala de Lactancia" class="w-full h-full object-cover rounded-[24px] transition-transform duration-700 group-hover:scale-105" />
+            <div class="absolute bottom-6 md:bottom-8 left-6 md:left-8 right-6 md:right-8 bg-white/90 backdrop-blur-md p-6 rounded-2xl shadow-xl border border-white/50">
+               <h4 class="text-xl md:text-2xl font-bold text-brand-blue mb-1 tracking-tight">Sala de Lactancia</h4>
+              <p class="text-sm md:text-base text-slate-600">Espacios serenos con asesoría profesional para guiar tu primera conexión alimentaria.</p>
+            </div>
+          </div>
+        </div>
+        <!-- Slide 4 -->
+        <div class="swiper-slide px-4 transition-all duration-300">
+          <div class="bg-white rounded-[32px] p-3 md:p-4 shadow-lg h-[400px] md:h-[500px] relative overflow-hidden group">
+            <img src="https://images.unsplash.com/photo-1579684385127-1ef15d508118?q=80&w=1480&auto=format&fit=crop" loading="lazy" alt="Quirófanos" class="w-full h-full object-cover rounded-[24px] transition-transform duration-700 group-hover:scale-105" />
+            <div class="absolute bottom-6 md:bottom-8 left-6 md:left-8 right-6 md:right-8 bg-white/90 backdrop-blur-md p-6 rounded-2xl shadow-xl border border-white/50">
+               <h4 class="text-xl md:text-2xl font-bold text-brand-blue mb-1 tracking-tight">Quirófanos Cesárea</h4>
+              <p class="text-sm md:text-base text-slate-600">Equipamiento tecnológico infalible para llevar a cabo procedimientos totalmente estériles.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Paginación -->
+      <div class="swiper-pagination !bottom-0 mt-8"></div>
+      <!-- Flechas Custom (solo desktop) -->
+      <div class="swiper-button-prev !bg-white/80 backdrop-blur !w-14 !h-14 !rounded-full shadow-lg !text-brand-blue hidden lg:flex !left-8 after:!text-xl border border-brand-blue/10 hover:!bg-brand-cyan hover:!text-white hover:!border-transparent transition-colors"></div>
+      <div class="swiper-button-next !bg-white/80 backdrop-blur !w-14 !h-14 !rounded-full shadow-lg !text-brand-blue hidden lg:flex !right-8 after:!text-xl border border-brand-blue/10 hover:!bg-brand-cyan hover:!text-white hover:!border-transparent transition-colors"></div>
+    </div>
+  </section>
+
+  <!-- Lógica 5. GSAP y Swiper -->
+  <script is:inline>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Soft Reveal Hero (GSAP)
+      if (typeof window.gsap !== 'undefined') {
+        window.gsap.from(".hero-maternity-content", {
+          y: 40, opacity: 0, duration: 1.5, ease: "expo.out", delay: 0.1
+        });
+
+        // Reveal Paquetes al Hacer Scroll (GSAP ScrollTrigger)
+        if(window.ScrollTrigger) {
+          window.gsap.from(".package-card", {
+            scrollTrigger: {
+              trigger: ".packages-section",
+              start: "top 75%"
+            },
+            scale: 0.95, opacity: 0, duration: 1, stagger: 0.3, ease: "power2.out", clearProps: "all"
+          });
+        }
+      }
+
+      // 3. Inicialización del Slider Swiper
+      if (typeof window.Swiper !== 'undefined') {
+        const swiper = new window.Swiper('.swiper-maternity', {
+          loop: true,
+          slidesPerView: 1.1,
+          spaceBetween: 15,
+          centeredSlides: true,
+          pagination: { 
+            el: '.swiper-pagination',
+            clickable: true 
+          },
+          navigation: { 
+            nextEl: '.swiper-button-next', 
+            prevEl: '.swiper-button-prev' 
+          },
+          breakpoints: {
+            768: {
+              slidesPerView: 1.5,
+              spaceBetween: 30,
+            },
+            1024: {
+              slidesPerView: 2.2,
+              spaceBetween: 40,
+            }
+          }
+        });
+      }
+    });
+  </script>
+
+</Layout>

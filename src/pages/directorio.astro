@@ -1,0 +1,394 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout 
+  title="Directorio Médico | Centro de Especialidades Médicas"
+  description="Encuentra a tu especialista ideal en nuestra red de médicos certificados. Especialistas bariátras, ginecólogos, traumatólogos y más."
+>
+  <style is:global>
+    /* Premium Shimmer Effect for Skeletons */
+    @keyframes shimmer {
+      0% {
+        background-position: -200% 0;
+      }
+      100% {
+        background-position: 200% 0;
+      }
+    }
+    .skeleton-shimmer {
+      background: linear-gradient(90deg, #f1f5f9 25%, #e2e8f0 50%, #f1f5f9 75%);
+      background-size: 200% 100%;
+      animation: shimmer 1.5s infinite;
+    }
+  </style>
+
+  <!-- Hero Section & Buscador Dual -->
+  <section class="bg-slate-50 pt-16 pb-12 overflow-hidden relative">
+    <div class="absolute inset-0 bg-gradient-to-br from-brand-cyan/5 to-transparent"></div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      
+      <!-- Copy Central -->
+      <div class="max-w-3xl mx-auto text-center mb-10">
+        <h1 class="text-4xl md:text-5xl font-bold text-brand-blue mb-4 tracking-tight">Directorio Médico Especializado</h1>
+        <p class="text-lg text-slate-600">Conecta con los mejores médicos del norte del país, certificados clínica y humanamente para tu cuidado integral.</p>
+      </div>
+
+      <!-- Barra Unificada Avanzada -->
+      <div class="max-w-4xl mx-auto">
+        
+        <!-- Input Form Control -->
+        <div class="bg-white rounded-3xl shadow-2xl shadow-brand-blue/10 border border-slate-100 p-2 mb-4 transition-all focus-within:ring-4 focus-within:ring-brand-cyan/20">
+          <div class="grid grid-cols-1 md:grid-cols-[1fr_auto_1fr_auto] items-center gap-2">
+            
+            <!-- 1. Input de Nombre -->
+            <div class="relative flex items-center h-full">
+              <i class="ph ph-user-focus absolute left-4 text-slate-400 text-2xl z-10 pointer-events-none"></i>
+              <input 
+                type="text" 
+                id="search-input"
+                class="w-full h-12 bg-transparent border-0 pl-12 pr-4 text-slate-800 placeholder-slate-400 focus:outline-none text-lg rounded-xl"
+                placeholder="Nombre del especialista..."
+                autocomplete="off"
+              />
+            </div>
+            
+            <!-- 2. Divisor -->
+            <div class="hidden md:block w-px h-8 bg-slate-200 mx-2"></div>
+
+            <!-- 3. Select Especialidad -->
+            <div class="relative flex items-center group">
+              <i class="ph ph-stethoscope absolute left-4 text-brand-cyan text-2xl z-10 pointer-events-none"></i>
+              <select id="specialty-select" class="appearance-none w-full h-12 bg-transparent border-0 pl-12 pr-10 text-slate-700 font-medium focus:outline-none text-lg cursor-pointer rounded-xl">
+                <option value="">Cualquier especialidad</option>
+                <!-- JS Inject -->
+              </select>
+              <i class="ph ph-caret-down absolute right-4 text-slate-400 text-lg pointer-events-none group-focus-within:-rotate-180 transition-transform duration-300"></i>
+            </div>
+
+            <!-- 4. Botón Buscar -->
+            <button id="search-btn" class="bg-brand-blue text-white px-8 h-12 rounded-2xl font-bold hover:bg-blue-900 shadow-md transform hover:scale-105 transition-all duration-300 text-lg flex items-center justify-center w-full md:w-auto">
+              Buscar
+            </button>
+            
+          </div>
+        </div>
+
+        <!-- Quick Filters Populares -->
+        <div class="px-2 lg:px-4 flex flex-col sm:flex-row sm:items-center">
+          <p class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-3 sm:mb-0 sm:mr-3 flex-shrink-0">Sugerencias Populares:</p>
+          <div class="flex flex-wrap items-center gap-2" id="quick-filters">
+            <!-- Skeletons Quick Filters -->
+            <div class="h-7 w-20 bg-slate-200 rounded-full animate-pulse"></div>
+            <div class="h-7 w-24 bg-slate-200 rounded-full animate-pulse"></div>
+            <div class="h-7 w-20 bg-slate-200 rounded-full animate-pulse"></div>
+          </div>
+        </div>
+
+        <!-- Feedback UI (Conteo Animado) -->
+        <div class="mt-8 text-center h-6">
+           <p id="results-count" class="text-sm font-bold text-slate-500 uppercase tracking-widest transition-opacity"></p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Results Grid -->
+  <section class="py-12 bg-white min-h-[50vh]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <!-- Doctor Cards Container -->
+      <div id="doctors-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Render dinámico aquí -->
+      </div>
+      
+      <!-- Empty State -->
+      <div id="empty-state" class="hidden max-w-lg mx-auto text-center py-16 px-4">
+        <div class="bg-slate-50 w-24 h-24 mx-auto rounded-full flex items-center justify-center mb-6 text-slate-400 shadow-inner">
+          <i class="ph ph-magnifying-glass-minus text-5xl"></i>
+        </div>
+        <h3 class="text-2xl font-bold text-brand-blue mb-3">Sin resultados</h3>
+        <p class="text-slate-600 mb-8 max-w-sm mx-auto text-lg leading-relaxed">
+          Intente modificar su criterio de búsqueda o comuníquese directo a urgencias si necesita atención inmediata.
+        </p>
+        <a href="tel:8181555000" class="inline-flex items-center justify-center px-8 py-3.5 border border-transparent text-base font-bold rounded-full text-white bg-red-600 hover:bg-red-700 transition-colors shadow-lg shadow-red-600/30 w-full sm:w-auto">
+          <i class="ph ph-phone text-xl mr-2"></i> Urgencias: (81) 8155 5000
+        </a>
+      </div>
+
+      <!-- Paginación: Mostrar más -->
+      <div id="load-more-container" class="hidden text-center mt-12 mb-8">
+        <button id="load-more-btn" class="px-8 py-3.5 bg-white border-2 border-brand-cyan text-brand-cyan font-bold rounded-full hover:bg-brand-cyan hover:text-white transition-colors shadow-sm inline-flex items-center group">
+          Mostrar más especialistas <i class="ph ph-caret-down ml-2 text-xl group-hover:translate-y-1 transition-transform"></i>
+        </button>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- JS Engine Logics -->
+  <script is:inline>
+    document.addEventListener('DOMContentLoaded', async () => {
+      const grid = document.getElementById('doctors-grid');
+      const searchInput = document.getElementById('search-input');
+      const specialtySelect = document.getElementById('specialty-select');
+      const searchBtn = document.getElementById('search-btn');
+      const emptyState = document.getElementById('empty-state');
+      const countEl = document.getElementById('results-count');
+      const quickFiltersContainer = document.getElementById('quick-filters');
+      const loadMoreContainer = document.getElementById('load-more-container');
+      const loadMoreBtn = document.getElementById('load-more-btn');
+
+      let currentPage = 1;
+      let debounceTimer;
+      const svgFallback = `data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100%' height='100%' viewBox='0 0 100 100'><rect fill='%23f1f5f9' width='100' height='100'/><path fill='%23cbd5e1' d='M50 50c11.046 0 20-8.954 20-20s-8.954-20-20-20-20 8.954-20 20 8.954 20 20 20zm0 10c-13.314 0-40 6.671-40 20v10h80V80c0-13.329-26.686-20-40-20z'/></svg>`;
+
+      // 1. Motor de Skeletons (UI premium Loader)
+      const renderSkeletons = (count = 6, cleanGrid = true) => {
+        if(cleanGrid) grid.innerHTML = '';
+        emptyState.classList.add('hidden');
+        grid.classList.remove('hidden');
+
+        for(let i=0; i<count; i++) {
+          const div = document.createElement('div');
+          div.className = "skeleton-card flex flex-col p-6 bg-white rounded-3xl border border-slate-100 shadow-sm";
+          div.innerHTML = `
+            <div class="flex items-center space-x-4 mb-5">
+              <div class="w-[72px] h-[72px] rounded-full skeleton-shimmer"></div>
+              <div class="flex-1 space-y-3 pt-2">
+                 <div class="h-4 w-3/4 rounded bg-slate-100 skeleton-shimmer"></div>
+                 <div class="h-3 w-1/2 rounded bg-brand-cyan/20 skeleton-shimmer"></div>
+              </div>
+            </div>
+            <div class="flex-grow mt-2">
+               <div class="h-4 w-5/6 rounded bg-slate-100 skeleton-shimmer"></div>
+            </div>
+            <div class="mt-8 space-y-3">
+               <div class="h-11 w-full rounded-xl bg-slate-100 skeleton-shimmer"></div>
+               <div class="h-11 w-full rounded-xl bg-slate-50 skeleton-shimmer"></div>
+            </div>
+          `;
+          grid.appendChild(div);
+        }
+      };
+
+      // Helper function for Title Case in Spanish
+      const toTitleCase = (str) => {
+        if (!str) return '';
+        const minors = ['y', 'de', 'del', 'el', 'la', 'los', 'las', 'en'];
+        return str.toLowerCase().split(' ').map((word, index) => {
+          if (index > 0 && minors.includes(word)) return word;
+          return word.charAt(0).toUpperCase() + word.slice(1);
+        }).join(' ');
+      };
+
+      // 2. Extracción de Especialidades (Filtros Selectores + Sugerencias Rapidas)
+      const fetchEspecialidades = async () => {
+        try {
+          const res = await fetch('https://administrador.especialidadesmedicassur.com.mx/api/especialidad/get-all');
+          const data = await res.json();
+          const especialidades = data.data || data;
+          let clean = Array.isArray(especialidades) ? especialidades.filter(e => e.estatus === 1) : [];
+
+          // Format Title Case and Sort Alphabetically
+          clean = clean.map(esp => ({
+            ...esp,
+            nombre: toTitleCase(esp.nombre)
+          })).sort((a, b) => a.nombre.localeCompare(b.nombre, 'es'));
+
+          // Poblar el Option Select
+          clean.forEach(esp => {
+            const opt = document.createElement('option');
+            opt.value = esp.id;
+            opt.textContent = esp.nombre;
+            specialtySelect.appendChild(opt);
+          });
+
+          // Poblar Sugerencias Relevantes (Moneymakers Keys)
+          const keys = ['bariatría', 'traumatología', 'ginecología', 'pediatría'];
+          const suggested = clean.filter(esp => keys.some(kw => esp.nombre.toLowerCase().includes(kw))).slice(0, 4);
+          
+          quickFiltersContainer.innerHTML = '';
+          suggested.forEach(esp => {
+            const btn = document.createElement('button');
+            btn.className = "px-4 py-1.5 rounded-full text-xs font-bold bg-white border border-brand-cyan/30 text-brand-cyan hover:bg-brand-cyan hover:text-white transition-colors shadow-sm focus:outline-none focus:ring-2 focus:ring-brand-cyan/50 whitespace-nowrap";
+            btn.textContent = esp.nombre;
+            // Al dar click conectamos con el Select y forzamos Disparo
+            btn.onclick = () => {
+              specialtySelect.value = esp.id;
+              fetchDoctors(); 
+            };
+            quickFiltersContainer.appendChild(btn);
+          });
+
+        } catch (error) {
+          console.error("Error cargando Select:", error);
+          quickFiltersContainer.innerHTML = '<span class="text-xs text-slate-400 italic">No se pudieron cargar especialidades</span>';
+        }
+      };
+
+      // 3. Pintado de Resultados (GSAP)
+      const renderCards = (results, isLoadMore = false) => {
+        // Matamos a los Skeletons viejos
+        grid.querySelectorAll('.skeleton-card').forEach(sk => sk.remove());
+
+        if (!isLoadMore) grid.innerHTML = ''; 
+
+        if (!isLoadMore && (!results || results.length === 0)) {
+          grid.classList.add('hidden');
+          emptyState.classList.remove('hidden');
+          countEl.textContent = "0 ESPECIALISTAS ENCONTRADOS";
+          return;
+        }
+
+        grid.classList.remove('hidden');
+        emptyState.classList.add('hidden');
+        if (!isLoadMore) countEl.textContent = `Directorio Médico`;
+
+        // Preparamos animación GSAP aislada para esta llamada particular
+        const batchClass = `batch-${Date.now()}`;
+
+        results.forEach(doc => {
+          const card = document.createElement('div');
+          card.className = `doctor-card ${batchClass} flex flex-col p-6 bg-white rounded-3xl border border-slate-100 overflow-hidden hover:shadow-xl hover:-translate-y-1 hover:border-brand-cyan/30 transition-all duration-300 relative`;
+          let profileImg = doc.foto ? doc.foto : svgFallback;
+          let docName = toTitleCase(doc.nombre);
+
+          card.innerHTML = `
+            <div class="flex items-center space-x-4 mb-5 relative z-10">
+              <div class="flex-shrink-0 w-[72px] h-[72px] relative rounded-full border border-slate-200 bg-slate-50 overflow-hidden">
+                <img src="${profileImg}" alt="${docName}" loading="lazy" onerror="this.src='${svgFallback}'" class="absolute inset-0 w-full h-full object-cover p-0.5 rounded-full" />
+              </div>
+              <div class="pt-1">
+                <h3 class="text-[1.15rem] font-bold text-brand-blue leading-tight mb-1 line-clamp-2" title="${docName}">${docName}</h3>
+                <span class="inline-block px-3 py-1 bg-brand-cyan/10 text-brand-cyan text-[10px] sm:text-[11px] font-bold rounded-full uppercase tracking-wider line-clamp-1">${doc.especialidad || 'Especialista'}</span>
+              </div>
+            </div>
+            <div class="flex-grow z-10">
+              <p class="text-sm text-slate-500 leading-relaxed bg-slate-50 p-3 rounded-lg border border-slate-100">
+                <i class="ph ph-certificate text-brand-cyan mr-1 text-base align-text-bottom"></i> 
+                Cédula: <strong class="text-brand-blue">${doc.cedula || 'En trámite'}</strong>
+              </p>
+            </div>
+            <div class="mt-6 space-y-2 z-10">
+              <a href="/contacto" class="flex w-full items-center justify-center bg-brand-cyan text-white py-3 rounded-xl font-bold hover:bg-cyan-600 transition-colors shadow-md shadow-brand-cyan/20">
+                Agendar Cita
+              </a>
+              <a href="/directorio/${doc.id}" class="flex w-full items-center justify-center text-sm font-bold text-brand-blue hover:text-brand-cyan transition-colors bg-blue-50/50 py-3 rounded-xl hover:bg-blue-100">
+                Ver Perfil Completo
+              </a>
+            </div>
+          `;
+          grid.appendChild(card);
+        });
+
+        // GSAP Fade In para el nuevo lote únicamente
+        if (typeof window.gsap !== 'undefined') {
+          window.gsap.fromTo(`.${batchClass}`, 
+            { opacity: 0, y: 15 },
+            { opacity: 1, y: 0, duration: 0.5, stagger: 0.05, ease: "power2.out", clearProps: "all" }
+          );
+        }
+      };
+
+      // 4. Conexión Endpoints Core
+      const fetchDoctors = async (isLoadMore = false) => {
+        const nombre = searchInput.value.trim();
+        const especialidadId = specialtySelect.value;
+        
+        if (!isLoadMore) {
+          currentPage = 1;
+          renderSkeletons(6, true);
+          countEl.innerHTML = '<i class="ph ph-spinner animate-spin mr-2"></i> Procesando tu búsqueda...';
+          loadMoreContainer.classList.add('hidden');
+        } else {
+          loadMoreBtn.innerHTML = '<i class="ph ph-spinner animate-spin mr-2 text-xl"></i> Cargando especialistas...';
+          loadMoreBtn.classList.add('opacity-70', 'pointer-events-none');
+        }
+
+        try {
+          const urlParams = new URLSearchParams();
+          if (nombre) urlParams.append('nombre', nombre);
+          if (especialidadId) urlParams.append('especialidad_id', especialidadId);
+          urlParams.append('per_page', '12'); 
+          urlParams.append('page', currentPage.toString());
+          
+          const endpoint = 'https://administrador.especialidadesmedicassur.com.mx/api/directorio-medico/search?' + urlParams.toString();
+          
+          const res = await fetch(endpoint);
+          const data = await res.json();
+          let results = [];
+          let lastPage = 1;
+          
+          if (Array.isArray(data)) {
+            results = data;
+          } else if (data.data && Array.isArray(data.data)) {
+            results = data.data;
+            lastPage = data.last_page || 1;
+          } else if (data.data && data.data.data && Array.isArray(data.data.data)) {
+            results = data.data.data;
+            lastPage = data.data.last_page || 1;
+          }
+
+          // Pintar Reales Eliminando Skeletons
+          renderCards(results, isLoadMore);
+
+          // Lógica Paginación
+          loadMoreBtn.innerHTML = 'Mostrar más especialistas <i class="ph ph-caret-down ml-2 text-xl group-hover:translate-y-1 transition-transform"></i>';
+          loadMoreBtn.classList.remove('opacity-70', 'pointer-events-none');
+          
+          if (currentPage < lastPage) {
+            loadMoreContainer.classList.remove('hidden');
+          } else {
+            loadMoreContainer.classList.add('hidden');
+          }
+
+        } catch (error) {
+          console.error("Error buscando doctores:", error);
+          if (!isLoadMore) {
+            grid.innerHTML = '';
+            emptyState.classList.remove('hidden');
+            countEl.textContent = "Problemas de conexión. Intente más tarde.";
+          }
+        }
+      };
+
+      // 5. Invocación y Despacho de Eventos Recreados
+      
+      // Auto Initialization
+      renderSkeletons(6);
+      await fetchEspecialidades();
+      fetchDoctors();
+
+      // Botón principal
+      searchBtn.addEventListener('click', () => fetchDoctors());
+
+      // Dropdown de Categorías
+      specialtySelect.addEventListener('change', () => fetchDoctors());
+
+      // Debounce Inteligente
+      searchInput.addEventListener('input', (e) => {
+        clearTimeout(debounceTimer);
+        debounceTimer = setTimeout(() => {
+          fetchDoctors();
+        }, 700);
+      });
+
+      // Tecla Enter forzada
+      searchInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+          clearTimeout(debounceTimer);
+          fetchDoctors();
+        }
+      });
+
+      // Paginador
+      loadMoreBtn.addEventListener('click', () => {
+        currentPage++;
+        fetchDoctors(true);
+      });
+
+    });
+  </script>
+</Layout>

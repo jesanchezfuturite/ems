@@ -1,69 +1,181 @@
 ---
 import Layout from '../layouts/Layout.astro';
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "MedicalOrganization",
+  "name": "Centro de Especialidades Médicas",
+  "url": "https://christus.mx/sur",
+  "logo": "/images/logo.png",
+  "medicalSpecialty": [
+    "Bariatrics",
+    "Maternity",
+    "Traumatology"
+  ]
+};
 ---
 
-<Layout title="Inicio - Hospital Christus Sur">
-  <section class="relative bg-brand-blue overflow-hidden min-h-[600px] flex items-center mt-20">
-    <div class="absolute inset-0 bg-gradient-to-r from-brand-blue to-brand-cyan/80 mix-blend-multiply pointer-events-none"></div>
-    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-white z-10 w-full py-24">
+<Layout 
+  title="Centro de Especialidades Médicas | Excelencia Médica y Quirúrgica en Monterrey"
+  description="Líderes en Cirugía Bariátrica, Maternidad y Urgencias 24/7. Tecnología de vanguardia y los mejores especialistas certificados en Monterrey."
+>
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+
+  <!-- Hero Section "Trust & Speed" -->
+  <section class="relative bg-slate-50 bg-gradient-to-br from-slate-50 to-brand-cyan/20 overflow-hidden min-h-[600px] flex items-center flex-col justify-center pt-32 pb-16">
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 z-10 w-full">
       <div class="max-w-3xl">
-        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight mb-6 mt-12 md:mt-0">
-          Cuidado humano<br /> y excelencia médica.
+        <h1 class="hero-text text-4xl sm:text-5xl lg:text-7xl font-bold tracking-tight text-brand-blue mb-6">
+          Tu salud merece la precisión de los mejores especialistas.
         </h1>
-        <p class="text-xl sm:text-2xl text-white/90 mb-10 max-w-2xl font-light">
-          Innovación tecnológica para la salud y el bienestar de tu familia en el sur de la ciudad.
+        <p class="hero-text text-xl sm:text-2xl text-slate-700 mb-10 max-w-2xl font-light">
+          En el Centro de Especialidades Médicas, combinamos calidez humana con quirófanos de alta tecnología para tu pronta recuperación.
         </p>
-        <div class="flex flex-wrap gap-4">
-          <a href="/directorio-medico" class="bg-white text-brand-blue px-8 py-3 rounded-full font-bold hover:bg-slate-100 transition-colors shadow-lg">
-            Encuentra un Especialista
+        <div class="hero-text flex flex-wrap gap-4">
+          <a href="/directorio" class="bg-brand-blue text-white px-8 py-4 rounded-full font-bold hover:bg-blue-900 transition-colors shadow-lg flex items-center">
+            Directorio Médico
+            <i class="ph ph-arrow-right ml-2" aria-label="Ir a Directorio Médico"></i>
           </a>
-          <a href="/contacto" class="glass-card text-white px-8 py-3 rounded-full font-bold hover:bg-white/20 transition-colors shadow-lg">
-            Agendar Cita
+          <a href="tel:+528100000000" class="bg-red-600 text-white px-8 py-4 rounded-full font-bold hover:bg-red-700 transition-colors shadow-lg flex items-center">
+            <i class="ph ph-phone text-xl mr-2" aria-label="Teléfono de Urgencias"></i>
+            Urgencias: 81 0000 0000
           </a>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Servicios Rápidos -->
-  <section class="py-20 bg-slate-50 relative -mt-16 z-20">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-        
-        <div class="bg-white rounded-2xl p-8 shadow-xl shadow-slate-200/50 hover:-translate-y-2 transition-transform duration-300 border border-slate-100">
-          <div class="bg-blue-50 w-14 h-14 rounded-xl flex items-center justify-center mb-6 text-brand-blue">
-            <i class="ph ph-heartbeat text-3xl"></i>
+  <!-- Bento Grid Estratégico (The Moneymakers) -->
+  <section class="bento-container py-20 px-4 max-w-7xl mx-auto cert-section">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      
+      <!-- Card A: Cirugía Avanzada (2 col) -->
+      <div class="bento-card md:col-span-2 bg-white rounded-3xl p-8 shadow-xl shadow-brand-blue/5 border border-slate-100 flex flex-col justify-between relative overflow-hidden min-h-[320px]">
+        <div class="z-10 relative md:w-1/2 md:pr-8">
+          <div class="bg-blue-50 w-12 h-12 rounded-full flex items-center justify-center mb-6 text-brand-blue">
+            <i class="ph ph-activity text-2xl" aria-label="Icono de Cirugía"></i>
           </div>
-          <h3 class="text-xl font-bold text-slate-900 mb-3">Especialidades</h3>
-          <p class="text-slate-600 mb-6 font-medium">Contamos con un equipo multidisciplinario altamente calificado.</p>
-          <a href="/especialidades" class="text-brand-cyan font-bold hover:text-brand-blue transition-colors flex items-center">
-            Ver todas <i class="ph ph-arrow-right ml-2"></i>
+          <h3 class="text-3xl font-bold text-brand-blue mb-4">Cirugía de Alta Especialidad</h3>
+          <p class="text-slate-600 text-lg mb-6">
+            Líderes en cirugía bariátrica y laparoscopía con mínima invasión.
+          </p>
+          <a href="/cirugias" class="text-brand-cyan font-bold hover:text-brand-blue transition-colors flex items-center mt-auto">
+            Conoce nuestros quirófanos <i class="ph ph-arrow-right ml-2" aria-label="Flecha derecha"></i>
           </a>
         </div>
+        <img src="/images/surgery-hub.webp" alt="Quirófano de alta tecnología" class="absolute right-0 bottom-0 w-1/2 h-full object-cover rounded-tl-[80px] opacity-90 hidden md:block" />
+      </div>
 
-        <div class="bg-white rounded-2xl p-8 shadow-xl shadow-slate-200/50 hover:-translate-y-2 transition-transform duration-300 border border-slate-100">
-          <div class="bg-blue-50 w-14 h-14 rounded-xl flex items-center justify-center mb-6 text-brand-blue">
-            <i class="ph ph-baby text-3xl"></i>
-          </div>
-          <h3 class="text-xl font-bold text-slate-900 mb-3">Maternidad</h3>
-          <p class="text-slate-600 mb-6 font-medium">Instalaciones de primer nivel para recibir a tu bebé.</p>
-          <a href="/maternidad" class="text-brand-cyan font-bold hover:text-brand-blue transition-colors flex items-center">
-            Conocer paquetes <i class="ph ph-arrow-right ml-2"></i>
-          </a>
+      <!-- Card B: Maternidad (1 col) -->
+      <div class="bento-card bg-white rounded-3xl p-8 shadow-xl shadow-brand-blue/5 border border-slate-100 flex flex-col">
+        <div class="bg-pink-50 w-12 h-12 rounded-full flex items-center justify-center mb-6 text-pink-600">
+          <i class="ph ph-baby text-2xl" aria-label="Icono Maternidad"></i>
         </div>
+        <h3 class="text-2xl font-bold text-brand-blue mb-4">Maternidad Sur</h3>
+        <p class="text-slate-600 mb-6 flex-grow text-lg">
+          Momentos únicos, seguridad absoluta para ti y tu bebé.
+        </p>
+        <a href="/maternidad" class="text-brand-cyan font-bold hover:text-brand-blue transition-colors flex items-center">
+          Ver paquetes <i class="ph ph-arrow-right ml-2" aria-label="Ir a Maternidad"></i>
+        </a>
+      </div>
 
-        <div class="bg-white rounded-2xl p-8 shadow-xl shadow-slate-200/50 hover:-translate-y-2 transition-transform duration-300 border border-slate-100">
-          <div class="bg-blue-50 w-14 h-14 rounded-xl flex items-center justify-center mb-6 text-brand-blue">
-            <i class="ph ph-first-aid text-3xl"></i>
-          </div>
-          <h3 class="text-xl font-bold text-slate-900 mb-3">Cirugía Ambulatoria</h3>
-          <p class="text-slate-600 mb-6 font-medium">Procedimientos seguros con la más rápida recuperación.</p>
-          <a href="/cirugias" class="text-brand-cyan font-bold hover:text-brand-blue transition-colors flex items-center">
-            Tipos de cirugías <i class="ph ph-arrow-right ml-2"></i>
-          </a>
+      <!-- Card C: Urgencias (1 col) -->
+      <div class="bento-card bg-red-50 rounded-3xl p-8 shadow-xl shadow-red-500/10 border border-red-100 flex flex-col justify-center text-center">
+        <div class="bg-red-100 w-16 h-16 mx-auto rounded-full flex items-center justify-center mb-4 text-red-600">
+          <i class="ph ph-heartbeat text-3xl animate-pulse" aria-label="Icono Pulso"></i>
         </div>
+        <h3 class="text-2xl font-bold text-red-700 mb-2">Urgencias</h3>
+        <p class="text-red-600 font-medium text-lg">
+          Atención inmediata 24/7
+        </p>
+      </div>
 
+      <!-- Card D: Especialidades (2 col) -->
+      <div class="bento-card md:col-span-2 bg-brand-blue rounded-3xl p-8 shadow-xl text-white">
+        <h3 class="text-2xl font-bold mb-6">Explora más de 40 especialidades médicas</h3>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-6">
+          <div class="flex items-center space-x-3 bg-white/10 rounded-xl p-3 backdrop-blur-sm">
+            <i class="ph ph-heart text-brand-cyan text-xl" aria-label="Cardiología"></i>
+            <span class="font-semibold text-sm">Cardiología</span>
+          </div>
+          <div class="flex items-center space-x-3 bg-white/10 rounded-xl p-3 backdrop-blur-sm">
+            <i class="ph ph-bone text-brand-cyan text-xl" aria-label="Traumatología"></i>
+            <span class="font-semibold text-sm">Traumatología</span>
+          </div>
+          <div class="flex items-center space-x-3 bg-white/10 rounded-xl p-3 backdrop-blur-sm">
+            <i class="ph ph-gender-female text-brand-cyan text-xl" aria-label="Ginecología"></i>
+            <span class="font-semibold text-sm">Ginecología</span>
+          </div>
+          <div class="flex items-center space-x-3 bg-white/10 rounded-xl p-3 backdrop-blur-sm">
+            <i class="ph ph-brain text-brand-cyan text-xl" aria-label="Neurología"></i>
+            <span class="font-semibold text-sm">Neurología</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Sección de Autoridad (Social Proof) -->
+  <section class="py-16 bg-white border-t border-slate-100 overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-lg font-bold text-slate-400 mb-10 cert-item uppercase tracking-wider">Hospital Certificado: Estándares internacionales de seguridad para el paciente</h2>
+      
+      <div class="swiper mySwiper cert-item max-w-4xl mx-auto">
+        <div class="swiper-wrapper flex items-center">
+          <div class="swiper-slide flex justify-center opacity-70 hover:opacity-100 transition-opacity">
+            <img src="/images/jci-logo.webp" alt="Joint Commission International" class="h-16 object-contain" />
+          </div>
+          <div class="swiper-slide flex justify-center opacity-70 hover:opacity-100 transition-opacity">
+            <img src="/images/csg-logo.webp" alt="Consejo de Salubridad General" class="h-16 object-contain" />
+          </div>
+          <div class="swiper-slide flex justify-center opacity-70 hover:opacity-100 transition-opacity">
+            <img src="/images/jci-logo.webp" alt="Joint Commission International 2" class="h-16 object-contain" />
+          </div>
+          <div class="swiper-slide flex justify-center opacity-70 hover:opacity-100 transition-opacity">
+            <img src="/images/csg-logo.webp" alt="Consejo de Salubridad General 2" class="h-16 object-contain" />
+          </div>
+        </div>
       </div>
     </div>
   </section>
+
+  <script is:inline>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Swiper Setup
+      if (typeof Swiper !== 'undefined') {
+        new Swiper('.mySwiper', {
+          slidesPerView: 2,
+          spaceBetween: 30,
+          loop: true,
+          autoplay: {
+            delay: 3000,
+            disableOnInteraction: false,
+          },
+          breakpoints: {
+            768: {
+              slidesPerView: 4,
+              spaceBetween: 40,
+            },
+          },
+        });
+      }
+
+      // GSAP Animations
+      if (typeof gsap !== 'undefined') {
+        const tl = gsap.timeline({defaults: {ease: "power4.out", duration: 1}});
+        tl.from(".hero-text", { y: 30, opacity: 0, stagger: 0.2 })
+          .from(".bento-card", { scale: 0.9, opacity: 0, stagger: 0.1 }, "-=0.5");
+          
+        // ScrollTrigger para la sección de certificaciones
+        if (gsap.plugins && gsap.plugins.ScrollTrigger) {
+          gsap.from(".cert-item", {
+            scrollTrigger: ".cert-section",
+            y: 20, opacity: 0, stagger: 0.2
+          });
+        }
+      }
+    });
+  </script>
 </Layout>
