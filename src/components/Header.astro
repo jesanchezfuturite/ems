@@ -19,19 +19,47 @@ const isEmergencyPage = pathname === '/urgencias' || pathname === '/urgencias/';
 
       <!-- Desktop Menu -->
       <nav class="hidden md:flex space-x-8 items-center">
-        <a href="/cirugias" class="text-sm font-semibold hover:text-brand-blue transition-colors">Especialidades</a>
+        <div class="relative group">
+          <button class="text-sm font-semibold hover:text-brand-blue transition-colors flex items-center gap-1 py-4">
+            Servicios
+            <i class="ph ph-caret-down text-xs transition-transform group-hover:rotate-180"></i>
+          </button>
+          
+          <div class="absolute top-[80%] left-1/2 -translate-x-1/2 pt-4 opacity-0 translate-y-3 invisible group-hover:opacity-100 group-hover:translate-y-0 group-hover:visible transition-all duration-300 w-[350px] z-[100]">
+            <div class="bg-gradient-to-b from-[#004b87] to-[#002f54] rounded-3xl p-6 shadow-2xl border border-[#00a3e0]/20 overflow-hidden flex flex-col">
+              
+              <h5 class="text-white/50 text-xs tracking-[0.2em] font-bold uppercase mb-4 pl-2">Diagnóstico y Prevención</h5>
+              
+              <nav class="flex flex-col gap-2">
+                <a href="/cirugias" class="flex items-center gap-4 p-3 rounded-2xl group/item hover:bg-white/5 transition-colors">
+                  <div class="bg-white/10 w-10 h-10 rounded-full flex justify-center items-center group-hover/item:shadow-[0_0_12px_#00a3e0] transition-all duration-300">
+                    <i class="ph ph-activity text-[#00a3e0] text-xl"></i>
+                  </div>
+                  <span class="text-white font-medium group-hover/item:text-[#00a3e0] transition-colors">1. Cirugías</span>
+                </a>
+
+                <a href="/diagnostico" class="flex items-center gap-4 p-3 rounded-2xl group/item hover:bg-white/5 transition-colors">
+                  <div class="bg-white/10 w-10 h-10 rounded-full flex justify-center items-center group-hover/item:shadow-[0_0_12px_#00a3e0] transition-all duration-300">
+                    <i class="ph ph-flask text-[#00a3e0] text-xl"></i>
+                  </div>
+                  <span class="text-white font-medium group-hover/item:text-[#00a3e0] transition-colors">2. Laboratorio y Diagnóstico</span>
+                </a>
+
+                <a href="/checkups" class="flex items-center gap-4 p-3 rounded-2xl group/item hover:bg-white/5 transition-colors">
+                  <div class="bg-white/10 w-10 h-10 rounded-full flex justify-center items-center group-hover/item:shadow-[0_0_12px_#00a3e0] transition-all duration-300">
+                    <i class="ph ph-clipboard-text text-[#00a3e0] text-xl"></i>
+                  </div>
+                  <span class="text-white font-medium group-hover/item:text-[#00a3e0] transition-colors">3. Check-ups Preventivos</span>
+                </a>
+              </nav>
+
+            </div>
+          </div>
+        </div>
         <a href="/maternidad" class="text-sm font-semibold hover:text-brand-blue transition-colors">Maternidad</a>
         <a href="/directorio" class="text-sm font-semibold hover:text-brand-blue transition-colors">Directorio Médico</a>
         <a href="/blog" class="text-sm font-semibold hover:text-brand-blue transition-colors">Blog</a>
       </nav>
-
-      <!-- Actions -->
-      <div class="hidden md:flex items-center space-x-4">
-        <a href="/portal" class="text-sm font-semibold text-brand-blue hover:text-brand-cyan transition-colors">Mi Portal Paciente</a>
-        <a href="/urgencias" class="bg-[#e11d48] text-white font-bold px-6 py-2 rounded-full hover:bg-red-700 transition-colors inline-flex items-center shadow-md">
-          <i class="ph ph-warning-circle text-lg mr-2"></i> URGENCIAS
-        </a>
-      </div>
 
       <!-- Mobile Button -->
       <div class="flex items-center md:hidden">
@@ -43,15 +71,16 @@ const isEmergencyPage = pathname === '/urgencias' || pathname === '/urgencias/';
   </div>
 
   <!-- Mobile Menu -->
-  <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-200 mt-4 absolute w-full left-0 shadow-lg top-full">
-    <div class="px-4 pt-2 pb-6 space-y-2">
-      <a href="/cirugias" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-brand-blue hover:bg-gray-50">Especialidades</a>
-      <a href="/maternidad" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-brand-blue hover:bg-gray-50">Maternidad</a>
-      <a href="/directorio" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-brand-blue hover:bg-gray-50">Directorio Médico</a>
-      <a href="/blog" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-brand-blue hover:bg-gray-50">Blog</a>
-      <hr class="my-2 border-gray-100" />
-      <a href="/portal" class="block px-3 py-2 rounded-md text-base font-medium text-brand-blue hover:bg-gray-50">Mi Portal Paciente</a>
-      <a href="/urgencias" class="block px-3 py-2 rounded-md text-base font-bold text-red-600 bg-red-50 hover:bg-red-100 mt-2 text-center">URGENCIAS</a>
+  <div id="mobile-menu" class="hidden md:hidden bg-white/90 backdrop-blur-md border-t border-gray-100 mt-4 absolute w-full left-0 shadow-xl top-full origin-top transition-all duration-300">
+    <div class="px-4 pt-4 pb-6 space-y-2">
+      <div class="mb-2">
+        <p class="px-3 text-xs font-bold text-slate-400 tracking-wider uppercase mb-1">Servicios</p>
+        <a href="/cirugias" class="block px-3 py-2 rounded-xl text-base font-medium text-slate-700 hover:text-brand-blue hover:bg-slate-50">Cirugías</a>
+        <a href="/checkups" class="block px-3 py-2 rounded-xl text-base font-medium text-slate-700 hover:text-brand-blue hover:bg-slate-50">Check-ups Médicos</a>
+      </div>
+      <a href="/maternidad" class="block px-3 py-2 rounded-xl text-base font-medium text-slate-700 hover:text-brand-blue hover:bg-slate-50">Maternidad</a>
+      <a href="/directorio" class="block px-3 py-2 rounded-xl text-base font-medium text-slate-700 hover:text-brand-blue hover:bg-slate-50">Directorio Médico</a>
+      <a href="/blog" class="block px-3 py-2 rounded-xl text-base font-medium text-slate-700 hover:text-brand-blue hover:bg-slate-50">Blog</a>
     </div>
   </div>
 </header>
@@ -80,3 +109,12 @@ const isEmergencyPage = pathname === '/urgencias' || pathname === '/urgencias/';
     }
   });
 </script>
+
+<style>
+  .glass-card {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+</style>

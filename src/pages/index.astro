@@ -1,5 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import Hero from '../components/Hero.astro';
+import Especialidades from '../components/Especialidades.astro';
 
 const jsonLd = {
   "@context": "https://schema.org",
@@ -21,120 +23,28 @@ const jsonLd = {
 >
   <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
 
-  <!-- Hero Section "Trust & Speed" -->
-  <section class="relative bg-slate-50 bg-gradient-to-br from-slate-50 to-brand-cyan/20 overflow-hidden min-h-[600px] flex items-center flex-col justify-center pt-32 pb-16">
-    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 z-10 w-full">
-      <div class="max-w-3xl">
-        <h1 class="hero-text text-4xl sm:text-5xl lg:text-7xl font-bold tracking-tight text-brand-blue mb-6">
-          Tu salud merece la precisión de los mejores especialistas.
-        </h1>
-        <p class="hero-text text-xl sm:text-2xl text-slate-700 mb-10 max-w-2xl font-light">
-          En el Centro de Especialidades Médicas, combinamos calidez humana con quirófanos de alta tecnología para tu pronta recuperación.
-        </p>
-        <div class="hero-text flex flex-wrap gap-4">
-          <a href="/directorio" class="bg-brand-blue text-white px-8 py-4 rounded-full font-bold hover:bg-blue-900 transition-colors shadow-lg flex items-center">
-            Directorio Médico
-            <i class="ph ph-arrow-right ml-2" aria-label="Ir a Directorio Médico"></i>
-          </a>
-          <a href="tel:+528100000000" class="bg-red-600 text-white px-8 py-4 rounded-full font-bold hover:bg-red-700 transition-colors shadow-lg flex items-center">
-            <i class="ph ph-phone text-xl mr-2" aria-label="Teléfono de Urgencias"></i>
-            Urgencias: 81 0000 0000
-          </a>
-        </div>
-      </div>
-    </div>
-  </section>
+  <Hero />
 
-  <!-- Bento Grid Estratégico (The Moneymakers) -->
-  <section class="bento-container py-20 px-4 max-w-7xl mx-auto cert-section">
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-      
-      <!-- Card A: Cirugía Avanzada (2 col) -->
-      <div class="bento-card md:col-span-2 bg-white rounded-3xl p-8 shadow-xl shadow-brand-blue/5 border border-slate-100 flex flex-col justify-between relative overflow-hidden min-h-[320px]">
-        <div class="z-10 relative md:w-1/2 md:pr-8">
-          <div class="bg-blue-50 w-12 h-12 rounded-full flex items-center justify-center mb-6 text-brand-blue">
-            <i class="ph ph-activity text-2xl" aria-label="Icono de Cirugía"></i>
-          </div>
-          <h3 class="text-3xl font-bold text-brand-blue mb-4">Cirugía de Alta Especialidad</h3>
-          <p class="text-slate-600 text-lg mb-6">
-            Líderes en cirugía bariátrica y laparoscopía con mínima invasión.
-          </p>
-          <a href="/cirugias" class="text-brand-cyan font-bold hover:text-brand-blue transition-colors flex items-center mt-auto">
-            Conoce nuestros quirófanos <i class="ph ph-arrow-right ml-2" aria-label="Flecha derecha"></i>
-          </a>
-        </div>
-        <img src="/images/surgery-hub.webp" alt="Quirófano de alta tecnología" class="absolute right-0 bottom-0 w-1/2 h-full object-cover rounded-tl-[80px] opacity-90 hidden md:block" />
-      </div>
-
-      <!-- Card B: Maternidad (1 col) -->
-      <div class="bento-card bg-white rounded-3xl p-8 shadow-xl shadow-brand-blue/5 border border-slate-100 flex flex-col">
-        <div class="bg-pink-50 w-12 h-12 rounded-full flex items-center justify-center mb-6 text-pink-600">
-          <i class="ph ph-baby text-2xl" aria-label="Icono Maternidad"></i>
-        </div>
-        <h3 class="text-2xl font-bold text-brand-blue mb-4">Maternidad Sur</h3>
-        <p class="text-slate-600 mb-6 flex-grow text-lg">
-          Momentos únicos, seguridad absoluta para ti y tu bebé.
-        </p>
-        <a href="/maternidad" class="text-brand-cyan font-bold hover:text-brand-blue transition-colors flex items-center">
-          Ver paquetes <i class="ph ph-arrow-right ml-2" aria-label="Ir a Maternidad"></i>
-        </a>
-      </div>
-
-      <!-- Card C: Urgencias (1 col) -->
-      <div class="bento-card bg-red-50 rounded-3xl p-8 shadow-xl shadow-red-500/10 border border-red-100 flex flex-col justify-center text-center">
-        <div class="bg-red-100 w-16 h-16 mx-auto rounded-full flex items-center justify-center mb-4 text-red-600">
-          <i class="ph ph-heartbeat text-3xl animate-pulse" aria-label="Icono Pulso"></i>
-        </div>
-        <h3 class="text-2xl font-bold text-red-700 mb-2">Urgencias</h3>
-        <p class="text-red-600 font-medium text-lg">
-          Atención inmediata 24/7
-        </p>
-      </div>
-
-      <!-- Card D: Especialidades (2 col) -->
-      <div class="bento-card md:col-span-2 bg-brand-blue rounded-3xl p-8 shadow-xl text-white">
-        <h3 class="text-2xl font-bold mb-6">Explora más de 40 especialidades médicas</h3>
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-6">
-          <div class="flex items-center space-x-3 bg-white/10 rounded-xl p-3 backdrop-blur-sm">
-            <i class="ph ph-heart text-brand-cyan text-xl" aria-label="Cardiología"></i>
-            <span class="font-semibold text-sm">Cardiología</span>
-          </div>
-          <div class="flex items-center space-x-3 bg-white/10 rounded-xl p-3 backdrop-blur-sm">
-            <i class="ph ph-bone text-brand-cyan text-xl" aria-label="Traumatología"></i>
-            <span class="font-semibold text-sm">Traumatología</span>
-          </div>
-          <div class="flex items-center space-x-3 bg-white/10 rounded-xl p-3 backdrop-blur-sm">
-            <i class="ph ph-gender-female text-brand-cyan text-xl" aria-label="Ginecología"></i>
-            <span class="font-semibold text-sm">Ginecología</span>
-          </div>
-          <div class="flex items-center space-x-3 bg-white/10 rounded-xl p-3 backdrop-blur-sm">
-            <i class="ph ph-brain text-brand-cyan text-xl" aria-label="Neurología"></i>
-            <span class="font-semibold text-sm">Neurología</span>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </section>
+  <Especialidades />
 
   <!-- Sección de Autoridad (Social Proof) -->
-  <section class="py-16 bg-white border-t border-slate-100 overflow-hidden">
+  <section class="py-16 bg-white border-t border-slate-100 overflow-hidden relative z-10 shadow-[-10px_-10px_30px_rgba(0,0,0,0.02)]">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
       <h2 class="text-lg font-bold text-slate-400 mb-10 cert-item uppercase tracking-wider">Hospital Certificado: Estándares internacionales de seguridad para el paciente</h2>
       
       <div class="swiper mySwiper cert-item max-w-4xl mx-auto">
         <div class="swiper-wrapper flex items-center">
-          <div class="swiper-slide flex justify-center opacity-70 hover:opacity-100 transition-opacity">
-            <img src="/images/jci-logo.webp" alt="Joint Commission International" class="h-16 object-contain" />
+          <div class="swiper-slide flex justify-center opacity-70 hover:opacity-100 transition-opacity duration-300">
+            <img src="/images/jci-logo.webp" alt="Joint Commission International" class="h-16 object-contain grayscale hover:grayscale-0 transition-all duration-300" />
           </div>
-          <div class="swiper-slide flex justify-center opacity-70 hover:opacity-100 transition-opacity">
-            <img src="/images/csg-logo.webp" alt="Consejo de Salubridad General" class="h-16 object-contain" />
+          <div class="swiper-slide flex justify-center opacity-70 hover:opacity-100 transition-opacity duration-300">
+            <img src="/images/csg-logo.webp" alt="Consejo de Salubridad General" class="h-16 object-contain grayscale hover:grayscale-0 transition-all duration-300" />
           </div>
-          <div class="swiper-slide flex justify-center opacity-70 hover:opacity-100 transition-opacity">
-            <img src="/images/jci-logo.webp" alt="Joint Commission International 2" class="h-16 object-contain" />
+          <div class="swiper-slide flex justify-center opacity-70 hover:opacity-100 transition-opacity duration-300">
+            <img src="/images/jci-logo.webp" alt="Joint Commission International 2" class="h-16 object-contain grayscale hover:grayscale-0 transition-all duration-300" />
           </div>
-          <div class="swiper-slide flex justify-center opacity-70 hover:opacity-100 transition-opacity">
-            <img src="/images/csg-logo.webp" alt="Consejo de Salubridad General 2" class="h-16 object-contain" />
+          <div class="swiper-slide flex justify-center opacity-70 hover:opacity-100 transition-opacity duration-300">
+            <img src="/images/csg-logo.webp" alt="Consejo de Salubridad General 2" class="h-16 object-contain grayscale hover:grayscale-0 transition-all duration-300" />
           </div>
         </div>
       </div>
@@ -162,19 +72,18 @@ const jsonLd = {
         });
       }
 
-      // GSAP Animations
-      if (typeof gsap !== 'undefined') {
-        const tl = gsap.timeline({defaults: {ease: "power4.out", duration: 1}});
-        tl.from(".hero-text", { y: 30, opacity: 0, stagger: 0.2 })
-          .from(".bento-card", { scale: 0.9, opacity: 0, stagger: 0.1 }, "-=0.5");
-          
-        // ScrollTrigger para la sección de certificaciones
-        if (gsap.plugins && gsap.plugins.ScrollTrigger) {
-          gsap.from(".cert-item", {
-            scrollTrigger: ".cert-section",
-            y: 20, opacity: 0, stagger: 0.2
-          });
-        }
+      // ScrollTrigger para la sección de certificaciones
+      if (typeof gsap !== 'undefined' && gsap.plugins && gsap.plugins.ScrollTrigger) {
+        gsap.fromTo(".cert-item", 
+          { y: 20, opacity: 0 },
+          { 
+            y: 0, opacity: 1, stagger: 0.2, duration: 1, ease: "power3.out",
+            scrollTrigger: {
+              trigger: ".cert-section, .mySwiper", // fallback in case cert-section class was removed
+              start: "top 85%",
+            }
+          }
+        );
       }
     });
   </script>
