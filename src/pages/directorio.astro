@@ -183,6 +183,17 @@ import Layout from '../layouts/Layout.astro';
         }).join(' ');
       };
 
+      // Helper function for URL Slug
+      const slugify = (text) => {
+        if (!text) return '';
+        return text.toString().toLowerCase().trim()
+          .normalize('NFD') // remove accents
+          .replace(/[\u0300-\u036f]/g, '')
+          .replace(/\s+/g, '-') // spaces to dashes
+          .replace(/[^\w\-]+/g, '') // remove non-words
+          .replace(/\-\-+/g, '-'); // collapse dashes
+      };
+
       // 2. Extracción de Especialidades (Filtros Selectores + Sugerencias Rapidas)
       const fetchEspecialidades = async () => {
         try {
@@ -275,7 +286,7 @@ import Layout from '../layouts/Layout.astro';
               <a href="/contacto" class="flex w-full items-center justify-center bg-brand-cyan text-white py-3 rounded-xl font-bold hover:bg-cyan-600 transition-colors shadow-md shadow-brand-cyan/20">
                 Agendar Cita
               </a>
-              <a href="/directorio/${doc.id}" class="flex w-full items-center justify-center text-sm font-bold text-brand-blue hover:text-brand-cyan transition-colors bg-blue-50/50 py-3 rounded-xl hover:bg-blue-100">
+              <a href="/directorio/${slugify(doc.nombre)}" class="flex w-full items-center justify-center text-sm font-bold text-brand-blue hover:text-brand-cyan transition-colors bg-blue-50/50 py-3 rounded-xl hover:bg-blue-100">
                 Ver Perfil Completo
               </a>
             </div>

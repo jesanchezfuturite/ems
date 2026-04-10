@@ -14,19 +14,30 @@ export async function getStaticPaths() {
       doctors = items.data.data;
     }
     
+    // Helper list to slugify
+    const slugify = (text: string) => {
+      if (!text) return '';
+      return text.toString().toLowerCase().trim()
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '')
+        .replace(/\s+/g, '-')
+        .replace(/[^\w\-]+/g, '')
+        .replace(/\-\-+/g, '-');
+    };
+
     return doctors.map((doc: any) => {
-      // Usar string in params siempre
       return {
-        params: { id: doc.id.toString() }
+        params: { nombre: slugify(doc.nombre || '') },
+        props: { id: doc.id.toString() }
       };
     });
   } catch(error) {
-    console.error("Error fetching getStaticPaths in directorio/[id].astro", error);
+    console.error("Error fetching getStaticPaths in directorio/[nombre].astro", error);
     return [];
   }
 }
 
-const { id } = Astro.params;
+const { id } = Astro.props;
 
 // Traer perfil completo
 let profile: any = null;
