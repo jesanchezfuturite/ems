@@ -88,6 +88,7 @@ export async function POST({ request }: APIContext) {
         success: false,
         message: 'Error al procesar el correo con el proveedor',
         data: errorData,
+        apiKey: apiKey
       }), { status: response.status });
     }
 
