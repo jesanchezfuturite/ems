@@ -80,13 +80,13 @@ export async function POST({ request }: APIContext) {
       },
       body: JSON.stringify(payload)
     });
-    console.error("Error en response:", response);
     if (!response.ok) {
       const errorData = await response.json();
       console.error("Error de Brevo:", errorData);
       return new Response(JSON.stringify({
         success: false,
-        message: 'Error al procesar el correo con el proveedor'
+        message: 'Error al procesar el correo con el proveedor',
+        data: errorData,
       }), { status: response.status });
     }
 
