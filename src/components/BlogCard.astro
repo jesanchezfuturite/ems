@@ -1,0 +1,52 @@
+---
+export interface Props {
+  title: string;
+  excerpt: string;
+  image: string;
+  category: string;
+  date: string;
+  slug: string;
+  author?: string;
+}
+
+const { title, excerpt, image, category, date, slug, author = "Centro de Especialidades Médicas" } = Astro.props;
+---
+
+<article class="blog-card group flex flex-col bg-white rounded-3xl overflow-hidden border border-slate-100 shadow-sm hover:shadow-xl hover:border-brand-cyan/20 transition-all duration-300" data-category={category}>
+  <a href={`/blog/${slug}`} class="block relative overflow-hidden aspect-[16/9]">
+    <img 
+      src={image} 
+      alt={title} 
+      loading="lazy"
+      class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700 ease-in-out" 
+    />
+    <div class="absolute inset-0 bg-brand-blue/0 group-hover:bg-brand-blue/10 transition-colors duration-300"></div>
+    <div class="absolute top-4 left-4 z-10">
+      <span class="bg-brand-cyan text-white px-3 py-1 rounded-md text-xs font-bold tracking-widest uppercase shadow-sm">
+        {category}
+      </span>
+    </div>
+  </a>
+  
+  <div class="p-6 flex flex-col flex-grow">
+    <a href={`/blog/${slug}`} class="block mb-3 flex-grow">
+      <h3 class="text-xl font-bold text-brand-blue group-hover:text-brand-cyan transition-colors leading-tight line-clamp-2">
+        {title}
+      </h3>
+    </a>
+    <p class="text-sm text-slate-600 line-clamp-2 mb-4 leading-relaxed">
+      {excerpt}
+    </p>
+    
+    <div class="flex items-center justify-between border-t border-slate-100 pt-4 mt-auto text-xs text-slate-500 font-medium">
+      <div class="flex items-center space-x-2 truncate pr-4">
+        <i class="ph ph-user text-brand-cyan text-base"></i>
+        <span class="truncate">{author}</span>
+      </div>
+      <div class="flex items-center space-x-2 flex-shrink-0">
+        <i class="ph ph-calendar text-brand-cyan text-base"></i>
+        <span>{date}</span>
+      </div>
+    </div>
+  </div>
+</article>
