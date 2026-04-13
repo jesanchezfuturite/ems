@@ -80,6 +80,7 @@ export async function POST({ request }: APIContext) {
       },
       body: JSON.stringify(payload)
     });
+
     if (!response.ok) {
       const errorData = await response.json();
       console.error("Error de Brevo:", errorData);
