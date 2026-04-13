@@ -99,7 +99,7 @@ import Layout from '../layouts/Layout.astro';
 
         <!-- Derecha (Formulario Fricción Cero) -->
         <div class="lg:w-7/12 p-10 lg:p-16">
-          <form class="space-y-8" onsubmit="event.preventDefault(); alert('Mensaje simulado enviado con éxito.');">
+          <form id="contactForm" class="space-y-8">
             
             <!-- Nombre Completo -->
             <div>
@@ -149,8 +149,9 @@ import Layout from '../layouts/Layout.astro';
 
             <!-- Botón Enviar -->
             <div class="pt-4">
-              <button type="submit" class="w-full bg-brand-blue hover:bg-brand-cyan text-white text-xl font-bold py-4 px-8 rounded-2xl transition-colors shadow-lg shadow-brand-cyan/20">
-                Enviar Mensaje
+              <button type="submit" id="submitButton" class="w-full bg-brand-blue hover:bg-brand-cyan text-white text-xl font-bold py-4 px-8 rounded-2xl transition-colors shadow-lg shadow-brand-cyan/20 flex justify-center items-center gap-2">
+                <span>Enviar Mensaje</span>
+                <i class="ph ph-spinner-gap animate-spin hidden" id="submitSpinner"></i>
               </button>
             </div>
             
@@ -194,4 +195,93 @@ import Layout from '../layouts/Layout.astro';
     </div>
   </section>
 
+  <!-- Toast Notification -->
+  <div id="toastNotification" class="fixed bottom-4 right-4 z-50 transform translate-y-20 opacity-0 transition-all duration-300 flex items-center p-4 mb-4 text-slate-800 bg-white rounded-2xl shadow-2xl border-l-4 border-brand-cyan max-w-sm pointer-events-none" role="alert">
+    <div class="inline-flex items-center justify-center flex-shrink-0 w-10 h-10 rounded-lg bg-brand-cyan/10 text-brand-cyan" id="toastIcon">
+      <i class="ph ph-check-circle text-2xl"></i>
+    </div>
+    <div class="ms-4 text-sm font-medium mr-4" id="toastMessage">
+      Mensaje enviado correctamente.
+    </div>
+    <button type="button" class="ms-auto -mx-1.5 -my-1.5 bg-white text-slate-400 hover:text-slate-900 rounded-lg focus:ring-2 focus:ring-slate-300 p-1.5 hover:bg-slate-50 inline-flex items-center justify-center h-8 w-8 pointer-events-auto" onclick="document.getElementById('toastNotification').classList.add('translate-y-20', 'opacity-0'); document.getElementById('toastNotification').classList.remove('translate-y-0', 'opacity-100');" aria-label="Close">
+      <span class="sr-only">Cerrar</span>
+      <i class="ph ph-x text-lg"></i>
+    </button>
+  </div>
+
+  <script is:inline>
+    document.addEventListener('DOMContentLoaded', () => {
+      const form = document.getElementById('contactForm');
+      const submitBtn = document.getElementById('submitButton');
+      const spinner = document.getElementById('submitSpinner');
+      const btnText = submitBtn.querySelector('span');
+      const toast = document.getElementById('toastNotification');
+      const toastMessage = document.getElementById('toastMessage');
+      const toastIconContainer = document.getElementById('toastIcon');
+
+      function showToast(message, isSuccess = true) {
+        toastMessage.textContent = message;
+        
+        if(isSuccess) {
+          toast.classList.remove('border-red-500');
+          toast.classList.add('border-brand-cyan');
+          toastIconContainer.className = "inline-flex items-center justify-center flex-shrink-0 w-10 h-10 rounded-lg bg-brand-cyan/10 text-brand-cyan";
+          toastIconContainer.innerHTML = '<i class="ph ph-check-circle text-2xl"></i>';
+        } else {
+          toast.classList.remove('border-brand-cyan');
+          toast.classList.add('border-red-500');
+          toastIconContainer.className = "inline-flex items-center justify-center flex-shrink-0 w-10 h-10 rounded-lg bg-red-100 text-red-500";
+          toastIconContainer.innerHTML = '<i class="ph ph-warning-circle text-2xl"></i>';
+        }
+
+        toast.classList.remove('translate-y-20', 'opacity-0');
+        toast.classList.add('translate-y-0', 'opacity-100');
+
+        setTimeout(() => {
+          toast.classList.remove('translate-y-0', 'opacity-100');
+          toast.classList.add('translate-y-20', 'opacity-0');
+        }, 5000);
+      }
+
+      if (form) {
+        form.addEventListener('submit', async (e) => {
+          e.preventDefault();
+          
+          const formData = new FormData(form);
+          const data = Object.fromEntries(formData);
+          
+          btnText.textContent = 'Enviando...';
+          spinner.classList.remove('hidden');
+          submitBtn.disabled = true;
+          submitBtn.classList.add('opacity-75', 'cursor-not-allowed');
+
+          try {
+            const response = await fetch('/api/contacto', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify(data)
+            });
+
+            const result = await response.json();
+
+            if (response.ok) {
+              showToast('Tu mensaje ha sido enviado correctamente. Te contactaremos pronto.');
+              form.reset();
+            } else {
+              showToast(result.message || 'Ocurrió un error al enviar el mensaje', false);
+            }
+          } catch (error) {
+            showToast('Error de red al intentar enviar el mensaje', false);
+          } finally {
+            btnText.textContent = 'Enviar Mensaje';
+            spinner.classList.add('hidden');
+            submitBtn.disabled = false;
+            submitBtn.classList.remove('opacity-75', 'cursor-not-allowed');
+          }
+        });
+      }
+    });
+  </script>
 </Layout>
