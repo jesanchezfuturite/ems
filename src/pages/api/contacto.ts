@@ -14,11 +14,11 @@ export async function POST({ request }: APIContext) {
       }), { status: 400 });
     }
 
-    // Configuración de Brevo
-    const apiKey = import.meta.env.BREVO_API_KEY;
+    // Configuración de Brevo (Soporte Vercel process.env + import.meta.env)
+    const apiKey = import.meta.env.BREVO_API_KEY || process.env.BREVO_API_KEY;
     
     // Leemos el sender predeterminado para leads si existe, si no, uno por defecto
-    const senderStr = import.meta.env.BREVO_SENDER_DEFAULT;
+    const senderStr = import.meta.env.BREVO_SENDER_DEFAULT || process.env.BREVO_SENDER_DEFAULT;
     let sender = { name: "Web Leads", email: "no_reply@ongoing.mx" };
     try {
       if (senderStr) sender = JSON.parse(senderStr);
@@ -87,8 +87,7 @@ export async function POST({ request }: APIContext) {
       return new Response(JSON.stringify({
         success: false,
         message: 'Error al procesar el correo con el proveedor',
-        data: errorData,
-        apiKey: apiKey
+        data: errorData
       }), { status: response.status });
     }
 
