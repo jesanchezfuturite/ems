@@ -1,20 +1,65 @@
 ---
 import Layout from '../layouts/Layout.astro';
+
+// AEO: JSON-LD FAQ Schema
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "¿Cómo agendar una cita médica en el directorio?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Puedes agendar una cita rápida haciendo clic en el botón 'Agendar Cita' de cualquier especialista en nuestro directorio, el cual te redirigirá a nuestras opciones de contacto inmediato."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Aceptan seguros de gastos médicos mayores?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Sí, nuestros especialistas y las instalaciones de Centro de Especialidades Médicas Sur están afiliados a las principales aseguradoras (GNP, AXA, MetLife, Seguros Monterrey, entre otras)."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Cómo elegir al especialista médico adecuado para mí?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Recomendamos usar nuestro buscador por especialidad o padecimiento. También puedes entrar al perfil individual de cada médico para conocer su formación académica, certificaciones y subespecialidades clínicas."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Dónde están ubicados los consultorios médicos?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Nuestros especialistas consultan dentro del Hospital Christus Muguerza Sur, ubicado en la Carretera Nacional, garantizando acceso inmediato a urgencias y tecnología médica de última generación."
+      }
+    }
+  ]
+};
 ---
 
 <Layout 
-  title="Directorio Médico | Centro de Especialidades Médicas"
-  description="Encuentra a tu especialista ideal en nuestra red de médicos certificados. Especialistas bariátras, ginecólogos, traumatólogos y más."
+  title="Directorio Médico Especializado | Centro de Especialidades Médicas Sur"
+  description="Conecta con médicos especialistas en Monterrey. Ginecólogos, pediatras, traumatólogos y más, certificados con los más altos estándares médicos y humanos."
 >
+  <!-- Inyección JSON-LD Schema -->
+  <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+
   <style is:global>
-    /* Premium Shimmer Effect for Skeletons */
+    .text-brand-blue { color: #004b87; }
+    .bg-brand-blue { background-color: #004b87; }
+    .border-brand-blue { border-color: #004b87; }
+    .text-brand-cyan { color: #00a3e0; }
+    .bg-brand-cyan { background-color: #00a3e0; }
+    .border-brand-cyan { border-color: #00a3e0; }
+
     @keyframes shimmer {
-      0% {
-        background-position: -200% 0;
-      }
-      100% {
-        background-position: 200% 0;
-      }
+      0% { background-position: -200% 0; }
+      100% { background-position: 200% 0; }
     }
     .skeleton-shimmer {
       background: linear-gradient(90deg, #f1f5f9 25%, #e2e8f0 50%, #f1f5f9 75%);
@@ -23,107 +68,153 @@ import Layout from '../layouts/Layout.astro';
     }
   </style>
 
-  <!-- Hero Section & Buscador Dual -->
-  <section class="bg-slate-50 pt-16 pb-12 overflow-hidden relative">
-    <div class="absolute inset-0 bg-gradient-to-br from-brand-cyan/5 to-transparent"></div>
+  <!-- Hero Section -->
+  <section class="bg-gradient-to-br from-slate-50 to-[#00a3e0]/5 pt-20 pb-16 overflow-hidden relative">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-      
-      <!-- Copy Central -->
-      <div class="max-w-3xl mx-auto text-center mb-10">
-        <h1 class="text-4xl md:text-5xl font-bold text-brand-blue mb-4 tracking-tight">Directorio Médico Especializado</h1>
-        <p class="text-lg text-slate-600">Conecta con los mejores médicos del norte del país, certificados clínica y humanamente para tu cuidado integral.</p>
+      <div class="max-w-3xl mx-auto text-center mb-12">
+        <h1 class="text-4xl lg:text-6xl font-extrabold text-brand-blue mb-6 tracking-tight font-jakarta">Directorio Médico Especializado</h1>
+        <p class="text-xl text-slate-600 font-jakarta leading-relaxed max-w-2xl mx-auto">
+          Conecta con los mejores médicos del norte del país, certificados clínica y humanamente para tu cuidado integral.
+        </p>
       </div>
 
       <!-- Barra Unificada Avanzada -->
       <div class="max-w-4xl mx-auto">
-        
-        <!-- Input Form Control -->
-        <div class="bg-white rounded-3xl shadow-2xl shadow-brand-blue/10 border border-slate-100 p-2 mb-4 transition-all focus-within:ring-4 focus-within:ring-brand-cyan/20">
-          <div class="grid grid-cols-1 md:grid-cols-[1fr_auto_1fr_auto] items-center gap-2">
+        <div class="glass-card rounded-[2rem] p-3 mb-6 transition-all focus-within:ring-4 focus-within:ring-brand-cyan/20 focus-within:bg-white relative z-20">
+          <div class="grid grid-cols-1 md:grid-cols-[1.2fr_auto_1.2fr_auto] items-center gap-3">
             
-            <!-- 1. Input de Nombre -->
-            <div class="relative flex items-center h-full">
-              <i class="ph ph-user-focus absolute left-4 text-slate-400 text-2xl z-10 pointer-events-none"></i>
+            <!-- 1. Input -->
+            <div class="relative flex items-center h-full group">
+              <i class="ph ph-magnifying-glass absolute left-5 text-brand-cyan text-2xl z-10 pointer-events-none group-focus-within:text-brand-blue transition-colors"></i>
               <input 
                 type="text" 
                 id="search-input"
-                class="w-full h-12 bg-transparent border-0 pl-12 pr-4 text-slate-800 placeholder-slate-400 focus:outline-none text-lg rounded-xl"
-                placeholder="Nombre del especialista..."
+                class="w-full h-14 bg-slate-50/50 md:bg-transparent border-0 pl-14 pr-4 text-slate-800 placeholder-slate-400 focus:outline-none text-lg rounded-2xl md:rounded-none font-jakarta focus:bg-transparent transition-colors"
+                placeholder="Nombre del médico..."
                 autocomplete="off"
               />
             </div>
             
-            <!-- 2. Divisor -->
-            <div class="hidden md:block w-px h-8 bg-slate-200 mx-2"></div>
+            <!-- Divisor -->
+            <div class="hidden md:block w-px h-10 bg-slate-200/80 mx-2"></div>
 
-            <!-- 3. Select Especialidad -->
+            <!-- 2. Select Especialidad -->
             <div class="relative flex items-center group">
-              <i class="ph ph-stethoscope absolute left-4 text-brand-cyan text-2xl z-10 pointer-events-none"></i>
-              <select id="specialty-select" class="appearance-none w-full h-12 bg-transparent border-0 pl-12 pr-10 text-slate-700 font-medium focus:outline-none text-lg cursor-pointer rounded-xl">
-                <option value="">Cualquier especialidad</option>
+              <i class="ph ph-stethoscope absolute left-5 text-brand-cyan text-2xl z-10 pointer-events-none group-focus-within:text-brand-blue transition-colors"></i>
+              <select id="specialty-select" class="appearance-none w-full h-14 bg-slate-50/50 md:bg-transparent border-0 pl-14 pr-10 text-slate-700 font-bold focus:outline-none text-lg cursor-pointer rounded-2xl md:rounded-none font-jakarta truncate">
+                <option value="">Buscar por especialidad</option>
                 <!-- JS Inject -->
               </select>
-              <i class="ph ph-caret-down absolute right-4 text-slate-400 text-lg pointer-events-none group-focus-within:-rotate-180 transition-transform duration-300"></i>
+              <i class="ph ph-caret-down absolute right-5 text-slate-400 text-lg pointer-events-none group-focus-within:-rotate-180 transition-transform duration-300"></i>
             </div>
 
-            <!-- 4. Botón Buscar -->
-            <button id="search-btn" class="bg-brand-blue text-white px-8 h-12 rounded-2xl font-bold hover:bg-blue-900 shadow-md transform hover:scale-105 transition-all duration-300 text-lg flex items-center justify-center w-full md:w-auto">
-              Buscar
+            <!-- 3. Botón Buscar -->
+            <button id="search-btn" class="bg-brand-blue text-white px-10 h-14 rounded-2xl font-bold hover:bg-blue-900 focus:ring-4 focus:ring-brand-blue/30 transform hover:scale-[1.02] active:scale-95 transition-all duration-300 text-lg flex items-center justify-center w-full shadow-lg shadow-brand-blue/20 cursor-pointer">
+              Buscar <i class="ph ph-arrow-right ml-2 text-xl"></i>
             </button>
             
           </div>
         </div>
 
-        <!-- Quick Filters Populares -->
+        <!-- Quick Filters -->
         <div class="px-2 lg:px-4 flex flex-col sm:flex-row sm:items-center">
-          <p class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-3 sm:mb-0 sm:mr-3 flex-shrink-0">Sugerencias Populares:</p>
+          <p class="text-sm font-bold text-slate-400 uppercase tracking-widest mb-3 sm:mb-0 sm:mr-4 flex-shrink-0 font-jakarta">Sugerencias:</p>
           <div class="flex flex-wrap items-center gap-2" id="quick-filters">
-            <!-- Skeletons Quick Filters -->
-            <div class="h-7 w-20 bg-slate-200 rounded-full animate-pulse"></div>
-            <div class="h-7 w-24 bg-slate-200 rounded-full animate-pulse"></div>
-            <div class="h-7 w-20 bg-slate-200 rounded-full animate-pulse"></div>
+            <div class="h-8 w-24 bg-brand-cyan/10 rounded-full animate-pulse"></div>
+            <div class="h-8 w-32 bg-brand-cyan/10 rounded-full animate-pulse"></div>
+            <div class="h-8 w-28 bg-brand-cyan/10 rounded-full animate-pulse"></div>
           </div>
         </div>
-
-        <!-- Feedback UI (Conteo Animado) -->
-        <div class="mt-8 text-center h-6">
-           <p id="results-count" class="text-sm font-bold text-slate-500 uppercase tracking-widest transition-opacity"></p>
-        </div>
-
       </div>
     </div>
   </section>
 
-  <!-- Results Grid -->
-  <section class="py-12 bg-white min-h-[50vh]">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+  <!-- Feedback UI (Count) -->
+  <div class="w-full bg-white border-b border-slate-100 py-3 shadow-sm relative z-10">
+    <p id="results-count" class="text-center text-sm font-bold text-brand-cyan uppercase tracking-widest font-jakarta transition-opacity">Cargando directorio...</p>
+  </div>
+
+  <!-- Results Grid Section -->
+  <section class="py-16 bg-[#f8fafc] min-h-[50vh] relative">
+    <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-[0.03]"></div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
       
-      <!-- Doctor Cards Container -->
-      <div id="doctors-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        <!-- Render dinámico aquí -->
-      </div>
+      <!-- Doctor Cards -->
+      <div id="doctors-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"></div>
       
       <!-- Empty State -->
-      <div id="empty-state" class="hidden max-w-lg mx-auto text-center py-16 px-4">
-        <div class="bg-slate-50 w-24 h-24 mx-auto rounded-full flex items-center justify-center mb-6 text-slate-400 shadow-inner">
-          <i class="ph ph-magnifying-glass-minus text-5xl"></i>
+      <div id="empty-state" class="hidden max-w-lg mx-auto text-center py-20 px-4">
+        <div class="bg-white w-24 h-24 mx-auto rounded-full flex items-center justify-center mb-6 text-slate-300 shadow-sm border border-slate-100">
+          <i class="ph ph-user-list text-5xl"></i>
         </div>
-        <h3 class="text-2xl font-bold text-brand-blue mb-3">Sin resultados</h3>
-        <p class="text-slate-600 mb-8 max-w-sm mx-auto text-lg leading-relaxed">
-          Intente modificar su criterio de búsqueda o comuníquese directo a urgencias si necesita atención inmediata.
+        <h3 class="text-2xl font-bold text-brand-blue mb-3 font-jakarta">Sin resultados</h3>
+        <p class="text-slate-500 mb-8 max-w-sm mx-auto text-lg leading-relaxed font-jakarta">
+          No encontramos especialistas que coincidan. Intente modificar su búsqueda.
         </p>
-        <a href="tel:8181555000" class="inline-flex items-center justify-center px-8 py-3.5 border border-transparent text-base font-bold rounded-full text-white bg-red-600 hover:bg-red-700 transition-colors shadow-lg shadow-red-600/30 w-full sm:w-auto">
-          <i class="ph ph-phone text-xl mr-2"></i> Urgencias: (81) 8155 5000
-        </a>
       </div>
 
-      <!-- Paginación: Mostrar más -->
-      <div id="load-more-container" class="hidden text-center mt-12 mb-8">
-        <button id="load-more-btn" class="px-8 py-3.5 bg-white border-2 border-brand-cyan text-brand-cyan font-bold rounded-full hover:bg-brand-cyan hover:text-white transition-colors shadow-sm inline-flex items-center group">
-          Mostrar más especialistas <i class="ph ph-caret-down ml-2 text-xl group-hover:translate-y-1 transition-transform"></i>
+      <!-- Load More Button -->
+      <div id="load-more-container" class="hidden text-center mt-16 mb-8">
+        <button id="load-more-btn" class="px-10 py-4 bg-white border-2 border-brand-cyan text-brand-cyan font-bold rounded-full hover:bg-brand-cyan hover:text-white transition-all shadow-md inline-flex items-center group font-jakarta text-lg cursor-pointer">
+          Mostrar más especialistas <i class="ph ph-arrow-circle-down ml-3 text-2xl group-hover:translate-y-1 transition-transform"></i>
         </button>
       </div>
+    </div>
+  </section>
 
+  <!-- Accionable 2: Cross-Selling Especialidades -->
+  <section class="py-20 bg-brand-blue relative overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-r from-brand-blue to-blue-900"></div>
+    <div class="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/diagnostic.png')]"></div>
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+      <h2 class="text-3xl md:text-5xl font-extrabold text-white mb-6 font-jakarta">La medicina a tu alcance</h2>
+      <p class="text-xl text-blue-100 mb-12 max-w-3xl mx-auto leading-relaxed font-jakarta">Conoce más sobre nuestras clínicas especializadas y descubre cómo nuestro enfoque multidisciplinario protege tu bienestar.</p>
+      
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10 action-grid font-jakarta">
+        <a href="/especialidades" class="bg-white/10 backdrop-blur-md border border-white/20 hover:bg-white/20 p-6 rounded-3xl transition-all duration-300 text-white flex flex-col items-center group">
+          <i class="ph ph-baby text-4xl mb-3 text-brand-cyan group-hover:scale-110 transition-transform"></i>
+          <span class="font-bold text-sm tracking-wide">Maternidad</span>
+        </a>
+        <a href="/especialidades" class="bg-white/10 backdrop-blur-md border border-white/20 hover:bg-white/20 p-6 rounded-3xl transition-all duration-300 text-white flex flex-col items-center group">
+          <i class="ph ph-heartbeat text-4xl mb-3 text-brand-cyan group-hover:scale-110 transition-transform"></i>
+          <span class="font-bold text-sm tracking-wide">Cardiología</span>
+        </a>
+        <a href="/especialidades" class="bg-white/10 backdrop-blur-md border border-white/20 hover:bg-white/20 p-6 rounded-3xl transition-all duration-300 text-white flex flex-col items-center group">
+          <i class="ph ph-bone text-4xl mb-3 text-brand-cyan group-hover:scale-110 transition-transform"></i>
+          <span class="font-bold text-sm tracking-wide">Ortopedia</span>
+        </a>
+        <a href="/especialidades" class="bg-white/10 backdrop-blur-md border border-white/20 hover:bg-white/20 p-6 rounded-3xl transition-all duration-300 text-white flex flex-col items-center group">
+          <i class="ph ph-first-aid text-4xl mb-3 text-brand-cyan group-hover:scale-110 transition-transform"></i>
+          <span class="font-bold text-sm tracking-wide">Urgencias</span>
+        </a>
+      </div>
+      <a href="/especialidades" class="inline-flex py-4 px-8 bg-brand-cyan hover:bg-cyan-400 text-white rounded-full font-bold text-lg shadow-lg shadow-brand-cyan/30 transition-colors font-jakarta">
+        Explorar Especialidades
+      </a>
+    </div>
+  </section>
+
+  <!-- Accionable 1: Sección FAQ -->
+  <section class="py-24 bg-white font-jakarta relative border-t border-slate-100">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16 faq-header">
+        <h2 class="text-3xl md:text-5xl font-black text-[#004b87] tracking-tight mb-4">Preguntas Frecuentes</h2>
+        <p class="text-slate-600 text-lg md:text-xl font-medium">Respuestas rápidas para facilitarte el acceso a tu atención médica.</p>
+      </div>
+      
+      <div class="space-y-6 faq-items">
+        {faqSchema.mainEntity.map((faq) => (
+          <details class="glass-card rounded-2xl p-6 group cursor-pointer marker:content-[''] border-l-4 border-l-transparent hover:border-l-[#00a3e0] transition-all overflow-hidden bg-white/60 shadow-sm hover:shadow-md">
+            <summary class="text-xl font-bold text-[#004b87] flex justify-between items-center outline-none list-none marker:content-none [&::-webkit-details-marker]:hidden">
+              {faq.name}
+              <i class="ph ph-caret-down transform group-open:rotate-180 transition-transform text-[#00a3e0] text-2xl"></i>
+            </summary>
+            <div class="mt-4 text-slate-600 font-medium leading-relaxed border-t border-slate-100 pt-4 pr-8">
+              {faq.acceptedAnswer.text}
+            </div>
+          </details>
+        ))}
+      </div>
     </div>
   </section>
 
@@ -142,111 +233,68 @@ import Layout from '../layouts/Layout.astro';
 
       let currentPage = 1;
       let debounceTimer;
-      const svgFallback = `data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100%' height='100%' viewBox='0 0 100 100'><rect fill='%23f1f5f9' width='100' height='100'/><path fill='%23cbd5e1' d='M50 50c11.046 0 20-8.954 20-20s-8.954-20-20-20-20 8.954-20 20 8.954 20 20 20zm0 10c-13.314 0-40 6.671-40 20v10h80V80c0-13.329-26.686-20-40-20z'/></svg>`;
+      const svgFallback = `data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100%' height='100%' viewBox='0 0 100 100'><rect fill='%23f8fafc' width='100' height='100'/><path fill='%23cbd5e1' d='M50 50c11.046 0 20-8.954 20-20s-8.954-20-20-20-20 8.954-20 20 8.954 20 20 20zm0 10c-13.314 0-40 6.671-40 20v10h80V80c0-13.329-26.686-20-40-20z'/></svg>`;
 
-      // 1. Motor de Skeletons (UI premium Loader)
+      // Helpers
       const renderSkeletons = (count = 6, cleanGrid = true) => {
         if(cleanGrid) grid.innerHTML = '';
         emptyState.classList.add('hidden');
         grid.classList.remove('hidden');
-
         for(let i=0; i<count; i++) {
           const div = document.createElement('div');
-          div.className = "skeleton-card flex flex-col p-6 bg-white rounded-3xl border border-slate-100 shadow-sm";
-          div.innerHTML = `
-            <div class="flex items-center space-x-4 mb-5">
-              <div class="w-[72px] h-[72px] rounded-full skeleton-shimmer"></div>
-              <div class="flex-1 space-y-3 pt-2">
-                 <div class="h-4 w-3/4 rounded bg-slate-100 skeleton-shimmer"></div>
-                 <div class="h-3 w-1/2 rounded bg-brand-cyan/20 skeleton-shimmer"></div>
-              </div>
-            </div>
-            <div class="flex-grow mt-2">
-               <div class="h-4 w-5/6 rounded bg-slate-100 skeleton-shimmer"></div>
-            </div>
-            <div class="mt-8 space-y-3">
-               <div class="h-11 w-full rounded-xl bg-slate-100 skeleton-shimmer"></div>
-               <div class="h-11 w-full rounded-xl bg-slate-50 skeleton-shimmer"></div>
-            </div>
-          `;
+          div.className = "flex flex-col bg-white rounded-3xl border border-slate-100 p-6 pb-8 shadow-sm h-full skeleton-shimmer opacity-50";
+          div.style.minHeight = "360px";
           grid.appendChild(div);
         }
       };
 
-      // Helper function for Title Case in Spanish
       const toTitleCase = (str) => {
         if (!str) return '';
         const minors = ['y', 'de', 'del', 'el', 'la', 'los', 'las', 'en'];
-        return str.toLowerCase().split(' ').map((word, index) => {
-          if (index > 0 && minors.includes(word)) return word;
-          return word.charAt(0).toUpperCase() + word.slice(1);
-        }).join(' ');
+        return str.toLowerCase().split(' ').map((w, i) => i > 0 && minors.includes(w) ? w : w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
       };
 
-      // Helper function for URL Slug
       const slugify = (text) => {
         if (!text) return '';
-        return text.toString().toLowerCase().trim()
-          .normalize('NFD') // remove accents
-          .replace(/[\u0300-\u036f]/g, '')
-          .replace(/\s+/g, '-') // spaces to dashes
-          .replace(/[^\w\-]+/g, '') // remove non-words
-          .replace(/\-\-+/g, '-'); // collapse dashes
+        return text.toString().toLowerCase().trim().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/\s+/g, '-').replace(/[^\w\-]+/g, '').replace(/\-\-+/g, '-');
       };
 
-      // 2. Extracción de Especialidades (Filtros Selectores + Sugerencias Rapidas)
+      // Extracción API
       const fetchEspecialidades = async () => {
         try {
           const res = await fetch('https://administrador.especialidadesmedicassur.com.mx/api/especialidad/get-all');
           const data = await res.json();
-          const especialidades = data.data || data;
-          let clean = Array.isArray(especialidades) ? especialidades.filter(e => e.estatus === 1) : [];
-
-          // Format Title Case and Sort Alphabetically
-          clean = clean.map(esp => ({
-            ...esp,
-            nombre: toTitleCase(esp.nombre)
-          })).sort((a, b) => a.nombre.localeCompare(b.nombre, 'es'));
-
-          // Poblar el Option Select
+          let clean = (Array.isArray(data.data || data) ? (data.data || data) : []).filter(e => e.estatus === 1);
+          clean = clean.map(esp => ({ ...esp, nombre: toTitleCase(esp.nombre) })).sort((a,b) => a.nombre.localeCompare(b.nombre, 'es'));
+          
           clean.forEach(esp => {
             const opt = document.createElement('option');
-            opt.value = esp.id;
-            opt.textContent = esp.nombre;
+            opt.value = esp.id; opt.textContent = esp.nombre;
             specialtySelect.appendChild(opt);
           });
 
-          // Poblar Sugerencias Relevantes (Moneymakers Keys)
-          const keys = ['bariatría', 'traumatología', 'ginecología', 'pediatría'];
-          const suggested = clean.filter(esp => keys.some(kw => esp.nombre.toLowerCase().includes(kw))).slice(0, 4);
+          const keys = ['ginecología', 'pediatría', 'traumatología'];
+          const suggested = clean.filter(esp => keys.some(k => esp.nombre.toLowerCase().includes(k))).slice(0, 3);
           
           quickFiltersContainer.innerHTML = '';
           suggested.forEach(esp => {
             const btn = document.createElement('button');
-            btn.className = "px-4 py-1.5 rounded-full text-xs font-bold bg-white border border-brand-cyan/30 text-brand-cyan hover:bg-brand-cyan hover:text-white transition-colors shadow-sm focus:outline-none focus:ring-2 focus:ring-brand-cyan/50 whitespace-nowrap";
+            btn.className = "px-4 py-2 rounded-xl text-sm font-bold bg-white border border-brand-cyan/20 text-brand-cyan hover:bg-brand-cyan hover:border-brand-cyan hover:text-white transition-all shadow-sm focus:outline-none focus:ring-2 focus:ring-brand-cyan/30 whitespace-nowrap cursor-pointer";
             btn.textContent = esp.nombre;
-            // Al dar click conectamos con el Select y forzamos Disparo
-            btn.onclick = () => {
-              specialtySelect.value = esp.id;
-              fetchDoctors(); 
-            };
+            btn.onclick = () => { specialtySelect.value = esp.id; fetchDoctors(); };
             quickFiltersContainer.appendChild(btn);
           });
-
         } catch (error) {
-          console.error("Error cargando Select:", error);
-          quickFiltersContainer.innerHTML = '<span class="text-xs text-slate-400 italic">No se pudieron cargar especialidades</span>';
+          console.error("Error loaded especialidades", error);
         }
       };
 
-      // 3. Pintado de Resultados (GSAP)
+      // Renderización E-E-A-T Cards
       const renderCards = (results, isLoadMore = false) => {
-        // Matamos a los Skeletons viejos
-        grid.querySelectorAll('.skeleton-card').forEach(sk => sk.remove());
+        if (!isLoadMore) grid.innerHTML = '';
+        else grid.querySelectorAll('.skeleton-shimmer').forEach(sk => sk.remove());
 
-        if (!isLoadMore) grid.innerHTML = ''; 
-
-        if (!isLoadMore && (!results || results.length === 0)) {
+        if (!isLoadMore && (!results || !results.length)) {
           grid.classList.add('hidden');
           emptyState.classList.remove('hidden');
           countEl.textContent = "0 ESPECIALISTAS ENCONTRADOS";
@@ -255,151 +303,147 @@ import Layout from '../layouts/Layout.astro';
 
         grid.classList.remove('hidden');
         emptyState.classList.add('hidden');
-        if (!isLoadMore) countEl.textContent = `Directorio Médico`;
+        if (!isLoadMore) countEl.innerHTML = `<i class="ph ph-check-circle mr-1"></i> Resultados encontrados para tu salud`;
 
-        // Preparamos animación GSAP aislada para esta llamada particular
         const batchClass = `batch-${Date.now()}`;
 
         results.forEach(doc => {
           const card = document.createElement('div');
-          card.className = `doctor-card ${batchClass} flex flex-col p-6 bg-white rounded-3xl border border-slate-100 overflow-hidden hover:shadow-xl hover:-translate-y-1 hover:border-brand-cyan/30 transition-all duration-300 relative`;
-          let profileImg = doc.foto ? doc.foto : svgFallback;
-          let docName = toTitleCase(doc.nombre);
-
+          // Important: We omit translateY initial class to use GSAP proper injection
+          card.className = `doctor-card ${batchClass} flex flex-col bg-white rounded-[2rem] border border-slate-100 p-6 pb-6 shadow-sm hover:shadow-2xl transition-shadow duration-500 group relative font-jakarta h-full`;
+          const profileImg = doc.foto ? doc.foto : svgFallback;
+          const docName = toTitleCase(doc.nombre);
+          
           card.innerHTML = `
-            <div class="flex items-center space-x-4 mb-5 relative z-10">
-              <div class="flex-shrink-0 w-[72px] h-[72px] relative rounded-full border border-slate-200 bg-slate-50 overflow-hidden">
-                <img src="${profileImg}" alt="${docName}" loading="lazy" onerror="this.src='${svgFallback}'" class="absolute inset-0 w-full h-full object-cover p-0.5 rounded-full" />
+            <div class="flex flex-col items-center mb-5">
+              <div class="w-28 h-28 mb-4 relative z-10">
+                <div class="absolute inset-0 rounded-full border-[3px] border-brand-cyan/30 group-hover:border-brand-cyan transition-colors duration-500 scale-[1.05] group-hover:scale-[1.08] shadow-sm"></div>
+                <div class="w-full h-full rounded-full overflow-hidden border-2 border-white bg-slate-50 relative z-20">
+                  <img src="${profileImg}" alt="${docName}" loading="lazy" onerror="this.src='${svgFallback}'" class="w-full h-full object-cover" />
+                </div>
               </div>
-              <div class="pt-1">
-                <h3 class="text-[1.15rem] font-bold text-brand-blue leading-tight mb-1 line-clamp-2" title="${docName}">${docName}</h3>
-                <span class="inline-block px-3 py-1 bg-brand-cyan/10 text-brand-cyan text-[10px] sm:text-[11px] font-bold rounded-full uppercase tracking-wider line-clamp-1">${doc.especialidad || 'Especialista'}</span>
+              <h3 class="text-[1.2rem] xl:text-[1.3rem] font-extrabold text-brand-blue tracking-tight leading-tight mb-2 text-center line-clamp-2">${docName}</h3>
+              <p class="text-brand-cyan font-bold text-[0.7rem] xl:text-xs uppercase tracking-widest text-center line-clamp-1 mb-4">${doc.especialidad || 'Especialista Médico'}</p>
+              
+              <div class="inline-flex items-center justify-center px-4 py-1.5 bg-slate-50 rounded-full text-slate-500 text-xs font-bold border border-slate-100">
+                <i class="ph ph-file-text text-brand-cyan mr-1.5 text-sm"></i> 
+                Céd: ${doc.cedula || 'En Proceso'}
               </div>
             </div>
-            <div class="flex-grow z-10">
-              <p class="text-sm text-slate-500 leading-relaxed bg-slate-50 p-3 rounded-lg border border-slate-100">
-                <i class="ph ph-certificate text-brand-cyan mr-1 text-base align-text-bottom"></i> 
-                Cédula: <strong class="text-brand-blue">${doc.cedula || 'En trámite'}</strong>
-              </p>
-            </div>
-            <div class="mt-6 space-y-2 z-10">
-              <a href="/contacto" class="flex w-full items-center justify-center bg-brand-cyan text-white py-3 rounded-xl font-bold hover:bg-cyan-600 transition-colors shadow-md shadow-brand-cyan/20">
+
+            <div class="mt-auto space-y-3 pt-5 border-t border-slate-100/80 relative z-10 w-full">
+              <a href="/contacto" class="block w-full text-center bg-brand-cyan text-white py-3.5 rounded-full font-bold hover:bg-cyan-500 hover:shadow-lg hover:shadow-brand-cyan/30 active:scale-95 transition-all text-[0.95rem]">
                 Agendar Cita
               </a>
-              <a href="/directorio/${slugify(doc.nombre)}" class="flex w-full items-center justify-center text-sm font-bold text-brand-blue hover:text-brand-cyan transition-colors bg-blue-50/50 py-3 rounded-xl hover:bg-blue-100">
-                Ver Perfil Completo
+              <a href="/directorio/${slugify(doc.nombre)}" class="flex w-full items-center justify-center text-sm font-bold text-slate-400 hover:text-brand-blue transition-colors py-2 group/link">
+                Ver Perfil Completo 
+                <i class="ph ph-arrow-right ml-1.5 transform group-hover/link:translate-x-1 group-hover/link:text-brand-cyan transition-all"></i>
               </a>
             </div>
           `;
           grid.appendChild(card);
         });
 
-        // GSAP Fade In para el nuevo lote únicamente
+        // GSAP ScrollTrigger Fade-In + Slide-Up Recreativo
         if (typeof window.gsap !== 'undefined') {
-          window.gsap.fromTo(`.${batchClass}`, 
-            { opacity: 0, y: 15 },
-            { opacity: 1, y: 0, duration: 0.5, stagger: 0.05, ease: "power2.out", clearProps: "all" }
+          window.gsap.fromTo("." + batchClass, 
+            { opacity: 0, y: 40 },
+            { 
+              opacity: 1, 
+              y: 0, 
+              duration: 0.8, 
+              stagger: 0.1, 
+              ease: "power2.out", 
+              clearProps: "all",
+              scrollTrigger: {
+                trigger: "." + batchClass,
+                start: "top 90%"
+              }
+            }
           );
         }
       };
 
-      // 4. Conexión Endpoints Core
       const fetchDoctors = async (isLoadMore = false) => {
         const nombre = searchInput.value.trim();
         const especialidadId = specialtySelect.value;
-        
         if (!isLoadMore) {
           currentPage = 1;
-          renderSkeletons(6, true);
-          countEl.innerHTML = '<i class="ph ph-spinner animate-spin mr-2"></i> Procesando tu búsqueda...';
+          renderSkeletons(12, true);
           loadMoreContainer.classList.add('hidden');
         } else {
-          loadMoreBtn.innerHTML = '<i class="ph ph-spinner animate-spin mr-2 text-xl"></i> Cargando especialistas...';
-          loadMoreBtn.classList.add('opacity-70', 'pointer-events-none');
+          loadMoreBtn.classList.add('opacity-50', 'pointer-events-none');
         }
 
         try {
           const urlParams = new URLSearchParams();
           if (nombre) urlParams.append('nombre', nombre);
           if (especialidadId) urlParams.append('especialidad_id', especialidadId);
-          urlParams.append('per_page', '12'); 
-          urlParams.append('page', currentPage.toString());
+          urlParams.append('per_page', '12'); urlParams.append('page', currentPage.toString());
           
-          const endpoint = 'https://administrador.especialidadesmedicassur.com.mx/api/directorio-medico/search?' + urlParams.toString();
-          
-          const res = await fetch(endpoint);
+          const ep = 'https://administrador.especialidadesmedicassur.com.mx/api/directorio-medico/search?' + urlParams.toString();
+          const res = await fetch(ep);
           const data = await res.json();
-          let results = [];
-          let lastPage = 1;
+          let results = []; let lastPage = 1;
           
-          if (Array.isArray(data)) {
-            results = data;
-          } else if (data.data && Array.isArray(data.data)) {
-            results = data.data;
-            lastPage = data.last_page || 1;
-          } else if (data.data && data.data.data && Array.isArray(data.data.data)) {
-            results = data.data.data;
-            lastPage = data.data.last_page || 1;
-          }
+          if (Array.isArray(data)) { results = data; }
+          else if (data.data && Array.isArray(data.data)) { results = data.data; lastPage = data.last_page || 1; }
+          else if (data.data?.data && Array.isArray(data.data.data)) { results = data.data.data; lastPage = data.data.last_page || 1; }
 
-          // Pintar Reales Eliminando Skeletons
           renderCards(results, isLoadMore);
-
-          // Lógica Paginación
-          loadMoreBtn.innerHTML = 'Mostrar más especialistas <i class="ph ph-caret-down ml-2 text-xl group-hover:translate-y-1 transition-transform"></i>';
-          loadMoreBtn.classList.remove('opacity-70', 'pointer-events-none');
           
-          if (currentPage < lastPage) {
-            loadMoreContainer.classList.remove('hidden');
-          } else {
-            loadMoreContainer.classList.add('hidden');
-          }
-
+          loadMoreBtn.classList.remove('opacity-50', 'pointer-events-none');
+          if (currentPage < lastPage) loadMoreContainer.classList.remove('hidden');
+          else loadMoreContainer.classList.add('hidden');
         } catch (error) {
-          console.error("Error buscando doctores:", error);
-          if (!isLoadMore) {
-            grid.innerHTML = '';
-            emptyState.classList.remove('hidden');
-            countEl.textContent = "Problemas de conexión. Intente más tarde.";
-          }
+          if (!isLoadMore) { grid.innerHTML = ''; emptyState.classList.remove('hidden'); countEl.textContent = "Error de conexión temporal."; }
         }
       };
 
-      // 5. Invocación y Despacho de Eventos Recreados
-      
-      // Auto Initialization
-      renderSkeletons(6);
+      // Init Layer
+      renderSkeletons(8);
       await fetchEspecialidades();
+      const uP = new URLSearchParams(window.location.search);
+      const especialidadParam = uP.get('especialidad');
+      if (especialidadParam) {
+        // Normaliza el param recibido (slug) para compararlo contra los nombres del select
+        const normalizeSlug = (str) => str.toString().toLowerCase().trim()
+          .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+          .replace(/\s+/g, '-').replace(/[^\w\-]+/g, '').replace(/\-\-+/g, '-');
+        const options = Array.from(specialtySelect.options);
+        const match = options.find(opt => normalizeSlug(opt.textContent) === normalizeSlug(especialidadParam));
+        if (match) specialtySelect.value = match.value;
+      }
       fetchDoctors();
 
-      // Botón principal
       searchBtn.addEventListener('click', () => fetchDoctors());
-
-      // Dropdown de Categorías
       specialtySelect.addEventListener('change', () => fetchDoctors());
+      searchInput.addEventListener('input', () => { clearTimeout(debounceTimer); debounceTimer = setTimeout(() => fetchDoctors(), 600); });
+      searchInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') { clearTimeout(debounceTimer); fetchDoctors(); } });
+      loadMoreBtn.addEventListener('click', () => { currentPage++; fetchDoctors(true); });
 
-      // Debounce Inteligente
-      searchInput.addEventListener('input', (e) => {
-        clearTimeout(debounceTimer);
-        debounceTimer = setTimeout(() => {
-          fetchDoctors();
-        }, 700);
-      });
-
-      // Tecla Enter forzada
-      searchInput.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter') {
-          clearTimeout(debounceTimer);
-          fetchDoctors();
-        }
-      });
-
-      // Paginador
-      loadMoreBtn.addEventListener('click', () => {
-        currentPage++;
-        fetchDoctors(true);
-      });
-
+      // Animaciones GSAP Estáticas para Elementos Core
+      if (typeof window.gsap !== 'undefined') {
+        // Deshabilitadas temporalmente para prevenir fallos de ScrollTrigger por altura dinámica
+        /* window.gsap.from(".action-grid a", {
+          scrollTrigger: { trigger: ".action-grid", start: "top 85%" },
+          y: 30, opacity: 0, duration: 0.8, stagger: 0.15, ease: "back.out(1.2)"
+        });
+        window.gsap.from(".faq-header, .faq-item", {
+          scrollTrigger: { trigger: ".faq-header", start: "top 85%" },
+          y: 20, opacity: 0, duration: 0.6, stagger: 0.1, ease: "power2.out"
+        }); */
+        
+        // Bounce Animation "Mostrar Más"
+        window.gsap.to("#load-more-btn", {
+          y: -6,
+          repeat: -1,
+          yoyo: true,
+          duration: 1.2,
+          ease: "power1.inOut",
+          scrollTrigger: { trigger: "#load-more-container", toggleActions: "play pause resume pause" }
+        });
+      }
     });
   </script>
 </Layout>

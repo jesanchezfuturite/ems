@@ -67,6 +67,88 @@ const jsonLd = {
     }
   ]
 };
+
+// Especialidades Estáticas
+const apiSpecialties = [
+  { nombre: "Alergología e Inmunología", desc: "Especialistas en el diagnóstico y tratamiento de alergias (alimentarias, estacionales, cutáneas) y enfermedades del sistema inmunológico como el asma y rinitis." },
+  { nombre: "Angiología", desc: "Expertos en salud vascular. Tratamiento de várices, insuficiencia venosa, trombosis y enfermedades de arterias y vasos linfáticos." },
+  { nombre: "Audiología, Otoneurología y Foniatría", desc: "Diagnóstico y rehabilitación de problemas de audición, trastornos del equilibrio (vértigo) y alteraciones de la voz y el lenguaje." },
+  { nombre: "Cardiología", desc: "Especialistas en la salud del corazón. Prevención y tratamiento de hipertensión, arritmias, infartos y enfermedades cardiovasculares." },
+  { nombre: "Cardiología Clínica", desc: "Enfoque en el diagnóstico no invasivo y manejo médico de enfermedades cardíacas crónicas y prevención de riesgos coronarios." },
+  { nombre: "Cirugía General", desc: "Especialistas en procedimientos quirúrgicos del aparato digestivo, sistema endocrino y reparación de hernias o patologías abdominales." },
+  { nombre: "Cirugia Pediatrica", desc: "Intervenciones quirúrgicas especializadas en niños y adolescentes, desde recién nacidos hasta la etapa de crecimiento." },
+  { nombre: "Cirugía Plástica y Reconstructiva", desc: "Procedimientos estéticos y reconstructivos para mejorar la apariencia o corregir anomalías congénitas, quemaduras y traumatismos." },
+  { nombre: "Cirujano General", desc: "Médico experto en cirugías de emergencia y programadas para tratar afecciones abdominales, tejidos blandos y glándulas." },
+  { nombre: "Dermatología", desc: "Cuidado integral de la piel, cabello y uñas. Tratamiento de acné, manchas, cáncer de piel, dermatitis y procedimientos estéticos dermatológicos." },
+  { nombre: "Endocrinología", desc: "Especialistas en hormonas y metabolismo. Manejo de diabetes, trastornos de la tiroides, obesidad, SOP y desequilibrios hormonales." },
+  { nombre: "Gastroenterología", desc: "Diagnóstico y tratamiento de enfermedades del aparato digestivo: gastritis, colitis, reflujo, úlceras y realización de endoscopias." },
+  { nombre: "Geriatría", desc: "Atención médica especializada para adultos mayores, enfocada en un envejecimiento saludable y el manejo de enfermedades crónico-degenerativas." },
+  { nombre: "Ginecología y Obstetricia", desc: "Salud integral de la mujer. Control prenatal, atención del parto, salud reproductiva, menopausia y prevención de cáncer cervicouterino." },
+  { nombre: "Hematología", desc: "Expertos en enfermedades de la sangre y órganos hematopoyéticos, como anemia, leucemia, linfomas y problemas de coagulación." },
+  { nombre: "Hepatología", desc: "Especialidad enfocada exclusivamente en el hígado, vesícula biliar y vías biliares. Tratamiento de hepatitis, cirrosis e hígado graso." },
+  { nombre: "Infectología", desc: "Diagnóstico y tratamiento de enfermedades causadas por virus, bacterias, parásitos o hongos (VIH, infecciones respiratorias, hepatitis, etc.)." },
+  { nombre: "Medicina Crítica", desc: "Médicos intensivistas dedicados al cuidado de pacientes en estado grave o crítico dentro de la Unidad de Cuidados Intensivos (UCI)." },
+  { nombre: "Medicina de Urgencias", desc: "Atención inmediata de emergencias médicas y situaciones que ponen en riesgo la vida del paciente de forma súbita." },
+  { nombre: "Medicina Familiar", desc: "Atención médica primaria y continua para todos los miembros de la familia, con un enfoque preventivo y de salud integral." },
+  { nombre: "Medicina General", desc: "Consulta médica de primer contacto para diagnósticos iniciales, chequeos generales y referencia a especialistas." },
+  { nombre: "Medicina Interna", desc: "Atención integral del adulto. Expertos en el manejo de enfermedades complejas y múltiples padecimientos crónicos simultáneos." },
+  { nombre: "Nefrología", desc: "Especialistas en la salud de los riñones. Tratamiento de insuficiencia renal, cálculos renales, hipertensión arterial y diálisis." },
+  { nombre: "Neumología", desc: "Diagnóstico y tratamiento de enfermedades respiratorias y de los pulmones como EPOC, asma, apnea del sueño y neumonía." },
+  { nombre: "Neurocirugía", desc: "Especialistas en cirugía del sistema nervioso, incluyendo cerebro, columna vertebral y nervios periféricos." },
+  { nombre: "Neurología", desc: "Tratamiento de trastornos del sistema nervioso: migrañas, epilepsia, Alzheimer, Parkinson y accidentes cerebrovasculares." },
+  { nombre: "Nutrición Clínica", desc: "Diseño de planes de alimentación terapéuticos para pacientes con enfermedades específicas, control de peso y mejora de hábitos alimenticios." },
+  { nombre: "Odontología", desc: "Cuidado integral de la salud bucodental. Tratamiento de caries, limpieza dental, ortodoncia, endodoncia y estética dental." },
+  { nombre: "Oftalmología", desc: "Salud visual y cuidado de los ojos. Tratamiento de cataratas, glaucoma, miopía, astigmatismo y cirugías oculares." },
+  { nombre: "Ortopedia", desc: "Diagnóstico y tratamiento de lesiones o deformidades en huesos, articulaciones, ligamentos y tendones." },
+  { nombre: "Otorrinolaringología", desc: "Especialistas en oído, nariz y garganta. Tratamiento de sinusitis, pérdida de audición, amigdalitis y problemas de equilibrio." },
+  { nombre: "Otorrinolaringología y Cirugía de Cabeza y Cuello", desc: "Tratamiento avanzado de patologías complejas que afectan el área facial, el cuello y las vías aéreas superiores." },
+  { nombre: "Pediatra", desc: "Cuidado médico integral para bebés, niños y adolescentes, monitoreando su crecimiento, desarrollo y esquema de vacunación." },
+  { nombre: "Pediatría", desc: "Cuidado médico integral para bebés, niños y adolescentes, monitoreando su crecimiento, desarrollo y esquema de vacunación." },
+  { nombre: "Psicología", desc: "Apoyo terapéutico para la salud mental. Manejo de ansiedad, depresión, estrés y procesos emocionales a través de terapia." },
+  { nombre: "Psiquiatría", desc: "Diagnóstico y tratamiento médico de trastornos mentales y del comportamiento, con enfoque en el equilibrio clínico y farmacológico." },
+  { nombre: "Traumatología y Ortopedia", desc: "Especialistas en fracturas, lesiones deportivas y cirugías de reemplazo articular (cadera, rodilla, hombro)." },
+  { nombre: "Urología", desc: "Salud del sistema urinario en hombres y mujeres, y del aparato reproductor masculino. Tratamiento de próstata y cálculos renales." }
+];
+
+function getSpecData(name) {
+  const n = name.toLowerCase();
+  let icon = "ph-stethoscope";
+  if (n.includes('cardio')) icon = "ph-heartbeat";
+  else if (n.includes('gastro')) icon = "ph-first-aid";
+  else if (n.includes('pediat')) icon = "ph-baby";
+  else if (n.includes('ortop') || n.includes('traum')) icon = "ph-activity";
+  else if (n.includes('neuro')) icon = "ph-brain";
+  else if (n.includes('derm')) icon = "ph-hand";
+  else if (n.includes('neumo')) icon = "ph-wind";
+  else if (n.includes('psiq') || n.includes('psic')) icon = "ph-brain";
+  else if (n.includes('hepa')) icon = "ph-drop";
+  else if (n.includes('hema')) icon = "ph-drop";
+  else if (n.includes('gine') || n.includes('obste')) icon = "ph-baby";
+  else if (n.includes('uro')) icon = "ph-drop";
+  else if (n.includes('cirug')) icon = "ph-scissors";
+  else if (n.includes('onco') || n.includes('cancer')) icon = "ph-dna";
+  else if (n.includes('alergi') || n.includes('inmun')) icon = "ph-plant";
+  else if (n.includes('bariat')) icon = "ph-person";
+  else if (n.includes('electro')) icon = "ph-activity";
+  else if (n.includes('endo')) icon = "ph-drop";
+  else if (n.includes('geri')) icon = "ph-users";
+  else if (n.includes('infec')) icon = "ph-shield-plus";
+
+  return { icon };
+}
+
+function slugify(text) {
+  if (!text) return '';
+  return text.toString().toLowerCase().trim()
+    .normalize('NFD') // remove accents
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/\s+/g, '-') // spaces to dashes
+    .replace(/[^\w\-]+/g, '') // remove non-words
+    .replace(/\-\-+/g, '-'); // collapse dashes
+}
+
+const initialSpecs = apiSpecialties.slice(0, 9);
+const remainingSpecs = apiSpecialties.slice(9);
 ---
 
 <Layout
@@ -136,152 +218,38 @@ const jsonLd = {
       </div>
 
       <!-- Importante: Marcado interno con ul y li para SEO -->
-      <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 list-none p-0 m-0">
-        <!-- Card 1 -->
-        <li class="specialty-card group relative bg-white p-8 rounded-[2rem] border border-slate-100 shadow-lg hover:shadow-2xl hover:border-sky-200 transition-all duration-500 flex flex-col items-start translate-y-0 hover:-translate-y-2">
-           <div class="w-14 h-14 bg-slate-50 rounded-2xl flex items-center justify-center text-sky-600 mb-6 group-hover:bg-sky-600 group-hover:text-white transition-colors duration-300">
-             <i class="ph ph-plant text-3xl"></i>
-           </div>
-           <h3 class="text-xl font-bold text-slate-900 mb-3 group-hover:text-sky-600 transition-colors">Alergias</h3>
-           <p class="text-slate-800 font-medium text-sm leading-relaxed mb-2">
-             Diagnóstico y tratamiento de alergias respiratorias, alimentarias y cutáneas.
-           </p>
-           <p class="text-slate-500 text-xs leading-relaxed mb-6">
-             La Alergología es la especialidad médica enfocada en el diagnóstico y tratamiento de alergias e hipersensibilidades del sistema inmunológico.
-           </p>
-           <a href="/directorio" class="mt-auto text-sky-600 font-semibold text-sm flex items-center opacity-0 group-hover:opacity-100 transition-opacity">
-             Directorio <i class="ph ph-arrow-right ml-1"></i>
-           </a>
-        </li>
-        <!-- Card 2 -->
-        <li class="specialty-card group relative bg-white p-8 rounded-[2rem] border border-slate-100 shadow-lg hover:shadow-2xl hover:border-sky-200 transition-all duration-500 flex flex-col items-start translate-y-0 hover:-translate-y-2">
-           <div class="w-14 h-14 bg-slate-50 rounded-2xl flex items-center justify-center text-sky-600 mb-6 group-hover:bg-sky-600 group-hover:text-white transition-colors duration-300">
-             <i class="ph ph-person text-3xl"></i>
-           </div>
-           <h3 class="text-xl font-bold text-slate-900 mb-3 group-hover:text-sky-600 transition-colors">Bariatría</h3>
-           <p class="text-slate-800 font-medium text-sm leading-relaxed mb-2">
-             Manejo integral del sobrepeso y obesidad mediante tratamiento médico y quirúrgico.
-           </p>
-           <p class="text-slate-500 text-xs leading-relaxed mb-6">
-             La Bariatría es la especialidad médica dedicada al manejo integral del sobrepeso y la obesidad, incluyendo tratamiento clínico y quirúrgico.
-           </p>
-           <a href="/directorio" class="mt-auto text-sky-600 font-semibold text-sm flex items-center opacity-0 group-hover:opacity-100 transition-opacity">
-             Directorio <i class="ph ph-arrow-right ml-1"></i>
-           </a>
-        </li>
-        <!-- Card 3 -->
-        <li class="specialty-card group relative bg-white p-8 rounded-[2rem] border border-slate-100 shadow-lg hover:shadow-2xl hover:border-sky-200 transition-all duration-500 flex flex-col items-start translate-y-0 hover:-translate-y-2">
-           <div class="w-14 h-14 bg-slate-50 rounded-2xl flex items-center justify-center text-sky-600 mb-6 group-hover:bg-sky-600 group-hover:text-white transition-colors duration-300">
-             <i class="ph ph-dna text-3xl"></i>
-           </div>
-           <h3 class="text-xl font-bold text-slate-900 mb-3 group-hover:text-sky-600 transition-colors">Cáncer de Mama</h3>
-           <p class="text-slate-800 font-medium text-sm leading-relaxed mb-2">
-             Diagnóstico, tratamiento y seguimiento del cáncer de mama.
-           </p>
-           <p class="text-slate-500 text-xs leading-relaxed mb-6">
-             La Oncología de Mama es la especialidad médica enfocada en la prevención, diagnóstico y tratamiento del cáncer de mama.
-           </p>
-           <a href="/directorio" class="mt-auto text-sky-600 font-semibold text-sm flex items-center opacity-0 group-hover:opacity-100 transition-opacity">
-             Directorio <i class="ph ph-arrow-right ml-1"></i>
-           </a>
-        </li>
-        <!-- Card 4 -->
-        <li class="specialty-card group relative bg-white p-8 rounded-[2rem] border border-slate-100 shadow-lg hover:shadow-2xl hover:border-sky-200 transition-all duration-500 flex flex-col items-start translate-y-0 hover:-translate-y-2">
-           <div class="w-14 h-14 bg-slate-50 rounded-2xl flex items-center justify-center text-sky-600 mb-6 group-hover:bg-sky-600 group-hover:text-white transition-colors duration-300">
-             <i class="ph ph-scissors text-3xl"></i>
-           </div>
-           <h3 class="text-xl font-bold text-slate-900 mb-3 group-hover:text-sky-600 transition-colors">Cirugía general</h3>
-           <p class="text-slate-800 font-medium text-sm leading-relaxed mb-2">
-             Tratamiento quirúrgico de diversas condiciones abdominales y tejidos blandos.
-           </p>
-           <p class="text-slate-500 text-xs leading-relaxed mb-6">
-             La Cirugía General es la especialidad médica encargada del tratamiento quirúrgico de enfermedades del abdomen y tejidos blandos.
-           </p>
-           <a href="/directorio" class="mt-auto text-sky-600 font-semibold text-sm flex items-center opacity-0 group-hover:opacity-100 transition-opacity">
-             Directorio <i class="ph ph-arrow-right ml-1"></i>
-           </a>
-        </li>
-        <!-- Card 5 -->
-        <li class="specialty-card group relative bg-white p-8 rounded-[2rem] border border-slate-100 shadow-lg hover:shadow-2xl hover:border-sky-200 transition-all duration-500 flex flex-col items-start translate-y-0 hover:-translate-y-2">
-           <div class="w-14 h-14 bg-slate-50 rounded-2xl flex items-center justify-center text-sky-600 mb-6 group-hover:bg-sky-600 group-hover:text-white transition-colors duration-300">
-             <i class="ph ph-activity text-3xl"></i>
-           </div>
-           <h3 class="text-xl font-bold text-slate-900 mb-3 group-hover:text-sky-600 transition-colors">Electrofisiología</h3>
-           <p class="text-slate-800 font-medium text-sm leading-relaxed mb-2">
-             Diagnóstico y tratamiento de trastornos del ritmo cardíaco.
-           </p>
-           <p class="text-slate-500 text-xs leading-relaxed mb-6">
-             La Electrofisiología es la subespecialidad de la cardiología enfocada en el diagnóstico y tratamiento de arritmias cardíacas.
-           </p>
-           <a href="/directorio" class="mt-auto text-sky-600 font-semibold text-sm flex items-center opacity-0 group-hover:opacity-100 transition-opacity">
-             Directorio <i class="ph ph-arrow-right ml-1"></i>
-           </a>
-        </li>
-        <!-- Card 6 -->
-        <li class="specialty-card group relative bg-white p-8 rounded-[2rem] border border-slate-100 shadow-lg hover:shadow-2xl hover:border-sky-200 transition-all duration-500 flex flex-col items-start translate-y-0 hover:-translate-y-2">
-           <div class="w-14 h-14 bg-slate-50 rounded-2xl flex items-center justify-center text-sky-600 mb-6 group-hover:bg-sky-600 group-hover:text-white transition-colors duration-300">
-             <i class="ph ph-drop text-3xl"></i>
-           </div>
-           <h3 class="text-xl font-bold text-slate-900 mb-3 group-hover:text-sky-600 transition-colors">Endocrinología</h3>
-           <p class="text-slate-800 font-medium text-sm leading-relaxed mb-2">
-             Atención de enfermedades hormonales como diabetes y trastornos tiroideos.
-           </p>
-           <p class="text-slate-500 text-xs leading-relaxed mb-6">
-             La Endocrinología es la especialidad médica dedicada al estudio, diagnóstico y tratamiento de enfermedades hormonales.
-           </p>
-           <a href="/directorio" class="mt-auto text-sky-600 font-semibold text-sm flex items-center opacity-0 group-hover:opacity-100 transition-opacity">
-             Directorio <i class="ph ph-arrow-right ml-1"></i>
-           </a>
-        </li>
-        <!-- Card 7 -->
-        <li class="specialty-card group relative bg-white p-8 rounded-[2rem] border border-slate-100 shadow-lg hover:shadow-2xl hover:border-sky-200 transition-all duration-500 flex flex-col items-start translate-y-0 hover:-translate-y-2">
-           <div class="w-14 h-14 bg-slate-50 rounded-2xl flex items-center justify-center text-sky-600 mb-6 group-hover:bg-sky-600 group-hover:text-white transition-colors duration-300">
-             <i class="ph ph-users text-3xl"></i>
-           </div>
-           <h3 class="text-xl font-bold text-slate-900 mb-3 group-hover:text-sky-600 transition-colors">Geriatría</h3>
-           <p class="text-slate-800 font-medium text-sm leading-relaxed mb-2">
-             Cuidado integral de la salud en adultos mayores.
-           </p>
-           <p class="text-slate-500 text-xs leading-relaxed mb-6">
-             La Geriatría es la especialidad médica enfocada en la atención integral de la salud de los adultos mayores.
-           </p>
-           <a href="/directorio" class="mt-auto text-sky-600 font-semibold text-sm flex items-center opacity-0 group-hover:opacity-100 transition-opacity">
-             Directorio <i class="ph ph-arrow-right ml-1"></i>
-           </a>
-        </li>
-        <!-- Card 8 -->
-        <li class="specialty-card group relative bg-white p-8 rounded-[2rem] border border-slate-100 shadow-lg hover:shadow-2xl hover:border-sky-200 transition-all duration-500 flex flex-col items-start translate-y-0 hover:-translate-y-2">
-           <div class="w-14 h-14 bg-slate-50 rounded-2xl flex items-center justify-center text-sky-600 mb-6 group-hover:bg-sky-600 group-hover:text-white transition-colors duration-300">
-             <i class="ph ph-baby text-3xl"></i>
-           </div>
-           <h3 class="text-xl font-bold text-slate-900 mb-3 group-hover:text-sky-600 transition-colors">Ginecología y Obstetricia</h3>
-           <p class="text-slate-800 font-medium text-sm leading-relaxed mb-2">
-             Atención médica de la salud femenina, embarazo y parto.
-           </p>
-           <p class="text-slate-500 text-xs leading-relaxed mb-6">
-             La Ginecología y Obstetricia es la especialidad médica encargada del cuidado de la salud femenina, el embarazo y el parto.
-           </p>
-           <a href="/directorio" class="mt-auto text-sky-600 font-semibold text-sm flex items-center opacity-0 group-hover:opacity-100 transition-opacity">
-             Directorio <i class="ph ph-arrow-right ml-1"></i>
-           </a>
-        </li>
-        <!-- Card 9 -->
-        <li class="specialty-card group relative bg-white p-8 rounded-[2rem] border border-slate-100 shadow-lg hover:shadow-2xl hover:border-sky-200 transition-all duration-500 flex flex-col items-start translate-y-0 hover:-translate-y-2">
-           <div class="w-14 h-14 bg-slate-50 rounded-2xl flex items-center justify-center text-sky-600 mb-6 group-hover:bg-sky-600 group-hover:text-white transition-colors duration-300">
-             <i class="ph ph-shield-plus text-3xl"></i>
-           </div>
-           <h3 class="text-xl font-bold text-slate-900 mb-3 group-hover:text-sky-600 transition-colors">Infectología</h3>
-           <p class="text-slate-800 font-medium text-sm leading-relaxed mb-2">
-             Diagnóstico y tratamiento de enfermedades infecciosas.
-           </p>
-           <p class="text-slate-500 text-xs leading-relaxed mb-6">
-             La Infectología es la especialidad médica enfocada en el diagnóstico, tratamiento y prevención de enfermedades infecciosas.
-           </p>
-           <a href="/directorio" class="mt-auto text-sky-600 font-semibold text-sm flex items-center opacity-0 group-hover:opacity-100 transition-opacity">
-             Directorio <i class="ph ph-arrow-right ml-1"></i>
-           </a>
-        </li>
+      <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-16 gap-x-8 list-none p-0 m-0" id="specialtiesList">
+        {initialSpecs.map((spec) => {
+          const sData = getSpecData(spec.nombre);
+          return (
+            <li class="specialty-card h-full group relative bg-white p-6 lg:p-8 rounded-[2rem] border border-slate-100 shadow-lg hover:shadow-2xl hover:border-sky-200 transition-all duration-500 flex flex-col items-start translate-y-0 hover:-translate-y-2">
+               <div class="w-14 h-14 bg-slate-50 rounded-2xl flex items-center justify-center text-sky-600 mb-6 group-hover:bg-sky-600 group-hover:text-white transition-colors duration-300">
+                 <i class={`ph ${sData.icon} text-3xl`}></i>
+               </div>
+               <h3 class="text-xl font-bold text-slate-900 mb-3 group-hover:text-sky-600 transition-colors uppercase leading-tight">{spec.nombre}</h3>
+               <p class="text-slate-500 text-sm leading-relaxed mb-6">
+                 {spec.desc}
+               </p>
+               <div class="mt-auto pt-4 w-full">
+                 <a href={`/especialidades/${slugify(spec.nombre)}`} class="text-sky-600 font-semibold text-sm flex items-center opacity-0 group-hover:opacity-100 transition-opacity">
+                   Ver más <i class="ph ph-arrow-right ml-1"></i>
+                 </a>
+               </div>
+            </li>
+          );
+        })}
       </ul>
+
+      {remainingSpecs.length > 0 && (
+        <div class="mt-20 mb-8 text-center" id="loadMoreContainer">
+          <button id="loadMoreBtn" class="px-8 py-4 bg-white border border-slate-200 hover:bg-slate-50 text-slate-700 hover:text-sky-600 font-bold rounded-2xl shadow-sm transition-all focus:ring-4 focus:ring-sky-100 flex items-center justify-center mx-auto gap-2">
+            Cargar más especialidades <i class="ph ph-caret-down font-bold"></i>
+          </button>
+        </div>
+      )}
+
+      <!-- Store remaining elements in JS variable safely -->
+      <script type="application/json" id="remainingSpecData" set:html={JSON.stringify(remainingSpecs)}></script>
     </div>
   </section>
 
@@ -384,88 +352,168 @@ const jsonLd = {
   <!-- 5. Sección FAQ -->
   <section class="py-24 bg-white relative">
     <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center mb-16">
-        <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mb-4">
-          Preguntas Frecuentes
-        </h2>
-        <p class="text-lg text-slate-600">
-          Resolvemos tus dudas sobre nuestra atención de especialidad médica.
-        </p>
+      <div class="text-center mb-16 faq-header">
+        <h2 class="text-3xl md:text-5xl font-black text-[#004b87] tracking-tight mb-4">Preguntas Frecuentes</h2>
+        <p class="text-slate-600 text-lg md:text-xl font-medium">Respuestas rápidas para facilitarte el acceso a tu atención médica.</p>
       </div>
 
-      <div class="space-y-4">
-        <details class="group bg-slate-50 rounded-2xl p-6 open:bg-sky-50 open:ring-2 open:ring-sky-500/20 transition-all duration-300">
-          <summary class="flex justify-between items-center font-bold cursor-pointer text-slate-900 text-lg">
+      <div class="space-y-6 faq-items">
+        <details class="glass-card rounded-2xl p-6 group cursor-pointer marker:content-[''] border-l-4 border-l-transparent hover:border-l-[#00a3e0] transition-all overflow-hidden bg-white/60 shadow-sm hover:shadow-md">
+          <summary class="text-xl font-bold text-[#004b87] flex justify-between items-center outline-none list-none marker:content-none [&::-webkit-details-marker]:hidden">
             ¿Cuándo debo acudir a un especialista médico?
-            <span class="transition group-open:rotate-180">
-              <i class="ph ph-caret-down text-xl text-sky-600"></i>
-            </span>
+            <i class="ph ph-caret-down transform group-open:rotate-180 transition-transform text-[#00a3e0] text-2xl"></i>
           </summary>
-          <p class="text-slate-600 mt-4 leading-relaxed">
+          <div class="mt-4 text-slate-600 font-medium leading-relaxed border-t border-slate-100 pt-4 pr-8">
             Debes acudir a un especialista cuando presentas síntomas persistentes, dolor continuo o cuando necesitas un diagnóstico más preciso en áreas como cardiología, neurología o gastroenterología.
-          </p>
+          </div>
         </details>
         
-        <details class="group bg-slate-50 rounded-2xl p-6 open:bg-sky-50 open:ring-2 open:ring-sky-500/20 transition-all duration-300">
-          <summary class="flex justify-between items-center font-bold cursor-pointer text-slate-900 text-lg">
+        <details class="glass-card rounded-2xl p-6 group cursor-pointer marker:content-[''] border-l-4 border-l-transparent hover:border-l-[#00a3e0] transition-all overflow-hidden bg-white/60 shadow-sm hover:shadow-md">
+          <summary class="text-xl font-bold text-[#004b87] flex justify-between items-center outline-none list-none marker:content-none [&::-webkit-details-marker]:hidden">
             ¿Qué hace un médico especialista?
-            <span class="transition group-open:rotate-180">
-              <i class="ph ph-caret-down text-xl text-sky-600"></i>
-            </span>
+            <i class="ph ph-caret-down transform group-open:rotate-180 transition-transform text-[#00a3e0] text-2xl"></i>
           </summary>
-          <p class="text-slate-600 mt-4 leading-relaxed">
+          <div class="mt-4 text-slate-600 font-medium leading-relaxed border-t border-slate-100 pt-4 pr-8">
             Un especialista es un médico con formación avanzada en un área específica, capacitado para diagnosticar y tratar enfermedades complejas de forma más precisa.
-          </p>
+          </div>
         </details>
 
-        <details class="group bg-slate-50 rounded-2xl p-6 open:bg-sky-50 open:ring-2 open:ring-sky-500/20 transition-all duration-300">
-          <summary class="flex justify-between items-center font-bold cursor-pointer text-slate-900 text-lg">
+        <details class="glass-card rounded-2xl p-6 group cursor-pointer marker:content-[''] border-l-4 border-l-transparent hover:border-l-[#00a3e0] transition-all overflow-hidden bg-white/60 shadow-sm hover:shadow-md">
+          <summary class="text-xl font-bold text-[#004b87] flex justify-between items-center outline-none list-none marker:content-none [&::-webkit-details-marker]:hidden">
             ¿Cómo elegir la especialidad médica correcta?
-            <span class="transition group-open:rotate-180">
-              <i class="ph ph-caret-down text-xl text-sky-600"></i>
-            </span>
+            <i class="ph ph-caret-down transform group-open:rotate-180 transition-transform text-[#00a3e0] text-2xl"></i>
           </summary>
-          <p class="text-slate-600 mt-4 leading-relaxed">
+          <div class="mt-4 text-slate-600 font-medium leading-relaxed border-t border-slate-100 pt-4 pr-8">
             Depende de tus síntomas. Por ejemplo, problemas digestivos corresponden a gastroenterología, síntomas respiratorios a neumología y afecciones de la piel a dermatología.
-          </p>
+          </div>
         </details>
 
-        <details class="group bg-slate-50 rounded-2xl p-6 open:bg-sky-50 open:ring-2 open:ring-sky-500/20 transition-all duration-300">
-          <summary class="flex justify-between items-center font-bold cursor-pointer text-slate-900 text-lg">
+        <details class="glass-card rounded-2xl p-6 group cursor-pointer marker:content-[''] border-l-4 border-l-transparent hover:border-l-[#00a3e0] transition-all overflow-hidden bg-white/60 shadow-sm hover:shadow-md">
+          <summary class="text-xl font-bold text-[#004b87] flex justify-between items-center outline-none list-none marker:content-none [&::-webkit-details-marker]:hidden">
             ¿Qué estudios debo llevar a mi primera consulta?
-            <span class="transition group-open:rotate-180">
-              <i class="ph ph-caret-down text-xl text-sky-600"></i>
-            </span>
+            <i class="ph ph-caret-down transform group-open:rotate-180 transition-transform text-[#00a3e0] text-2xl"></i>
           </summary>
-          <p class="text-slate-600 mt-4 leading-relaxed">
+          <div class="mt-4 text-slate-600 font-medium leading-relaxed border-t border-slate-100 pt-4 pr-8">
             Se recomienda llevar estudios previos, análisis clínicos, radiografías o cualquier historial médico que ayude al especialista a evaluar tu caso de forma más completa.
-          </p>
+          </div>
         </details>
 
-        <details class="group bg-slate-50 rounded-2xl p-6 open:bg-sky-50 open:ring-2 open:ring-sky-500/20 transition-all duration-300">
-          <summary class="flex justify-between items-center font-bold cursor-pointer text-slate-900 text-lg">
+        <details class="glass-card rounded-2xl p-6 group cursor-pointer marker:content-[''] border-l-4 border-l-transparent hover:border-l-[#00a3e0] transition-all overflow-hidden bg-white/60 shadow-sm hover:shadow-md">
+          <summary class="text-xl font-bold text-[#004b87] flex justify-between items-center outline-none list-none marker:content-none [&::-webkit-details-marker]:hidden">
             ¿Necesito referencia médica para consultar a un especialista?
-            <span class="transition group-open:rotate-180">
-              <i class="ph ph-caret-down text-xl text-sky-600"></i>
-            </span>
+            <i class="ph ph-caret-down transform group-open:rotate-180 transition-transform text-[#00a3e0] text-2xl"></i>
           </summary>
-          <p class="text-slate-600 mt-4 leading-relaxed">
+          <div class="mt-4 text-slate-600 font-medium leading-relaxed border-t border-slate-100 pt-4 pr-8">
             No es necesario. Puedes agendar directamente con el especialista indicado según tus síntomas o necesidades.
-          </p>
+          </div>
         </details>
       </div>
     </div>
   </section>
 
-  <!-- Lógica de Animaciones GSAP -->
+  <!-- Lógica de Animaciones GSAP y Load More -->
   <script is:inline>
     document.addEventListener("DOMContentLoaded", () => {
+      
+      // Load More Logic
+      const loadMoreBtn = document.getElementById('loadMoreBtn');
+      const dataNode = document.getElementById('remainingSpecData');
+      const listContainer = document.getElementById('specialtiesList');
+      const loadMoreContainer = document.getElementById('loadMoreContainer');
+      
+      function getIcon(name) {
+        const n = name.toLowerCase();
+        let icon = "ph-stethoscope";
+        if (n.includes('cardio')) icon = "ph-heartbeat";
+        else if (n.includes('gastro')) icon = "ph-first-aid";
+        else if (n.includes('pediat')) icon = "ph-baby";
+        else if (n.includes('ortop') || n.includes('traum')) icon = "ph-activity";
+        else if (n.includes('neuro')) icon = "ph-brain";
+        else if (n.includes('derm')) icon = "ph-hand";
+        else if (n.includes('neumo')) icon = "ph-wind";
+        else if (n.includes('psiq') || n.includes('psic')) icon = "ph-brain";
+        else if (n.includes('hepa')) icon = "ph-drop";
+        else if (n.includes('hema')) icon = "ph-drop";
+        else if (n.includes('gine') || n.includes('obste')) icon = "ph-baby";
+        else if (n.includes('uro')) icon = "ph-drop";
+        else if (n.includes('cirug')) icon = "ph-scissors";
+        else if (n.includes('onco') || n.includes('cancer')) icon = "ph-dna";
+        else if (n.includes('alergi') || n.includes('inmun')) icon = "ph-plant";
+        else if (n.includes('bariat')) icon = "ph-person";
+        else if (n.includes('electro')) icon = "ph-activity";
+        else if (n.includes('endo')) icon = "ph-drop";
+        else if (n.includes('geri')) icon = "ph-users";
+        else if (n.includes('infec')) icon = "ph-shield-plus";
+        return icon;
+      }
+
+      function slugify(text) {
+        if (!text) return '';
+        return text.toString().toLowerCase().trim()
+          .normalize('NFD')
+          .replace(/[\u0300-\u036f]/g, '')
+          .replace(/\s+/g, '-')
+          .replace(/[^\w\-]+/g, '')
+          .replace(/\-\-+/g, '-');
+      }
+
+      if (loadMoreBtn && dataNode && listContainer) {
+        loadMoreBtn.addEventListener('click', () => {
+          let remainingSpecialties = JSON.parse(dataNode.textContent);
+          
+          const nextBatch = remainingSpecialties.splice(0, 9);
+          dataNode.textContent = JSON.stringify(remainingSpecialties);
+          
+          let newHtml = '';
+          nextBatch.forEach(spec => {
+            const icon = getIcon(spec.nombre);
+            newHtml += `
+              <li class="specialty-card new-added-card h-full group relative bg-white p-6 lg:p-8 rounded-[2rem] border border-slate-100 shadow-lg hover:shadow-2xl hover:border-sky-200 transition-all duration-500 flex flex-col items-start translate-y-0 hover:-translate-y-2">
+                 <div class="w-14 h-14 bg-slate-50 rounded-2xl flex items-center justify-center text-sky-600 mb-6 group-hover:bg-sky-600 group-hover:text-white transition-colors duration-300">
+                   <i class="ph ${icon} text-3xl"></i>
+                 </div>
+                 <h3 class="text-xl font-bold text-slate-900 mb-3 group-hover:text-sky-600 transition-colors uppercase leading-tight">${spec.nombre}</h3>
+                 <p class="text-slate-500 text-sm leading-relaxed mb-6">
+                   Atención médica especializada de primer nivel, orientada al diagnóstico y tratamiento preciso.
+                 </p>
+                 <div class="mt-auto pt-4 w-full">
+                   <a href="/especialidades/${slugify(spec.nombre)}" class="text-sky-600 font-semibold text-sm flex items-center opacity-0 group-hover:opacity-100 transition-opacity">
+                     Ver más <i class="ph ph-arrow-right ml-1"></i>
+                   </a>
+                 </div>
+              </li>
+            `;
+          });
+          
+          listContainer.insertAdjacentHTML('beforeend', newHtml);
+          
+          if (remainingSpecialties.length === 0) {
+            loadMoreContainer.style.display = 'none';
+          }
+          
+          if (typeof window.gsap !== "undefined" && window.ScrollTrigger) {
+            window.gsap.from(".new-added-card", {
+              y: 40,
+              opacity: 0,
+              duration: 0.6,
+              stagger: 0.1,
+              ease: "power2.out",
+              clearProps: "all",
+              onComplete: () => {
+                document.querySelectorAll('.new-added-card').forEach(el => el.classList.remove('new-added-card'));
+                window.ScrollTrigger.refresh();
+              }
+            });
+          }
+        });
+      }
+
       // Small timeout to ensure custom elements/images loads visually stabilize
       setTimeout(() => {
           if (typeof window.gsap !== "undefined" && window.ScrollTrigger) {
             
             // Animación de las cards de especialidad (Stagger)
-            window.gsap.from(".specialty-card", {
+            window.gsap.from(".specialty-card:not(.new-added-card)", {
               scrollTrigger: {
                 trigger: ".specialties-section",
                 start: "top 80%",

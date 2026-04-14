@@ -1,0 +1,514 @@
+---
+import Layout from "../../layouts/Layout.astro";
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "MedicalWebPage",
+      "@id": "https://midominio.com/servicios/centro-de-trasplantes",
+      "url": "https://midominio.com/servicios/centro-de-trasplantes",
+      "name": "Centro de Trasplantes en Monterrey",
+      "description": "Centro de trasplantes con tecnología ECMO. Liderazgo, tecnología de vanguardia y tasas de supervivencia internacionales en México.",
+      "specialty": "https://schema.org/SurgicalSpecialty"
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Cómo sé si soy candidato para un trasplante?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "La candidatura se determina tras una evaluación médica exhaustiva por nuestro equipo multidisciplinario, valorando tu estado clínico, compatibilidad y factores de supervivencia."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cuánto tiempo dura el proceso de espera y cirugía?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Los tiempos varían según la disponibilidad de órganos y compatibilidad. Nuestro equipo te mantendrá informado apoyado por la coordinación hospitalaria y el CENATRA."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Aceptan seguros de gastos médicos mayores?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sí, colaboramos con las principales aseguradoras nacionales e internacionales. Contamos con asesoría personalizada para guiarte en el proceso administrativo."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cuáles son los requisitos para la donación en vida?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Requiere voluntariedad, ser mayor de edad, evaluación clínica favorable (física y psicológica) y completa compatibilidad con el receptor sin riesgo para la salud del donante."
+          }
+        }
+      ]
+    }
+  ]
+};
+---
+
+<Layout
+  title="Centro de Trasplantes en Monterrey | Nueva Oportunidad de Vida"
+  description="Liderazgo médico y tecnología ECMO. Nuestro Centro de Trasplantes ofrece las tasas de supervivencia más altas y atención multidisciplinaria de vanguardia."
+>
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+
+  <!-- 1. Hero de Autoridad Máxima -->
+  <section class="relative bg-[#004b87] pt-32 pb-20 lg:pt-44 lg:pb-32 overflow-hidden text-white hero-section">
+    <!-- Parallax Image Container -->
+    <div class="absolute inset-0 z-0 h-[120%] -top-[10%] parallax-bg">
+      <img src="/images/img_transplante_organos.webp" alt="Cirugía de Especialidad" class="w-full h-full object-cover opacity-30 select-none pointer-events-none" />
+      <div class="absolute inset-0 bg-gradient-to-t from-[#004b87] via-[#004b87]/80 to-[#004b87]/40 mix-blend-multiply"></div>
+      <div class="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-slate-50 to-transparent"></div>
+    </div>
+    
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 flex flex-col items-center text-center">
+      <span class="inline-flex flex-row items-center justify-center gap-2 bg-[#00a3e0]/20 text-white px-4 py-2 rounded-full text-sm font-semibold tracking-wide border border-[#00a3e0]/40 mb-8 backdrop-blur-sm">
+        <i class="ph ph-shield-plus text-[#00a3e0] text-lg"></i>
+        Centro de Alta Complejidad Médica
+      </span>
+      <h1 class="text-4xl md:text-5xl lg:text-7xl font-black text-white mb-6 leading-tight tracking-tight drop-shadow-lg max-w-5xl">
+        Centro de Trasplantes en Monterrey: Una Nueva Oportunidad de Vida
+      </h1>
+      <p class="text-xl md:text-2xl text-blue-100 mb-10 max-w-3xl leading-relaxed font-light">
+        Liderazgo, tecnología de vanguardia y las tasas de supervivencia más altas en México, apoyadas por nuestro incomparable equipo multidisciplinario.
+      </p>
+      <a href="/contacto" class="inline-flex items-center justify-center px-10 py-5 bg-[#00a3e0] text-white text-xl font-bold rounded-2xl hover:bg-white hover:text-[#004b87] transition-all shadow-xl shadow-[#00a3e0]/30 transform hover:-translate-y-1">
+        Agendar Cita Valorativa <i class="ph ph-heartbeat text-2xl ml-3"></i>
+      </a>
+    </div>
+  </section>
+
+  <!-- 2. Trust Bar E-E-A-T -->
+  <section class="relative z-20 -mt-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="glass-card rounded-[2rem] p-6 lg:p-8 bg-white/95 border border-slate-200/50 shadow-2xl backdrop-blur-xl">
+      <div class="grid grid-cols-2 md:grid-cols-5 gap-6 divide-x divide-slate-100">
+        
+        <div class="flex flex-col items-center text-center px-2 group">
+          <div class="w-14 h-14 rounded-2xl bg-blue-50 flex items-center justify-center text-[#004b87] mb-3 group-hover:bg-[#00a3e0] group-hover:text-white transition-colors">
+            <i class="ph ph-wind text-3xl"></i>
+          </div>
+          <p class="font-bold text-slate-800 text-sm leading-tight">Hito Bipulmonar</p>
+        </div>
+
+        <div class="flex flex-col items-center text-center px-2 group">
+          <div class="w-14 h-14 rounded-2xl bg-blue-50 flex items-center justify-center text-[#004b87] mb-3 group-hover:bg-[#00a3e0] group-hover:text-white transition-colors">
+            <i class="ph ph-globe-hemisphere-west text-3xl"></i>
+          </div>
+          <p class="font-bold text-slate-800 text-sm leading-tight">Supervivencia Global</p>
+        </div>
+
+        <div class="flex flex-col items-center text-center px-2 group">
+          <div class="w-14 h-14 rounded-2xl bg-blue-50 flex items-center justify-center text-[#004b87] mb-3 group-hover:bg-[#00a3e0] group-hover:text-white transition-colors">
+            <i class="ph ph-users-three text-3xl"></i>
+          </div>
+          <p class="font-bold text-slate-800 text-sm leading-tight">Manejo Multidisciplinario</p>
+        </div>
+
+        <div class="flex flex-col items-center text-center px-2 group">
+          <div class="w-14 h-14 rounded-2xl bg-blue-50 flex items-center justify-center text-[#004b87] mb-3 group-hover:bg-[#00a3e0] group-hover:text-white transition-colors">
+            <i class="ph ph-hand-heart text-3xl"></i>
+          </div>
+          <p class="font-bold text-slate-800 text-sm leading-tight">Atención Ultra-Personal</p>
+        </div>
+
+        <div class="flex flex-col items-center text-center px-2 group">
+          <div class="w-14 h-14 rounded-2xl bg-slate-900 flex items-center justify-center text-[#00a3e0] mb-3 group-hover:bg-[#004b87] transition-colors relative overflow-hidden">
+            <div class="absolute inset-0 bg-[#00a3e0]/20 animate-pulse"></div>
+            <i class="ph ph-activity text-3xl relative z-10"></i>
+          </div>
+          <p class="font-bold text-slate-800 text-sm leading-tight">Tecnología ECMO</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. Definición AEO y Tipos de Trasplantes -->
+  <section class="py-24 bg-slate-50 relative overflow-hidden">
+    <div class="absolute top-0 right-0 w-[600px] h-[600px] bg-[#00a3e0]/5 rounded-full blur-[100px] pointer-events-none translate-x-1/3 -translate-y-1/3"></div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-start">
+        
+        <!-- Izquierda AEO -->
+        <div class="sticky top-32">
+          <span class="text-[#00a3e0] font-bold tracking-wider uppercase text-sm mb-4 block">Conceptos Médicos</span>
+          <h2 class="text-3xl md:text-5xl font-black text-[#004b87] mb-6 leading-tight">
+            ¿Qué es un trasplante?
+          </h2>
+          <div class="bg-white p-8 rounded-[2rem] border border-slate-200 shadow-xl shadow-slate-200/50 relative overflow-hidden">
+            <div class="absolute top-0 right-0 w-32 h-32 bg-[#004b87]/5 rounded-bl-[100px] -mr-8 -mt-8"></div>
+            <p class="text-slate-600 text-lg leading-relaxed mb-6 font-medium relative z-10">
+              Un trasplante es un procedimiento quirúrgico de alta complejidad que consiste en sustituir un órgano o tejido enfermo (cuyas funciones ya no pueden restaurarse con alternativas terapéuticas), por uno sano proveniente de un donante vivo o cadavérico.
+            </p>
+            <p class="text-slate-600 leading-relaxed max-w-md relative z-10">
+              Este procedimiento devuelve la salud integral y la calidad de vida, lográndose bajo protocolos de compatibilidad inmunológica y excelencia quirúrgica.
+            </p>
+          </div>
+        </div>
+
+        <!-- Derecha Tipos -->
+        <div>
+          <h2 class="text-3xl font-black text-[#004b87] mb-10 flex items-center gap-3">
+             Tipos de trasplantes que atendemos
+          </h2>
+          <div class="space-y-6 list-trasplantes">
+            
+            <div class="tj-card bg-white p-6 rounded-2xl border flex flex-col md:flex-row gap-6 shadow-sm hover:shadow-xl hover:border-[#00a3e0] transition-all group">
+               <div class="w-16 h-16 bg-[#004b87] text-white rounded-xl flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-transform">
+                 <i class="ph ph-wind text-3xl"></i>
+               </div>
+               <div>
+                  <h3 class="text-xl font-bold text-slate-900 mb-2 group-hover:text-[#00a3e0] transition-colors">Trasplante Pulmonar</h3>
+                  <p class="text-slate-600 text-sm leading-relaxed">Referente nacional en procedimientos uni y bipulmonares. Tratamiento de EPOC avanzado, fibrosis quística y patologías pulmonares críticas.</p>
+               </div>
+            </div>
+
+            <div class="tj-card bg-white p-6 rounded-2xl border flex flex-col md:flex-row gap-6 shadow-sm hover:shadow-xl hover:border-[#e11d48] transition-all group">
+               <div class="w-16 h-16 bg-[#e11d48] text-white rounded-xl flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-transform">
+                 <i class="ph ph-heartbeat text-3xl"></i>
+               </div>
+               <div>
+                  <h3 class="text-xl font-bold text-slate-900 mb-2 group-hover:text-[#e11d48] transition-colors">Trasplante Cardíaco</h3>
+                  <p class="text-slate-600 text-sm leading-relaxed">Intervención definitiva para fallas cardíacas terminales mediante protocolos internacionales y tecnología circulatoria avanzada.</p>
+               </div>
+            </div>
+
+            <div class="tj-card bg-white p-6 rounded-2xl border flex flex-col md:flex-row gap-6 shadow-sm hover:shadow-xl hover:border-[#00a3e0] transition-all group">
+               <div class="w-16 h-16 bg-[#004b87] text-white rounded-xl flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-transform">
+                 <i class="ph ph-drop text-3xl"></i>
+               </div>
+               <div>
+                  <h3 class="text-xl font-bold text-slate-900 mb-2 group-hover:text-[#00a3e0] transition-colors">Trasplante Renal</h3>
+                  <p class="text-slate-600 text-sm leading-relaxed">Solución para insuficiencia renal crónica, ejecutado con mínimas complicaciones y alta viabilidad a largo plazo mediante donante vivo o cadavérico.</p>
+               </div>
+            </div>
+
+            <div class="tj-card bg-white p-6 rounded-2xl border flex flex-col md:flex-row gap-6 shadow-sm hover:shadow-xl hover:border-[#00a3e0] transition-all group">
+               <div class="w-16 h-16 bg-[#004b87] text-white rounded-xl flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-transform">
+                 <i class="ph ph-activity text-3xl"></i>
+               </div>
+               <div>
+                  <h3 class="text-xl font-bold text-slate-900 mb-2 group-hover:text-[#00a3e0] transition-colors">Trasplante Hepático</h3>
+                  <p class="text-slate-600 text-sm leading-relaxed">Atención cirrótica y falla hepática fulminante con un equipo supraespecializado en fisiología biliar e inmunología quirúrgica.</p>
+               </div>
+            </div>
+
+            <div class="tj-card bg-white p-6 rounded-2xl border flex flex-col md:flex-row gap-6 shadow-sm hover:shadow-xl hover:border-[#00a3e0] transition-all group">
+               <div class="w-16 h-16 bg-[#004b87] text-white rounded-xl flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-transform">
+                 <i class="ph ph-dna text-3xl"></i>
+               </div>
+               <div>
+                  <h3 class="text-xl font-bold text-slate-900 mb-2 group-hover:text-[#00a3e0] transition-colors">Trasplante de Tejidos</h3>
+                  <p class="text-slate-600 text-sm leading-relaxed">Córneas, válvulas cardíacas, injertos óseos y piel, apoyados por nuestro riguroso banco de tejidos y tecnología regenerativa.</p>
+               </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. y 5. Enfoque Multidisciplinario & Tecnología ECMO -->
+  <section class="py-24 bg-white relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-stretch">
+        <!-- Bloque ECMO (Diferenciador) -->
+        <div class="bg-slate-900 p-10 md:p-14 rounded-[3rem] relative overflow-hidden flex flex-col justify-center text-white border border-slate-700 shadow-2xl">
+          <div class="absolute -top-32 -left-32 w-80 h-80 bg-[#00a3e0] rounded-full blur-[120px] opacity-20 pointer-events-none"></div>
+          
+          <div class="w-16 h-16 bg-white/10 rounded-2xl flex items-center justify-center text-[#00a3e0] mb-6 backdrop-blur-sm border border-white/10">
+            <i class="ph ph-cpu text-3xl"></i>
+          </div>
+          <h3 class="text-3xl lg:text-4xl font-bold mb-6 tracking-tight">Tecnología de Vanguardia: ECMO</h3>
+          <p class="text-slate-300 text-lg leading-relaxed mb-6">
+            La Oxigenación por Membrana Extracorpórea (ECMO) asume las funciones del corazón y pulmones temporalmente. Somos el centro médico en la región con la infraestructura y capacidad para operar este soporte de vida prolongado.
+          </p>
+          <p class="text-slate-400 text-sm leading-relaxed font-light">
+            *ECMO es el puente definitivo a la supervivencia pre, trans y post trasplante (particularmente cardíaco y pulmonar), estabilizando a pacientes críticos mientras el nuevo órgano se adapta.
+          </p>
+        </div>
+
+        <!-- Enfoque multidisciplinario y atención al paciente -->
+        <div class="flex flex-col gap-8 justify-center">
+          <div>
+             <h2 class="text-3xl md:text-4xl font-black text-[#004b87] mb-4">
+               Enfoque Multidisciplinario
+             </h2>
+             <p class="text-slate-600 text-lg leading-relaxed">
+               El éxito de un trasplante no reside en una única disciplina, sino en la perfecta orquestación e integración de especialidades. Colaboran estrechamente <strong>cirujanos especialistas, inmunólogos, infectólogos y anestesiólogos</strong> bajo protocolos estandarizados internacionalmente para blindar el éxito del injerto.
+             </p>
+          </div>
+          
+          <!-- Box Atención Paciente -->
+          <div class="bg-sky-50 border border-sky-100 p-8 rounded-[2rem]">
+             <h3 class="text-xl font-bold text-[#004b87] mb-3 flex items-center gap-2">
+               <i class="ph ph-hands-praying text-[#00a3e0] text-2xl"></i> Atención Centrada en el Paciente
+             </h3>
+             <p class="text-slate-600 leading-relaxed font-medium">
+               Acompañamos tu proceso clínico con apoyo psicológico integral, tanatología, trabajadores sociales y soporte emocional/espiritual sistemático. Entendemos que el trasplante es un renacer que involucra mente, cuerpo y familia entera.
+             </p>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+  </section>
+
+  <!-- 6. Proceso del Paciente (Stepper de 5 pasos) -->
+  <section class="py-24 bg-slate-50 relative process-section border-t border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-20 max-w-3xl mx-auto">
+        <h2 class="text-3xl md:text-5xl font-black text-[#004b87] mb-6">
+          Ruta al Trasplante
+        </h2>
+        <p class="text-lg text-slate-600">
+          Un proceso sistemático de cinco fases regido por estrictos comités éticos y clínicos.
+        </p>
+      </div>
+
+      <div class="relative max-w-6xl mx-auto px-2 md:px-0">
+        <!-- Línea conectora Desktop -->
+        <div class="hidden lg:block absolute top-[2.5rem] left-[10%] right-[10%] h-[2px] bg-slate-200 z-0"></div>
+        <!-- Línea conectora Mobile -->
+        <div class="block lg:hidden absolute top-8 bottom-8 left-[2.4rem] w-[2px] bg-slate-200 z-0"></div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-5 gap-12 lg:gap-6 relative z-10">
+          
+          <div class="stepper-tr flex lg:flex-col items-start lg:items-center text-left lg:text-center relative gap-6 lg:gap-0">
+             <div class="w-16 h-16 lg:w-20 lg:h-20 bg-white rounded-full shadow-lg border border-slate-100 flex items-center justify-center text-[#00a3e0] flex-shrink-0 z-10 lg:mb-6">
+               <span class="text-2xl font-black">1</span>
+             </div>
+             <div>
+                <h4 class="text-lg font-bold text-slate-900 mb-2 mt-1 lg:mt-0">Evaluación</h4>
+                <p class="text-sm text-slate-500 max-w-xs lg:max-w-none lg:mx-auto">Análisis riguroso para constatar que es la última línea terapéutica posible.</p>
+             </div>
+          </div>
+
+          <div class="stepper-tr flex lg:flex-col items-start lg:items-center text-left lg:text-center relative gap-6 lg:gap-0">
+             <div class="w-16 h-16 lg:w-20 lg:h-20 bg-white rounded-full shadow-lg border border-slate-100 flex items-center justify-center text-[#00a3e0] flex-shrink-0 z-10 lg:mb-6">
+               <span class="text-2xl font-black">2</span>
+             </div>
+             <div>
+                <h4 class="text-lg font-bold text-slate-900 mb-2 mt-1 lg:mt-0">Diagnóstico</h4>
+                <p class="text-sm text-slate-500 max-w-xs lg:max-w-none lg:mx-auto">Exámenes serológicos, histocompatibilidad y perfilamiento exacto del órgano receptor.</p>
+             </div>
+          </div>
+
+          <div class="stepper-tr flex lg:flex-col items-start lg:items-center text-left lg:text-center relative gap-6 lg:gap-0">
+             <div class="w-16 h-16 lg:w-20 lg:h-20 bg-[#00a3e0] rounded-full shadow-[0_10px_30px_rgba(0,163,224,0.4)] border-4 border-slate-50 flex items-center justify-center text-white flex-shrink-0 z-10 lg:mb-6">
+               <span class="text-2xl font-black">3</span>
+             </div>
+             <div>
+                <h4 class="text-lg font-bold text-slate-900 mb-2 mt-1 lg:mt-0">Selección</h4>
+                <p class="text-sm text-slate-500 max-w-xs lg:max-w-none lg:mx-auto">Aprobación del comité e ingreso a lista de espera (apoyados por CENATRA) o match vivo.</p>
+             </div>
+          </div>
+
+          <div class="stepper-tr flex lg:flex-col items-start lg:items-center text-left lg:text-center relative gap-6 lg:gap-0">
+             <div class="w-16 h-16 lg:w-20 lg:h-20 bg-white rounded-full shadow-lg border border-slate-100 flex items-center justify-center text-[#00a3e0] flex-shrink-0 z-10 relative lg:mb-6">
+               <span class="absolute -top-1 -right-1 w-4 h-4 bg-[#e11d48] rounded-full animate-pulse"></span>
+               <span class="text-2xl font-black">4</span>
+             </div>
+             <div>
+                <h4 class="text-lg font-bold text-slate-900 mb-2 mt-1 lg:mt-0">Cirugía</h4>
+                <p class="text-sm text-slate-500 max-w-xs lg:max-w-none lg:mx-auto">Procedimiento intraoperatorio altamente estandarizado con tecnología vital y extracorpórea.</p>
+             </div>
+          </div>
+
+          <div class="stepper-tr flex lg:flex-col items-start lg:items-center text-left lg:text-center relative gap-6 lg:gap-0">
+             <div class="w-16 h-16 lg:w-20 lg:h-20 bg-white rounded-full shadow-lg border border-slate-100 flex items-center justify-center text-[#00a3e0] flex-shrink-0 z-10 lg:mb-6">
+               <span class="text-2xl font-black">5</span>
+             </div>
+             <div>
+                <h4 class="text-lg font-bold text-slate-900 mb-2 mt-1 lg:mt-0">Seguimiento</h4>
+                <p class="text-sm text-slate-500 max-w-xs lg:max-w-none lg:mx-auto">Monitorización perpetua post-trasplante con esquemas inmunosupresores garantizando injerto.</p>
+             </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7 y 8. Bloques de Educación, Referencias, CTA y Pagos -->
+  <section class="py-24 bg-white relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <!-- B2B and Donation Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
+        
+        <!-- Bloque Donación Órganos -->
+        <div class="glass-card bg-sky-50/50 border border-sky-100 p-10 rounded-[2.5rem] relative overflow-hidden group">
+          <div class="absolute top-0 right-0 p-8 opacity-10 group-hover:opacity-20 transition-opacity">
+            <i class="ph ph-hand-heart text-9xl text-[#00a3e0]"></i>
+          </div>
+          <h3 class="text-2xl font-bold text-[#004b87] mb-4 relative z-10">Cultura de Donación (CENATRA)</h3>
+          <p class="text-slate-600 mb-6 relative z-10">
+            Fomentamos una cultura nacional pro-donación en estrecha regulación normativa y operativa con el Centro Nacional de Trasplantes. La base de nuestro trabajo radica en el altruismo absoluto y la generosidad sin igual.
+          </p>
+        </div>
+
+        <!-- Bloque Referencias Médicas B2B -->
+        <div class="glass-card bg-slate-900 p-10 rounded-[2.5rem] relative overflow-hidden group text-white">
+          <div class="absolute -bottom-10 -right-10 w-64 h-64 bg-[#00a3e0]/20 rounded-full blur-[80px]"></div>
+          <h3 class="text-2xl font-bold mb-4 relative z-10 flex items-center gap-3">
+             <i class="ph ph-stethoscope text-[#00a3e0]"></i> Referencias Médicas
+          </h3>
+          <p class="text-slate-300 mb-6 relative z-10">
+            ¿Eres colega médico con un caso de falla orgánica terminal? Contamos con un portal exclusivo y línea directa para recepción y valoración inmediata de pacientes de alta complejidad biológica de todo el país.
+          </p>
+          <a href="/contacto" class="inline-flex items-center text-[#00a3e0] font-bold hover:text-white transition-colors relative z-10 border-b border-[#00a3e0] pb-1">
+            Referir a un paciente &rarr;
+          </a>
+        </div>
+      </div>
+
+      <!-- Pagos y CTA Principal -->
+      <div id="contacto" class="bg-[#004b87] rounded-[3rem] p-10 lg:p-16 relative overflow-hidden flex flex-col lg:flex-row items-center justify-between gap-12 shadow-2xl">
+         <div class="absolute inset-0 bg-[url('/images/pattern-grid.svg')] opacity-10"></div>
+         <div class="absolute w-[800px] h-[800px] bg-[#00a3e0] rounded-full blur-[200px] opacity-30 -right-40 -top-40 pointer-events-none"></div>
+
+         <div class="lg:w-1/2 relative z-10">
+           <h2 class="text-4xl md:text-5xl font-black text-white mb-6 leading-tight">
+             Habla con nuestro equipo de trasplantes
+           </h2>
+           <p class="text-xl text-blue-100 mb-8 max-w-lg">
+             Una vida nueva está a una conversación de distancia. Inicia tu protocolo valorativo hoy.
+           </p>
+           
+           <div class="space-y-6">
+             <div class="flex items-start gap-4">
+                <i class="ph ph-shield-check text-[#00a3e0] text-3xl"></i>
+                <div>
+                   <h4 class="text-white font-bold text-lg">Opciones de Pago Especializadas</h4>
+                   <p class="text-blue-200 text-sm leading-relaxed mt-1">Acompañamos la viabilidad financiera mediante convenios directos con aseguradoras de Gastos Médicos Mayores y diseño conjunto de planes administrativos.</p>
+                </div>
+             </div>
+           </div>
+         </div>
+
+         <div class="lg:w-auto relative z-10 flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto justify-end">
+           <a href="/contacto" class="w-full sm:w-auto px-10 py-5 bg-white text-[#004b87] text-xl font-bold rounded-2xl hover:bg-slate-50 transition-all text-center flex justify-center items-center gap-3 transform hover:-translate-y-1 shadow-xl shadow-black/20">
+             Contactar al Equipo <i class="ph ph-arrow-right text-2xl"></i>
+           </a>
+         </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 9. Sección FAQ Estratégica -->
+  <section class="py-24 bg-slate-50 relative">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-5xl font-black text-[#004b87] tracking-tight mb-4">Preguntas Frecuentes</h2>
+        <p class="text-slate-600 text-lg md:text-xl font-medium">Resolviendo tus dudas clínicas sobre los procedimientos de trasplante.</p>
+      </div>
+
+      <div class="space-y-6">
+        <details class="bg-white rounded-2xl p-6 group cursor-pointer marker:content-[''] !border-l-[4px] border-slate-200 !border-l-transparent hover:!border-l-[#00a3e0] border shadow-sm hover:shadow-md transition-all overflow-hidden">
+          <summary class="text-xl font-bold text-[#004b87] flex justify-between items-center outline-none list-none marker:content-none [&::-webkit-details-marker]:hidden">
+            ¿Cómo sé si soy candidato para un trasplante?
+            <i class="ph ph-caret-down transform group-open:rotate-180 transition-transform text-[#00a3e0] text-2xl"></i>
+          </summary>
+          <div class="mt-4 text-slate-600 font-medium leading-relaxed border-t border-slate-100 pt-4 pr-8">
+            La candidatura se determina tras una evaluación médica exhaustiva por nuestro equipo multidisciplinario, valorando tu estado clínico actual, nivel de urgencia, compatibilidad y factores prospectivos de supervivencia sin co-morbilidades absolutas limitantes.
+          </div>
+        </details>
+        
+        <details class="bg-white rounded-2xl p-6 group cursor-pointer marker:content-[''] !border-l-[4px] border-slate-200 !border-l-transparent hover:!border-l-[#00a3e0] border shadow-sm hover:shadow-md transition-all overflow-hidden">
+          <summary class="text-xl font-bold text-[#004b87] flex justify-between items-center outline-none list-none marker:content-none [&::-webkit-details-marker]:hidden">
+            ¿Cuánto tiempo dura el proceso de espera y cirugía?
+            <i class="ph ph-caret-down transform group-open:rotate-180 transition-transform text-[#00a3e0] text-2xl"></i>
+          </summary>
+          <div class="mt-4 text-slate-600 font-medium leading-relaxed border-t border-slate-100 pt-4 pr-8">
+            Los tiempos de lista de espera varían radicalmente según el órgano, la disponibilidad y tu compatibilidad biológica. En cuanto a la magnitud quirúrgica, las cirugías pueden durar desde 4 horas (tejidos/riñón) hasta más de 12 horas (pulmón, hígado), seguidas por terapia intensiva y habitación regular.
+          </div>
+        </details>
+
+        <details class="bg-white rounded-2xl p-6 group cursor-pointer marker:content-[''] !border-l-[4px] border-slate-200 !border-l-transparent hover:!border-l-[#00a3e0] border shadow-sm hover:shadow-md transition-all overflow-hidden">
+          <summary class="text-xl font-bold text-[#004b87] flex justify-between items-center outline-none list-none marker:content-none [&::-webkit-details-marker]:hidden">
+            ¿Aceptan seguros de gastos médicos mayores?
+            <i class="ph ph-caret-down transform group-open:rotate-180 transition-transform text-[#00a3e0] text-2xl"></i>
+          </summary>
+          <div class="mt-4 text-slate-600 font-medium leading-relaxed border-t border-slate-100 pt-4 pr-8">
+            Sí, colaboramos con las principales aseguradoras y redes internacionales de Gastos Médicos Mayores (GMM). Entendemos que cada póliza es única, por lo que contamos con área de atención a clientes dedicada a revisar sumas aseguradas, copagos y autorización de injertos.
+          </div>
+        </details>
+
+        <details class="bg-white rounded-2xl p-6 group cursor-pointer marker:content-[''] !border-l-[4px] border-slate-200 !border-l-transparent hover:!border-l-[#00a3e0] border shadow-sm hover:shadow-md transition-all overflow-hidden">
+          <summary class="text-xl font-bold text-[#004b87] flex justify-between items-center outline-none list-none marker:content-none [&::-webkit-details-marker]:hidden">
+            ¿Cuáles son los requisitos para la donación en vida?
+            <i class="ph ph-caret-down transform group-open:rotate-180 transition-transform text-[#00a3e0] text-2xl"></i>
+          </summary>
+          <div class="mt-4 text-slate-600 font-medium leading-relaxed border-t border-slate-100 pt-4 pr-8">
+            Un marco ético irrenunciable rige la donación de vivo (hígado o riñón). Requiere total voluntariedad, parentesco o vínculo altruista justificado, ser mayor de edad, estado óptimo de salud basal, psiquiatría aprobada y excelente compatibilidad para evitar daño renal o hepático al donante.
+          </div>
+        </details>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Animaciones GSAP -->
+  <script is:inline>
+    document.addEventListener("DOMContentLoaded", () => {
+      setTimeout(() => {
+        if (typeof window.gsap !== "undefined" && window.ScrollTrigger) {
+          
+          // Parallax Hero
+          window.gsap.to(".parallax-bg", {
+            yPercent: 15,
+            ease: "none",
+            scrollTrigger: {
+              trigger: ".hero-section",
+              start: "top top",
+              end: "bottom top",
+              scrub: true
+            }
+          });
+
+          // Animación Stagger Tipos de Trasplantes
+          window.gsap.from(".tj-card", {
+            scrollTrigger: {
+              trigger: ".list-trasplantes",
+              start: "top 80%",
+            },
+            y: 40,
+            opacity: 0,
+            duration: 0.6,
+            stagger: 0.15,
+            ease: "power3.out",
+            clearProps: "all",
+          });
+
+          // Animación Stepper Proceso
+          window.gsap.from(".stepper-tr", {
+            scrollTrigger: {
+              trigger: ".process-section",
+              start: "top 75%",
+            },
+            y: 50,
+            opacity: 0,
+            duration: 0.6,
+            stagger: 0.15,
+            ease: "back.out(1.2)",
+            clearProps: "all",
+          });
+
+        }
+      }, 100);
+    });
+  </script>
+
+</Layout>

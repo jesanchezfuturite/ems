@@ -1,6 +1,5 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import BlogCard from '../../components/BlogCard.astro';
 
 // Llamada al API
 let articles: any[] = [];
@@ -21,23 +20,37 @@ if (articles.length > 0 && articles[0].created_at) {
   articles.sort((a, b) => new Date(b.created_at).valueOf() - new Date(a.created_at).valueOf());
 }
 
-// Función auxiliar para extraer extractos (excerpts) seguros desde HTML (limpiando tags rudimentariamente)
+// Helper functions (Utilities)
 const stripHtml = (html: string) => {
   if (!html) return "";
   return html.replace(/<[^>]*>?/gm, '').substring(0, 160) + '...';
 };
 
-// Formato de Fecha
 const formatDate = (dateStr: string) => {
   if(!dateStr) return 'Reciente';
   return new Date(dateStr).toLocaleDateString('es-MX', { year: 'numeric', month: 'short', day: 'numeric' });
 };
 
-// Separar Destacados de Regulares
-const featuredPosts = articles.slice(0, 4); // Tomamos los últimos 4 como destacados para el slider
-const regularPosts = articles; // Mostrar todos en el grid, o slice(4) si prefieren no repetir
+const getReadingTime = (html: string) => {
+  if (!html) return 3;
+  const words = html.replace(/<[^>]*>?/gm, '').split(/\s+/).length;
+  return Math.max(1, Math.ceil(words / 220)); // average adult reading time (wpm)
+};
 
-// Categorías únicas basadas en los tags
+const getAuthorDoc = (postTags: string[]) => {
+  if (!postTags || postTags.length === 0) return { name: "Dr. Guardias", url: "/directorio" };
+  const tag = postTags[0].toLowerCase();
+  if (tag.includes('ciruga') || tag.includes('bariatr')) return { name: "Departamento Cirugía", url: "/directorio?especialidad=cirugia-general" };
+  if (tag.includes('cardiolo')) return { name: "Dept. Cardiología", url: "/directorio?especialidad=cardiologia-clinica" };
+  if (tag.includes('mater')) return { name: "Dept. Materno", url: "/directorio?especialidad=ginecologia-y-obstetricia" };
+  return { name: "Especialistas CMS", url: "/directorio" };
+};
+
+// Separación y Variables Core
+const featuredPosts = articles.slice(0, 4);
+const regularPosts = articles.length > 4 ? articles.slice(4) : articles;
+
+// Extracción de Categorías
 const allTagsSet = new Set<string>();
 articles.forEach(article => {
   if (article.tags && Array.isArray(article.tags)) {
@@ -46,104 +59,137 @@ articles.forEach(article => {
 });
 const categories = ['Todas', ...Array.from(allTagsSet)];
 
-// --- SEO Schema Markup ---
+// --- AEO: JSON-LD Schemas (FAQ & Blog) ---
 const schemaMarkup = {
   "@context": "https://schema.org",
-  "@type": "Blog",
-  "name": "Revista Médica Digital - CMS",
-  "description": "Artículos médicos sobre salud, cirugía y prevención.",
-  "blogPost": articles.map(post => ({
-    "@type": "BlogPosting",
-    "headline": post.title,
-    "image": post.cover_image,
-    "datePublished": post.created_at,
-    "author": {
-      "@type": "Organization",
-      "name": "Centro de Especialidades Médicas"
+  "@graph": [
+    {
+      "@type": "Blog",
+      "name": "Revista Médica Digital - CMS",
+      "description": "Artículos médicos sobre salud, cirugía y prevención redactados por especialistas certificados.",
+      "blogPost": articles.map(post => ({
+        "@type": "BlogPosting",
+        "headline": post.title,
+        "image": post.cover_image,
+        "datePublished": post.created_at,
+        "author": {
+          "@type": "Organization",
+          "name": "Centro de Especialidades Médicas"
+        }
+      }))
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Cómo agendar una cita con un especialista publicado en la Revista Médica?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Puedes agendar una cita visitando nuestro Directorio Médico en línea, seleccionando el especialista adecuado para tu patología y contactando los números directos de sus consultorios en nuestras instalaciones."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Aceptan seguros de gastos médicos mayores?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sí, el ecosistema de médicos del Centro de Especialidades Médicas y las instalaciones de hospitalización aceptan una amplia red de aseguradoras nacionales e internacionales. Te recomendamos revisar la póliza aplicable con tu especialista de preferencia."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cómo elijo al médico adecuado según lo que leí en los artículos de salud?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Nuestro directorio médico virtual permite filtrar a los profesionales por especialidad clínica (como Traumatología, Cirugía Bariátrica, Ginecología). Todos nuestros médicos publicantes están certificados por sus respectivos Consejos de Especialidad Mexicanos."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Dónde están localizados los especialistas del blog?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Nuestros consultorios y quirófanos están ubicados centralizadamente en Monterrey (Sector Sur), facilitando el acceso rápido tanto a prevención ambulatoria como a procedimientos quirúrgicos de emergencia o programados."
+          }
+        }
+      ]
     }
-  }))
+  ]
 };
 ---
 
 <Layout 
-  title="Revista Médica Digital | Centro de Especialidades Médicas"
-  description="Mantente informado con los artículos médicos más recientes sobre nuestro catálogo de especialidades: maternidad, bariatría, salud y tecnología quirúrgica."
+  title="Revista Médica Digital | Expertos en Salud y Cirugía Especializada"
+  description="Autoridad y precisión periodística en salud. Aprende todo sobre tratamientos, innovaciones quirúrgicas y prevención de la mano de nuestros médicos especialistas."
 >
-  <!-- SEO JSON-LD Override in body (or it can go to head if layout supports slot="head", but script block is fine) -->
+  <!-- SEO JSON-LD Override Engine -->
   <script type="application/ld+json" set:html={JSON.stringify(schemaMarkup)} />
 
   <style is:global>
     /* Ocultar barra de scroll para el menú lateral */
-    .scrollbar-hide::-webkit-scrollbar {
-      display: none;
-    }
-    .scrollbar-hide {
-      -ms-overflow-style: none;
-      scrollbar-width: none;
-    }
+    .scrollbar-hide::-webkit-scrollbar { display: none; }
+    .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
     
     /* Configuración de Paginación Swiper */
-    .swiper-pagination-bullet {
-      background: rgba(255, 255, 255, 0.5) !important;
-      opacity: 1 !important;
-    }
-    .swiper-pagination-bullet-active {
-      background: #00a3e0 !important; /* brand-cyan */
-      width: 24px !important;
-      border-radius: 8px !important;
-      transition: all 0.3s ease;
-    }
+    .swiper-pagination-bullet { background: rgba(255, 255, 255, 0.5) !important; opacity: 1 !important; }
+    .swiper-pagination-bullet-active { background: #00a3e0 !important; width: 24px !important; border-radius: 8px !important; transition: all 0.3s ease; }
+    
+    /* Base Fonts */
+    .font-jakarta { font-family: 'Plus Jakarta Sans', sans-serif; }
+    .font-serif-cms { font-family: 'Plus Jakarta Sans', ui-serif, Georgia, serif; font-weight: 800; tracking: tracking-tighter; }
   </style>
 
-  <section class="bg-slate-50 pt-16 pb-12 overflow-hidden relative">
+
+  <section class="bg-slate-50 pt-16 pb-12 overflow-hidden relative font-jakarta">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
       
       <!-- Hero Header -->
-      <div class="text-center mb-12">
-        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-4 text-transparent bg-clip-text bg-gradient-to-r from-brand-blue to-brand-cyan drop-shadow-sm pb-2">
-          Revista Médica Digital
+      <div class="text-center mb-14 max-w-4xl mx-auto">
+        <h1 class="text-5xl md:text-6xl font-black mb-4 tracking-tighter text-[#004b87] leading-tight drop-shadow-sm pb-1">
+          Revista Médica <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#004b87] to-[#00a3e0]">Digital</span>
         </h1>
-        <p class="text-lg text-slate-600 max-w-2xl mx-auto leading-relaxed">
-          Autoridad, innovación y prevención. Descubre lo último en medicina directamente de nuestros especialistas certificados.
+        <p class="text-lg text-slate-600 font-medium leading-relaxed max-w-2xl mx-auto">
+          Innovación técnica y calidez humana. Contenido dictado por nuestra élite de especialistas certificados.
         </p>
       </div>
 
       <!-- Slider Destacados (Swiper) -->
       {featuredPosts.length > 0 && (
-        <div class="relative w-full mb-16 rounded-[32px] shadow-2xl overflow-hidden">
-          <div class="swiper blog-featured-swiper w-full h-[450px] md:h-[550px]">
+        <div class="relative w-full mb-16 rounded-[2rem] shadow-2xl overflow-hidden">
+          <div class="swiper blog-featured-swiper w-full h-[450px] md:h-[600px] bg-slate-900">
             <div class="swiper-wrapper">
               {featuredPosts.map((post) => (
                 <div class="swiper-slide relative w-full h-full group group/slide">
                   <a href={`/blog/${post.slug}`} class="block w-full h-full">
-                    <!-- Background Image con efecto scale sutil -->
+                    <!-- Background Image -->
                     <img 
                       src={post.cover_image} 
                       alt={post.title} 
-                      class="absolute inset-0 w-full h-full object-cover transform sm:scale-100 sm:group-hover:scale-105 transition-transform duration-1000 ease-in-out" 
+                      class="absolute inset-0 w-full h-full object-cover transform sm:scale-100 sm:group-hover:scale-105 transition-transform duration-1000 ease-in-out mix-blend-overlay brightness-110" 
                     />
-                    <!-- Overlay de Gradiente Oscuro -->
-                    <div class="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/30 to-slate-900/10"></div>
+                    <!-- Overlay de Gradiente Oscuro Mejorado -->
+                    <div class="absolute inset-0 bg-gradient-to-t from-[#001730]/95 via-[#001730]/40 to-transparent"></div>
                     
-                    <!-- Contenedor Glass Card -->
-                    <div class="absolute bottom-0 left-0 right-0 p-6 md:p-12 z-20">
-                      <div class="glass-card p-6 md:p-8 rounded-[24px] max-w-3xl transform translate-y-8 opacity-0 group-[.swiper-slide-active]/slide:opacity-100 group-[.swiper-slide-active]/slide:translate-y-0 transition-all duration-700 delay-300">
-                        <span class="inline-block bg-brand-cyan text-white px-3 py-1 rounded-md text-xs font-bold tracking-widest uppercase mb-4 shadow-sm border border-brand-cyan/50">
+                    <!-- Contenedor Glass Card Destacado -->
+                    <div class="absolute bottom-0 left-0 right-0 p-6 md:p-12 z-20 flex items-end">
+                      <div class="glass-card p-6 md:p-10 rounded-3xl max-w-4xl transform translate-y-8 opacity-0 group-[.swiper-slide-active]/slide:opacity-100 group-[.swiper-slide-active]/slide:translate-y-0 transition-all duration-[800ms] delay-300">
+                        <span class="inline-block bg-[#00a3e0] text-white px-4 py-1.5 rounded-md text-xs font-bold tracking-widest uppercase mb-6 shadow-md border border-[#00a3e0]/20">
                           {post.tags && post.tags.length > 0 ? post.tags[0] : 'Destacado'}
                         </span>
-                        <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold text-slate-900 mb-3 leading-tight drop-shadow-sm">
+                        <h2 class="text-3xl md:text-5xl font-black text-slate-900 mb-4 leading-tight drop-shadow-sm font-serif-cms tracking-tight">
                           {post.title}
                         </h2>
-                        <p class="text-slate-800 line-clamp-2 mb-4 text-base md:text-lg font-medium opacity-90">
+                        <p class="text-slate-700 line-clamp-2 mb-6 text-base md:text-lg font-medium">
                           {stripHtml(post.content)}
                         </p>
-                        <div class="flex items-center text-slate-700 text-sm font-bold">
-                          <div class="w-8 h-8 rounded-full bg-brand-blue text-white flex items-center justify-center overflow-hidden border border-slate-200 mr-3">
-                            <i class="ph ph-stethoscope text-lg"></i>
+                        <div class="flex items-center text-[#004b87] text-sm font-bold flex-wrap gap-y-2">
+                          <div class="w-10 h-10 rounded-full bg-[#004b87] text-white flex items-center justify-center overflow-hidden border-2 border-white shadow-sm mr-3">
+                            <i class="ph ph-stethoscope text-xl"></i>
                           </div>
-                          <span>Centro de Especialidades</span>
-                          <span class="mx-3 text-slate-400">•</span>
-                          <span>{formatDate(post.created_at)}</span>
+                          <span>{getAuthorDoc(post.tags).name}</span>
+                          <span class="mx-3 text-slate-300 hidden sm:inline">•</span>
+                          <span class="text-slate-500 font-semibold">{getReadingTime(post.content)} min de lectura</span>
                         </div>
                       </div>
                     </div>
@@ -152,19 +198,19 @@ const schemaMarkup = {
               ))}
             </div>
             <!-- Swiper Controls -->
-            <div class="swiper-pagination mb-2"></div>
-            <div class="swiper-button-prev hidden md:flex !text-white after:!text-2xl !w-12 !h-12 bg-black/20 rounded-full backdrop-blur-sm border border-white/20 hover:bg-brand-blue transition-colors"></div>
-            <div class="swiper-button-next hidden md:flex !text-white after:!text-2xl !w-12 !h-12 bg-black/20 rounded-full backdrop-blur-sm border border-white/20 hover:bg-brand-blue transition-colors"></div>
+            <div class="swiper-pagination mb-4"></div>
+            <div class="swiper-button-prev hidden md:flex !text-white after:!text-2xl !w-14 !h-14 bg-black/30 rounded-full backdrop-blur-sm border border-white/20 hover:bg-[#004b87] transition-colors ml-4 shadow-lg"></div>
+            <div class="swiper-button-next hidden md:flex !text-white after:!text-2xl !w-14 !h-14 bg-black/30 rounded-full backdrop-blur-sm border border-white/20 hover:bg-[#004b87] transition-colors mr-4 shadow-lg"></div>
           </div>
         </div>
       )}
 
       <!-- Navegación de Categorías -->
-      <div class="mb-10 w-full overflow-hidden relative">
-        <div class="flex overflow-x-auto scrollbar-hide space-x-3 py-4 pl-1 snap-x shadow-inner-sm" id="blog-filters">
+      <div class="mb-12 w-full overflow-hidden relative border-y border-slate-200 py-2">
+        <div class="flex overflow-x-auto scrollbar-hide space-x-3 py-4 snap-x" id="blog-filters">
           {categories.map((cat, index) => (
             <button 
-              class={`blog-chip snap-start flex-shrink-0 px-6 py-2.5 rounded-full text-sm font-bold transition-all duration-300 transform active:scale-95 ${index === 0 ? 'bg-brand-blue text-white shadow-lg shadow-brand-blue/30' : 'bg-white text-slate-600 border border-slate-200 hover:border-brand-cyan hover:text-brand-cyan hover:shadow-md'}`}
+              class={`blog-chip snap-start flex-shrink-0 px-6 py-2.5 rounded-full text-sm font-bold transition-all duration-300 transform outline-none active:scale-95 ${index === 0 ? 'bg-[#004b87] text-white shadow-lg shadow-blue-900/30 ring-2 ring-[#004b87] ring-offset-2 ring-offset-slate-50' : 'bg-white text-slate-600 border border-slate-200 hover:border-[#00a3e0] hover:text-[#00a3e0] shadow-sm'}`}
               data-filter={cat}
             >
               {cat}
@@ -176,80 +222,197 @@ const schemaMarkup = {
     </div>
   </section>
 
-  <!-- Grid Regular de Artículos -->
-  <section class="py-12 bg-slate-50 min-h-[50vh]">
+  <!-- Grid Regular de Artículos (Único Componente) -->
+  <section class="py-12 bg-white min-h-[50vh] font-jakarta">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       
-      <div id="blog-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-        {regularPosts.map((post) => (
-          <div class="blog-grid-item" data-category={post.tags && post.tags.length > 0 ? post.tags.join(',') : 'General'}>
-            <BlogCard 
-              title={post.title}
-              excerpt={stripHtml(post.content)}
-              image={post.cover_image}
-              category={post.tags && post.tags.length > 0 ? post.tags[0] : 'General'}
-              date={formatDate(post.created_at)}
-              slug={post.slug}
-            />
-          </div>
+      <div id="blog-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 gap-y-12">
+        {regularPosts.map((post, i) => (
+          <>
+            <!-- AEO y Conexión Modular: Inyección de BANNER después de la tercera caja -->
+            {i === 3 && (
+              <div class="col-span-full banner-connection w-full bg-[#004b87] rounded-[2rem] p-8 md:p-14 text-white shadow-2xl flex flex-col md:flex-row items-center justify-between my-4 relative overflow-hidden">
+                <!-- Decorative BG Overlay -->
+                <div class="absolute inset-0 z-0 opacity-20 pointer-events-none" style="background-image:-webkit-radial-gradient(center,ellipse cover,white 10%,transparent 60%)"></div>
+                <div class="relative z-10 md:w-2/3 mb-8 md:mb-0 text-center md:text-left">
+                  <h3 class="text-3xl md:text-4xl font-black mb-4 tracking-tight drop-shadow-sm">Conoce más sobre nuestras especialidades</h3>
+                  <p class="text-lg opacity-90 leading-relaxed font-medium">Descubre a nuestro equipo médico élite y encuentra hoy mismo al especialista adecuado al área de tu necesidad clícina.</p>
+                </div>
+                <div class="relative z-10 shrink-0 w-full md:w-auto text-center">
+                  <a href="/directorio" class="inline-flex w-full sm:w-auto items-center justify-center px-10 py-5 bg-white text-[#004b87] rounded-xl font-bold text-lg hover:bg-slate-100 transition shadow-lg shadow-black/20 hover:-translate-y-1">
+                    Encontrar un Especialista <i class="ph-bold ph-arrow-right ml-2 text-xl"></i>
+                  </a>
+                </div>
+              </div>
+            )}
+            
+            <!-- TARJETA DE BLOG ESTANDARIZADA -->
+            <article class="blog-grid-item group flex flex-col bg-white rounded-3xl overflow-hidden border border-slate-100 shadow-sm hover:shadow-2xl hover:border-[#00a3e0]/30 transition-all duration-500" data-category={post.tags && post.tags.length > 0 ? post.tags.join(',') : 'General'}>
+              <a href={`/blog/${post.slug}`} class="block relative overflow-hidden aspect-[16/9]">
+                <img 
+                  src={post.cover_image} 
+                  alt={post.title} 
+                  loading="lazy"
+                  class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-[800ms] ease-out brightness-[0.97]" 
+                />
+                <div class="absolute inset-0 bg-[#004b87]/0 group-hover:bg-[#004b87]/10 transition-colors duration-500 pointer-events-none"></div>
+                <div class="absolute top-5 left-5 z-10">
+                  <span class="bg-[#00a3e0] border border-[#00a3e0]/10 text-white px-3 py-1.5 rounded-md text-xs font-extrabold tracking-widest uppercase shadow-sm backdrop-blur-sm shadow-[#00a3e0]/20">
+                    {post.tags && post.tags.length > 0 ? post.tags[0] : 'Salud Global'}
+                  </span>
+                </div>
+                <!-- Reading Time Feature Snippet -->
+                <div class="absolute bottom-3 right-4 z-10 bg-slate-900/80 backdrop-blur-md rounded-full px-3 py-1 border border-white/10 flex items-center shadow-md">
+                   <i class="ph ph-clock text-white/90 mr-1.5 text-sm"></i>
+                   <span class="text-white text-xs font-bold">{getReadingTime(post.content)} min</span>
+                </div>
+              </a>
+              
+              <div class="p-8 flex flex-col flex-grow">
+                <a href={`/blog/${post.slug}`} class="block mb-4 flex-grow">
+                  <h3 class="text-2xl font-serif-cms text-[#004b87] group-hover:text-[#00a3e0] transition-colors leading-snug line-clamp-2">
+                    {post.title}
+                  </h3>
+                </a>
+                <p class="text-slate-600 line-clamp-2 mb-6 leading-relaxed font-medium">
+                  {stripHtml(post.content)}
+                </p>
+                
+                <div class="flex flex-wrap items-center justify-between border-t border-slate-100 pt-5 mt-auto text-xs text-slate-500 font-bold gap-y-2">
+                  <a href={getAuthorDoc(post.tags).url} class="flex items-center space-x-2 truncate hover:text-[#00a3e0] transition-colors pr-2">
+                    <i class="ph-bold ph-stethoscope text-[#00a3e0] text-lg"></i>
+                    <span class="truncate">{getAuthorDoc(post.tags).name}</span>
+                  </a>
+                  <div class="flex items-center space-x-1.5 flex-shrink-0 text-slate-400">
+                    <i class="ph-bold ph-calendar-blank text-[#004b87] text-lg"></i>
+                    <span>{formatDate(post.created_at)}</span>
+                  </div>
+                </div>
+              </div>
+            </article>
+          </>
         ))}
       </div>
 
       <!-- Empty State For Filters -->
-      <div id="no-articles-msg" class={articles.length === 0 ? "text-center py-16" : "hidden text-center py-16"}>
-        <div class="bg-white w-24 h-24 mx-auto rounded-full flex items-center justify-center mb-6 text-slate-300 shadow-sm border border-slate-100">
-           <i class="ph ph-article-ny-times text-5xl"></i>
+      <div id="no-articles-msg" class={articles.length === 0 ? "text-center py-20" : "hidden text-center py-20"}>
+        <div class="bg-slate-50 w-24 h-24 mx-auto rounded-full flex items-center justify-center mb-6 text-slate-400 shadow-sm border border-slate-100">
+           <i class="ph-light ph-article-ny-times text-6xl"></i>
         </div>
-        <h3 class="text-2xl font-bold text-brand-blue mb-2">Sin artículos coincidentes</h3>
-        <p class="text-slate-500 text-lg">Actualmente no existen publicaciones filtradas con tu búsqueda.</p>
+        <h3 class="text-2xl font-black text-[#004b87] mb-3">Sin artículos en esta categoría</h3>
+        <p class="text-slate-500 text-lg font-medium">Los especialistas están creando contenidos médicos para publicarlo aquí próximamente.</p>
       </div>
 
     </div>
   </section>
 
-  <!-- Lógica y Animaciones -->
+  <!-- SECCIÓN FAQ AEO (Answer Engine Optimization) -->
+  <section class="py-24 bg-slate-50 border-t border-slate-200 mt-8 font-jakarta">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16 faq-header">
+        <h2 class="text-3xl md:text-5xl font-black text-[#004b87] tracking-tight mb-4">Preguntas Frecuentes</h2>
+        <p class="text-slate-600 text-lg md:text-xl font-medium">Respuestas rápidas para facilitarte el acceso a tu atención médica.</p>
+      </div>
+
+      <div class="space-y-4">
+        <!-- Accordion 1 -->
+        <details class="glass-card rounded-2xl p-6 group cursor-pointer marker:content-[''] border-l-4 border-l-transparent hover:border-l-[#00a3e0] transition-all overflow-hidden bg-white/60 shadow-sm hover:shadow-md" name="faq">
+          <summary class="text-xl font-bold text-[#004b87] flex justify-between items-center outline-none list-none marker:content-none [&::-webkit-details-marker]:hidden">
+            ¿Cómo agendar una cita con un especialista publicado en la Revista Médica?
+            <i class="ph ph-caret-down transform group-open:rotate-180 transition-transform text-[#00a3e0] text-2xl"></i>
+          </summary>
+          <div class="mt-4 text-slate-600 font-medium leading-relaxed border-t border-slate-100 pt-4 pr-8">
+            Puedes agendar una cita visitando nuestro Directorio Médico en línea, seleccionando el especialista adecuado para tu patología y contactando los números directos de sus consultorios en nuestras instalaciones.
+          </div>
+        </details>
+
+        <!-- Accordion 2 -->
+        <details class="glass-card rounded-2xl p-6 group cursor-pointer marker:content-[''] border-l-4 border-l-transparent hover:border-l-[#00a3e0] transition-all overflow-hidden bg-white/60 shadow-sm hover:shadow-md" name="faq">
+          <summary class="text-xl font-bold text-[#004b87] flex justify-between items-center outline-none list-none marker:content-none [&::-webkit-details-marker]:hidden">
+            ¿Aceptan seguros de gastos médicos mayores?
+            <i class="ph ph-caret-down transform group-open:rotate-180 transition-transform text-[#00a3e0] text-2xl"></i>
+          </summary>
+          <div class="mt-4 text-slate-600 font-medium leading-relaxed border-t border-slate-100 pt-4 pr-8">
+            Sí, el ecosistema de médicos del Centro de Especialidades Médicas y las instalaciones de hospitalización aceptan una amplia red de aseguradoras nacionales e internacionales. Te recomendamos revisar la póliza aplicable con tu especialista de preferencia.
+          </div>
+        </details>
+
+        <!-- Accordion 3 -->
+        <details class="glass-card rounded-2xl p-6 group cursor-pointer marker:content-[''] border-l-4 border-l-transparent hover:border-l-[#00a3e0] transition-all overflow-hidden bg-white/60 shadow-sm hover:shadow-md" name="faq">
+          <summary class="text-xl font-bold text-[#004b87] flex justify-between items-center outline-none list-none marker:content-none [&::-webkit-details-marker]:hidden">
+            ¿Cómo elijo al médico adecuado según lo que leí en los artículos de salud?
+            <i class="ph ph-caret-down transform group-open:rotate-180 transition-transform text-[#00a3e0] text-2xl"></i>
+          </summary>
+          <div class="mt-4 text-slate-600 font-medium leading-relaxed border-t border-slate-100 pt-4 pr-8">
+            Nuestro directorio médico virtual permite filtrar a los profesionales por especialidad clínica (como Traumatología, Cirugía Bariátrica o Cardiología especializada). Todos nuestros médicos publicantes están avalados y certificados.
+          </div>
+        </details>
+        
+        <!-- Accordion 4 -->
+        <details class="glass-card rounded-2xl p-6 group cursor-pointer marker:content-[''] border-l-4 border-l-transparent hover:border-l-[#00a3e0] transition-all overflow-hidden bg-white/60 shadow-sm hover:shadow-md" name="faq">
+          <summary class="text-xl font-bold text-[#004b87] flex justify-between items-center outline-none list-none marker:content-none [&::-webkit-details-marker]:hidden">
+            ¿Dónde están localizados los especialistas del blog?
+            <i class="ph ph-caret-down transform group-open:rotate-180 transition-transform text-[#00a3e0] text-2xl"></i>
+          </summary>
+          <div class="mt-4 text-slate-600 font-medium leading-relaxed border-t border-slate-100 pt-4 pr-8">
+            Nuestros consultorios y quirófanos principales están ubicados de manera estratégica dentro del corazón del Sector Sur metropolitano, permitiendo derivación de emergencias ambulatorias e internamiento de máximo control clínico.
+          </div>
+        </details>
+      </div>
+
+      <!-- Trust Action -->
+      <div class="text-center mt-12">
+         <a href="/directorio" class="font-bold text-[#00a3e0] hover:text-[#004b87] transition-colors border-b-2 border-[#00a3e0] pb-1">Ver Directorio de Especialistas Completos →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Lógica y Animaciones GSAP AEO -->
   <script is:inline>
     document.addEventListener('DOMContentLoaded', () => {
-      // 1. Inicializar Swiper
+      // 1. Inicializar Swiper Hero
       if (typeof window.Swiper !== 'undefined') {
         new window.Swiper('.blog-featured-swiper', {
           slidesPerView: 1,
           loop: true,
-          autoplay: {
-            delay: 6000,
-            disableOnInteraction: false,
-          },
+          autoplay: { delay: 7000, disableOnInteraction: false },
           effect: 'fade',
-          fadeEffect: {
-            crossFade: true
-          },
-          pagination: {
-            el: '.swiper-pagination',
-            clickable: true,
-          },
-          navigation: {
-            nextEl: '.swiper-button-next',
-            prevEl: '.swiper-button-prev',
-          },
+          fadeEffect: { crossFade: true },
+          pagination: { el: '.swiper-pagination', clickable: true },
+          navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
         });
       }
 
-      // 2. Animaciones GSAP Grid Artículos (Aparición Escalada y Transición)
-      if (typeof window.gsap !== 'undefined') {
-        window.gsap.from('.blog-grid-item', {
-          y: 40,
-          opacity: 0,
-          duration: 0.8,
-          stagger: 0.1,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: "#blog-grid",
-            start: "top 85%",
+      // 2. Animaciones GSAP Grid Artículos (Apariencia Cascada AEO)
+      if (typeof window.gsap !== 'undefined' && typeof window.ScrollTrigger !== 'undefined') {
+        window.gsap.registerPlugin(window.ScrollTrigger);
+        window.gsap.fromTo('.blog-grid-item', 
+          { y: 50, opacity: 0 },
+          {
+            y: 0,
+            opacity: 1,
+            duration: 0.8,
+            stagger: 0.1,
+            ease: "back.out(1.2)",
+            clearProps: "all",
+            scrollTrigger: {
+              trigger: "#blog-grid",
+              start: "top 95%",
+            }
           }
-        });
+        );
+
+        // Banner Stagger connection
+        window.gsap.fromTo('.banner-connection', 
+           { scale: 0.95, opacity: 0 },
+           { 
+             scale: 1, opacity: 1, duration: 1, ease: 'power4.out', clearProps: "all",
+             scrollTrigger: { trigger: ".banner-connection", start: "top 90%" }
+           }
+        );
       }
 
-      // 3. Lógica de Filtrado por Categorías (Pills)
+      // 3. Lógica de Filtrado Local (Pills UI/UX)
       const chips = document.querySelectorAll('.blog-chip');
       const items = document.querySelectorAll('.blog-grid-item');
       const emptyMsg = document.getElementById('no-articles-msg');
@@ -259,36 +422,30 @@ const schemaMarkup = {
           const btn = e.currentTarget;
           const filter = btn.getAttribute('data-filter');
 
-          // Estilos Activos
+          // Clases UI Activas/Inactivas
           chips.forEach(c => {
-             c.classList.remove('bg-brand-blue', 'text-white', 'shadow-lg', 'shadow-brand-blue/30');
-             c.classList.add('bg-white', 'text-slate-600', 'hover:border-brand-cyan');
+             c.classList.remove('bg-[#004b87]', 'text-white', 'shadow-lg', 'shadow-blue-900/30', 'ring-2', 'ring-[#004b87]', 'ring-offset-2', 'ring-offset-slate-50');
+             c.classList.add('bg-white', 'text-slate-600');
           });
-          btn.classList.remove('bg-white', 'text-slate-600', 'hover:border-brand-cyan');
-          btn.classList.add('bg-brand-blue', 'text-white', 'shadow-lg', 'shadow-brand-blue/30');
+          btn.classList.remove('bg-white', 'text-slate-600');
+          btn.classList.add('bg-[#004b87]', 'text-white', 'shadow-lg', 'shadow-blue-900/30', 'ring-2', 'ring-[#004b87]', 'ring-offset-2', 'ring-offset-slate-50');
 
-          // Aplicar Filtro (con simple display logic o gsap si se prefiere)
           let visibleCount = 0;
           items.forEach(item => {
             const catStr = item.getAttribute('data-category');
             if (!catStr) return;
             const tags = catStr.split(',');
             if (filter === 'Todas' || tags.includes(filter)) {
-              item.style.display = 'block';
+              item.style.display = 'flex';
               visibleCount++;
             } else {
               item.style.display = 'none';
             }
           });
 
-          // Empty State
-          if(visibleCount === 0) {
-            emptyMsg.classList.remove('hidden');
-          } else {
-            emptyMsg.classList.add('hidden');
-          }
+          if(visibleCount === 0) emptyMsg.classList.remove('hidden');
+          else emptyMsg.classList.add('hidden');
           
-          // Re-trigger scrollTrigger para GSAP si se actualiza el layout (opcional)
           if(window.ScrollTrigger) window.ScrollTrigger.refresh();
         });
       });

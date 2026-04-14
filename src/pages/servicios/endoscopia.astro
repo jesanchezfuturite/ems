@@ -1,0 +1,474 @@
+---
+import Layout from "../../layouts/Layout.astro";
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Service",
+      "@id": "https://midominio.com/servicios/endoscopia",
+      "url": "https://midominio.com/servicios/endoscopia",
+      "name": "Servicio de Endoscopia y Colonoscopia en Monterrey",
+      "description": "Estudios especializados de endoscopia superior, colonoscopia y sigmoidoscopia con diagnóstico preciso y seguro para detectar enfermedades gastrointestinales.",
+      "serviceType": "Estudios Médicos Gastrointestinales",
+      "provider": {
+        "@type": "MedicalOrganization",
+        "name": "Centro Médico de Especialidades"
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Duele hacerse una endoscopia o colonoscopia?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. Para garantizar tu confort total y evitar cualquier dolor o molestia, todos nuestros procedimientos se realizan bajo sedación asistida administrada por un anestesiólogo."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cómo me debo preparar para el estudio?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "La preparación varía según el tipo de estudio. Para una endoscopia superior requieres ayuno estricto de 8 horas. Para una colonoscopia, se te indicará una dieta líquida y un laxante específico un día antes."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cuánto tiempo dura el procedimiento?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "El procedimiento diagnóstico en sí es bastante rápido, usualmente dura entre 20 y 40 minutos. Sin embargo, debes considerar al menos 2 horas en el centro por los tiempos de preparación y recuperación de la anestesia."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cuándo me entregan los resultados?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Finalizado el estudio y tras recuperarte de la sedación, el médico te explicará de inmediato los hallazgos principales en imágenes. En caso de haberse tomado biopsias, el análisis patológico toma aproximadamente 5 a 7 días hábiles."
+          }
+        }
+      ]
+    }
+  ]
+};
+---
+
+<Layout
+  title="Endoscopia y Colonoscopia en Monterrey | Diagnóstico Preciso"
+  description="Realiza tu endoscopia con total seguridad y confort. Contamos con tecnología de vanguardia y médicos especialistas para diagnóstico digestivo exacto."
+>
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+
+  <!-- 1. Hero Tranquilizador -->
+  <section class="relative bg-slate-50 pt-32 pb-20 lg:pt-40 lg:pb-28 overflow-hidden">
+    <!-- Orb de fondo para calma -->
+    <div class="absolute top-0 right-0 w-[800px] h-[800px] bg-[#00a3e0]/10 rounded-full blur-[120px] pointer-events-none translate-x-1/3 -translate-y-1/3"></div>
+    <div class="absolute bottom-0 left-0 w-[500px] h-[500px] bg-[#004b87]/5 rounded-full blur-[80px] pointer-events-none -translate-x-1/3 translate-y-1/3"></div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
+      
+      <div class="w-full lg:w-[55%] flex flex-col items-start lg:text-left text-center">
+        <span class="inline-flex items-center gap-2 bg-[#00a3e0]/10 text-[#00a3e0] px-5 py-2 rounded-full text-sm font-bold tracking-wide border border-[#00a3e0]/20 mb-6 mx-auto lg:mx-0">
+          <i class="ph ph-shield-check text-xl"></i> Diagnóstico Certificado
+        </span>
+        <h1 class="text-4xl md:text-5xl lg:text-[3.5rem] font-black text-[#004b87] mb-6 leading-[1.1] tracking-tight">
+          Endoscopia: Diagnóstico Preciso y Seguro
+        </h1>
+        <p class="text-lg md:text-xl text-slate-600 mb-10 max-w-2xl leading-relaxed font-medium mx-auto lg:mx-0">
+          Estudios especializados para evaluar tu sistema digestivo con tecnología avanzada y procedimientos 100% seguros enfocados en tu confort total.
+        </p>
+
+        <div class="flex flex-col sm:flex-row gap-4 w-full sm:w-auto mx-auto lg:mx-0">
+           <a href="/contacto" class="btn-agendar inline-flex items-center justify-center px-8 py-4 bg-[#00a3e0] text-white text-lg font-bold rounded-2xl hover:bg-[#004b87] transition-colors shadow-lg shadow-[#00a3e0]/30 transform hover:-translate-y-1">
+             Agendar Estudio <i class="ph ph-calendar-check text-2xl ml-2"></i>
+           </a>
+           <a href="#estudios" class="inline-flex items-center justify-center px-8 py-4 bg-white text-[#004b87] text-lg font-bold rounded-2xl hover:bg-slate-50 transition-colors border border-slate-200 shadow-sm">
+             Conocer Catálogo
+           </a>
+        </div>
+      </div>
+
+      <div class="w-full lg:w-[45%] relative">
+        <div class="relative rounded-[3rem] overflow-hidden shadow-2xl border-4 border-white aspect-[4/3] md:aspect-[3/4] lg:aspect-[4/5]">
+           <img src="/images/img_endoscopia.webp" alt="Sala de Endoscopia Clínica" class="w-full h-full object-cover object-center transform scale-100 hover:scale-105 transition-transform duration-1000" />
+           <div class="absolute inset-0 bg-gradient-to-t from-[#004b87]/30 to-transparent mix-blend-overlay"></div>
+        </div>
+        <!-- Distintivo de Confort -->
+        <div class="absolute -bottom-8 -left-8 md:bottom-12 md:-left-12 bg-white/90 backdrop-blur-md p-5 rounded-2xl shadow-xl flex items-center gap-4 animate-bounce-slow border border-slate-100">
+           <div class="w-12 h-12 bg-sky-100 text-[#00a3e0] rounded-full flex items-center justify-center">
+             <i class="ph ph-smiley text-2xl"></i>
+           </div>
+           <div>
+             <p class="text-sm font-bold text-[#004b87]">Sin Dolor</p>
+             <p class="text-xs text-slate-500">Bajo sedación controlada</p>
+           </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 2. Bloque de Confianza y Autoridad -->
+  <section class="border-y border-slate-200 relative z-20 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-6 py-8 text-center divide-x divide-slate-100">
+        
+        <div class="flex flex-col items-center group px-2">
+           <i class="ph ph-shield-plus text-4xl text-[#00a3e0] mb-3 group-hover:scale-110 transition-transform origin-bottom"></i>
+           <p class="font-bold text-[#004b87] text-sm md:text-base">Procedimientos Seguros</p>
+        </div>
+        
+        <div class="flex flex-col items-center group px-2">
+           <i class="ph ph-users text-4xl text-[#00a3e0] mb-3 group-hover:scale-110 transition-transform origin-bottom"></i>
+           <p class="font-bold text-[#004b87] text-sm md:text-base">Equipo Especializado</p>
+        </div>
+
+        <div class="flex flex-col items-center group px-2">
+           <i class="ph ph-cpu text-4xl text-[#00a3e0] mb-3 group-hover:scale-110 transition-transform origin-bottom"></i>
+           <p class="font-bold text-[#004b87] text-sm md:text-base">Tecnología Vanguardista</p>
+        </div>
+
+        <div class="flex flex-col items-center group px-2">
+           <i class="ph ph-hospital text-4xl text-[#00a3e0] mb-3 group-hover:scale-110 transition-transform origin-bottom"></i>
+           <p class="font-bold text-[#004b87] text-sm md:text-base">2 Salas Equipadas</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. Definición AEO y Utilidad -->
+  <section class="py-24 bg-slate-50 relative overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+        
+        <!-- Izquierda AEO Snippet -->
+        <div>
+           <span class="text-[#00a3e0] font-bold tracking-widest uppercase text-sm mb-4 block">Concepto Clínico</span>
+           <h2 class="text-3xl md:text-5xl font-black text-[#004b87] mb-6 leading-tight">
+             ¿Qué es una endoscopia?
+           </h2>
+           <div class="p-8 rounded-[2rem] bg-white border border-slate-200 shadow-xl relative">
+             <i class="ph ph-quotes absolute -top-6 -left-6 text-6xl text-sky-100"></i>
+             <p class="text-slate-600 text-lg leading-relaxed mb-4 font-medium relative z-10">
+               La endoscopia es un procedimiento médico no invasivo que utiliza un endoscopio (un tubo delgado y flexible con una cámara y luz en el extremo) para examinar visualmente el interior del tracto digestivo superior o inferior.
+             </p>
+             <p class="text-slate-600 leading-relaxed relative z-10">
+               Este nivel de exploración milimétrica permite al especialista visualizar directamente esófago, estómago, duodeno o colon (colonoscopia) en monitores de alta definición, garantizando la detección temprana de anomalías antes de que evolucionen.
+             </p>
+           </div>
+        </div>
+
+        <!-- Derecha Utilidad y Valor -->
+        <div class="bg-[#004b87] p-10 md:p-14 rounded-[3rem] text-white relative shadow-2xl flex flex-col justify-center">
+           <div class="absolute inset-0 bg-[url('/images/pattern-grid.svg')] opacity-15"></div>
+           <div class="absolute bottom-[-100px] right-[-100px] w-64 h-64 bg-[#00a3e0] rounded-full blur-[100px] opacity-40"></div>
+           
+           <i class="ph ph-first-aid text-5xl text-[#00a3e0] mb-6 relative z-10"></i>
+           <h3 class="text-2xl md:text-3xl font-black mb-6 relative z-10 leading-tight">
+             Diagnóstico y tratamiento en un mismo procedimiento
+           </h3>
+           <p class="text-blue-100 text-lg leading-relaxed relative z-10 font-light mb-6">
+             La gran ventaja de la endoscopia moderna es su <strong>capacidad dual</strong>. Si el médico encuentra una lesión sospechosa o tejido anormal durante la inspección visual, puede utilizar herramientas microscópicas que pasan a través del mismo tubo para:
+           </p>
+           <ul class="space-y-4 relative z-10">
+             <li class="flex items-start gap-3"><i class="ph ph-check-circle text-[#00a3e0] text-xl mt-0.5"></i> <span class="font-medium">Tomar biopsias (muestras de tejido) de inmediato.</span></li>
+             <li class="flex items-start gap-3"><i class="ph ph-check-circle text-[#00a3e0] text-xl mt-0.5"></i> <span class="font-medium">Extirpar pólipos precancerosos sin cirugía abierta.</span></li>
+             <li class="flex items-start gap-3"><i class="ph ph-check-circle text-[#00a3e0] text-xl mt-0.5"></i> <span class="font-medium">Detener sangrados digestivos internos cauterizando.</span></li>
+           </ul>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. Padecimientos y Catálogo de Estudios -->
+  <section id="estudios" class="py-24 bg-white relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center mb-16 max-w-3xl mx-auto">
+        <h2 class="text-3xl md:text-5xl font-black text-[#004b87] tracking-tight mb-4">Catálogo de Procedimientos</h2>
+        <p class="text-slate-600 text-lg font-medium">Contamos con los estudios clave para proteger la salud de todo tu sistema digestivo abordados por expertos.</p>
+      </div>
+
+      <!-- Cartas de Estudios -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-24 catalog-list">
+        
+        <div class="glass-card bg-slate-50 border border-slate-200 p-8 rounded-[2rem] flex flex-col hover:-translate-y-2 hover:shadow-xl hover:border-[#00a3e0] transition-all group catalog-card">
+           <div class="w-16 h-16 bg-blue-50 text-[#004b87] rounded-2xl flex items-center justify-center mb-6 text-3xl group-hover:bg-[#00a3e0] group-hover:text-white transition-colors">
+              <i class="ph ph-stethoscope"></i>
+           </div>
+           <h3 class="text-2xl font-black text-[#004b87] mb-3">Endoscopia Superior (Panendoscopia)</h3>
+           <p class="text-slate-600 text-sm leading-relaxed mb-6 flex-grow">
+              Evalúa el esófago, estómago y duodeno. Es la herramienta definitiva para encontrar úlceras, causas de sangrado, acidez persistente o tumores gástricos.
+           </p>
+        </div>
+
+        <div class="glass-card bg-slate-50 border border-slate-200 p-8 rounded-[2rem] flex flex-col hover:-translate-y-2 hover:shadow-xl hover:border-[#00a3e0] transition-all group catalog-card">
+           <div class="w-16 h-16 bg-indigo-50 text-indigo-600 rounded-2xl flex items-center justify-center mb-6 text-3xl group-hover:bg-indigo-600 group-hover:text-white transition-colors">
+              <i class="ph ph-magnifying-glass-plus"></i>
+           </div>
+           <h3 class="text-2xl font-black text-[#004b87] mb-3">Colonoscopia Total</h3>
+           <p class="text-slate-600 text-sm leading-relaxed mb-6 flex-grow">
+              Inspección competa del intestino grueso e íleon terminal. Es el método más eficaz en la prevención y detección oportuna de pólipos y cáncer de colon.
+           </p>
+        </div>
+
+        <div class="glass-card bg-slate-50 border border-slate-200 p-8 rounded-[2rem] flex flex-col hover:-translate-y-2 hover:shadow-xl hover:border-[#00a3e0] transition-all group catalog-card">
+           <div class="w-16 h-16 bg-teal-50 text-teal-600 rounded-2xl flex items-center justify-center mb-6 text-3xl group-hover:bg-teal-600 group-hover:text-white transition-colors">
+              <i class="ph ph-scissors"></i>
+           </div>
+           <h3 class="text-2xl font-black text-[#004b87] mb-3">Sigmoidoscopia y Biopsias</h3>
+           <p class="text-slate-600 text-sm leading-relaxed mb-6 flex-grow">
+              Enfocada en el examen del sigmoides (parte inferior del colon) y recto, o procedimientos focalizados de extracción de muestras patológicas (biopsias indoloras).
+           </p>
+        </div>
+      </div>
+
+      <!-- Padecimientos Bento Grid -->
+      <h3 class="text-3xl font-black text-[#004b87] mb-10 border-l-4 border-[#00a3e0] pl-4">Afecciones Clínicas Detectables</h3>
+      <div class="grid grid-cols-2 md:grid-cols-5 gap-4 md:gap-6 pad-list">
+         <div class="glass-card bg-sky-50/50 p-6 rounded-2xl border border-sky-100 flex flex-col items-center justify-center text-center hover:bg-white hover:shadow-md transition-all">
+            <i class="ph ph-fire text-3xl text-orange-500 mb-2"></i>
+            <span class="font-bold text-slate-800 text-sm">Gastritis y Reflujo (ERGE)</span>
+         </div>
+         <div class="glass-card bg-sky-50/50 p-6 rounded-2xl border border-sky-100 flex flex-col items-center justify-center text-center hover:bg-white hover:shadow-md transition-all">
+            <i class="ph ph-target text-3xl text-red-500 mb-2"></i>
+            <span class="font-bold text-slate-800 text-sm">Úlceras Gástricas</span>
+         </div>
+         <div class="glass-card bg-sky-50/50 p-6 rounded-2xl border border-sky-100 flex flex-col items-center justify-center text-center hover:bg-white hover:shadow-md transition-all">
+            <i class="ph ph-dots-three-circle text-3xl text-purple-500 mb-2"></i>
+            <span class="font-bold text-slate-800 text-sm">Pólipos Intestinales</span>
+         </div>
+         <div class="glass-card bg-sky-50/50 p-6 rounded-2xl border border-sky-100 flex flex-col items-center justify-center text-center hover:bg-white hover:shadow-md transition-all">
+            <i class="ph ph-users-three text-3xl text-emerald-500 mb-2"></i>
+            <span class="font-bold text-slate-800 text-sm">Enfermedad de Crohn</span>
+         </div>
+         <div class="glass-card bg-[#004b87] p-6 rounded-2xl border-none flex flex-col items-center justify-center text-center shadow-lg text-white col-span-2 md:col-span-1 hover:bg-[#00a3e0] transition-colors">
+            <i class="ph ph-activity text-3xl text-white mb-2"></i>
+            <span class="font-bold text-sm">Prevención Oncológica</span>
+         </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 5. Proceso del Paciente (Stepper de 5 pasos) -->
+  <section class="py-24 bg-slate-50 relative process-section border-t border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-20 max-w-3xl mx-auto">
+        <h2 class="text-3xl md:text-5xl font-black text-[#004b87] mb-6">
+          Tu Proceso de Forma Segura y Cómoda
+        </h2>
+        <p class="text-lg text-slate-600">
+          Diseñamos una experiencia de "fricción cero", garantizando la máxima claridad clínica desde antes de que cruces la puerta.
+        </p>
+      </div>
+
+      <div class="relative max-w-6xl mx-auto pl-2 md:pl-0">
+        <!-- Línea conectora Desktop -->
+        <div class="hidden lg:block absolute top-[2.5rem] left-[10%] right-[10%] h-[2px] bg-sky-200 z-0"></div>
+        <!-- Línea conectora Mobile -->
+        <div class="block lg:hidden absolute top-8 bottom-8 left-[3.4rem] w-[2px] bg-sky-200 z-0"></div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-5 gap-12 lg:gap-6 relative z-10">
+          
+          <div class="stepper-tr flex lg:flex-col items-start lg:items-center text-left lg:text-center relative gap-6 lg:gap-0">
+             <div class="w-16 h-16 lg:w-20 lg:h-20 bg-white rounded-full shadow-lg border border-slate-100 flex items-center justify-center text-[#00a3e0] flex-shrink-0 z-10 lg:mb-6">
+               <span class="text-2xl font-black">1</span>
+             </div>
+             <div class="glass-card bg-white lg:bg-transparent lg:shadow-none lg:border-none p-5 lg:p-0 rounded-2xl border border-slate-100 shadow-sm w-full">
+                <h4 class="text-lg font-bold text-slate-900 mb-2">Evaluación</h4>
+                <p class="text-sm text-slate-500">Valoración médica previa donde se prescriben indicaciones dietéticas o suspensión de medicamentos.</p>
+             </div>
+          </div>
+
+          <div class="stepper-tr flex lg:flex-col items-start lg:items-center text-left lg:text-center relative gap-6 lg:gap-0">
+             <div class="w-16 h-16 lg:w-20 lg:h-20 bg-white rounded-full shadow-lg border border-slate-100 flex items-center justify-center text-[#00a3e0] flex-shrink-0 z-10 lg:mb-6">
+               <span class="text-2xl font-black">2</span>
+             </div>
+             <div class="glass-card bg-white lg:bg-transparent lg:shadow-none lg:border-none p-5 lg:p-0 rounded-2xl border border-slate-100 shadow-sm w-full">
+                <h4 class="text-lg font-bold text-slate-900 mb-2">Preparación</h4>
+                <p class="text-sm text-slate-500">Ingreso a la suite de endoscopia. Entrevista con anestesiología para una sedación confortable.</p>
+             </div>
+          </div>
+
+          <div class="stepper-tr flex lg:flex-col items-start lg:items-center text-left lg:text-center relative gap-6 lg:gap-0">
+             <div class="w-16 h-16 lg:w-20 lg:h-20 bg-[#00a3e0] rounded-full shadow-[0_10px_30px_rgba(0,163,224,0.4)] border-4 border-slate-50 flex items-center justify-center text-white flex-shrink-0 z-10 lg:mb-6">
+               <span class="text-2xl font-black">3</span>
+             </div>
+             <div class="glass-card bg-white lg:bg-transparent lg:shadow-none lg:border-none p-5 lg:p-0 rounded-2xl border border-slate-100 shadow-sm w-full">
+                <h4 class="text-lg font-bold text-[#00a3e0] mb-2">Procedimiento</h4>
+                <p class="text-sm text-slate-500">Realización del estudio indoloro (20 a 40 min). Permite toma de biopsias o extracción de pólipos si aplica.</p>
+             </div>
+          </div>
+
+          <div class="stepper-tr flex lg:flex-col items-start lg:items-center text-left lg:text-center relative gap-6 lg:gap-0">
+             <div class="w-16 h-16 lg:w-20 lg:h-20 bg-white rounded-full shadow-lg border border-slate-100 flex items-center justify-center text-[#00a3e0] flex-shrink-0 z-10 lg:mb-6">
+               <span class="text-2xl font-black">4</span>
+             </div>
+             <div class="glass-card bg-white lg:bg-transparent lg:shadow-none lg:border-none p-5 lg:p-0 rounded-2xl border border-slate-100 shadow-sm w-full">
+                <h4 class="text-lg font-bold text-slate-900 mb-2">Recuperación</h4>
+                <p class="text-sm text-slate-500">Despertar progresivo en área de reposo monitorizada, hasta que los efectos del anestésico se disuelvan.</p>
+             </div>
+          </div>
+
+          <div class="stepper-tr flex lg:flex-col items-start lg:items-center text-left lg:text-center relative gap-6 lg:gap-0">
+             <div class="w-16 h-16 lg:w-20 lg:h-20 bg-white rounded-full shadow-lg border border-slate-100 flex items-center justify-center text-[#00a3e0] flex-shrink-0 z-10 lg:mb-6">
+               <span class="text-2xl font-black">5</span>
+             </div>
+             <div class="glass-card bg-white lg:bg-transparent lg:shadow-none lg:border-none p-5 lg:p-0 rounded-2xl border border-slate-100 shadow-sm w-full">
+                <h4 class="text-lg font-bold text-slate-900 mb-2">Resultados</h4>
+                <p class="text-sm text-slate-500">Explicación inmediata y cálida junto a tu acompañante. Entrega de informe impreso y digital.</p>
+             </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. CTA de Conversión -->
+  <section id="contacto" class="py-24 bg-white relative overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      
+      <div class="bg-[#004b87] rounded-[3rem] p-10 md:p-16 text-white text-center shadow-2xl relative overflow-hidden">
+         <div class="absolute inset-0 bg-[url('/images/pattern-grid.svg')] opacity-15"></div>
+         <div class="absolute w-80 h-80 bg-[#00a3e0] blur-[150px] rounded-full opacity-60 right-0 bottom-0 translate-y-1/2 pointer-events-none"></div>
+
+         <div class="relative z-10 max-w-3xl mx-auto">
+            <h2 class="text-4xl md:text-5xl font-black mb-6 leading-tight">Agenda tu estudio de Endoscopia</h2>
+            <p class="text-xl text-blue-100 mb-10 font-light">
+              Nuestro equipo coordinará tus indicaciones médicas, preparación previa y cualquier gestión de presupuesto con aseguradora de forma personalizada.
+            </p>
+            
+            <div class="flex justify-center">
+               <a href="/contacto" class="inline-flex items-center justify-center px-10 py-5 bg-[#00a3e0] text-white text-xl font-bold rounded-2xl hover:bg-white hover:text-[#004b87] transition-all shadow-xl shadow-[#00a3e0]/30 transform hover:-translate-y-1">
+                 <i class="ph ph-calendar-check text-2xl mr-3"></i> Agendar mi Estudio
+               </a>
+            </div>
+         </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 6. Sección FAQ y Conexión SEO -->
+  <section class="py-24 bg-slate-50 border-t border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+         
+         <!-- FAQ Acordeón (Col 8) -->
+         <div class="lg:col-span-8">
+           <h3 class="text-3xl font-black text-[#004b87] mb-8">Resolviendo Dudas Frecuentes</h3>
+           
+           <div class="space-y-4">
+             <details class="bg-white rounded-2xl p-6 group cursor-pointer marker:content-[''] !border-l-[4px] border-slate-200 !border-l-transparent hover:!border-l-[#00a3e0] border shadow-sm transition-all overflow-hidden">
+               <summary class="text-lg font-bold text-[#004b87] flex justify-between items-center outline-none list-none marker:content-none [&::-webkit-details-marker]:hidden">
+                 ¿Duele hacerse una endoscopia o colonoscopia?
+                 <i class="ph ph-caret-down transform group-open:rotate-180 transition-transform text-[#00a3e0] text-2xl"></i>
+               </summary>
+               <div class="mt-4 text-slate-600 font-medium leading-relaxed border-t border-slate-100 pt-4">
+                 No. Para garantizar tu confort total y evitar cualquier dolor o molestia, todos nuestros procedimientos se realizan bajo sedación asistida administrada por un anestesiólogo. Dormirás profundamente y despertarás sintiéndote relajado.
+               </div>
+             </details>
+             
+             <details class="bg-white rounded-2xl p-6 group cursor-pointer marker:content-[''] !border-l-[4px] border-slate-200 !border-l-transparent hover:!border-l-[#00a3e0] border shadow-sm transition-all overflow-hidden">
+               <summary class="text-lg font-bold text-[#004b87] flex justify-between items-center outline-none list-none marker:content-none [&::-webkit-details-marker]:hidden">
+                 ¿Cómo me debo preparar para el estudio?
+                 <i class="ph ph-caret-down transform group-open:rotate-180 transition-transform text-[#00a3e0] text-2xl"></i>
+               </summary>
+               <div class="mt-4 text-slate-600 font-medium leading-relaxed border-t border-slate-100 pt-4">
+                 Si es una endoscopia superior, solo requieres ayuno estricto de 8 horas previas. Para una colonoscopia, nuestro equipo te entregará una hoja con instrucciones precisas para un régimen de dieta líquida un día anterior y la toma puntual de un laxante purgante para limpiar el tracto.
+               </div>
+             </details>
+
+             <details class="bg-white rounded-2xl p-6 group cursor-pointer marker:content-[''] !border-l-[4px] border-slate-200 !border-l-transparent hover:!border-l-[#00a3e0] border shadow-sm transition-all overflow-hidden">
+               <summary class="text-lg font-bold text-[#004b87] flex justify-between items-center outline-none list-none marker:content-none [&::-webkit-details-marker]:hidden">
+                 ¿Cuánto tiempo estaré en el hospital?
+                 <i class="ph ph-caret-down transform group-open:rotate-180 transition-transform text-[#00a3e0] text-2xl"></i>
+               </summary>
+               <div class="mt-4 text-slate-600 font-medium leading-relaxed border-t border-slate-100 pt-4">
+                 El procedimiento diagnóstico en sí es rápido, dura entre 20 y 40 minutos. Sin embargo, te aconsejamos programar un estimado de hasta 2 horas en nuestras instalaciones considerando la evaluación inicial, preparación, el estudio y el tiempo que dicta protocolo para despertar completamente en recuperación médica.
+               </div>
+             </details>
+
+             <details class="bg-white rounded-2xl p-6 group cursor-pointer marker:content-[''] !border-l-[4px] border-slate-200 !border-l-transparent hover:!border-l-[#00a3e0] border shadow-sm transition-all overflow-hidden">
+               <summary class="text-lg font-bold text-[#004b87] flex justify-between items-center outline-none list-none marker:content-none [&::-webkit-details-marker]:hidden">
+                 ¿Cuándo me entregan los resultados?
+                 <i class="ph ph-caret-down transform group-open:rotate-180 transition-transform text-[#00a3e0] text-2xl"></i>
+               </summary>
+               <div class="mt-4 text-slate-600 font-medium leading-relaxed border-t border-slate-100 pt-4">
+                 Inmediatamente después de recuperarte, el médico especialista te comentará los hallazgos principales viéndolos en el informe. Si durante la inspección detectan tejido atípico y toman biopsias, esas muestras de patología toman en promedio de 5 a 7 días hábiles para arrojar resultados.
+               </div>
+             </details>
+           </div>
+         </div>
+
+         <!-- Especialidades Relacionadas (Col 4 - Conexión SEO) -->
+         <div class="lg:col-span-4">
+            <div class="glass-card bg-white p-8 rounded-[2rem] border border-slate-200 shadow-xl">
+               <h4 class="text-xl font-bold text-[#004b87] mb-6 flex items-center gap-2 border-b border-slate-100 pb-4">
+                 <i class="ph ph-link-simple text-[#00a3e0] text-2xl"></i> Manejo Integral
+               </h4>
+               <p class="text-sm text-slate-600 mb-6 font-medium">Nuestro departamento de Endoscopia trabaja codo a codo en un equipo multidisciplinario liderado por el área de Gastroenterología Clínica Quirúrgica.</p>
+               
+               <a href="/directorio?especialidad=gastroenterologia" class="flex gap-4 p-4 bg-sky-50 rounded-2xl hover:bg-[#00a3e0] hover:text-white transition-colors group">
+                  <span class="w-12 h-12 bg-white text-[#00a3e0] rounded-xl flex justify-center items-center flex-shrink-0 group-hover:bg-[#004b87] transition-colors"><i class="ph ph-stethoscope text-2xl"></i></span>
+                  <div>
+                     <strong class="block text-slate-800 text-sm group-hover:text-white mb-1"><i class="ph ph-user-md"></i> Ver Gastroenterólogos</strong>
+                     <span class="text-xs text-slate-500 group-hover:text-sky-100">Médicos expertos que solicitarán y continuarán el tratamiento post-endoscopia.</span>
+                  </div>
+               </a>
+            </div>
+         </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Animaciones GSAP -->
+  <script is:inline>
+    document.addEventListener("DOMContentLoaded", () => {
+      setTimeout(() => {
+        if (typeof window.gsap !== "undefined" && window.ScrollTrigger) {
+          
+          // Animación Stagger Soft Reveal Padecimientos y Catálogo
+          window.gsap.from(".catalog-card, .pad-list > div", {
+            scrollTrigger: {
+              trigger: ".catalog-list",
+              start: "top 80%",
+            },
+            y: 30,
+            opacity: 0,
+            duration: 0.6,
+            stagger: 0.1,
+            ease: "power2.out",
+            clearProps: "all",
+          });
+
+          // Animación Stepper Despliegue Secuencial
+          window.gsap.from(".stepper-tr", {
+            scrollTrigger: {
+              trigger: ".process-section",
+              start: "top 75%",
+            },
+            y: 40,
+            opacity: 0,
+            duration: 0.6,
+            stagger: 0.15,
+            ease: "power3.out",
+            clearProps: "all",
+          });
+
+        }
+      }, 100);
+    });
+  </script>
+
+</Layout>

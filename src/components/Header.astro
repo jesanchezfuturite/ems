@@ -25,31 +25,80 @@ const isEmergencyPage = pathname === '/urgencias' || pathname === '/urgencias/';
             <i class="ph ph-caret-down text-xs transition-transform group-hover:rotate-180"></i>
           </button>
           
-          <div class="absolute top-[80%] left-1/2 -translate-x-1/2 pt-4 opacity-0 translate-y-3 invisible group-hover:opacity-100 group-hover:translate-y-0 group-hover:visible transition-all duration-300 w-[350px] z-[100]">
+          <div class="absolute top-[80%] left-1/2 -translate-x-1/2 pt-4 opacity-0 translate-y-3 invisible group-hover:opacity-100 group-hover:translate-y-0 group-hover:visible transition-all duration-300 w-[550px] z-[100]">
             <div class="bg-gradient-to-b from-[#004b87] to-[#002f54] rounded-3xl p-6 shadow-2xl border border-[#00a3e0]/20 overflow-hidden flex flex-col">
               
-              <h5 class="text-white/50 text-xs tracking-[0.2em] font-bold uppercase mb-4 pl-2">Diagnóstico y Prevención</h5>
+              <h5 class="text-white/50 text-xs tracking-[0.2em] font-bold uppercase mb-4 pl-2">Nuestros Servicios</h5>
               
-              <nav class="flex flex-col gap-2">
-                <a href="/cirugias" class="flex items-center gap-4 p-3 rounded-2xl group/item hover:bg-white/5 transition-colors">
-                  <div class="bg-white/10 w-10 h-10 rounded-full flex justify-center items-center group-hover/item:shadow-[0_0_12px_#00a3e0] transition-all duration-300">
-                    <i class="ph ph-activity text-[#00a3e0] text-xl"></i>
+              <nav class="grid grid-cols-2 gap-x-4 gap-y-1">
+                <a href="/servicios/banco-de-sangre" class="flex items-center gap-3 p-2 rounded-xl group/item hover:bg-white/5 transition-colors">
+                  <div class="bg-white/10 w-8 h-8 rounded-full flex justify-center items-center group-hover/item:shadow-[0_0_12px_#00a3e0] transition-all duration-300">
+                    <i class="ph ph-drop text-[#00a3e0] text-lg"></i>
                   </div>
-                  <span class="text-white font-medium group-hover/item:text-[#00a3e0] transition-colors">1. Cirugías</span>
+                  <span class="text-white text-sm font-medium group-hover/item:text-[#00a3e0] transition-colors truncate">Banco de Sangre</span>
+                </a>
+                
+                <a href="/servicios/centro-de-trasplantes" class="flex items-center gap-3 p-2 rounded-xl group/item hover:bg-white/5 transition-colors">
+                  <div class="bg-white/10 w-8 h-8 rounded-full flex justify-center items-center group-hover/item:shadow-[0_0_12px_#00a3e0] transition-all duration-300">
+                    <i class="ph ph-heart text-[#00a3e0] text-lg"></i>
+                  </div>
+                  <span class="text-white text-sm font-medium group-hover/item:text-[#00a3e0] transition-colors truncate">Centro de Trasplantes</span>
                 </a>
 
-                <a href="/diagnostico" class="flex items-center gap-4 p-3 rounded-2xl group/item hover:bg-white/5 transition-colors">
-                  <div class="bg-white/10 w-10 h-10 rounded-full flex justify-center items-center group-hover/item:shadow-[0_0_12px_#00a3e0] transition-all duration-300">
-                    <i class="ph ph-flask text-[#00a3e0] text-xl"></i>
+                <a href="/servicios/check-ups" class="flex items-center gap-3 p-2 rounded-xl group/item hover:bg-white/5 transition-colors">
+                  <div class="bg-white/10 w-8 h-8 rounded-full flex justify-center items-center group-hover/item:shadow-[0_0_12px_#00a3e0] transition-all duration-300">
+                    <i class="ph ph-clipboard-text text-[#00a3e0] text-lg"></i>
                   </div>
-                  <span class="text-white font-medium group-hover/item:text-[#00a3e0] transition-colors">2. Laboratorio y Diagnóstico</span>
+                  <span class="text-white text-sm font-medium group-hover/item:text-[#00a3e0] transition-colors truncate">Check Ups</span>
                 </a>
 
-                <a href="/checkups" class="flex items-center gap-4 p-3 rounded-2xl group/item hover:bg-white/5 transition-colors">
-                  <div class="bg-white/10 w-10 h-10 rounded-full flex justify-center items-center group-hover/item:shadow-[0_0_12px_#00a3e0] transition-all duration-300">
-                    <i class="ph ph-clipboard-text text-[#00a3e0] text-xl"></i>
+                <a href="/servicios/cuidados-intensivos" class="flex items-center gap-3 p-2 rounded-xl group/item hover:bg-white/5 transition-colors">
+                  <div class="bg-white/10 w-8 h-8 rounded-full flex justify-center items-center group-hover/item:shadow-[0_0_12px_#00a3e0] transition-all duration-300">
+                    <i class="ph ph-heartbeat text-[#00a3e0] text-lg"></i>
                   </div>
-                  <span class="text-white font-medium group-hover/item:text-[#00a3e0] transition-colors">3. Check-ups Preventivos</span>
+                  <span class="text-white text-sm font-medium group-hover/item:text-[#00a3e0] transition-colors truncate">Cuidados Intensivos</span>
+                </a>
+
+                <a href="/servicios/emergencias-medicas" class="flex items-center gap-3 p-2 rounded-xl group/item hover:bg-white/5 transition-colors">
+                  <div class="bg-white/10 w-8 h-8 rounded-full flex justify-center items-center group-hover/item:shadow-[0_0_12px_#00a3e0] transition-all duration-300">
+                    <i class="ph ph-ambulance text-[#00a3e0] text-lg"></i>
+                  </div>
+                  <span class="text-white text-sm font-medium group-hover/item:text-[#00a3e0] transition-colors truncate">Emergencias Médicas</span>
+                </a>
+                
+                <a href="/servicios/endoscopia" class="flex items-center gap-3 p-2 rounded-xl group/item hover:bg-white/5 transition-colors">
+                  <div class="bg-white/10 w-8 h-8 rounded-full flex justify-center items-center group-hover/item:shadow-[0_0_12px_#00a3e0] transition-all duration-300">
+                    <i class="ph ph-video-camera text-[#00a3e0] text-lg"></i>
+                  </div>
+                  <span class="text-white text-sm font-medium group-hover/item:text-[#00a3e0] transition-colors truncate">Endoscopia</span>
+                </a>
+
+                <a href="/servicios/hemodinamia" class="flex items-center gap-3 p-2 rounded-xl group/item hover:bg-white/5 transition-colors">
+                  <div class="bg-white/10 w-8 h-8 rounded-full flex justify-center items-center group-hover/item:shadow-[0_0_12px_#00a3e0] transition-all duration-300">
+                    <i class="ph ph-activity text-[#00a3e0] text-lg"></i>
+                  </div>
+                  <span class="text-white text-sm font-medium group-hover/item:text-[#00a3e0] transition-colors truncate">Hemodinamia</span>
+                </a>
+
+                <a href="/servicios/imagenologia" class="flex items-center gap-3 p-2 rounded-xl group/item hover:bg-white/5 transition-colors">
+                  <div class="bg-white/10 w-8 h-8 rounded-full flex justify-center items-center group-hover/item:shadow-[0_0_12px_#00a3e0] transition-all duration-300">
+                    <i class="ph ph-bone text-[#00a3e0] text-lg"></i>
+                  </div>
+                  <span class="text-white text-sm font-medium group-hover/item:text-[#00a3e0] transition-colors truncate">Imagenología</span>
+                </a>
+
+                <a href="/servicios/laboratorio" class="flex items-center gap-3 p-2 rounded-xl group/item hover:bg-white/5 transition-colors">
+                  <div class="bg-white/10 w-8 h-8 rounded-full flex justify-center items-center group-hover/item:shadow-[0_0_12px_#00a3e0] transition-all duration-300">
+                    <i class="ph ph-flask text-[#00a3e0] text-lg"></i>
+                  </div>
+                  <span class="text-white text-sm font-medium group-hover/item:text-[#00a3e0] transition-colors truncate">Laboratorio</span>
+                </a>
+
+                <a href="/servicios/quirofano" class="flex items-center gap-3 p-2 rounded-xl group/item hover:bg-white/5 transition-colors">
+                  <div class="bg-white/10 w-8 h-8 rounded-full flex justify-center items-center group-hover/item:shadow-[0_0_12px_#00a3e0] transition-all duration-300">
+                    <i class="ph ph-scissors text-[#00a3e0] text-lg"></i>
+                  </div>
+                  <span class="text-white text-sm font-medium group-hover/item:text-[#00a3e0] transition-colors truncate">Quirófano</span>
                 </a>
               </nav>
 
@@ -74,10 +123,20 @@ const isEmergencyPage = pathname === '/urgencias' || pathname === '/urgencias/';
   <!-- Mobile Menu -->
   <div id="mobile-menu" class="hidden md:hidden bg-white/90 backdrop-blur-md border-t border-gray-100 mt-4 absolute w-full left-0 shadow-xl top-full origin-top transition-all duration-300">
     <div class="px-4 pt-4 pb-6 space-y-2">
-      <div class="mb-2">
-        <p class="px-3 text-xs font-bold text-slate-400 tracking-wider uppercase mb-1">Servicios</p>
-        <a href="/cirugias" class="block px-3 py-2 rounded-xl text-base font-medium text-slate-700 hover:text-brand-blue hover:bg-slate-50">Cirugías</a>
-        <a href="/checkups" class="block px-3 py-2 rounded-xl text-base font-medium text-slate-700 hover:text-brand-blue hover:bg-slate-50">Check-ups Médicos</a>
+      <div class="mb-4">
+        <p class="px-3 text-xs font-bold text-slate-400 tracking-wider uppercase mb-2">Servicios</p>
+        <div class="grid grid-cols-1 gap-1">
+          <a href="/servicios/banco-de-sangre" class="block px-3 py-1.5 rounded-xl text-[0.95rem] font-medium text-slate-700 hover:text-brand-blue hover:bg-slate-50"><i class="ph ph-drop mr-2 text-brand-cyan"></i>Banco de Sangre</a>
+          <a href="/servicios/centro-de-trasplantes" class="block px-3 py-1.5 rounded-xl text-[0.95rem] font-medium text-slate-700 hover:text-brand-blue hover:bg-slate-50"><i class="ph ph-heart mr-2 text-brand-cyan"></i>Centro de Trasplantes</a>
+          <a href="/servicios/check-ups" class="block px-3 py-1.5 rounded-xl text-[0.95rem] font-medium text-slate-700 hover:text-brand-blue hover:bg-slate-50"><i class="ph ph-clipboard-text mr-2 text-brand-cyan"></i>Check Ups</a>
+          <a href="/servicios/cuidados-intensivos" class="block px-3 py-1.5 rounded-xl text-[0.95rem] font-medium text-slate-700 hover:text-brand-blue hover:bg-slate-50"><i class="ph ph-heartbeat mr-2 text-brand-cyan"></i>Cuidados Intensivos</a>
+          <a href="/servicios/emergencias-medicas" class="block px-3 py-1.5 rounded-xl text-[0.95rem] font-medium text-slate-700 hover:text-brand-blue hover:bg-slate-50"><i class="ph ph-ambulance mr-2 text-brand-cyan"></i>Emergencias Médicas</a>
+          <a href="/servicios/endoscopia" class="block px-3 py-1.5 rounded-xl text-[0.95rem] font-medium text-slate-700 hover:text-brand-blue hover:bg-slate-50"><i class="ph ph-video-camera mr-2 text-brand-cyan"></i>Endoscopia</a>
+          <a href="/servicios/hemodinamia" class="block px-3 py-1.5 rounded-xl text-[0.95rem] font-medium text-slate-700 hover:text-brand-blue hover:bg-slate-50"><i class="ph ph-activity mr-2 text-brand-cyan"></i>Hemodinamia</a>
+          <a href="/servicios/imagenologia" class="block px-3 py-1.5 rounded-xl text-[0.95rem] font-medium text-slate-700 hover:text-brand-blue hover:bg-slate-50"><i class="ph ph-bone mr-2 text-brand-cyan"></i>Imagenología</a>
+          <a href="/servicios/laboratorio" class="block px-3 py-1.5 rounded-xl text-[0.95rem] font-medium text-slate-700 hover:text-brand-blue hover:bg-slate-50"><i class="ph ph-flask mr-2 text-brand-cyan"></i>Laboratorio</a>
+          <a href="/servicios/quirofano" class="block px-3 py-1.5 rounded-xl text-[0.95rem] font-medium text-slate-700 hover:text-brand-blue hover:bg-slate-50"><i class="ph ph-scissors mr-2 text-brand-cyan"></i>Quirófano</a>
+        </div>
       </div>
       <a href="/especialidades" class="block px-3 py-2 rounded-xl text-base font-medium text-slate-700 hover:text-brand-blue hover:bg-slate-50">Especialidades</a>
       <a href="/maternidad" class="block px-3 py-2 rounded-xl text-base font-medium text-slate-700 hover:text-brand-blue hover:bg-slate-50">Maternidad</a>
@@ -111,12 +170,3 @@ const isEmergencyPage = pathname === '/urgencias' || pathname === '/urgencias/';
     }
   });
 </script>
-
-<style>
-  .glass-card {
-    background: rgba(255, 255, 255, 0.7);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-  }
-</style>

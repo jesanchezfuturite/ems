@@ -1,73 +1,189 @@
 ---
 import Layout from '../layouts/Layout.astro';
+
+const seoTitle = "Contacto y Ubicación | Centro de Especialidades Médicas en Monterrey";
+const seoDescription = "Agenda tu consulta, resuelve tus dudas y encuentra cómo llegar a nuestras instalaciones. Respaldo directo de CHRISTUS MUGUERZA Hospital Sur.";
+
+// JSON-LD
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "MedicalBusiness",
+  "name": "Centro de Especialidades Médicas Sur",
+  "image": "https://espmedicassur.com/logo.png",
+  "url": "https://espmedicassur.com/contacto",
+  "telephone": "+52 81 9245 3678",
+  "contactPoint": [
+    {
+      "@type": "ContactPoint",
+      "telephone": "+52 81 9245 3678",
+      "contactType": "Citas con Especialistas"
+    },
+    {
+      "@type": "ContactPoint",
+      "telephone": "+52 81 8155 5000",
+      "contactType": "Conmutador y Urgencias",
+      "availableLanguage": ["Spanish"]
+    }
+  ],
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Carretera Nacional No. 6501, Col. Estanzuela",
+    "addressLocality": "Monterrey",
+    "addressRegion": "N.L.",
+    "postalCode": "64988",
+    "addressCountry": "MX"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": 25.5892631,
+    "longitude": -100.2587855
+  },
+  "openingHoursSpecification": [
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+      "opens": "09:00",
+      "closes": "18:00"
+    },
+    {
+      "@type": "OpeningHoursSpecification",
+      "name": "Urgencias 24/7",
+      "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+      "opens": "00:00",
+      "closes": "23:59"
+    }
+  ],
+  "parentOrganization": {
+    "@type": "Hospital",
+    "name": "CHRISTUS MUGUERZA Hospital Sur"
+  }
+};
 ---
 
 <Layout 
-  title="Contacto | Centro de Especialidades Médicas Sur"
-  description="Línea directa, atención a dudas sobre seguros, facturación y correo electrónico de Christus Muguerza Sur."
+  title={seoTitle}
+  description={seoDescription}
 >
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+  </Fragment>
+
   <style>
-    @keyframes fadeUpIn {
-      from { opacity: 0; transform: translateY(30px); }
-      to { opacity: 1; transform: translateY(0); }
+    /* Hide scrollbar for details */
+    details > summary {
+      list-style: none;
     }
-    .animate-entrance {
-      animation: fadeUpIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-      opacity: 0;
+    details > summary::-webkit-details-marker {
+      display: none;
     }
-    .stagger-1 { animation-delay: 100ms; }
-    .stagger-2 { animation-delay: 300ms; }
-    .stagger-3 { animation-delay: 450ms; }
-    .stagger-4 { animation-delay: 600ms; }
+    
+    .faq-icon {
+      transition: transform 0.3s ease;
+    }
+    details[open] .faq-icon {
+      transform: rotate(180deg);
+    }
   </style>
 
-  <!-- 1. Hero & Bento Info Grid -->
-  <section class="bg-slate-50 pt-16 pb-12 overflow-hidden relative">
+  <!-- 1. Hero Section -->
+  <section class="bg-slate-50 pt-24 pb-12 overflow-hidden relative">
     <div class="absolute inset-0 bg-gradient-to-br from-brand-cyan/10 via-transparent to-brand-blue/5"></div>
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
       
-      <!-- Copy Principal -->
-      <div class="contact-hero text-center max-w-3xl mx-auto mb-16 animate-entrance">
-        <h1 class="text-4xl md:text-5xl font-bold text-brand-blue mb-4 tracking-tight">Estamos para Ayudarte</h1>
-        <p class="text-lg text-slate-600">Nuestro compromiso es brindarte atención inmediata, clara y resolutiva a cualquier duda que tengas sobre tu visita.</p>
+      <div class="text-center max-w-4xl mx-auto mb-16 px-4" id="hero-content">
+        <span class="inline-block py-1 px-4 rounded-full bg-brand-cyan/10 text-brand-cyan font-bold text-sm tracking-widest uppercase mb-4">Contacto y Ubicación</span>
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-black text-brand-blue mb-6 tracking-tight leading-tight">
+          Contacto y Ubicación del Centro de Especialidades Médicas en Monterrey
+        </h1>
+        <p class="text-xl text-slate-600 font-medium">
+          Agenda tu consulta, resuelve tus dudas y encuentra cómo llegar a nuestras instalaciones.
+        </p>
       </div>
 
-      <!-- Bento Grid de Contacto -->
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+      <!-- 2. Bloque de Contacto Rápido -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-5xl mx-auto mb-16 contact-cards">
         
-        <!-- Card 1 (Atención Directa) -->
-        <div class="info-card animate-entrance stagger-1 bg-white/80 backdrop-blur-xl border border-white/40 shadow-xl shadow-brand-blue/5 rounded-3xl p-8 text-center flex flex-col items-center hover:bg-white transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl hover:shadow-brand-cyan/20">
-          <div class="w-16 h-16 bg-brand-cyan/10 text-brand-cyan rounded-2xl flex items-center justify-center mb-6">
-            <i class="ph ph-phone-call text-4xl"></i>
+        <!-- Tarjeta 1: Teléfonos -->
+        <div class="bg-white/80 backdrop-blur-xl border border-white/40 shadow-xl rounded-3xl transition-all duration-300 hover:shadow-brand-blue/10 hover:-translate-y-1 p-8 md:p-10 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center gap-4 mb-8 border-b border-slate-100 pb-6">
+              <div class="w-14 h-14 bg-brand-blue/10 text-brand-blue rounded-2xl flex items-center justify-center shrink-0">
+                <i class="ph ph-phone text-3xl"></i>
+              </div>
+              <div>
+                <h3 class="text-2xl font-bold text-brand-blue">Directorios Telefónicos</h3>
+                <p class="text-slate-500 font-medium">Atención inmediata a tus necesidades</p>
+              </div>
+            </div>
+            
+            <div class="space-y-6">
+              <div class="bg-slate-50 rounded-2xl p-6 border border-slate-100 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                <div>
+                  <p class="text-sm font-bold text-slate-500 uppercase tracking-wide mb-1">Citas con Especialistas</p>
+                  <p class="text-3xl font-black text-brand-cyan">81 9245 3678</p>
+                </div>
+                <a href="tel:8192453678" class="px-6 py-3 bg-brand-blue hover:bg-[#003b6b] text-white font-bold rounded-xl transition-all shadow-md text-center shrink-0">
+                  Llamar
+                </a>
+              </div>
+              
+              <div class="bg-brand-blue/5 rounded-2xl p-6 border border-brand-blue/10 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                <div>
+                  <p class="text-sm font-bold text-brand-blue uppercase tracking-wide mb-1">Conmutador Hospitalario</p>
+                  <p class="text-3xl font-black text-slate-800">(81) 8155 5000</p>
+                </div>
+                <a href="tel:8181555000" class="px-6 py-3 bg-white border border-slate-200 hover:bg-slate-50 text-slate-700 font-bold rounded-xl transition-all shadow-sm text-center shrink-0">
+                  Marcar
+                </a>
+              </div>
+            </div>
           </div>
-          <h3 class="text-xl font-bold text-brand-blue mb-2">Línea Directa</h3>
-          <p class="text-2xl font-black text-slate-800 mb-6">81 9245 3678</p>
-          <a href="tel:8192453678" class="mt-auto px-8 py-3 bg-brand-blue hover:bg-blue-900 text-white font-bold rounded-2xl transition-colors shadow-md w-full">
-            Llamar ahora
-          </a>
         </div>
 
-        <!-- Card 2 (Consultas Digitales) -->
-        <div class="info-card animate-entrance stagger-2 bg-white/80 backdrop-blur-xl border border-white/40 shadow-xl shadow-brand-blue/5 rounded-3xl p-8 text-center flex flex-col items-center hover:bg-white transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl hover:shadow-brand-cyan/20">
-          <div class="w-16 h-16 bg-brand-blue/10 text-brand-blue rounded-2xl flex items-center justify-center mb-6">
-            <i class="ph ph-envelope-simple text-4xl"></i>
-          </div>
-          <h3 class="text-xl font-bold text-brand-blue mb-2">Correo Electrónico</h3>
-          <p class="text-base font-semibold text-slate-700 mb-6 whitespace-nowrap overflow-hidden text-ellipsis w-full">contacto@espmedicassur.com</p>
-          <a href="mailto:contacto@espmedicassur.com" class="mt-auto px-8 py-3 bg-white border-2 border-brand-blue text-brand-blue hover:bg-brand-blue hover:text-white font-bold rounded-2xl transition-colors w-full">
-            Escribir email
-          </a>
-        </div>
+        <!-- Tarjeta 2: Horarios y Digital -->
+        <div class="bg-white/80 backdrop-blur-xl border border-white/40 shadow-xl rounded-3xl transition-all duration-300 hover:shadow-brand-cyan/10 hover:-translate-y-1 p-8 md:p-10 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center gap-4 mb-8 border-b border-slate-100 pb-6">
+              <div class="w-14 h-14 bg-brand-cyan/10 text-brand-cyan rounded-2xl flex items-center justify-center shrink-0">
+                <i class="ph ph-clock text-3xl"></i>
+              </div>
+              <div>
+                <h3 class="text-2xl font-bold text-brand-blue">Horarios de Atención</h3>
+                <p class="text-slate-500 font-medium">Disponibilidad de nuestros servicios</p>
+              </div>
+            </div>
+            
+            <div class="space-y-6">
+              <div class="flex items-start gap-4">
+                <div class="w-10 h-10 bg-slate-100 rounded-xl flex items-center justify-center text-slate-500 shrink-0 mt-1">
+                  <i class="ph ph-calendar-blank text-xl"></i>
+                </div>
+                <div>
+                  <p class="text-lg font-bold text-slate-800">Consultas Regulares</p>
+                  <p class="text-slate-600 font-medium">Lunes a Sábado de 9:00 a 18:00 Hrs</p>
+                </div>
+              </div>
+              
+              <div class="flex items-start gap-4 bg-red-50/50 p-4 rounded-xl border border-red-100">
+                <div class="w-10 h-10 bg-red-100 rounded-xl flex items-center justify-center text-red-500 shrink-0 mt-1">
+                  <i class="ph ph-warning-circle text-xl"></i>
+                </div>
+                <div>
+                  <p class="text-lg font-bold text-red-600">Urgencias</p>
+                  <p class="text-red-500 font-bold">Disponible 24 horas, 365 días</p>
+                </div>
+              </div>
 
-        <!-- Card 3 (Disponibilidad) -->
-        <div class="info-card animate-entrance stagger-3 bg-white/80 backdrop-blur-xl border border-white/40 shadow-xl shadow-brand-blue/5 rounded-3xl p-8 text-center flex flex-col items-center hover:bg-white transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl hover:shadow-brand-cyan/20">
-          <div class="w-16 h-16 bg-brand-cyan/10 text-brand-cyan rounded-2xl flex items-center justify-center mb-6">
-            <i class="ph ph-clock text-4xl"></i>
-          </div>
-          <h3 class="text-xl font-bold text-brand-blue mb-2">Horario de Atención</h3>
-          <p class="text-lg font-bold text-slate-800 leading-tight mb-2">Lunes a Sábado<br/><span class="text-slate-600 font-medium">9:00 a 18:00 Hrs</span></p>
-          <div class="mt-auto mt-4 flex items-center justify-center text-red-600 bg-red-50 px-4 py-3 rounded-xl w-full font-bold">
-            <i class="ph ph-warning-circle text-xl mr-2"></i> Urgencias 24/7
+              <div class="pt-4 border-t border-slate-100">
+                <p class="text-sm font-bold text-slate-500 uppercase tracking-wide mb-2">Correo Institucional</p>
+                <div class="flex items-center gap-3">
+                  <i class="ph ph-envelope-simple text-brand-cyan text-xl"></i>
+                  <a href="mailto:contacto@espmedicassur.com" class="text-lg font-bold text-slate-800 hover:text-brand-cyan transition-colors">
+                    contacto@espmedicassur.com
+                  </a>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -75,120 +191,209 @@ import Layout from '../layouts/Layout.astro';
     </div>
   </section>
 
-  <!-- 2. Formulario de Conversión -->
-  <section class="py-20 bg-white relative overflow-hidden">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+  <!-- 3. Banner de Urgencias 24/7 -->
+  <section class="bg-[#d92128] py-8 text-white relative z-20 emergency-banner">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 max-w-5xl">
+      <div class="flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left">
+        <div class="flex items-center justify-center md:justify-start gap-4">
+          <div class="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center animate-pulse">
+            <i class="ph ph-ambulance text-4xl"></i>
+          </div>
+          <div>
+            <h2 class="text-2xl font-black tracking-wide">¿Tienes una urgencia médica?</h2>
+            <p class="text-red-100 text-lg font-medium mt-1">Nuestro servicio dentro del hospital está disponible 24/7.</p>
+          </div>
+        </div>
+        <a href="tel:8181555000" class="bg-white text-[#d92128] hover:bg-slate-100 font-black text-xl px-10 py-4 rounded-full shadow-2xl transition-transform hover:scale-105 inline-flex items-center justify-center gap-2 shrink-0 border-2 border-transparent">
+          <i class="ph ph-phone-call"></i> Llamar Inmediatamente
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. Formulario de Conversión & FAQ -->
+  <section class="py-24 bg-white relative overflow-hidden">
+    <div class="absolute inset-0 top-1/2 bg-slate-50 z-0"></div> <!-- Split background color -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
       
-      <div class="bg-white rounded-[2.5rem] shadow-2xl shadow-brand-blue/10 border border-slate-100 overflow-hidden flex flex-col lg:flex-row contact-form animate-entrance stagger-4">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 contact-form-section">
         
-        <!-- Izquierda (Texto y Copy) -->
-        <div class="lg:w-5/12 bg-slate-50 p-10 lg:p-16 flex flex-col justify-center border-r border-slate-100 relative">
-          <div class="absolute top-0 right-0 p-8 text-brand-cyan/10">
-            <i class="ph ph-chat-circle-text text-9xl"></i>
-          </div>
-          <div class="relative z-10">
-            <h2 class="text-3xl lg:text-4xl font-bold text-brand-blue mb-6">Estamos para escucharte.</h2>
-            <p class="text-lg text-slate-600 leading-relaxed mb-6 font-medium">
-              Ya sea una duda sobre seguros médicos, convenios institucionales, presupuestos o citas directas.
-            </p>
-            <p class="text-brand-cyan font-bold flex items-center bg-brand-cyan/10 px-4 py-3 rounded-xl w-fit">
-              <i class="ph ph-rocket-launch text-xl mr-2"></i> Te responderemos en menos de 2h hábiles.
-            </p>
+        <!-- FAQ -->
+        <div class="lg:col-span-5 flex flex-col justify-center">
+          <span class="inline-block py-1 px-3 rounded-md bg-brand-blue/5 text-brand-blue font-bold text-sm tracking-widest uppercase mb-4 w-fit">Dudas Comunes</span>
+          <h2 class="text-3xl md:text-4xl font-black text-brand-blue mb-8">Preguntas Frecuentes</h2>
+          
+          <div class="space-y-4">
+            <!-- Pregunta 1 -->
+            <details class="group bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow [&_summary::-webkit-details-marker]:hidden" open>
+              <summary class="flex items-center justify-between cursor-pointer p-6 font-bold text-lg text-slate-800 bg-white hover:bg-slate-50 transition-colors">
+                ¿Cómo puedo agendar una consulta?
+                <span class="faq-icon text-brand-cyan mt-1 shrink-0"><i class="ph ph-caret-down text-xl"></i></span>
+              </summary>
+              <div class="p-6 pt-0 text-slate-600 font-medium bg-white">
+                Puedes agendar directamente llenando el formulario de esta página o llamando a nuestra Línea Directa (81 9245 3678). Nuestros coordinadores te asignarán con el especialista adecuado.
+              </div>
+            </details>
+
+            <!-- Pregunta 2 -->
+            <details class="group bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow [&_summary::-webkit-details-marker]:hidden">
+              <summary class="flex items-center justify-between cursor-pointer p-6 font-bold text-lg text-slate-800 bg-white hover:bg-slate-50 transition-colors">
+                ¿Qué hago si tengo una urgencia médica?
+                <span class="faq-icon text-brand-cyan mt-1 shrink-0"><i class="ph ph-caret-down text-xl"></i></span>
+              </summary>
+              <div class="p-6 pt-0 text-slate-600 font-medium bg-white">
+                Acude inmediatamente al área de urgencias de CHRISTUS MUGUERZA Hospital Sur o llama al conmutador (81) 8155 5000. Estamos disponibles las 24 horas, respaldados por la infraestructura del hospital.
+              </div>
+            </details>
+
+            <!-- Pregunta 3 -->
+            <details class="group bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow [&_summary::-webkit-details-marker]:hidden">
+              <summary class="flex items-center justify-between cursor-pointer p-6 font-bold text-lg text-slate-800 bg-white hover:bg-slate-50 transition-colors">
+                ¿Aceptan seguros de gastos médicos mayores?
+                <span class="faq-icon text-brand-cyan mt-1 shrink-0"><i class="ph ph-caret-down text-xl"></i></span>
+              </summary>
+              <div class="p-6 pt-0 text-slate-600 font-medium bg-white">
+                Sí, trabajamos directa y coordinadamente con la mayoría de las aseguradoras nacionales e internacionales. Te sugerimos contactarnos mediante el formulario seleccionando "Facturación y Seguros" para orientación específica.
+              </div>
+            </details>
+
+            <!-- Pregunta 4 -->
+            <details class="group bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow [&_summary::-webkit-details-marker]:hidden">
+              <summary class="flex items-center justify-between cursor-pointer p-6 font-bold text-lg text-slate-800 bg-white hover:bg-slate-50 transition-colors">
+                ¿Dónde están ubicados exactamente?
+                <span class="faq-icon text-brand-cyan mt-1 shrink-0"><i class="ph ph-caret-down text-xl"></i></span>
+              </summary>
+              <div class="p-6 pt-0 text-slate-600 font-medium bg-white">
+                Nos encontramos dentro de las instalaciones de CHRISTUS MUGUERZA Hospital Sur, en Carretera Nacional No. 6501, Col. Estanzuela. Contamos con estacionamiento amplio e indicaciones claras al llegar.
+              </div>
+            </details>
           </div>
         </div>
 
-        <!-- Derecha (Formulario Fricción Cero) -->
-        <div class="lg:w-7/12 p-10 lg:p-16">
-          <form id="contactForm" class="space-y-8">
+        <!-- Formulario -->
+        <div class="lg:col-span-7">
+          <div class="bg-white rounded-3xl shadow-2xl shadow-brand-blue/10 border border-slate-100 p-8 md:p-12 relative overflow-hidden h-full">
+            <div class="absolute top-0 right-0 w-64 h-64 bg-brand-cyan/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 pointer-events-none"></div>
             
-            <!-- Nombre Completo -->
-            <div>
-              <label for="nombre" class="block text-sm font-bold text-slate-700 mb-2">Nombre Completo <span class="text-red-500">*</span></label>
-              <div class="relative">
-                <i class="ph ph-user absolute left-5 top-1/2 -translate-y-1/2 text-slate-400 text-xl"></i>
-                <input type="text" id="nombre" name="nombre" class="w-full bg-slate-50 border border-slate-200 text-slate-800 text-lg rounded-2xl focus:ring-4 focus:ring-brand-cyan/20 focus:border-brand-cyan block pl-14 pr-4 py-3.5 transition-all" placeholder="Ej. Ana García" required />
-              </div>
-            </div>
+            <h3 class="text-3xl font-black text-brand-blue mb-2 relative z-10">Ponte en contacto</h3>
+            <p class="text-slate-600 mb-8 relative z-10 font-medium">Te responderemos a la brevedad posible.</p>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <!-- Teléfono -->
+            <form id="contactForm" class="space-y-6 relative z-10">
+              
+              <!-- Nombre -->
               <div>
-                <label for="telefono" class="block text-sm font-bold text-slate-700 mb-2">Teléfono <span class="text-red-500">*</span></label>
+                <label for="nombre" class="block text-sm font-bold text-slate-700 mb-2">Nombre Completo <span class="text-red-500">*</span></label>
                 <div class="relative">
-                  <i class="ph ph-phone absolute left-5 top-1/2 -translate-y-1/2 text-slate-400 text-xl"></i>
-                  <input type="tel" id="telefono" name="telefono" class="w-full bg-slate-50 border border-slate-200 text-slate-800 text-lg rounded-2xl focus:ring-4 focus:ring-brand-cyan/20 focus:border-brand-cyan block pl-14 pr-4 py-3.5 transition-all" placeholder="A 10 dígitos" required />
+                  <i class="ph ph-user absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 text-xl"></i>
+                  <input type="text" id="nombre" name="nombre" class="w-full bg-slate-50 border border-slate-200 text-slate-800 rounded-xl focus:ring-2 focus:ring-brand-cyan/20 focus:border-brand-cyan block pl-12 pr-4 py-3 sm:py-3.5 transition-all outline-none" placeholder="Ej. Ana García" required />
                 </div>
               </div>
 
-              <!-- Correo Electrónico -->
-              <div>
-                <label for="correo" class="block text-sm font-bold text-slate-700 mb-2">Correo Electrónico <span class="text-red-500">*</span></label>
-                <div class="relative">
-                  <i class="ph ph-envelope absolute left-5 top-1/2 -translate-y-1/2 text-slate-400 text-xl"></i>
-                  <input type="email" id="correo" name="correo" class="w-full bg-slate-50 border border-slate-200 text-slate-800 text-lg rounded-2xl focus:ring-4 focus:ring-brand-cyan/20 focus:border-brand-cyan block pl-14 pr-4 py-3.5 transition-all" placeholder="tucorreo@ejemplo.com" required />
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Teléfono -->
+                <div>
+                  <label for="telefono" class="block text-sm font-bold text-slate-700 mb-2">Teléfono <span class="text-red-500">*</span></label>
+                  <div class="relative">
+                    <i class="ph ph-phone absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 text-xl"></i>
+                    <input type="tel" id="telefono" name="telefono" class="w-full bg-slate-50 border border-slate-200 text-slate-800 rounded-xl focus:ring-2 focus:ring-brand-cyan/20 focus:border-brand-cyan block pl-12 pr-4 py-3 sm:py-3.5 transition-all outline-none" placeholder="A 10 dígitos" required />
+                  </div>
+                </div>
+
+                <!-- Correo -->
+                <div>
+                  <label for="correo" class="block text-sm font-bold text-slate-700 mb-2">Correo Electrónico <span class="text-red-500">*</span></label>
+                  <div class="relative">
+                    <i class="ph ph-envelope absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 text-xl"></i>
+                    <input type="email" id="correo" name="correo" class="w-full bg-slate-50 border border-slate-200 text-slate-800 rounded-xl focus:ring-2 focus:ring-brand-cyan/20 focus:border-brand-cyan block pl-12 pr-4 py-3 sm:py-3.5 transition-all outline-none" placeholder="tucorreo@ejemplo.com" required />
+                  </div>
                 </div>
               </div>
-            </div>
 
-            <!-- Motivo de Consulta -->
-            <div>
-              <label for="motivo" class="block text-sm font-bold text-slate-700 mb-2">Motivo de Consulta <span class="text-red-500">*</span></label>
-              <div class="relative">
-                <i class="ph ph-list-dashes absolute left-5 top-1/2 -translate-y-1/2 text-slate-400 text-xl pointer-events-none"></i>
-                <select id="motivo" name="motivo" class="appearance-none w-full bg-slate-50 border border-slate-200 text-slate-800 text-lg rounded-2xl focus:ring-4 focus:ring-brand-cyan/20 focus:border-brand-cyan block pl-14 pr-10 py-3.5 transition-all cursor-pointer" required>
-                  <option value="" disabled selected>Selecciona una opción...</option>
-                  <option value="citas">Agendar / Modificar Citas</option>
-                  <option value="presupuesto">Presupuesto Quirúrgico</option>
-                  <option value="facturacion">Facturación y Seguros</option>
-                  <option value="quejas">Quejas y/o Sugerencias</option>
-                  <option value="otros">Otros</option>
-                </select>
-                <i class="ph ph-caret-down absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 text-lg pointer-events-none"></i>
+              <!-- Motivo -->
+              <div>
+                <label for="motivo" class="block text-sm font-bold text-slate-700 mb-2">Motivo de Consulta <span class="text-red-500">*</span></label>
+                <div class="relative">
+                  <i class="ph ph-list-dashes absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 text-xl pointer-events-none"></i>
+                  <select id="motivo" name="motivo" class="appearance-none w-full bg-slate-50 border border-slate-200 text-slate-800 rounded-xl focus:ring-2 focus:ring-brand-cyan/20 focus:border-brand-cyan block pl-12 pr-10 py-3 sm:py-3.5 transition-all cursor-pointer outline-none font-medium" required>
+                    <option value="" disabled selected>Selecciona una opción...</option>
+                    <option value="citas">Agendar / Modificar Citas</option>
+                    <option value="presupuesto">Presupuesto Quirúrgico</option>
+                    <option value="facturacion">Facturación y Seguros</option>
+                    <option value="quejas">Quejas y/o Sugerencias</option>
+                    <option value="otros">Otros</option>
+                  </select>
+                  <i class="ph ph-caret-down absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 text-lg pointer-events-none"></i>
+                </div>
               </div>
-            </div>
 
-            <!-- Botón Enviar -->
-            <div class="pt-4">
-              <button type="submit" id="submitButton" class="w-full bg-brand-blue hover:bg-brand-cyan text-white text-xl font-bold py-4 px-8 rounded-2xl transition-colors shadow-lg shadow-brand-cyan/20 flex justify-center items-center gap-2">
-                <span>Enviar Mensaje</span>
-                <i class="ph ph-spinner-gap animate-spin hidden" id="submitSpinner"></i>
-              </button>
-            </div>
-            
-          </form>
+              <!-- Submit -->
+              <div class="pt-4">
+                <button type="submit" id="submitButton" class="w-full bg-brand-cyan hover:bg-[#008fcc] text-white text-lg font-bold py-4 px-8 rounded-xl transition-all shadow-lg shadow-brand-cyan/30 hover:shadow-brand-cyan/40 hover:-translate-y-0.5 flex justify-center items-center gap-2">
+                  <span>Agenda tu cita hoy</span>
+                  <i class="ph ph-paper-plane-right font-bold"></i>
+                  <i class="ph ph-spinner-gap animate-spin hidden ml-2" id="submitSpinner"></i>
+                </button>
+                <p class="text-xs text-slate-400 text-center mt-4">Tus datos están protegidos y sólo se usarán para contactarte.</p>
+              </div>
+              
+            </form>
+          </div>
         </div>
+
       </div>
-
     </div>
   </section>
 
-  <!-- 3. Sección de Mapa y Localización (Local SEO) -->
-  <section class="bg-slate-50 border-t border-slate-200">
-    <div class="w-full h-96 relative">
-      <iframe 
-        src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d1799.2354648445735!2d-100.2587855!3d25.5892631!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8662c0aa5f4574d5%3A0x5403799d251348f0!2sCHRISTUS%20MUGUERZA%20Hospital%20Sur!5e0!3m2!1sen!2smx!4v1775668234622!5m2!1sen!2smx" 
-        width="100%" 
-        height="100%" 
-        style="border:0; filter: grayscale(0.2);" 
-        allowfullscreen="" 
-        loading="lazy" 
-        referrerpolicy="no-referrer-when-downgrade"
-        title="Ubicación CHRISTUS MUGUERZA Hospital Sur">
-      </iframe>
-    </div>
-    
-    <!-- Info Física -->
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-16 relative z-10 pb-16">
-      <div class="bg-brand-blue text-white rounded-3xl p-8 shadow-2xl flex flex-col md:flex-row items-center justify-between text-center md:text-left gap-6">
-        <div>
-          <h3 class="text-xl font-bold mb-2 flex items-center justify-center md:justify-start">
-            <i class="ph ph-map-pin text-brand-cyan text-2xl mr-2"></i> CHRISTUS MUGUERZA Hospital Sur
-          </h3>
-          <p class="text-slate-200">Carretera Nacional No. 6501, Col. Estanzuela, Monterrey, N.L. C.P. 64988</p>
+  <!-- 5. Sección de Ubicación y Respaldo -->
+  <section class="bg-slate-50 border-t border-slate-200 relative map-section">
+    <div class="grid grid-cols-1 lg:grid-cols-2">
+      <!-- Mapa -->
+      <div class="h-[400px] lg:h-auto min-h-[500px] relative w-full order-2 lg:order-1 map-container border-t lg:border-t-0 lg:border-r border-slate-200">
+        <iframe 
+          src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d1799.2354648445735!2d-100.2587855!3d25.5892631!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8662c0aa5f4574d5%3A0x5403799d251348f0!2sCHRISTUS%20MUGUERZA%20Hospital%20Sur!5e0!3m2!1sen!2smx!4v1775668234622!5m2!1sen!2smx" 
+          class="absolute inset-0 w-full h-full"
+          style="border:0;" 
+          allowfullscreen="" 
+          loading="lazy" 
+          referrerpolicy="no-referrer-when-downgrade"
+          title="Ubicación CHRISTUS MUGUERZA Hospital Sur">
+        </iframe>
+      </div>
+
+      <!-- Info del Hospital -->
+      <div class="p-8 md:p-16 lg:p-20 xl:p-24 flex flex-col justify-center order-1 lg:order-2 bg-slate-50 z-10 relative">
+        <div class="bg-brand-blue/10 w-16 h-16 rounded-2xl flex items-center justify-center text-brand-blue mb-8">
+          <i class="ph ph-hospital text-3xl"></i>
         </div>
+        <h2 class="text-3xl lg:text-4xl font-black text-brand-blue mb-6">Ubicación y Respaldo de Alto Nivel</h2>
+        
+        <p class="text-lg text-slate-700 leading-relaxed mb-10 font-medium">
+          El Centro de Especialidades Médicas se encuentra estratégicamente ubicado dentro de las instalaciones de <strong class="text-brand-blue">CHRISTUS MUGUERZA Hospital Sur</strong>, lo que nos permite garantizar un respaldo hospitalario integral, acceso inmediato a quirófanos y tecnología médica avanzada.
+        </p>
+
+        <div class="space-y-6 bg-white p-8 rounded-3xl shadow-sm border border-slate-100 mb-10">
+          <h3 class="font-bold text-lg text-slate-800 mb-4 border-b border-slate-100 pb-3">Información para tu visita</h3>
+          
+          <div class="flex gap-4">
+            <i class="ph ph-car text-brand-cyan text-2xl shrink-0 mt-1"></i>
+            <div>
+              <p class="font-bold text-slate-800 text-lg">Estacionamiento Amplio</p>
+              <p class="text-slate-600 font-medium">Contamos con amplias zonas de estacionamiento exclusivas para pacientes y visitantes dentro del complejo hospitalario.</p>
+            </div>
+          </div>
+          
+          <div class="flex gap-4">
+            <i class="ph ph-wheelchair text-brand-cyan text-2xl shrink-0 mt-1"></i>
+            <div>
+              <p class="font-bold text-slate-800 text-lg">Acceso Universal</p>
+              <p class="text-slate-600 font-medium">Nuestras instalaciones cuentan con rampas, elevadores y sillas de ruedas en la entrada principal para facilitar tu acceso.</p>
+            </div>
+          </div>
+        </div>
+
         <div>
-          <a href="https://maps.app.goo.gl/VDCtEy4roU6DTcko8" target="_blank" rel="noopener" class="px-6 py-3 bg-brand-cyan hover:bg-cyan-600 font-bold rounded-xl transition-colors whitespace-nowrap shadow-lg">
-            Cómo llegar (Google Maps)
+          <a href="https://maps.app.goo.gl/VDCtEy4roU6DTcko8" target="_blank" rel="noopener" class="inline-flex items-center justify-center gap-2 px-8 py-4 bg-brand-blue hover:bg-[#003b6b] text-white font-bold rounded-xl transition-all shadow-lg shadow-brand-blue/20 hover:-translate-y-1 w-full sm:w-auto">
+            <i class="ph ph-map-pin-line text-xl"></i> Obtener Indicaciones en Google Maps
           </a>
         </div>
       </div>
@@ -196,25 +401,83 @@ import Layout from '../layouts/Layout.astro';
   </section>
 
   <!-- Toast Notification -->
-  <div id="toastNotification" class="fixed bottom-4 right-4 z-50 transform translate-y-20 opacity-0 transition-all duration-300 flex items-center p-4 mb-4 text-slate-800 bg-white rounded-2xl shadow-2xl border-l-4 border-brand-cyan max-w-sm pointer-events-none" role="alert">
+  <div id="toastNotification" class="fixed bottom-4 right-4 z-[100] transform translate-y-20 opacity-0 transition-all duration-300 flex items-center p-4 mb-4 text-slate-800 bg-white rounded-2xl shadow-2xl border-l-4 border-brand-cyan max-w-sm pointer-events-none" role="alert">
     <div class="inline-flex items-center justify-center flex-shrink-0 w-10 h-10 rounded-lg bg-brand-cyan/10 text-brand-cyan" id="toastIcon">
       <i class="ph ph-check-circle text-2xl"></i>
     </div>
     <div class="ms-4 text-sm font-medium mr-4" id="toastMessage">
       Mensaje enviado correctamente.
     </div>
-    <button type="button" class="ms-auto -mx-1.5 -my-1.5 bg-white text-slate-400 hover:text-slate-900 rounded-lg focus:ring-2 focus:ring-slate-300 p-1.5 hover:bg-slate-50 inline-flex items-center justify-center h-8 w-8 pointer-events-auto" onclick="document.getElementById('toastNotification').classList.add('translate-y-20', 'opacity-0'); document.getElementById('toastNotification').classList.remove('translate-y-0', 'opacity-100');" aria-label="Close">
+    <button type="button" class="ms-auto -mx-1.5 -my-1.5 bg-white text-slate-400 hover:text-slate-900 rounded-lg focus:ring-2 focus:ring-slate-300 p-1.5 hover:bg-slate-50 inline-flex items-center justify-center h-8 w-8 pointer-events-auto transition-colors" onclick="document.getElementById('toastNotification').classList.add('translate-y-20', 'opacity-0'); document.getElementById('toastNotification').classList.remove('translate-y-0', 'opacity-100');" aria-label="Close">
       <span class="sr-only">Cerrar</span>
       <i class="ph ph-x text-lg"></i>
     </button>
   </div>
 
+  <!-- Scripts -->
+  <script is:inline src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script is:inline src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  
   <script is:inline>
     document.addEventListener('DOMContentLoaded', () => {
+      // --- GSAP ANIMATIONS ---
+      gsap.registerPlugin(ScrollTrigger);
+
+      // Hero Elements
+      gsap.fromTo("#hero-content", 
+        { opacity: 0, y: 30 }, 
+        { opacity: 1, y: 0, duration: 1, ease: "power3.out" }
+      );
+
+      // Contact Cards
+      gsap.fromTo(".contact-cards > div", 
+        { opacity: 0, y: 40 }, 
+        { opacity: 1, y: 0, duration: 0.8, stagger: 0.15, ease: "power3.out", delay: 0.2 }
+      );
+
+      // Emergency Banner pulse reveal
+      gsap.fromTo(".emergency-banner",
+        { opacity: 0, scale: 0.98 },
+        { 
+          opacity: 1, scale: 1, duration: 0.8, ease: "power2.out",
+          scrollTrigger: {
+            trigger: ".emergency-banner",
+            start: "top 90%",
+          }
+        }
+      );
+
+      // Form Section Reveal
+      gsap.fromTo(".contact-form-section > div",
+        { opacity: 0, y: 30 },
+        {
+          opacity: 1, y: 0, duration: 0.8, stagger: 0.2, ease: "power3.out",
+          scrollTrigger: {
+            trigger: ".contact-form-section",
+            start: "top 85%",
+          }
+        }
+      );
+
+      // Map Section reveal
+      gsap.fromTo(".map-container",
+        { opacity: 0, x: -30 },
+        {
+          opacity: 1, x: 0, duration: 1, ease: "power3.out",
+          scrollTrigger: {
+            trigger: ".map-section",
+            start: "top 80%",
+          }
+        }
+      );
+
+
+      // --- FORM API INTEGRATION ---
       const form = document.getElementById('contactForm');
       const submitBtn = document.getElementById('submitButton');
       const spinner = document.getElementById('submitSpinner');
       const btnText = submitBtn.querySelector('span');
+      const iconArrow = submitBtn.querySelector('.ph-paper-plane-right');
       const toast = document.getElementById('toastNotification');
       const toastMessage = document.getElementById('toastMessage');
       const toastIconContainer = document.getElementById('toastIcon');
@@ -251,6 +514,7 @@ import Layout from '../layouts/Layout.astro';
           const data = Object.fromEntries(formData);
           
           btnText.textContent = 'Enviando...';
+          iconArrow.classList.add('hidden');
           spinner.classList.remove('hidden');
           submitBtn.disabled = true;
           submitBtn.classList.add('opacity-75', 'cursor-not-allowed');
@@ -276,7 +540,8 @@ import Layout from '../layouts/Layout.astro';
           } catch (error) {
             showToast('Error de red al intentar enviar el mensaje', false);
           } finally {
-            btnText.textContent = 'Enviar Mensaje';
+            btnText.textContent = 'Agenda tu cita hoy';
+            iconArrow.classList.remove('hidden');
             spinner.classList.add('hidden');
             submitBtn.disabled = false;
             submitBtn.classList.remove('opacity-75', 'cursor-not-allowed');

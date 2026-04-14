@@ -1,326 +1,467 @@
 ---
 import Layout from '../layouts/Layout.astro';
+
+// AEO: JSON-LD FAQ Schema
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "¿Cuál es la diferencia entre parto natural y cesárea en su hospital?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "El parto natural es un proceso fisiológico respetado con mínima intervención, mientras que la cesárea es un procedimiento quirúrgico mayor. En nuestro centro, ambas opciones cuentan con monitoreo avanzado, pero la cesárea incluye dos noches de hospitalización y uso de quirófano estéril."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Qué debo llevar al hospital para el día del parto?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Se recomienda llevar documentos médicos, estudios previos, ropa cómoda, artículos personales y lo necesario para el recién nacido."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Qué incluye un paquete de maternidad?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Incluye estancia hospitalaria, atención médica especializada, cuidados neonatales y servicios adicionales según el tipo de parto."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Pueden acompañarme durante el parto?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Sí, nuestras salas LPR (Labor, Parto y Recuperación) están diseñadas para que un acompañante de tu elección esté contigo en todo momento, fomentando el apego y brindando apoyo emocional."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Qué pasa si ocurre una emergencia durante el parto natural?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Contamos con protocolos de emergencia inmediatos. Nuestros quirófanos están disponibles 24/7 y la transición de parto natural a cesárea de emergencia se realiza en minutos con un equipo multidisciplinario listo para actuar."
+      }
+    }
+  ]
+};
+
+// Fetch Especialistas de Ginecología (ID 18)
+let gineDoctors = [];
+try {
+  const res = await fetch('https://administrador.especialidadesmedicassur.com.mx/api/directorio-medico/search?especialidad_id=18&per_page=3');
+  const data = await res.json();
+  if (data && data.data && data.data.data) {
+    gineDoctors = data.data.data;
+  } else if (data && data.data) {
+    gineDoctors = Array.isArray(data.data) ? data.data : [];
+  } else if (Array.isArray(data)) {
+    gineDoctors = data.slice(0, 3);
+  }
+} catch (error) {
+  console.error("Error fetching ginecology doctors:", error);
+}
+
+// Helper para mayúsculas
+const toTitleCase = (str) => {
+  if (!str) return '';
+  const minors = ['y', 'de', 'del', 'el', 'la', 'los', 'las', 'en'];
+  return str.toLowerCase().split(' ').map((word, index) => {
+    if (index > 0 && minors.includes(word)) return word;
+    return word.charAt(0).toUpperCase() + word.slice(1);
+  }).join(' ');
+};
 ---
 
 <Layout 
-  title="Maternidad | El comienzo perfecto para tu bebé | Centro de Especialidades Médicas"
-  description="En el Centro de Especialidades Médicas, cada detalle está diseñado para vivir el milagro del nacimiento con máxima seguridad y calidez humana."
+  title="Centro de Maternidad en Monterrey | Especialistas en Embarazo"
+  description="Atención integral para embarazo y parto con ginecólogos certificados. Clínicas seguras, UCIN Nivel III y certificación JCI. Conoce el Centro de Maternidad en Monterrey."
 >
-  <!-- 1. Hero Section "El Comienzo Perfecto" -->
-  <section class="relative w-full min-h-[90vh] flex items-center bg-white overflow-hidden pt-24 pb-12 lg:pt-32 lg:pb-24">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20">
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-        <!-- Izquierda: Texto -->
-        <div class="hero-maternity-content flex flex-col justify-center text-center lg:text-left order-2 lg:order-1">
-          <span class="inline-block self-center lg:self-start py-1 px-4 rounded-full bg-pink-50 border border-pink-100 text-slate-800 text-xs md:text-sm font-semibold tracking-widest uppercase mb-6 shadow-sm">
-            Maternidad Premium
-          </span>
-          <h1 class="text-4xl md:text-5xl lg:text-6xl font-serif text-slate-900 mb-6 tracking-tight leading-tight">
-            El recibimiento más <span class="text-slate-600 italic">cálido</span> y seguro para tu bebé.
-          </h1>
-          <p class="text-lg md:text-xl text-slate-600 mb-10 max-w-2xl mx-auto lg:mx-0 font-light leading-relaxed">
-            Cada detalle está diseñado para que vivas el milagro del nacimiento con la tranquilidad de estar en manos de expertos, envuelta en un ambiente de confort inigualable.
-          </p>
-          <div class="flex flex-col sm:flex-row items-center gap-4 justify-center lg:justify-start">
-            <a href="#paquetes" class="w-full sm:w-auto px-8 py-4 bg-slate-900 text-white text-lg font-medium rounded-full hover:bg-slate-800 transition-colors shadow-xl shadow-slate-900/20 text-center">
-              Ver Paquetes de Parto
-            </a>
-            <!-- Glass button for Virtual Tour -->
-            <a href="#instalaciones" class="w-full sm:w-auto px-8 py-4 bg-white/40 backdrop-blur-md border border-white/60 shadow-lg text-slate-900 text-lg font-medium rounded-full hover:bg-white/60 transition-all flex items-center justify-center leading-none relative group overflow-hidden">
-              <span class="absolute inset-0 bg-pink-50/50 transform translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-in-out"></span>
-              <i class="ph ph-play-circle text-2xl mr-2 relative z-10 text-pink-400 group-hover:text-pink-500 transition-colors"></i> 
-              <span class="relative z-10 font-bold">Tour Virtual</span>
-            </a>
+  <!-- Preload Font for Performance -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+
+  <style>
+    /* Aplicando la tipografía solicitada a todo el scope de esta página */
+    .font-jakarta {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+    
+    /* Estilos específicos si se requiere forzar el color de base */
+    .text-primary-blue { color: #004b87; }
+    .bg-primary-blue { background-color: #004b87; }
+    .text-surgical-cyan { color: #00a3e0; }
+    .bg-surgical-cyan { background-color: #00a3e0; }
+  </style>
+
+  <!-- Inject JSON-LD para SEO (AEO) -->
+  <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+
+  <div class="font-jakarta text-slate-700 bg-slate-50 selection:bg-[#00a3e0] selection:text-white">
+    
+    <!-- 1. HERO SECTION -->
+    <section class="relative w-full min-h-[90vh] flex items-center bg-white overflow-hidden py-20 lg:py-32">
+      <!-- Decoración de fondo suave -->
+      <div class="absolute inset-0 z-0 pointer-events-none opacity-40 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-blue-100 via-transparent to-transparent"></div>
+      
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+          <!-- Text Content -->
+          <div class="hero-content flex flex-col justify-center text-center lg:text-left order-2 lg:order-1">
+            <div class="inline-flex items-center self-center lg:self-start px-3 py-1 rounded-full bg-blue-50 border border-blue-100 text-[#004b87] text-sm font-semibold tracking-wide mb-6">
+              <span class="w-2 h-2 rounded-full bg-[#00a3e0] mr-2"></span>
+              Líderes en Maternidad
+            </div>
+            <!-- Accionable 1: H1 SEO Optimizado -->
+            <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold text-[#004b87] mb-6 tracking-tight leading-[1.1]">
+              Centro de Maternidad en Monterrey
+            </h1>
+            <p class="text-lg md:text-xl text-slate-600 mb-10 max-w-2xl mx-auto lg:mx-0 font-medium leading-relaxed">
+              Atención integral para embarazo y parto con ginecólogos certificados y tecnología especializada. Tu bienestar y el de tu bebé son nuestra absoluta prioridad.
+            </p>
+            <div class="flex flex-col sm:flex-row items-center gap-4 justify-center lg:justify-start">
+              <a href="#paquetes" class="w-full sm:w-auto px-8 py-4 bg-[#004b87] text-white text-lg font-bold rounded-xl hover:bg-blue-900 transition-colors shadow-lg shadow-blue-900/20 text-center">
+                Ver Paquetes de Parto
+              </a>
+              <a href="/contacto" class="w-full sm:w-auto px-8 py-4 glass-card text-[#004b87] text-lg font-bold hover:bg-white/90 transition-all flex items-center justify-center">
+                Agenda tu Cita Médica
+              </a>
+            </div>
+          </div>
+
+          <!-- Hero Image con Fade/Mask Effect -->
+          <div class="hero-image-container relative order-1 lg:order-2">
+            <div class="relative w-full max-w-lg mx-auto aspect-[4/5] lg:aspect-square">
+              <!-- Mask image para crear un borde suave difuminado -->
+              <div class="absolute inset-0 rounded-[3rem] overflow-hidden bg-gradient-to-tr from-blue-50 to-white" style="mask-image: radial-gradient(white, black); -webkit-mask-image: -webkit-radial-gradient(white, black);">
+                <img 
+                  src="/images/momBaby.webp" 
+                  alt="Madre y bebé en Centro de Maternidad en Monterrey" 
+                  class="w-full h-full object-cover object-center hero-parallax-img scale-105"
+                  onerror="this.src='https://images.unsplash.com/photo-1544281679-450f75e2eb22?q=80&w=2670&auto=format&fit=crop'"
+                />
+                <!-- Gradiente superpuesto sutil -->
+                <div class="absolute inset-0 bg-gradient-to-t from-[#004b87]/30 to-transparent"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. SEGURIDAD PRIMERO (E-E-A-T & AEO) -->
+    <section class="py-24 bg-slate-50 relative z-20 shadow-[0_-20px_40px_-20px_rgba(0,0,0,0.05)]">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16 max-w-4xl mx-auto safety-header">
+          <h2 class="text-3xl md:text-5xl font-extrabold text-[#004b87] mb-4">Certificación internacional para tu seguridad (JCI)</h2>
+          <p class="text-slate-600 text-lg md:text-xl">Respaldados por la Joint Commission International (JCI), garantizamos los más altos estándares globales en atención médica materno-infantil.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+          <!-- AEO Snippet LPR -->
+          <div class="glass-card p-10 hover:-translate-y-1 transition-transform duration-300 safety-card">
+            <div class="flex items-center mb-6">
+              <div class="w-14 h-14 bg-white rounded-full flex items-center justify-center shadow-md mr-4">
+                <i class="ph ph-house-line text-3xl text-[#00a3e0]"></i>
+              </div>
+              <h3 class="text-2xl font-extrabold text-[#004b87]">¿Qué es una sala LPR?</h3>
+            </div>
+            <p class="text-slate-600 leading-relaxed text-lg">
+              Una sala <strong>LPR (Labor, Parto y Recuperación)</strong> es una habitación privada y acondicionada donde la madre experimenta todo el proceso de dar a luz sin necesidad de ser trasladada a diferentes áreas, reduciendo el estrés y fomentando el apego inmediato en un entorno familiar y seguro.
+            </p>
+          </div>
+
+          <!-- AEO Snippet UCIN -->
+          <div class="glass-card p-10 hover:-translate-y-1 transition-transform duration-300 safety-card">
+            <div class="flex items-center mb-6">
+              <div class="w-14 h-14 bg-white rounded-full flex items-center justify-center shadow-md mr-4">
+                <i class="ph ph-baby text-3xl text-[#00a3e0]"></i>
+              </div>
+              <h3 class="text-2xl font-extrabold text-[#004b87]">UCIN Nivel III</h3>
+            </div>
+            <p class="text-slate-600 leading-relaxed text-lg">
+              Nuestra <strong>Unidad de Cuidados Intensivos Neonatales (UCIN) de Nivel III</strong> es un beneficio directo para tu bebé: significa que contamos con neonatólogos 24/7 y ventilación mecánica avanzada, listos para resolver desde complicaciones menores hasta atención crítica compleja al instante.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. ESPECIALISTAS (E-E-A-T) -->
+    <section class="py-24 bg-white relative">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <h2 class="text-3xl md:text-5xl font-extrabold text-[#004b87] mb-6">Equipo médico para embarazo y parto</h2>
+        <p class="text-slate-600 text-lg md:text-xl max-w-2xl mx-auto mb-16">
+          Nuestros ginecólogos y obstetras están avalados por el Consejo Mexicano de Ginecología y Obstetricia.
+        </p>
+
+        <!-- Grid de Médicos -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12" id="especialistas-grid">
+          {gineDoctors.length > 0 ? gineDoctors.map((doc) => (
+            <div class="glass-card p-8 border border-slate-100 text-center doctor-card">
+              <div class="w-32 h-32 mx-auto rounded-full bg-slate-200 overflow-hidden mb-6 border-4 border-white shadow-lg">
+                <img src={doc.foto || "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect fill='%23f1f5f9' width='100' height='100'/><path fill='%23cbd5e1' d='M50 50c11.046 0 20-8.954 20-20s-8.954-20-20-20-20 8.954-20 20 8.954 20 20 20zm0 10c-13.314 0-40 6.671-40 20v10h80V80c0-13.329-26.686-20-40-20z'/></svg>"} alt={`Dr. ${toTitleCase(doc.nombre)}`} loading="lazy" class="w-full h-full object-cover border border-slate-100" />
+              </div>
+              <h3 class="text-xl font-extrabold text-[#004b87] mb-1 line-clamp-1" title={toTitleCase(doc.nombre)}>{toTitleCase(doc.nombre)}</h3>
+              <p class="text-slate-500 font-medium mb-4 line-clamp-1">{doc.especialidad || 'Ginecoyobstetricia'}</p>
+              <div class="inline-flex items-center justify-center px-4 py-2 bg-blue-50 text-[#004b87] rounded-lg text-sm font-bold w-full">
+                <i class="ph-fill ph-seal-check text-[#00a3e0] mr-2"></i> Certificado Especialista
+              </div>
+            </div>
+          )) : (
+            <div class="col-span-full text-center text-slate-500 py-8">
+              No se pudieron cargar los especialistas en este momento.
+            </div>
+          )}
+        </div>
+
+        <a href="/directorio?especialidad=ginecologia-y-obstetricia" class="inline-flex items-center justify-center px-8 py-4 bg-[#00a3e0] text-white text-lg font-bold rounded-xl hover:bg-cyan-500 transition-colors shadow-lg shadow-cyan-500/30">
+          Conoce a nuestros especialistas y agenda tu cita
+        </a>
+      </div>
+    </section>
+
+    <!-- 4. PAQUETES AEO -->
+    <section id="paquetes" class="py-24 bg-[#004b87] relative overflow-hidden rounded-t-[3rem] lg:rounded-t-[5rem]">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div class="text-center mb-16 max-w-3xl mx-auto">
+          <h2 class="text-3xl md:text-5xl font-extrabold text-white mb-6">Planes de Maternidad Transparentes</h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto items-stretch package-wrapper">
+          <!-- Paquete Natural -->
+          <div class="glass-card !bg-white p-10 md:p-14 relative flex flex-col h-full transform transition hover:scale-[1.02] duration-300">
+            <h3 class="text-2xl md:text-3xl font-extrabold text-[#004b87] mb-4">¿Qué incluye el paquete de parto natural?</h3>
+            <ul class="space-y-4 flex-grow mb-8 mt-4">
+              <li class="flex items-start">
+                <i class="ph-fill ph-check-circle text-[#00a3e0] text-2xl mr-3 mt-0.5 flex-shrink-0"></i>
+                <span class="text-slate-700 font-medium leading-tight">Estancia en Habitación Suite LPR</span>
+              </li>
+              <li class="flex items-start">
+                <i class="ph-fill ph-check-circle text-[#00a3e0] text-2xl mr-3 mt-0.5 flex-shrink-0"></i>
+                <span class="text-slate-700 font-medium leading-tight">Uso e insumos básicos de sala de labor</span>
+              </li>
+              <li class="flex items-start">
+                <i class="ph-fill ph-check-circle text-[#00a3e0] text-2xl mr-3 mt-0.5 flex-shrink-0"></i>
+                <span class="text-slate-700 font-medium leading-tight">Enfermería neonatal en cuneros 24 hrs</span>
+              </li>
+              <li class="flex items-start">
+                <i class="ph-fill ph-check-circle text-[#00a3e0] text-2xl mr-3 mt-0.5 flex-shrink-0"></i>
+                <span class="text-slate-700 font-medium leading-tight">Vacunas aplicadas al nacer (BCG y Hep. B)</span>
+              </li>
+            </ul>
+            <a href="/contacto" class="w-full mt-auto block text-center py-4 px-6 rounded-xl border-2 border-[#004b87] text-[#004b87] font-bold hover:bg-blue-50 transition-colors">Agendar Cita de Valoración</a>
+          </div>
+
+          <!-- Paquete Cesárea -->
+          <div class="glass-card !bg-white p-10 md:p-14 relative flex flex-col h-full transform transition hover:scale-[1.02] duration-300 border-4 !border-[#00a3e0]">
+            <div class="absolute -top-5 left-1/2 transform -translate-x-1/2 bg-[#00a3e0] text-white px-6 py-2 rounded-full font-bold text-sm tracking-widest uppercase shadow-xl flex items-center whitespace-nowrap">
+              <i class="ph-fill ph-star mr-2 text-white"></i> Opción Segura
+            </div>
+            
+            <h3 class="text-2xl md:text-3xl font-extrabold text-[#004b87] mb-4">¿Qué incluye el paquete de cesárea?</h3>
+            <ul class="space-y-4 flex-grow mb-8 mt-4">
+              <li class="flex items-start">
+                <i class="ph-fill ph-check-circle text-[#00a3e0] text-2xl mr-3 mt-0.5 flex-shrink-0"></i>
+                <span class="text-slate-700 font-medium leading-tight">2 Noches en Habitación Suite Privada</span>
+              </li>
+              <li class="flex items-start">
+                <i class="ph-fill ph-check-circle text-[#00a3e0] text-2xl mr-3 mt-0.5 flex-shrink-0"></i>
+                <span class="text-slate-700 font-medium leading-tight">Uso de Quirófano estéril e instrumental</span>
+              </li>
+              <li class="flex items-start">
+                <i class="ph-fill ph-check-circle text-[#00a3e0] text-2xl mr-3 mt-0.5 flex-shrink-0"></i>
+                <span class="text-slate-700 font-medium leading-tight">Sala de recuperación postanestésica</span>
+              </li>
+              <li class="flex items-start">
+                <i class="ph-fill ph-check-circle text-[#00a3e0] text-2xl mr-3 mt-0.5 flex-shrink-0"></i>
+                <span class="text-slate-700 font-medium leading-tight">Enfermería neonatal en cuneros 48 hrs</span>
+              </li>
+            </ul>
+            <a href="/contacto" class="w-full mt-auto block text-center py-4 px-6 rounded-xl bg-[#00a3e0] text-white font-bold hover:bg-cyan-500 transition-colors shadow-lg">Agendar Cita de Valoración</a>
           </div>
         </div>
 
-        <!-- Derecha: Imagen Premium -->
-        <div class="hero-image-container relative order-1 lg:order-2 w-full max-w-md lg:max-w-full mx-auto">
-          <!-- Decoraciones sutiles bg -->
-          <div class="absolute -top-10 -right-10 w-full h-full bg-pink-50 rounded-[3rem] -z-10 transform rotate-3 scale-105"></div>
-          <div class="absolute -bottom-6 -left-6 w-3/4 h-3/4 bg-slate-100 rounded-[3rem] -z-10 transform -rotate-2"></div>
+        <!-- Notas de Transparencia & Claridad AEO -->
+        <div class="mt-12 max-w-5xl mx-auto glass-card !bg-white/10 p-8 border-none opacity-95">
+          <div class="grid md:grid-cols-2 gap-8 text-white text-sm">
+            <div>
+              <h4 class="font-extrabold flex items-center mb-2 text-lg"><i class="ph ph-info text-2xl mr-2 text-[#00a3e0]"></i> Transparencia Médica</h4>
+              <p class="leading-relaxed opacity-90">Tu seguridad es 24/7. En caso de una complicación real durante un intento de parto natural, el equipo médico está preparado para realizar una <strong>transición inmediata a cesárea de emergencia</strong>, ajustando los lineamientos del paquete hacia los insumos quirúrgicos sin demoras.</p>
+            </div>
+            <div>
+              <h4 class="font-extrabold flex items-center mb-2 text-lg"><i class="ph ph-ear text-2xl mr-2 text-[#00a3e0]"></i> Tamiz Auditivo vs. Metabólico</h4>
+              <p class="leading-relaxed opacity-90">Ambos paquetes consideran opciones de tamizaje. El <strong>tamiz auditivo</strong> evalúa precozmente la capacidad de audición del recién nacido, mientras que el <strong>tamiz metabólico</strong> (una pequeña punción en el talón) detecta alteraciones bioquímicas en los primeros días de vida.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. PRUEBA SOCIAL -->
+    <section class="py-24 bg-slate-50 border-b border-slate-200">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <h2 class="text-3xl md:text-5xl font-extrabold text-[#004b87] mb-12">Testimonios de nuestras pacientes</h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div class="glass-card p-10 text-left testimonial-card">
+            <div class="flex text-yellow-400 mb-4 text-xl">
+              <i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i>
+            </div>
+            <p class="text-slate-600 font-medium italic mb-6">"El trato de las enfermeras y la doctora Ana en la sala LPR hizo que mi parto natural fuera mágico. Nunca me sentí sola, la seguridad de estar ahí me dio mucha paz."</p>
+            <h4 class="font-bold text-[#004b87]">— Mariana G.</h4>
+          </div>
           
-          <div class="relative rounded-[4rem] lg:rounded-[6rem] overflow-hidden shadow-2xl shadow-slate-900/10 parallax-img-wrapper" style="transform-style: preserve-3d;">
-            <img 
-              src="/images/momBaby.webp" 
-              alt="Maternidad Cálida y Segura" 
-              class="w-full h-auto object-cover object-center hero-parallax-img scale-110"
-              style="min-height: 500px;"
-            />
+          <div class="glass-card p-10 text-left testimonial-card">
+             <div class="flex text-yellow-400 mb-4 text-xl">
+              <i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i>
+            </div>
+            <p class="text-slate-600 font-medium italic mb-6">"Mi bebé tuvo que ir a la UCIN por unas complicaciones. Saber que el área estaba a unos pasos y ver el profesionalismo de los neonatólogos nos salvó del pánico."</p>
+            <h4 class="font-bold text-[#004b87]">— Lucía Y.</h4>
+          </div>
+
+          <div class="glass-card p-10 text-left testimonial-card">
+             <div class="flex text-yellow-400 mb-4 text-xl">
+              <i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i>
+            </div>
+            <p class="text-slate-600 font-medium italic mb-6">"Tuve una cesárea programada. El quirófano estaba impecable, sentí el respaldo por ser un hospital certificado JCI. La recuperación en la suite fue súper cómoda."</p>
+            <h4 class="font-bold text-[#004b87]">— Fernanda R.</h4>
           </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- 4. Tu Seguridad es Primero (E-E-A-T) -->
-  <section class="py-24 bg-white relative z-30">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center mb-16 max-w-3xl mx-auto safety-header">
-        <h2 class="text-3xl md:text-5xl font-bold font-serif text-slate-900 mb-6">Tu Seguridad es Primero</h2>
-        <p class="text-slate-600 text-lg md:text-xl font-light">Acompañamiento integral desde el primer síntoma, con tecnología y protocolos de clase mundial.</p>
-      </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-        <!-- Badge 1 -->
-        <div class="benefit-card bg-slate-50 p-10 rounded-[3rem] border border-slate-100 shadow-2xl shadow-blue-900/5 hover:-translate-y-2 transition-transform duration-500 group">
-          <div class="w-16 h-16 bg-white text-slate-900 rounded-full flex items-center justify-center mb-8 shadow-sm group-hover:bg-pink-50 group-hover:text-pink-600 transition-colors duration-500 border border-slate-100 group-hover:border-pink-100">
-            <i class="ph ph-baby text-3xl"></i>
-          </div>
-          <h3 class="text-xl md:text-2xl font-bold font-serif text-slate-900 mb-4">UCIN Nivel III</h3>
-          <p class="text-slate-600 font-light leading-relaxed">Terapia Intensiva Neonatal especializada con equipos de soporte de vida continuo para recién nacidos que requieren cuidados críticos.</p>
+    <!-- 6. FAQ AVANZADA -->
+    <section class="py-24 bg-white relative">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16 faq-header">
+          <h2 class="text-3xl md:text-5xl font-black text-[#004b87] tracking-tight mb-4">Preguntas Frecuentes</h2>
+          <p class="text-slate-600 text-lg md:text-xl font-medium">Respuestas rápidas para facilitarte el acceso a tu atención médica.</p>
         </div>
         
-        <!-- Badge 2 -->
-        <div class="benefit-card bg-slate-50 p-10 rounded-[3rem] border border-slate-100 shadow-2xl shadow-blue-900/5 hover:-translate-y-2 transition-transform duration-500 group">
-          <div class="w-16 h-16 bg-white text-slate-900 rounded-full flex items-center justify-center mb-8 shadow-sm group-hover:bg-slate-900 group-hover:text-white transition-colors duration-500 border border-slate-100">
-            <i class="ph ph-stethoscope text-3xl"></i>
-          </div>
-          <h3 class="text-xl md:text-2xl font-bold font-serif text-slate-900 mb-4">Expertos 24/7</h3>
-          <p class="text-slate-600 font-light leading-relaxed">Ginecólogos, cardiólogos y especialistas certificados de guardia permanente para garantizar atención ante cualquier eventualidad.</p>
-        </div>
-
-        <!-- Badge 3 -->
-        <div class="benefit-card bg-slate-50 p-10 rounded-[3rem] border border-slate-100 shadow-2xl shadow-blue-900/5 hover:-translate-y-2 transition-transform duration-500 group">
-          <div class="w-16 h-16 bg-white text-slate-900 rounded-full flex items-center justify-center mb-8 shadow-sm group-hover:bg-pink-50 group-hover:text-pink-600 transition-colors duration-500 border border-slate-100 group-hover:border-pink-100">
-            <i class="ph ph-shield-check text-3xl"></i>
-          </div>
-          <h3 class="text-xl md:text-2xl font-bold font-serif text-slate-900 mb-4">Protocolos Globales</h3>
-          <p class="text-slate-600 font-light leading-relaxed">Instalaciones estructuradas bajo los estrictos protocolos de la Joint Commission International para la total seguridad de madre e hijo.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 2. Paquetes Section (Pricing & Benefits) -->
-  <section id="paquetes" class="py-24 bg-slate-50 packages-section overflow-hidden rounded-[3rem] lg:rounded-[5rem]">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center mb-20 max-w-3xl mx-auto">
-        <h2 class="text-3xl md:text-5xl font-bold font-serif text-slate-900 mb-6">Nuestros Paquetes de Parto</h2>
-        <p class="text-slate-600 text-lg md:text-xl font-light">Planes todo-incluido diseñados con una meta simple: que te enfoques exclusivamente en darle la bienvenida a tu bebé.</p>
-      </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 max-w-5xl mx-auto items-stretch">
-        <!-- Natural -->
-        <div class="bg-white p-10 md:p-14 rounded-[3rem] border border-slate-100 shadow-2xl shadow-slate-900/5 relative flex flex-col h-full transform transition hover:scale-[1.02] duration-500">
-          <h3 class="text-3xl font-bold font-serif text-slate-900 mb-3">Parto Natural</h3>
-          <p class="text-slate-500 font-light mb-10 pb-8 border-b border-slate-100">Para una experiencia tradicional, respetada y bajo tus propios términos médicos.</p>
-          
-          <ul class="space-y-6 flex-grow">
-            <li class="flex items-center">
-              <i class="ph ph-check text-slate-400 text-xl mr-4 font-bold flex-shrink-0"></i>
-              <span class="text-slate-700 font-light">Habitación tipo Suite por 1 noche</span>
-            </li>
-            <li class="flex items-center">
-              <i class="ph ph-check text-slate-400 text-xl mr-4 font-bold flex-shrink-0"></i>
-              <span class="text-slate-700 font-light">Derecho de Sala de Labor (LPR)</span>
-            </li>
-            <li class="flex items-center">
-              <i class="ph ph-check text-slate-400 text-xl mr-4 font-bold flex-shrink-0"></i>
-              <span class="text-slate-700 font-light">Atención Neonatal 24/7 en cuneros</span>
-            </li>
-            <li class="flex items-center">
-              <i class="ph ph-check text-slate-400 text-xl mr-4 font-bold flex-shrink-0"></i>
-              <span class="text-slate-700 font-light">Tamiz Auditivo Neonatal</span>
-            </li>
-            <li class="flex items-center">
-              <i class="ph ph-check text-slate-400 text-xl mr-4 font-bold flex-shrink-0"></i>
-              <span class="text-slate-700 font-light">Kit de Bienvenida Maternidad</span>
-            </li>
-          </ul>
-
-          <div class="mt-12 pt-8">
-            <a href="#" class="w-full block text-center py-4 px-6 rounded-full bg-slate-50 text-slate-900 font-medium hover:bg-slate-100 border border-slate-200 transition-colors">Solicitar Información</a>
-          </div>
-        </div>
-
-        <!-- Cesárea (Premium Highlighted) -->
-        <div class="bg-slate-900 text-white p-10 md:p-14 rounded-[3rem] border border-slate-800 shadow-2xl shadow-slate-900/30 relative flex flex-col h-full transform transition hover:scale-[1.02] md:-translate-y-6 duration-500">
-          <!-- Badge Pulse -->
-          <div class="absolute -top-5 left-1/2 transform -translate-x-1/2 flex items-center justify-center">
-            <div class="absolute inset-0 bg-pink-400 rounded-full animate-ping opacity-20"></div>
-            <div class="bg-gradient-to-r from-pink-100 to-pink-50 text-slate-900 px-6 py-2 rounded-full font-medium text-sm tracking-widest uppercase shadow-xl relative z-10 whitespace-nowrap flex items-center">
-              <i class="ph-fill ph-star mr-2 text-pink-500 text-lg"></i> Más Elegido
+        <div class="space-y-6">
+          <details class="glass-card rounded-2xl p-6 group cursor-pointer marker:content-[''] border-l-4 border-l-transparent hover:border-l-[#00a3e0] transition-all overflow-hidden bg-white/60 shadow-sm hover:shadow-md">
+            <summary class="text-xl font-bold text-[#004b87] flex justify-between items-center outline-none list-none marker:content-none [&::-webkit-details-marker]:hidden">
+              ¿Cuál es la diferencia entre parto natural y cesárea en su hospital?
+              <i class="ph ph-caret-down transform group-open:rotate-180 transition-transform text-[#00a3e0] text-2xl"></i>
+            </summary>
+            <div class="mt-4 text-slate-600 font-medium leading-relaxed border-t border-slate-100 pt-4 pr-8">
+              El parto natural es un proceso fisiológico respetado con mínima intervención, mientras que la cesárea es un procedimiento quirúrgico mayor. En nuestro centro, ambas opciones cuentan con monitoreo avanzado, pero la cesárea incluye dos noches de hospitalización y uso de quirófano estéril.
             </div>
-          </div>
-          
-          <h3 class="text-3xl font-bold font-serif text-white mb-3 mt-4 md:mt-0">Cesárea</h3>
-          <p class="text-slate-400 font-light mb-10 pb-8 border-b border-slate-800">Confort premium y monitoreo extendido para una recuperación post-quirúrgica impecable.</p>
-          
-          <ul class="space-y-6 flex-grow">
-             <li class="flex items-center">
-              <i class="ph ph-check text-pink-300 text-xl mr-4 font-bold flex-shrink-0"></i>
-              <span class="text-slate-200 font-light">Habitación tipo Suite por 2 noches</span>
-            </li>
-            <li class="flex items-center">
-              <i class="ph ph-check text-pink-300 text-xl mr-4 font-bold flex-shrink-0"></i>
-              <span class="text-slate-200 font-light">Uso de Quirófano estéril certificado</span>
-            </li>
-            <li class="flex items-center">
-              <i class="ph ph-check text-pink-300 text-xl mr-4 font-bold flex-shrink-0"></i>
-              <span class="text-slate-200 font-light">Atención Neonatal 24/7 en cuneros</span>
-            </li>
-             <li class="flex items-center">
-              <i class="ph ph-check text-pink-300 text-xl mr-4 font-bold flex-shrink-0"></i>
-              <span class="text-slate-200 font-light">Tamiz Auditivo Metabólico</span>
-            </li>
-            <li class="flex items-center">
-              <i class="ph ph-check text-pink-300 text-xl mr-4 font-bold flex-shrink-0"></i>
-              <span class="text-slate-200 font-light">Kit de Bienvenida VIP y Amenidades</span>
-            </li>
-          </ul>
+          </details>
 
-          <div class="mt-12 pt-8">
-            <a href="#" class="w-full block text-center py-4 px-6 rounded-full bg-white text-slate-900 font-medium hover:bg-pink-50 transition-colors shadow-lg shadow-white/10">Reservar Paquete</a>
-          </div>
+          <details class="glass-card rounded-2xl p-6 group cursor-pointer marker:content-[''] border-l-4 border-l-transparent hover:border-l-[#00a3e0] transition-all overflow-hidden bg-white/60 shadow-sm hover:shadow-md">
+            <summary class="text-xl font-bold text-[#004b87] flex justify-between items-center outline-none list-none marker:content-none [&::-webkit-details-marker]:hidden">
+              ¿Qué debo llevar al hospital para el día del parto?
+              <i class="ph ph-caret-down transform group-open:rotate-180 transition-transform text-[#00a3e0] text-2xl"></i>
+            </summary>
+            <div class="mt-4 text-slate-600 font-medium leading-relaxed border-t border-slate-100 pt-4 pr-8">
+              Se recomienda llevar documentos médicos, estudios previos, ropa cómoda, artículos personales y lo necesario para el recién nacido.
+            </div>
+          </details>
+
+          <details class="glass-card rounded-2xl p-6 group cursor-pointer marker:content-[''] border-l-4 border-l-transparent hover:border-l-[#00a3e0] transition-all overflow-hidden bg-white/60 shadow-sm hover:shadow-md">
+            <summary class="text-xl font-bold text-[#004b87] flex justify-between items-center outline-none list-none marker:content-none [&::-webkit-details-marker]:hidden">
+              ¿Qué incluye un paquete de maternidad?
+              <i class="ph ph-caret-down transform group-open:rotate-180 transition-transform text-[#00a3e0] text-2xl"></i>
+            </summary>
+            <div class="mt-4 text-slate-600 font-medium leading-relaxed border-t border-slate-100 pt-4 pr-8">
+              Incluye estancia hospitalaria, atención médica especializada, cuidados neonatales y servicios adicionales según el tipo de parto.
+            </div>
+          </details>
+
+          <details class="glass-card rounded-2xl p-6 group cursor-pointer marker:content-[''] border-l-4 border-l-transparent hover:border-l-[#00a3e0] transition-all overflow-hidden bg-white/60 shadow-sm hover:shadow-md">
+            <summary class="text-xl font-bold text-[#004b87] flex justify-between items-center outline-none list-none marker:content-none [&::-webkit-details-marker]:hidden">
+              ¿Pueden acompañarme durante el parto?
+              <i class="ph ph-caret-down transform group-open:rotate-180 transition-transform text-[#00a3e0] text-2xl"></i>
+            </summary>
+            <div class="mt-4 text-slate-600 font-medium leading-relaxed border-t border-slate-100 pt-4 pr-8">
+              Sí, nuestras salas LPR (Labor, Parto y Recuperación) están diseñadas para que un acompañante de tu elección esté contigo en todo momento, fomentando el apego y brindando apoyo emocional.
+            </div>
+          </details>
+
+           <details class="glass-card rounded-2xl p-6 group cursor-pointer marker:content-[''] border-l-4 border-l-transparent hover:border-l-[#00a3e0] transition-all overflow-hidden bg-white/60 shadow-sm hover:shadow-md">
+            <summary class="text-xl font-bold text-[#004b87] flex justify-between items-center outline-none list-none marker:content-none [&::-webkit-details-marker]:hidden">
+              ¿Qué pasa si ocurre una emergencia durante el parto natural?
+              <i class="ph ph-caret-down transform group-open:rotate-180 transition-transform text-[#00a3e0] text-2xl"></i>
+            </summary>
+            <div class="mt-4 text-slate-600 font-medium leading-relaxed border-t border-slate-100 pt-4 pr-8">
+               Contamos con protocolos de emergencia inmediatos. Nuestros quirófanos están disponibles 24/7 y la transición de parto natural a cesárea de emergencia se realiza en minutos con un equipo multidisciplinario listo para actuar.
+            </div>
+          </details>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- 3. Slider de Instalaciones (Swiper.js) -->
-  <section id="instalaciones" class="py-32 bg-white overflow-hidden relative">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center mb-16 relative z-10 w-full flex flex-col lg:flex-row lg:justify-between lg:items-end w-full">
-      <div class="text-left w-full lg:w-2/3">
-        <h2 class="text-3xl md:text-5xl font-bold font-serif text-slate-900 mb-4">Descubre Nuestras Suites</h2>
-        <p class="text-slate-600 text-lg md:text-xl font-light">Espacios creados para la serenidad y la cercanía, resguardados por tecnología inigualable.</p>
-      </div>
-      <!-- Swiper Navigation Custom -->
-      <div class="hidden lg:flex gap-4 items-center mt-8 lg:mt-0">
-        <div class="swiper-button-prev-custom w-14 h-14 rounded-full border border-slate-200 flex items-center justify-center text-slate-600 hover:bg-slate-900 hover:text-white transition-colors cursor-pointer ring-1 ring-transparent hover:ring-slate-900/50 shadow-sm">
-          <i class="ph ph-arrow-left text-2xl"></i>
-        </div>
-        <div class="swiper-button-next-custom w-14 h-14 rounded-full border border-slate-200 flex items-center justify-center text-slate-600 hover:bg-slate-900 hover:text-white transition-colors cursor-pointer ring-1 ring-transparent hover:ring-slate-900/50 shadow-sm">
-          <i class="ph ph-arrow-right text-2xl"></i>
+    <!-- Sellos de Certificación (Trust Signals) al final de la página -->
+    <div class="bg-white py-12 border-t border-slate-100">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <p class="text-center text-sm font-bold text-slate-400 mb-6 uppercase tracking-widest">Acreditaciones y Sellos de Calidad</p>
+        <div class="flex justify-center items-center gap-12 flex-wrap opacity-60 grayscale hover:grayscale-0 transition-all duration-300">
+           <div class="flex items-center text-[#004b87] font-bold text-xl"><i class="ph-fill ph-seal-check text-4xl mr-2 text-[#00a3e0]"></i> JCI Accredited</div>
+           <div class="flex items-center text-[#004b87] font-bold text-xl"><i class="ph-fill ph-certificate text-4xl mr-2 text-[#00a3e0]"></i> CSG México</div>
+           <div class="flex items-center text-[#004b87] font-bold text-xl"><i class="ph-fill ph-first-aid text-4xl mr-2 text-[#00a3e0]"></i> Hospital Seguro</div>
         </div>
       </div>
     </div>
 
-    <!-- Swiper Container -->
-    <div class="swiper swiper-suites w-full pb-20 px-4 md:px-8 lg:px-0 lg:pl-16 relative z-10" style="overflow-x: hidden;">
-      <div class="swiper-wrapper">
-        <!-- Slide 1 -->
-        <div class="swiper-slide w-full md:w-[70vw] lg:w-[45vw]">
-          <div class="relative w-full h-[50vh] md:h-[60vh] rounded-[3rem] overflow-hidden group shadow-2xl shadow-slate-900/10">
-            <img src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?q=80&w=2000&auto=format&fit=crop" loading="lazy" alt="Suites Privadas LPR" class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105" />
-            <!-- Gradient Overlay -->
-            <div class="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/20 to-transparent"></div>
-            <!-- Caption -->
-            <div class="absolute bottom-8 left-8 right-8">
-              <h4 class="text-2xl md:text-3xl font-bold font-serif text-white mb-2">Suites Privadas LPR</h4>
-              <p class="text-slate-200 font-light text-sm md:text-base line-clamp-2">Amplitud majestuosa orientada al descanso y al contacto piel a piel con total privacidad.</p>
-            </div>
-          </div>
-        </div>
-        <!-- Slide 2 -->
-        <div class="swiper-slide w-full md:w-[70vw] lg:w-[45vw]">
-          <div class="relative w-full h-[50vh] md:h-[60vh] rounded-[3rem] overflow-hidden group shadow-2xl shadow-slate-900/10">
-            <img src="https://images.unsplash.com/photo-1584515933487-779824d29309?q=80&w=2000&auto=format&fit=crop" loading="lazy" alt="Área de Cuneros" class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105" />
-            <div class="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/20 to-transparent"></div>
-            <div class="absolute bottom-8 left-8 right-8">
-              <h4 class="text-2xl md:text-3xl font-bold font-serif text-white mb-2">Área de Cuneros</h4>
-              <p class="text-slate-200 font-light text-sm md:text-base line-clamp-2">Monitoreo experto y continuo las 24 horas a cargo de neonatólogos especialistas.</p>
-            </div>
-          </div>
-        </div>
-        <!-- Slide 3 -->
-        <div class="swiper-slide w-full md:w-[70vw] lg:w-[45vw]">
-          <div class="relative w-full h-[50vh] md:h-[60vh] rounded-[3rem] overflow-hidden group shadow-2xl shadow-slate-900/10">
-            <img src="https://images.unsplash.com/photo-1555252333-9f8e92e65df9?q=80&w=2000&auto=format&fit=crop" loading="lazy" alt="Sala de Lactancia" class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105" />
-            <div class="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/20 to-transparent"></div>
-            <div class="absolute bottom-8 left-8 right-8">
-              <h4 class="text-2xl md:text-3xl font-bold font-serif text-white mb-2">Sala de Lactancia</h4>
-              <p class="text-slate-200 font-light text-sm md:text-base line-clamp-2">Entorno de absoluta paz, equipado con apoyo para un apego nutritivo perfecto.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-      
-      <!-- Mobile Pagination -->
-      <div class="swiper-pagination-custom mt-8 flex justify-center gap-2 lg:hidden"></div>
-    </div>
-  </section>
+  </div> <!-- End font-jakarta wrapper -->
 
-  <!-- Lógica 5. GSAP y Swiper -->
+  <!-- GSAP ANIMATIONS SCRIPT -->
   <script is:inline>
     document.addEventListener('DOMContentLoaded', () => {
-      // Registrar Plugins de GSAP si existen
-      if (typeof window.gsap !== 'undefined') {
+      if (typeof window.gsap !== 'undefined' && typeof window.ScrollTrigger !== 'undefined') {
         const { gsap, ScrollTrigger } = window;
-        if(ScrollTrigger) gsap.registerPlugin(ScrollTrigger);
+        gsap.registerPlugin(ScrollTrigger);
 
-        // 1. Hero Animations
-        const tl = gsap.timeline();
-        
-        tl.from(".hero-maternity-content span", { y: 20, opacity: 0, duration: 0.8, ease: "power3.out" })
-          .from(".hero-maternity-content h1", { y: 30, opacity: 0, duration: 1, ease: "power3.out" }, "-=0.6")
-          .from(".hero-maternity-content p", { y: 20, opacity: 0, duration: 0.8, ease: "power3.out" }, "-=0.6")
-          .from(".hero-maternity-content a", { y: 20, opacity: 0, duration: 0.6, stagger: 0.1, ease: "power2.out" }, "-=0.4")
-          .from(".hero-image-container", { scale: 0.9, opacity: 0, duration: 1.5, ease: "expo.out" }, "-=1");
+        // Hero Reveal
+        const heroTl = gsap.timeline();
+        heroTl.from(".hero-content > *", { y: 30, opacity: 0, duration: 0.8, stagger: 0.15, ease: "power3.out" })
+              .from(".hero-image-container", { scale: 0.95, opacity: 0, duration: 1.2, ease: "expo.out" }, "-=0.6");
 
-        // Parallax suave en la imagen del Hero
-        if(ScrollTrigger) {
-          gsap.to(".hero-parallax-img", {
-            yPercent: 15,
-            ease: "none",
-            scrollTrigger: {
-              trigger: ".hero-image-container",
-              start: "top bottom",
-              end: "bottom top",
-              scrub: true
-            } 
-          });
-        }
-
-        // 2. Beneficios GSAP (back.out)
-        if(ScrollTrigger) {
-          gsap.from(".benefit-card", {
-            scrollTrigger: {
-              trigger: ".safety-header",
-              start: "top 80%"
-            },
-            y: 80,
-            opacity: 0,
-            duration: 0.8,
-            stagger: 0.2,
-            ease: "back.out(1.7)",
-            clearProps: "all"
-          });
-        }
-      }
-
-      // 3. Inicialización del Slider Swiper (Suites)
-      if (typeof window.Swiper !== 'undefined') {
-        const swiper = new window.Swiper('.swiper-suites', {
-          slidesPerView: 1.1,
-          spaceBetween: 20,
-          centeredSlides: true,
-          loop: true,
-          speed: 800,
-          pagination: { 
-            el: '.swiper-pagination-custom',
-            clickable: true 
-          },
-          navigation: { 
-            nextEl: '.swiper-button-next-custom', 
-            prevEl: '.swiper-button-prev-custom' 
-          },
-          breakpoints: {
-            768: {
-              slidesPerView: 1.5,
-              spaceBetween: 30,
-              centeredSlides: false,
-            },
-            1024: {
-              slidesPerView: 2.2,
-              spaceBetween: 40,
-              centeredSlides: false,
-            }
-          }
+        // Parallax simple hero
+        gsap.to(".hero-parallax-img", {
+          yPercent: 10,
+          ease: "none",
+          scrollTrigger: { trigger: ".hero-image-container", start: "top bottom", end: "bottom top", scrub: true } 
         });
+
+        // Seguridad Reveal
+        gsap.from(".safety-card", {
+          scrollTrigger: { trigger: ".safety-header", start: "top 80%" },
+          y: 40, opacity: 0, duration: 0.8, stagger: 0.2, ease: "back.out(1.5)"
+        });
+
+        // Especialistas (Deshabilitado por renderizado inconsistente)
+        /* gsap.from(".doctor-card", {
+          scrollTrigger: { trigger: "#especialistas-grid", start: "top 85%" },
+          y: 40, opacity: 0, duration: 0.8, stagger: 0.15, ease: "power2.out"
+        }); */
+
+        // Paquetes Reveal (Deshabilitado por conflicto con css hover transition)
+        /* gsap.from(".package-wrapper > div", {
+          scrollTrigger: { trigger: "#paquetes", start: "top 70%" },
+          y: 50, opacity: 0, duration: 1, stagger: 0.2, ease: "power3.out"
+        }); */
+
+        // Testimonios Reveal (Deshabilitado por carga de grid inconsistente)
+        /* gsap.from(".testimonial-card", {
+          scrollTrigger: { trigger: ".testimonial-card", start: "top 85%" },
+          scale: 0.9, opacity: 0, duration: 0.8, stagger: 0.2, ease: "back.out(1.2)"
+        }); */
       }
     });
+
+    // Custom CSS for `<details>` open transition if needed:
+    const detailsElements = document.querySelectorAll('details');
+    detailsElements.forEach(targetDetail => {
+      targetDetail.addEventListener('click', (e) => {
+        // Opcional: Cerrar otros detalles al abrir uno nuevo
+      });
+    });
   </script>
-
 </Layout>
-

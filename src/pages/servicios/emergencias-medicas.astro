@@ -1,0 +1,491 @@
+---
+import Layout from "../../layouts/Layout.astro";
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "EmergencyService",
+      "@id": "https://midominio.com/servicios/emergencias-medicas",
+      "url": "https://midominio.com/servicios/emergencias-medicas",
+      "name": "Emergencias Médicas en Monterrey 24/7",
+      "description": "Atención médica de urgencias las 24 horas. Médicos especialistas, diagnóstico inmediato en sitio y equipo para pacientes en estado crítico.",
+      "telephone": "+52-81-8155-5000",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Av. Principal #123",
+        "addressLocality": "Monterrey",
+        "addressRegion": "NL",
+        "postalCode": "64000",
+        "addressCountry": "MX"
+      },
+      "image": "https://midominio.com/images/imggen_1.webp"
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿El servicio de emergencias está disponible las 24 horas?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sí, nuestro departamento de urgencias opera ininterrumpidamente las 24 horas del día, los 365 días del año, con médicos especialistas siempre de guardia física."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Necesito hacer una cita para urgencias?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. Por la naturaleza de una emergencia médica, no se requiere cita previa. Puedes acudir directamente a nuestras instalaciones y serás atendido bajo el sistema de Triage."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Puedo ir a emergencias si mi caso no es grave?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sí, recibimos todo tipo de malestares, sin embargo, nuestra atención se prioriza mediante un sistema de clasificación médica (Triage), donde se atiende primero a los pacientes cuya vida o integridad corre peligro o riesgo inmediato."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Aceptan seguros de gastos médicos mayores en urgencias?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sí, aceptamos la mayoría de los seguros nacionales e internacionales. Nuestro equipo administrativo te auxiliará para notificar a tu aseguradora desde tu ingreso."
+          }
+        }
+      ]
+    }
+  ]
+};
+---
+
+<Layout
+  title="Emergencias Médicas en Monterrey | Urgencias 24/7"
+  description="Servicio de Urgencias Médicas disponible las 24 horas. Tiempo de respuesta inmediato, especialistas calificados y tecnología diagnóstica en el mismo lugar."
+>
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+
+  <!-- 1. Hero de Respuesta Inmediata (Mobile-First / Urgente) -->
+  <section class="relative bg-slate-900 pt-32 pb-10 lg:pt-40 lg:pb-16 overflow-hidden hero-em">
+    <div class="absolute inset-0 z-0">
+      <!-- Overlay oscuro con tono azul marino -->
+      <img src="/images/img_emergencias.webp" alt="Sala de Urgencias Médicas" class="w-full h-full object-cover opacity-40 mix-blend-overlay filter grayscale" />
+      <div class="absolute inset-0 bg-[#004b87]/70"></div>
+      <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-[#00a3e0]/20"></div>
+    </div>
+    
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20 flex flex-col items-center lg:items-start text-center lg:text-left">
+      <span class="inline-flex items-center gap-2 bg-[#dc2626] text-white px-5 py-2 rounded-full text-sm sm:text-base font-black tracking-widest uppercase mb-6 animate-pulse shadow-[0_0_15px_#dc2626]">
+        <div class="w-2 h-2 bg-white rounded-full"></div> ABIERTO 24/7
+      </span>
+      <h1 class="text-4xl sm:text-5xl lg:text-7xl font-black text-white mb-6 leading-[1.1] tracking-tight drop-shadow-2xl">
+        Emergencias Médicas<br class="hidden lg:block" /> 24/7 en Monterrey
+      </h1>
+      <p class="text-lg sm:text-xl text-blue-100 mb-10 max-w-2xl leading-relaxed font-medium">
+        Atención inmediata con médicos especialistas y la tecnología diagnóstica más avanzada disponible en este preciso momento.
+      </p>
+
+      <!-- Botones Críticos (UX Emergency) -->
+      <div class="flex flex-col sm:flex-row gap-4 w-full sm:w-auto mb-8">
+         <a href="tel:+528181555000" class="btn-llamar flex items-center justify-center px-8 py-5 sm:py-6 bg-[#dc2626] text-white text-xl sm:text-2xl font-black rounded-2xl hover:bg-red-700 transition-colors shadow-[0_10px_30px_rgba(220,38,38,0.5)] w-full sm:w-auto">
+           <i class="ph ph-phone-call text-3xl mr-3"></i> Llamar ahora
+         </a>
+         <a href="https://maps.app.goo.gl/VDCtEy4roU6DTcko8" target="_blank" rel="noopener noreferrer" class="flex items-center justify-center px-8 py-5 sm:py-6 bg-white text-[#004b87] text-xl sm:text-2xl font-black rounded-2xl hover:bg-slate-100 transition-colors shadow-xl w-full sm:w-auto border border-white/20">
+           <i class="ph ph-map-pin text-3xl mr-3 text-[#00a3e0]"></i> Cómo llegar
+         </a>
+      </div>
+      
+      <p class="text-white/80 font-bold tracking-wide uppercase text-xs sm:text-sm bg-black/40 px-4 py-2 rounded-lg backdrop-blur-md">
+        <i class="ph ph-warning-circle text-[#dc2626] bg-white rounded-full mr-1"></i> En caso de emergencia real, no esperes. Acude de inmediato.
+      </p>
+    </div>
+  </section>
+
+  <!-- 2. Trust Bar de Capacidad -->
+  <div class="bg-[#004b87] border-y border-blue-800 relative z-30">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 py-6 text-center divide-x divide-blue-800/50 text-white">
+        
+        <div class="flex flex-col items-center">
+           <i class="ph ph-clock text-3xl text-[#00a3e0] mb-2"></i>
+           <p class="font-bold text-xs sm:text-sm tracking-wide">Atención 24/7</p>
+        </div>
+        
+        <div class="flex flex-col items-center">
+           <i class="ph ph-lightning text-3xl text-[#00a3e0] mb-2"></i>
+           <p class="font-bold text-xs sm:text-sm tracking-wide">Respuesta Rápida</p>
+        </div>
+
+        <div class="flex flex-col items-center">
+           <i class="ph ph-user-md text-3xl text-[#00a3e0] mb-2"></i>
+           <p class="font-bold text-xs sm:text-sm tracking-wide">Equipo Capacitado</p>
+        </div>
+
+        <div class="flex flex-col items-center">
+           <i class="ph ph-microscope text-3xl text-[#00a3e0] mb-2"></i>
+           <p class="font-bold text-xs sm:text-sm tracking-wide">Diagnóstico en Sitio</p>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. Definición AEO y 6. Tipos de Emergencias -->
+  <section class="py-16 md:py-24 bg-slate-50 relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+        
+        <!-- Definición AEO (Izquierda) -->
+        <div class="lg:col-span-5 lg:sticky lg:top-32">
+           <span class="text-[#00a3e0] font-black tracking-widest uppercase text-sm mb-4 block">Concepto Médico</span>
+           <h2 class="text-3xl md:text-5xl font-black text-[#004b87] mb-6 leading-tight">
+             ¿Qué es el servicio de emergencias médicas?
+           </h2>
+           <div class="glass-card bg-white p-8 rounded-3xl border border-slate-200 shadow-xl relative overflow-hidden">
+             <div class="absolute top-0 right-0 w-24 h-24 bg-red-100/50 rounded-bl-full pointer-events-none"></div>
+             <p class="text-slate-600 text-lg leading-relaxed mb-6 font-medium relative z-10">
+               Una emergencia médica es una lesión o enfermedad que se presenta de manera súbita e inesperada, y que supone un <strong>riesgo inminente para la vida</strong> o puede causar daños irreversibles en los órganos si no se interviene inmediatamente.
+             </p>
+             <p class="text-slate-600 leading-relaxed relative z-10">
+               Nuestro departamento está estructurado con protocolos internacionales para estabilizar signos vitales en cuestión de minutos (Hora Dorada), realizando estudios agudos y trasladando al paciente al tratamiento definitivo.
+             </p>
+           </div>
+        </div>
+
+        <!-- Tipos de Emergencias (Derecha) -->
+        <div class="lg:col-span-7">
+           <h2 class="text-2xl md:text-3xl font-black text-[#004b87] mb-8">
+             Principales urgencias que atendemos:
+           </h2>
+           <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 urg-types">
+             
+             <div class="bg-white p-6 rounded-2xl border border-slate-200 flex flex-col md:flex-row gap-4 items-start shadow-sm urg-card">
+               <div class="w-12 h-12 rounded-xl bg-red-50 text-[#dc2626] flex justify-center items-center flex-shrink-0">
+                 <i class="ph ph-heart-break text-3xl"></i>
+               </div>
+               <div>
+                  <h3 class="text-lg font-bold text-slate-800 mb-1">Infartos y Cardiacas</h3>
+                  <p class="text-xs text-slate-500 leading-relaxed">Código infarto activo. Intervención hemodinámica y estabilización coronaria inmediata.</p>
+               </div>
+             </div>
+
+             <div class="bg-white p-6 rounded-2xl border border-slate-200 flex flex-col md:flex-row gap-4 items-start shadow-sm urg-card">
+               <div class="w-12 h-12 rounded-xl bg-blue-50 text-[#004b87] flex justify-center items-center flex-shrink-0">
+                 <i class="ph ph-brain text-3xl"></i>
+               </div>
+               <div>
+                  <h3 class="text-lg font-bold text-slate-800 mb-1">Cerebrovasculares</h3>
+                  <p class="text-xs text-slate-500 leading-relaxed">Código cerebro. Perfilamiento rápido para derrames o ECV para preservar función neuronal.</p>
+               </div>
+             </div>
+
+             <div class="bg-white p-6 rounded-2xl border border-slate-200 flex flex-col md:flex-row gap-4 items-start shadow-sm urg-card">
+               <div class="w-12 h-12 rounded-xl bg-orange-50 text-orange-500 flex justify-center items-center flex-shrink-0">
+                 <i class="ph ph-bone text-3xl"></i>
+               </div>
+               <div>
+                  <h3 class="text-lg font-bold text-slate-800 mb-1">Trauma y Fracturas</h3>
+                  <p class="text-xs text-slate-500 leading-relaxed">Accidentes severos, ortopedia de choque y estabilización de daño musculoesquelético.</p>
+               </div>
+             </div>
+
+             <div class="bg-white p-6 rounded-2xl border border-slate-200 flex flex-col md:flex-row gap-4 items-start shadow-sm urg-card">
+               <div class="w-12 h-12 rounded-xl bg-pink-50 text-pink-500 flex justify-center items-center flex-shrink-0">
+                 <i class="ph ph-baby text-3xl"></i>
+               </div>
+               <div>
+                  <h3 class="text-lg font-bold text-slate-800 mb-1">Urgencias Obstétricas</h3>
+                  <p class="text-xs text-slate-500 leading-relaxed">Complicaciones en el embarazo, preeclampsia y monitoreo fetal de emergencia (UCI Neonatal).</p>
+               </div>
+             </div>
+
+             <div class="bg-white p-6 rounded-2xl border border-slate-200 flex flex-col md:flex-row gap-4 items-start shadow-sm urg-card">
+               <div class="w-12 h-12 rounded-xl bg-teal-50 text-teal-500 flex justify-center items-center flex-shrink-0">
+                 <i class="ph ph-baby-carriage text-3xl"></i>
+               </div>
+               <div>
+                  <h3 class="text-lg font-bold text-slate-800 mb-1">Urgencias Pediátricas</h3>
+                  <p class="text-xs text-slate-500 leading-relaxed">Fiebres crónicas, asfixia, crisis asmáticas e ingesta de cuerpos extraños por pediatras 24/7.</p>
+               </div>
+             </div>
+
+             <div class="bg-white p-6 rounded-2xl border border-slate-200 flex flex-col md:flex-row gap-4 items-start shadow-sm urg-card">
+               <div class="w-12 h-12 rounded-xl bg-indigo-50 text-indigo-500 flex justify-center items-center flex-shrink-0">
+                 <i class="ph ph-activity text-3xl"></i>
+               </div>
+               <div>
+                  <h3 class="text-lg font-bold text-slate-800 mb-1">Emergencias Neurológicas</h3>
+                  <p class="text-xs text-slate-500 leading-relaxed">Convulsiones prolongadas sensitivas, pérdida súbita de consciencia y daño a médula espinal.</p>
+               </div>
+             </div>
+
+           </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. Diagnóstico en Sitio y 5. Triage Vertical -->
+  <section class="py-16 md:py-24 bg-white border-y border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-16">
+        
+        <!-- Diagnóstico (Box Técnico) -->
+        <div>
+           <div class="mb-8">
+             <span class="text-[#dc2626] font-bold uppercase text-xs tracking-widest flex items-center gap-2 mb-2"><div class="w-2 h-2 bg-[#dc2626] rounded-full animate-pulse"></div> Cero Traslados Pendientes</span>
+             <h2 class="text-3xl md:text-4xl font-black text-[#004b87] leading-tight">Diagnóstico inmediato en el mismo lugar</h2>
+           </div>
+           
+           <div class="bg-slate-900 border border-slate-800 p-8 rounded-3xl grid grid-cols-1 sm:grid-cols-2 gap-4 text-white">
+              
+              <div class="bg-white/5 border border-white/10 p-5 rounded-2xl flex items-center gap-4 fast-reveal">
+                 <i class="ph ph-lightning text-3xl text-[#00a3e0]"></i>
+                 <div>
+                    <strong class="block text-white">Rayos X</strong>
+                    <span class="text-xs text-slate-400">Digitales y portátiles</span>
+                 </div>
+              </div>
+
+              <div class="bg-white/5 border border-white/10 p-5 rounded-2xl flex items-center gap-4 fast-reveal">
+                 <i class="ph ph-waves text-3xl text-[#00a3e0]"></i>
+                 <div>
+                    <strong class="block text-white">Ultrasonido</strong>
+                    <span class="text-xs text-slate-400">Doppler color</span>
+                 </div>
+              </div>
+
+              <div class="bg-white/5 border border-white/10 p-5 rounded-2xl flex items-center gap-4 fast-reveal">
+                 <i class="ph ph-disc text-3xl text-[#00a3e0]"></i>
+                 <div>
+                    <strong class="block text-white">Tomografía (TAC)</strong>
+                    <span class="text-xs text-slate-400">Alta resolución 3D</span>
+                 </div>
+              </div>
+
+              <div class="bg-white/5 border border-white/10 p-5 rounded-2xl flex items-center gap-4 fast-reveal">
+                 <i class="ph ph-test-tube text-3xl text-[#00a3e0]"></i>
+                 <div>
+                    <strong class="block text-white">Laboratorio CITO</strong>
+                    <span class="text-xs text-slate-400">Resultados en minutos</span>
+                 </div>
+              </div>
+           </div>
+        </div>
+
+        <!-- Triage (Stepper Vertical) -->
+        <div>
+           <h2 class="text-3xl font-black text-[#004b87] mb-8">Protocolo Triage</h2>
+           
+           <div class="relative pl-8 md:pl-10 space-y-10">
+              <!-- Línea vertical conectora -->
+              <div class="absolute left-3.5 md:left-4 top-2 bottom-5 w-1 bg-slate-200"></div>
+
+              <!-- Paso 1 -->
+              <div class="relative fast-reveal">
+                 <div class="absolute -left-[37px] md:-left-[46px] w-8 h-8 md:w-10 md:h-10 bg-[#dc2626] rounded-full border-4 border-white shadow-md flex items-center justify-center text-white text-sm md:text-base font-bold select-none z-10 box-content">1</div>
+                 <div class="glass-card bg-slate-50 p-6 rounded-2xl border border-slate-200">
+                    <h3 class="text-xl font-bold text-slate-900 mb-2">Evaluación Inicial (Triage)</h3>
+                    <p class="text-sm text-slate-600 leading-relaxed">
+                      El paciente es abordado de forma inmediata por personal calificado para clasificar clínicamente la prioridad de su padecimiento (Rojo, Amarillo, Verde).
+                    </p>
+                 </div>
+              </div>
+
+              <!-- Paso 2 -->
+              <div class="relative fast-reveal">
+                 <div class="absolute -left-[37px] md:-left-[46px] w-8 h-8 md:w-10 md:h-10 bg-[#00a3e0] rounded-full border-4 border-white shadow-md flex items-center justify-center text-white text-sm md:text-base font-bold select-none z-10 box-content">2</div>
+                 <div class="glass-card bg-slate-50 p-6 rounded-2xl border border-slate-200">
+                    <h3 class="text-xl font-bold text-slate-900 mb-2">Atención y Diagnóstico</h3>
+                    <p class="text-sm text-slate-600 leading-relaxed">
+                      Pasaje a cubículo de urgencias para interrogatorio, exploración clínica y ejecución rápida de laboratorios/imagenología para identificar el origen crítico.
+                    </p>
+                 </div>
+              </div>
+
+              <!-- Paso 3 -->
+              <div class="relative fast-reveal">
+                 <div class="absolute -left-[37px] md:-left-[46px] w-8 h-8 md:w-10 md:h-10 bg-[#004b87] rounded-full border-4 border-white shadow-md flex items-center justify-center text-white text-sm md:text-base font-bold select-none z-10 box-content">3</div>
+                 <div class="glass-card bg-slate-50 p-6 rounded-2xl border border-slate-200">
+                    <h3 class="text-xl font-bold text-slate-900 mb-2">Tratamiento y Seguimiento</h3>
+                    <p class="text-sm text-slate-600 leading-relaxed">
+                      Aplicación terapéutica in-situ. El paciente puede ser estabilizado y dado de alta, o bien canalizado velozmente a Quirófano o Terapia Intensiva.
+                    </p>
+                 </div>
+              </div>
+           </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. Enfoque Humano & Integración -->
+  <section class="py-16 md:py-24 bg-slate-50 border-b border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        
+        <div class="bg-[#004b87] p-10 rounded-[2.5rem] text-white flex flex-col justify-center relative overflow-hidden shadow-xl">
+           <div class="absolute right-0 bottom-0 opacity-10 blur-xl w-64 h-64 bg-[#00a3e0] rounded-full"></div>
+           <i class="ph ph-heart-half text-5xl text-[#00a3e0] mb-6 relative z-10"></i>
+           <h3 class="text-2xl font-black mb-4 relative z-10">Atención médica con acompañamiento humano</h3>
+           <p class="text-blue-100 leading-relaxed relative z-10 font-light text-lg">
+             Una emergencia genera estrés y miedo insoportable. Nuestro equipo médico y enfermería está altamente capacitado bajo el principio de compasión: explicamos todo con claridad, permitimos soporte familiar cuando es clínico-viable y minimizamos agresivamente el dolor desde el arribo.
+           </p>
+        </div>
+
+        <div class="bg-white border border-slate-200 p-10 rounded-[2.5rem] flex flex-col justify-center shadow-lg relative overflow-hidden">
+           <i class="ph ph-plugs-connected text-5xl text-[#004b87] mb-6"></i>
+           <h3 class="text-2xl font-black text-slate-900 mb-4">Atención integral sin salir del hospital</h3>
+           <p class="text-slate-600 leading-relaxed font-medium text-lg mb-6">
+             La ventaja de una urgencia en nuestro centro es la escalabilidad silenciosa de infraestructura. En caso de requerirlo, tienes a metros de distancia <strong>Quirófano, Terapia Intensiva, Banco de Sangre y Hospitalización</strong>.
+           </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. Formas de Pago y CTA Final -->
+  <section class="py-16 md:py-24 bg-white relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="bg-slate-900 rounded-[3rem] p-10 md:p-16 text-center text-white relative shadow-2xl overflow-hidden">
+         <div class="absolute -top-40 -left-40 w-96 h-96 bg-[#dc2626] rounded-full blur-[150px] opacity-20 pointer-events-none"></div>
+         <div class="absolute -bottom-40 -right-40 w-96 h-96 bg-[#00a3e0] rounded-full blur-[150px] opacity-20 pointer-events-none"></div>
+
+         <div class="relative z-10 max-w-4xl mx-auto">
+            <h2 class="text-3xl md:text-5xl font-black mb-8 leading-tight">
+              ¿Tienes una emergencia médica?<br/>Acude de inmediato o contáctanos.<br/><span class="text-[#dc2626] animate-pulse">Estamos 24/7.</span>
+            </h2>
+            
+            <div class="flex flex-col sm:flex-row justify-center gap-6 mb-12">
+               <a href="tel:+528181555000" class="btn-llamar flex items-center justify-center px-10 py-5 bg-[#dc2626] text-white text-xl font-black rounded-2xl hover:bg-red-700 shadow-xl shadow-red-900/50 w-full sm:w-auto">
+                 Llamar a Urgencias <i class="ph ph-phone text-2xl ml-3"></i>
+               </a>
+               <a href="https://maps.app.goo.gl/VDCtEy4roU6DTcko8" target="_blank" class="flex items-center justify-center px-10 py-5 bg-[#00a3e0] text-white text-xl font-black rounded-2xl hover:bg-[#0081b3] shadow-xl w-full sm:w-auto">
+                 Abrir GPS <i class="ph ph-navigation-arrow text-2xl ml-3"></i>
+               </a>
+            </div>
+
+            <!-- Payment Methods -->
+            <div class="border-t border-slate-700 pt-8 mt-12 mb-4">
+               <p class="text-sm font-bold tracking-wider text-slate-400 mb-6 uppercase">Facilidades Médicas de Pago Inmediato</p>
+               <div class="flex flex-wrap justify-center items-center gap-6 md:gap-12 opacity-80 filter grayscale hover:grayscale-0 transition-all">
+                  <div class="h-8 md:h-10 text-white font-black text-2xl flex items-center gap-2 italic"><i class="ph ph-credit-card text-3xl"></i> VISA</div>
+                  <div class="h-8 md:h-10 text-white font-black text-2xl flex items-center gap-2 italic"><i class="ph ph-credit-card text-3xl"></i> MASTERCARD</div>
+                  <div class="h-8 md:h-10 text-white font-black text-2xl flex items-center gap-2 italic"><i class="ph ph-bank text-3xl"></i> AMEX</div>
+               </div>
+            </div>
+         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9. Sección FAQ Estratégica -->
+  <section class="py-16 md:py-24 bg-slate-50 border-t border-slate-200">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl md:text-5xl font-black text-[#004b87] tracking-tight mb-4">Preguntas Rápidas</h2>
+      </div>
+
+      <div class="space-y-4">
+        
+        <details class="bg-white rounded-2xl p-6 group cursor-pointer marker:content-[''] !border-l-[4px] border-slate-200 !border-l-transparent hover:!border-l-[#dc2626] border shadow-sm transition-all overflow-hidden lg:text-lg">
+          <summary class="font-bold text-[#004b87] flex justify-between items-center outline-none list-none marker:content-none [&::-webkit-details-marker]:hidden">
+            ¿El servicio de urgencias está cerrado en días festivos?
+            <i class="ph ph-caret-down transform group-open:rotate-180 transition-transform text-[#00a3e0] text-xl"></i>
+          </summary>
+          <div class="mt-4 text-slate-600 font-medium leading-relaxed border-t border-slate-100 pt-4 text-base">
+            Jamás. Las instalaciones de emergencias están operando las 24 horas continuas del día, tanto en fines de semana como en días festivos, siempre con plantilla médica completa in situ.
+          </div>
+        </details>
+        
+        <details class="bg-white rounded-2xl p-6 group cursor-pointer marker:content-[''] !border-l-[4px] border-slate-200 !border-l-transparent hover:!border-l-[#dc2626] border shadow-sm transition-all overflow-hidden lg:text-lg">
+          <summary class="font-bold text-[#004b87] flex justify-between items-center outline-none list-none marker:content-none [&::-webkit-details-marker]:hidden">
+            ¿Necesito agendar cita si estoy teniendo una crisis?
+            <i class="ph ph-caret-down transform group-open:rotate-180 transition-transform text-[#00a3e0] text-xl"></i>
+          </summary>
+          <div class="mt-4 text-slate-600 font-medium leading-relaxed border-t border-slate-100 pt-4 text-base">
+            Rotundamente no. Las urgencias no demandan cita. Dirígete sin llamar directamente al área de emergencias; tenemos protocolos para recepción en estado crítico inmediato (sin paso por recepción administrativa).
+          </div>
+        </details>
+
+        <details class="bg-white rounded-2xl p-6 group cursor-pointer marker:content-[''] !border-l-[4px] border-slate-200 !border-l-transparent hover:!border-l-[#dc2626] border shadow-sm transition-all overflow-hidden lg:text-lg">
+          <summary class="font-bold text-[#004b87] flex justify-between items-center outline-none list-none marker:content-none [&::-webkit-details-marker]:hidden">
+            ¿Me van a rechazar si mi malestar "no es grave"?
+            <i class="ph ph-caret-down transform group-open:rotate-180 transition-transform text-[#00a3e0] text-xl"></i>
+          </summary>
+          <div class="mt-4 text-slate-600 font-medium leading-relaxed border-t border-slate-100 pt-4 text-base">
+            No, todos los pacientes son recibidos. Sin embargo, empleamos normas de clasificación Triage. Esto significa que alguien con dolor de oído será atendido *después* de alguien que ingresa con dolor de pecho por infarto. Solo te pedimos un poco de paciencia si esto ocurre.
+          </div>
+        </details>
+
+        <details class="bg-white rounded-2xl p-6 group cursor-pointer marker:content-[''] !border-l-[4px] border-slate-200 !border-l-transparent hover:!border-l-[#dc2626] border shadow-sm transition-all overflow-hidden lg:text-lg">
+          <summary class="font-bold text-[#004b87] flex justify-between items-center outline-none list-none marker:content-none [&::-webkit-details-marker]:hidden">
+            Tengo Seguro de Gastos Médicos Mayores, ¿qué hago?
+            <i class="ph ph-caret-down transform group-open:rotate-180 transition-transform text-[#00a3e0] text-xl"></i>
+          </summary>
+          <div class="mt-4 text-slate-600 font-medium leading-relaxed border-t border-slate-100 pt-4 text-base">
+            Presentarlo en la recepción mientras ingresas. La aseguradora debe notificarse durante las primeras horas del accidente y nosotros te proporcionamos el diagnóstico definitivo para dictaminar su cobertura de red sin frenar tu atención vital médica.
+          </div>
+        </details>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- GSAP Animations (Urgente - Rápido) -->
+  <script is:inline>
+    document.addEventListener("DOMContentLoaded", () => {
+      setTimeout(() => {
+        if (typeof window.gsap !== "undefined" && window.ScrollTrigger) {
+          
+          // Animación Stagger Tipos Urgencia (RÁPIDO)
+          window.gsap.from(".urg-card", {
+            scrollTrigger: {
+              trigger: ".urg-types",
+              start: "top 85%",
+            },
+            y: 30,
+            opacity: 0,
+            duration: 0.3,
+            stagger: 0.08,
+            ease: "power2.out",
+            clearProps: "all",
+          });
+
+          // Animación Fast Reveal Diagnósticos + Triage Vertical
+          window.gsap.from(".fast-reveal", {
+            scrollTrigger: {
+              trigger: ".fast-reveal",
+              start: "top 80%",
+            },
+            x: -20,
+            opacity: 0,
+            duration: 0.4,
+            stagger: 0.1,
+            ease: "power2.out",
+            clearProps: "all",
+          });
+
+          // Pulso vital del botón Llamar (Permanente)
+          window.gsap.to(".btn-llamar", {
+            scale: 1.05,
+            repeat: -1,
+            yoyo: true,
+            ease: "sine.inOut",
+            duration: 0.7
+          });
+
+        }
+      }, 50);
+    });
+  </script>
+
+</Layout>

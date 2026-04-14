@@ -1,0 +1,667 @@
+---
+import Layout from "../../layouts/Layout.astro";
+
+// Generar rutas estáticas para las especialidades
+export async function getStaticPaths() {
+  const cardiologiaParams = {
+    params: { especialidad: "cardiologia" },
+    props: {
+      title: "Cardiología en Monterrey",
+      heroText:
+        "Especialistas altamente capacitados en el diagnóstico rápido y tratamiento avanzado de enfermedades del corazón. Porque el tiempo es vida, ofrecemos atención cardiológica con tecnología de última generación.",
+      definition:
+        "La cardiología es la especialidad médica dedicada al estudio, diagnóstico, tratamiento y prevención de las enfermedades que afectan el corazón y los vasos sanguíneos. Los cardiólogos son expertos en el manejo de condiciones complejas desde arritmias hasta insuficiencia cardíaca, utilizando métodos no invasivos y cirugía avanzada para restaurar la salud cardiovascular del paciente.",
+      symptoms: [
+        { icon: "ph-heartbeat", text: "Dolor en el pecho o presión" },
+        { icon: "ph-wind", text: "Falta de aire o dificultad para respirar" },
+        { icon: "ph-activity", text: "Palpitaciones aceleradas" },
+        { icon: "ph-sneaker", text: "Hinchazón en piernas o tobillos" },
+        { icon: "ph-warning-circle", text: "Mareos frecuentes o desmayos" },
+        { icon: "ph-drop", text: "Cansancio extremo sin razón" },
+      ],
+      diseases: [
+        { name: "Hipertensión Arterial", desc: "Presión sanguínea crónicamente alta que pone en riesgo el corazón." },
+        { name: "Arritmias", desc: "Latidos cardíacos irregulares, demasiado rápidos o lentos." },
+        { name: "Cardiopatía Isquémica", desc: "Reducción del flujo sanguíneo al corazón (riesgo de infarto)." },
+        { name: "Insuficiencia Cardíaca", desc: "El corazón no bombea sangre con la eficacia necesaria." },
+      ],
+      services: [
+        { title: "Electrocardiograma (ECG)", copy: "Registro rápido e indoloro de la actividad eléctrica del corazón.", icon: "ph-pulse" },
+        { title: "Ecocardiograma", copy: "Ultrasonido especializado para observar el movimiento del corazón.", icon: "ph-waves" },
+        { title: "Cateterismo Cardíaco", copy: "Procedimiento mínimamente invasivo para diagnosticar y tratar arterias bloqueadas.", icon: "ph-needle" },
+        { title: "Prueba de Esfuerzo", copy: "Estudio del corazón bajo estrés físico controlado en caminadora.", icon: "ph-person-simple-run" },
+      ],
+      process: [
+        { step: "01", title: "Valoración Inicial", desc: "Revisión completa de tus síntomas e historial médico clínico." },
+        { step: "02", title: "Estudios de Diagnóstico", desc: "Análisis con tecnología de última generación para identificar el problema." },
+        { step: "03", title: "Plan de Tratamiento", desc: "Terapia médica o ruta quirúrgica diseñada acorde a tus necesidades." },
+        { step: "04", title: "Seguimiento", desc: "Monitoreo continuo para asegurar tu recuperación total." },
+      ],
+      specialists: [
+        { name: "Dr. Roberto Gómez", role: "Cardiólogo Intervencionista", img: "https://images.unsplash.com/photo-1612349317150-e410f624c4a5?q=80&w=2070&auto=format&fit=crop", link: "/directorio/roberto-gomez" },
+        { name: "Dra. Elvia Martínez", role: "Especialista en Arritmias", img: "https://images.unsplash.com/photo-1594824406951-3165b497e42d?q=80&w=1974&auto=format&fit=crop", link: "/directorio/elvia-martinez" },
+      ],
+      faq: [
+        { q: "¿Cada cuánto debo visitar al cardiólogo preventivamente?", a: "Si eres mayor de 40 años o tienes antecedentes familiares, se recomienda una evaluación cardiológica anual. Si experimentas síntomas como dolor de pecho frecuente, debes acudir inmediatamente." },
+        { q: "¿Duele el cateterismo cardíaco?", a: "Es un procedimiento de mínima invasión y se realiza bajo anestesia local o sedación, por lo que las molestias son mínimas y la recuperación suele ser rápida." },
+        { q: "¿Cómo saber si mi dolor de pecho es grave?", a: "Si el dolor se irradia al brazo izquierdo, cuello o mandíbula, y va acompañado de sudoración fría o falta de aire, acude de inmediato a urgencias." },
+      ],
+    },
+  };
+
+  const apiSpecialties = [
+    { nombre: "Alergología e Inmunología" },
+    { nombre: "Angiología" },
+    { nombre: "Audiología, Otoneurología y Foniatría" },
+    { nombre: "Cardiología Clínica" },
+    { nombre: "Cirugía General" },
+    { nombre: "Cirugia Pediatrica" },
+    { nombre: "Cirugía Plástica y Reconstructiva" },
+    { nombre: "Cirujano General" },
+    { nombre: "Dermatología" },
+    { nombre: "Endocrinología" },
+    { nombre: "Gastroenterología" },
+    { nombre: "Geriatría" },
+    { nombre: "Ginecología y Obstetricia" },
+    { nombre: "Hematología" },
+    { nombre: "Hepatología" },
+    { nombre: "Infectología" },
+    { nombre: "Medicina Crítica" },
+    { nombre: "Medicina de Urgencias" },
+    { nombre: "Medicina Familiar" },
+    { nombre: "Medicina General" },
+    { nombre: "Medicina Interna" },
+    { nombre: "Nefrología" },
+    { nombre: "Neumología" },
+    { nombre: "Neurocirugía" },
+    { nombre: "Neurología" },
+    { nombre: "Nutrición Clínica" },
+    { nombre: "Odontología" },
+    { nombre: "Oftalmología" },
+    { nombre: "Ortopedia" },
+    { nombre: "Otorrinolaringología" },
+    { nombre: "Otorrinolaringología y Cirugía de Cabeza y Cuello" },
+    { nombre: "Pediatra" },
+    { nombre: "Pediatría" },
+    { nombre: "Psicología" },
+    { nombre: "Psiquiatría" },
+    { nombre: "Traumatología y Ortopedia" },
+    { nombre: "Urología" }
+  ];
+
+  function slugify(text: string) {
+    if (!text) return '';
+    return text.toString().toLowerCase().trim()
+      .normalize('NFD') // remove accents
+      .replace(/[\u0300-\u036f]/g, '')
+      .replace(/\s+/g, '-') // spaces to dashes
+      .replace(/[^\w\-]+/g, '') // remove non-words
+      .replace(/\-\-+/g, '-'); // collapse dashes
+  }
+
+  const otrasEspecialidades = apiSpecialties.map(spec => {
+    return {
+      params: { especialidad: slugify(spec.nombre) },
+      props: {
+        title: `${spec.nombre} en Monterrey`,
+        heroText: `Expertos certificados y altamente capacitados en el diagnóstico rápido y tratamiento avanzado en el área de ${spec.nombre}. Ofrecemos atención médica integral con tecnología de última generación.`,
+        definition: `La ${spec.nombre} es la especialidad dedicada al estudio, diagnóstico, tratamiento y prevención de los padecimientos propios de esta rama médica. Nuestro equipo está preparado para brindarte la mejor atención.`,
+        symptoms: [
+          { icon: "ph-warning-circle", text: "Dolor o malestar continuo" },
+          { icon: "ph-activity", text: "Aparición de síntomas repentinos" },
+          { icon: "ph-thermometer", text: "Fiebre o alteraciones" },
+          { icon: "ph-bed", text: "Fatiga o cansancio extremo" },
+          { icon: "ph-heartbeat", text: "Cambios en tu rutina física" },
+          { icon: "ph-first-aid", text: "Problemas funcionales severos" },
+        ],
+        diseases: [
+          { name: "Padecimiento Común", desc: "Afección regular que requiere atención médica oportuna y diagnóstico preciso." },
+          { name: "Alteración Sistémica", desc: "Modificación de tu estado de salud que amerita tratamiento profesional." },
+          { name: "Padecimiento Complejo", desc: "Condición avanzada que se trata mediante nuestra experiencia clínica." },
+          { name: "Enfermedad Crónica", desc: "Evaluación y tratamiento integral de casos que requieren seguimiento." },
+        ],
+        services: [
+          { title: "Consulta de Valoración", copy: "Revisión clínica exhaustiva y entrevista médica profunda.", icon: "ph-stethoscope" },
+          { title: "Estudios Especializados", copy: "Análisis y procedimientos diagnósticos de vanguardia.", icon: "ph-microscope" },
+          { title: "Tratamiento Integral", copy: "Terapias, procedimientos médicos o quirúrgicos para tu condición.", icon: "ph-pill" },
+          { title: "Monitoreo y Seguimiento", copy: "Control continuo para asegurar una recuperación óptima.", icon: "ph-calendar-check" },
+        ],
+        process: [
+          { step: "01", title: "Valoración Inicial", desc: "Revisión completa de tus síntomas e historial médico clínico." },
+          { step: "02", title: "Estudios de Diagnóstico", desc: "Análisis con tecnología de última generación para identificar el problema." },
+          { step: "03", title: "Plan de Tratamiento", desc: "Terapia médica o ruta quirúrgica diseñada acorde a tus necesidades." },
+          { step: "04", title: "Seguimiento", desc: "Monitoreo continuo para asegurar tu recuperación total." },
+        ],
+        specialists: [
+          { name: "Especialista Clínico", role: `Especialista en ${spec.nombre}`, img: "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?q=80&w=2070&auto=format&fit=crop", link: "/directorio" },
+          { name: "Médico Tratante", role: `Expeto en ${spec.nombre}`, img: "https://images.unsplash.com/photo-1622253692010-333f2da6031d?q=80&w=2064&auto=format&fit=crop", link: "/directorio" },
+        ],
+        faq: [
+          { q: `¿Cuándo debo acudir al especialista en ${spec.nombre}?`, a: "Te recomendamos agendar una consulta si presentas síntomas persistentes, molestias recurrentes o si buscas valoración preventiva." },
+          { q: "¿Qué debo llevar a mi primera cita?", a: "Es útil llevar estudios médicos previos, análisis de laboratorio recientes y una lista de los medicamentos que estás tomando actualmente." },
+          { q: "¿Cuentan con equipo para estudios relacionados?", a: "Sí, nuestras instalaciones están equipadas con tecnología de última generación para realizar los estudios diagnósticos solicitados por tu especialista." },
+        ],
+      }
+    };
+  });
+
+  return [cardiologiaParams, ...otrasEspecialidades];
+}
+
+const { especialidad } = Astro.params;
+// Recuperar Props e Inicializar Valores
+const {
+  title,
+  heroText,
+  definition,
+  symptoms,
+  diseases,
+  services,
+  process,
+  specialists,
+  faq,
+} = Astro.props;
+
+const medicalSpecialtySchema = {
+  "@context": "https://schema.org",
+  "@type": "MedicalSpecialty",
+  name: title,
+  description: heroText,
+  relevantSpecialty: {
+    "@type": "MedicalSpecialty",
+    name: title,
+  },
+};
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faq.map((item: any) => ({
+    "@type": "Question",
+    name: item.q,
+    acceptedAnswer: {
+      "@type": "Answer",
+      text: item.a,
+    },
+  })),
+};
+---
+
+<Layout
+  title={`${title} | Centro de Especialidades Médicas`}
+  description={heroText.substring(0, 160)}
+>
+  <!-- SEO JSON-LD INJECTION -->
+  <script type="application/ld+json" set:html={JSON.stringify(medicalSpecialtySchema)} />
+  <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+
+  <!-- 1. Hero de Especialidad -->
+  <header class="relative pt-32 pb-16 lg:pt-40 lg:pb-24 overflow-hidden bg-gradient-to-br from-slate-900 to-brand-blue text-white">
+    <!-- Background element -->
+    <div class="absolute inset-0 opacity-10 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-white via-brand-blue to-transparent"></div>
+    <div class="relative container mx-auto px-4 max-w-7xl z-10">
+      <div class="max-w-3xl hero-reveal">
+        <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 border border-white/20 text-brand-cyan text-sm font-semibold mb-6">
+          <i class="ph-fill ph-stethoscope text-lg"></i> Especialidad Médica
+        </div>
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6">
+          {title}
+        </h1>
+        <p class="text-lg md:text-xl text-slate-300 mb-8 leading-relaxed">
+          {heroText}
+        </p>
+        <div class="flex flex-wrap items-center gap-4">
+          <a href="/contacto" class="btn-primary inline-flex items-center justify-center bg-brand-cyan hover:bg-cyan-400 text-slate-900 font-bold px-8 py-4 rounded-xl transition-all duration-300 shadow-lg shadow-brand-cyan/20 ring-1 ring-white/10 uppercase tracking-wide">
+            Agendar Consulta
+          </a>
+          <a href={`/directorio?especialidad=${especialidad}`} class="btn-secondary inline-flex items-center justify-center bg-transparent border-2 border-white/20 hover:border-white text-white font-medium px-8 py-4 rounded-xl transition-all duration-300">
+            Ver Especialistas
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- 2. Trust Bar -->
+  <section class="border-b border-slate-200 bg-white py-6">
+    <div class="container mx-auto px-4 max-w-7xl">
+      <div class="flex flex-col md:flex-row justify-center items-center gap-6 md:gap-12 opacity-80 text-sm font-semibold text-slate-600">
+        <div class="flex items-center gap-2">
+          <i class="ph-fill ph-seal-check text-brand-cyan text-2xl"></i>
+          <span>Certificación CSG</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <i class="ph-fill ph-certificate text-brand-cyan text-2xl"></i>
+          <span>Acreditación Joint Commission</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <i class="ph-fill ph-shield-check text-brand-cyan text-2xl"></i>
+          <span>Atención 24/7 Urgencias</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. Definición AEO (Featured Snippet Target) -->
+  <section class="py-16 md:py-24 relative bg-slate-50">
+    <div class="container mx-auto px-4 max-w-4xl text-center">
+      <div class="glass-card shadow-sm rounded-3xl p-8 md:p-12 border-brand-cyan/20">
+        <h2 class="text-2xl md:text-3xl font-bold text-brand-blue mb-6">
+          ¿Qué es la {title.split(" ")[0]}?
+        </h2>
+        <p class="text-lg md:text-xl text-slate-700 leading-relaxed font-medium">
+          {definition}
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. Síntomas y Señales de Alerta -->
+  <section class="py-16 md:py-24 bg-white">
+    <div class="container mx-auto px-4 max-w-7xl">
+      <div class="text-center max-w-2xl mx-auto mb-16">
+        <h2 class="text-3xl md:text-4xl font-bold text-brand-blue mb-4">¿Cuándo acudir al especialista?</h2>
+        <p class="text-slate-600 text-lg">Si presentas uno o más de estos síntomas, te recomendamos agendar una valoración médica de inmediato.</p>
+      </div>
+
+      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 symptom-grid">
+        {symptoms.map((symptom: any) => (
+          <div class="glass-card bg-slate-50 border-slate-200 rounded-2xl p-6 text-center flex flex-col items-center justify-center gap-4 hover:-translate-y-1 transition-transform symptom-card">
+            <div class="w-16 h-16 rounded-full bg-brand-cyan/10 flex items-center justify-center text-brand-cyan mb-2">
+              <i class={`ph ${symptom.icon} text-3xl`}></i>
+            </div>
+            <p class="font-semibold text-slate-800 text-sm">{symptom.text}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. Enfermedades y Padecimientos (SEO Long Tail Bento Grid) -->
+  <section class="py-16 md:py-24 bg-slate-50">
+    <div class="container mx-auto px-4 max-w-7xl">
+      <h2 class="text-3xl md:text-4xl font-bold text-center text-brand-blue mb-16">Padecimientos que tratamos</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 disease-grid">
+        {diseases.map((disease: any, idx: number) => (
+          <div class={`glass-card bg-white p-8 rounded-3xl border-slate-200 h-full flex flex-col disease-card ${idx === 0 || idx === 3 ? "lg:col-span-2" : ""}`}>
+              <h3 class="text-xl font-bold text-brand-blue mb-3 group-hover:text-brand-cyan transition-colors">{disease.name}</h3>
+              <p class="text-slate-600">{disease.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. Servicios y Tratamientos -->
+  <section class="py-16 md:py-24 bg-white relative overflow-hidden">
+    <div class="container mx-auto px-4 max-w-7xl">
+      <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
+        <div class="max-w-2xl">
+          <h2 class="text-3xl md:text-4xl font-bold text-brand-blue mb-4">Servicios y Procedimientos</h2>
+          <p class="text-slate-600 text-lg">Contamos con instalaciones de punta para realizar diagnósticos precisos e intervenciones avanzadas.</p>
+        </div>
+        <a href="/contacto" class="text-brand-cyan font-bold hover:text-brand-blue flex items-center gap-2 transition-colors">
+          Consultar cobertura de seguros <i class="ph-bold ph-arrow-right"></i>
+        </a>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        {services.map((service: any) => (
+          <div class="border-l-4 border-brand-cyan pl-6 py-2 service-item">
+            <i class={`ph ${service.icon} text-3xl text-brand-cyan mb-4`}></i>
+            <h3 class="text-xl font-bold text-slate-800 mb-2">{service.title}</h3>
+            <p class="text-slate-600 text-sm leading-relaxed">{service.copy}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. Proceso de Atención (Stepper UX) -->
+  <section class="py-16 md:py-24 bg-brand-blue text-white">
+    <div class="container mx-auto px-4 max-w-7xl">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-4xl font-bold mb-4">Tu ruta hacia el bienestar</h2>
+        <p class="text-brand-cyan text-lg">Nuestro proceso estructurado para garantizar resultados efectivos</p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-4 gap-8 relative process-grid">
+        <!-- Connecting Line for desktop -->
+        <div class="hidden lg:block absolute top-[28px] left-[10%] right-[10%] h-0.5 bg-brand-cyan/30 z-0"></div>
+        
+        {process.map((step: any) => (
+          <div class="relative z-10 flex flex-col items-center text-center process-step">
+            <div class="w-14 h-14 rounded-full bg-brand-blue border-4 border-brand-cyan flex items-center justify-center font-bold text-xl mb-6 shadow-[0_0_20px_rgba(0,163,224,0.3)]">
+              {step.step}
+            </div>
+            <h3 class="text-xl font-bold mb-3">{step.title}</h3>
+            <p class="text-slate-300 text-sm">{step.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. Especialistas Destacados (E-E-A-T) - Carga dinámica desde API -->
+  <section id="especialistas" class="py-16 md:py-24 bg-slate-50">
+    <div class="container mx-auto px-4 max-w-7xl">
+      <h2 class="text-3xl md:text-4xl font-bold text-brand-blue text-center mb-16">Médicos Especialistas en {title.split(" ")[0]}</h2>
+      
+      <!-- Contenedor dinámico -->
+      <div id="specialists-grid" class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 max-w-4xl mx-auto">
+        <!-- Skeletons de carga -->
+        <div class="bg-white rounded-3xl p-6 flex flex-col md:flex-row items-center gap-6 animate-pulse">
+          <div class="w-32 h-32 md:w-40 md:h-40 rounded-full bg-slate-200 shrink-0"></div>
+          <div class="flex-1 space-y-3 w-full">
+            <div class="h-6 bg-slate-200 rounded w-3/4"></div>
+            <div class="h-4 bg-slate-200 rounded w-1/2"></div>
+            <div class="h-9 bg-slate-200 rounded w-28"></div>
+          </div>
+        </div>
+        <div class="bg-white rounded-3xl p-6 flex flex-col md:flex-row items-center gap-6 animate-pulse">
+          <div class="w-32 h-32 md:w-40 md:h-40 rounded-full bg-slate-200 shrink-0"></div>
+          <div class="flex-1 space-y-3 w-full">
+            <div class="h-6 bg-slate-200 rounded w-3/4"></div>
+            <div class="h-4 bg-slate-200 rounded w-1/2"></div>
+            <div class="h-9 bg-slate-200 rounded w-28"></div>
+          </div>
+        </div>
+      </div>
+
+      <div id="no-specialists" class="hidden text-center py-8 text-slate-500 font-medium max-w-4xl mx-auto">
+        <i class="ph ph-user-list text-4xl text-slate-300 mb-3 block"></i>
+        Próximamente médicos certificados en esta especialidad.
+      </div>
+
+      <div class="text-center mt-12">
+        <a href={`/directorio?especialidad=${especialidad}`} class="text-brand-blue font-bold hover:text-brand-cyan underline underline-offset-4 transition-colors">
+          Ver directorio médico completo
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <script define:vars={{ especialidad }}>
+    (async () => {
+      const grid = document.getElementById('specialists-grid');
+      const noSpec = document.getElementById('no-specialists');
+      if (!grid) return;
+
+      const svgFallback = `data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'><rect fill='%23f1f5f9' width='100' height='100'/><path fill='%23cbd5e1' d='M50 50c11.046 0 20-8.954 20-20s-8.954-20-20-20-20 8.954-20 20 8.954 20 20 20zm0 10c-13.314 0-40 6.671-40 20v10h80V80c0-13.329-26.686-20-40-20z'/></svg>`;
+
+      const toTitleCase = (str) => {
+        if (!str) return '';
+        const minors = ['y', 'de', 'del', 'el', 'la', 'los', 'las', 'en'];
+        return str.toLowerCase().split(' ').map((w, i) => i > 0 && minors.includes(w) ? w : w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
+      };
+
+      const normalizeSlug = (str) => str.toString().toLowerCase().trim()
+        .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+        .replace(/\s+/g, '-').replace(/[^\w\-]+/g, '').replace(/\-\-+/g, '-');
+
+      try {
+        // 1. Buscar el ID de la especialidad desde la lista de especialidades
+        const espRes = await fetch('https://administrador.especialidadesmedicassur.com.mx/api/especialidad/get-all');
+        const espData = await espRes.json();
+        const allEsp = Array.isArray(espData.data || espData) ? (espData.data || espData) : [];
+        const match = allEsp.find(e => normalizeSlug(e.nombre) === normalizeSlug(especialidad));
+
+        let doctors = [];
+        if (match) {
+          // 2. Buscar médicos por el ID encontrado
+          const docRes = await fetch(`https://administrador.especialidadesmedicassur.com.mx/api/directorio-medico/search?especialidad_id=${match.id}&per_page=4`);
+          const docData = await docRes.json();
+          if (docData.data?.data) doctors = docData.data.data;
+          else if (Array.isArray(docData.data)) doctors = docData.data;
+          else if (Array.isArray(docData)) doctors = docData;
+        }
+
+        grid.innerHTML = '';
+
+        if (!doctors.length) {
+          grid.classList.add('hidden');
+          noSpec.classList.remove('hidden');
+          return;
+        }
+
+        doctors.slice(0, 4).forEach(doc => {
+          const name = toTitleCase(doc.nombre);
+          const img = doc.foto || svgFallback;
+          const slug = name.toLowerCase().trim().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/\s+/g, '-').replace(/[^\w\-]+/g, '');
+          
+          const card = document.createElement('div');
+          card.className = 'glass-card bg-white rounded-3xl p-6 flex flex-col md:flex-row items-center gap-6 group hover:shadow-xl transition-all';
+          card.innerHTML = `
+            <div class="w-32 h-32 md:w-40 md:h-40 rounded-full overflow-hidden shrink-0 border-4 border-slate-50 shadow-md">
+              <img src="${img}" alt="${name}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" onerror="this.src='${svgFallback}'" />
+            </div>
+            <div class="text-center md:text-left flex flex-col">
+              <h3 class="text-2xl font-bold text-brand-blue mb-1">${name}</h3>
+              <p class="text-brand-cyan font-semibold mb-4">${doc.especialidad || 'Especialista Médico'}</p>
+              <a href="/contacto" class="inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-slate-100 hover:bg-brand-cyan hover:text-slate-900 rounded-xl text-slate-700 font-bold transition-colors">
+                Agendar Cita <i class="ph-bold ph-calendar-plus"></i>
+              </a>
+            </div>
+          `;
+          grid.appendChild(card);
+        });
+      } catch (err) {
+        console.error('Error cargando especialistas:', err);
+        grid.innerHTML = '';
+        noSpec.classList.remove('hidden');
+      }
+    })();
+  </script>
+
+  <!-- 9. Tecnología e Infraestructura -->
+  <section class="py-16 md:py-24 relative overflow-hidden">
+    <div class="absolute inset-0 z-0">
+      <img src="https://images.unsplash.com/photo-1516549655169-df83a0774514?q=80&w=2070&auto=format&fit=crop" alt="Quirófano alta tecnología" class="w-full h-full object-cover opacity-20" />
+      <div class="absolute inset-0 bg-brand-blue/90 mix-blend-multiply"></div>
+    </div>
+    
+    <div class="relative z-10 container mx-auto px-4 max-w-7xl">
+      <div class="backdrop-blur-xl bg-white/10 border border-white/20 p-8 md:p-12 rounded-3xl max-w-3xl">
+        <div class="inline-flex items-center gap-2 px-3 py-1 bg-brand-cyan/20 text-cyan-300 rounded-full text-sm font-bold mb-4">
+          <i class="ph-fill ph-cpu"></i> Equipamiento de vanguardia
+        </div>
+        <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">Tecnología al servicio de tu salud</h2>
+        <p class="text-slate-200 text-lg mb-8 leading-relaxed">
+          Nuestras áreas especializadas cuentan con monitoreo inteligente, quirófanos híbridos y sistemas de imagenología de alta precisión (Resonancia Magnética 3T, Tomografía de 256 cortes), permitiendo abordajes quirúrgicos más seguros y mínimamente invasivos.
+        </p>
+        <ul class="grid grid-cols-1 md:grid-cols-2 gap-4 text-white font-medium mb-8">
+          <li class="flex items-center gap-2"><i class="ph-bold ph-check text-brand-cyan"></i> Quirófanos integrados</li>
+          <li class="flex items-center gap-2"><i class="ph-bold ph-check text-brand-cyan"></i> Sala de Hemodinamia</li>
+          <li class="flex items-center gap-2"><i class="ph-bold ph-check text-brand-cyan"></i> Terapia Intensiva Especializada</li>
+          <li class="flex items-center gap-2"><i class="ph-bold ph-check text-brand-cyan"></i> Equipo Multidisciplinario</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10. Llamado a la Acción (CTA) de alta conversión -->
+  <section class="py-12 bg-brand-cyan relative overflow-hidden shadow-2xl">
+    <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-10 mix-blend-overlay"></div>
+    <div class="container mx-auto px-4 relative z-10 text-center">
+      <h2 class="text-3xl md:text-4xl font-bold text-brand-blue mb-4">¿Necesitas una valoración especializada?</h2>
+      <p class="text-brand-blue/80 font-medium text-lg mb-8 max-w-2xl mx-auto">No dejes pasar más tiempo. Obtén un diagnóstico preciso y comienza tu tratamiento hoy mismo.</p>
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+        <a href="/contacto" class="w-full sm:w-auto bg-brand-blue hover:bg-slate-800 text-white font-bold px-8 py-4 rounded-xl transition-all flex items-center justify-center gap-2 shadow-xl shadow-brand-blue/30 text-lg">
+          <i class="ph-bold ph-calendar-plus"></i> Agendar Consulta
+        </a>
+        <a href="tel:8192453678" class="w-full sm:w-auto bg-transparent border-2 border-brand-blue text-brand-blue font-bold px-8 py-4 rounded-xl transition-all hover:bg-brand-blue hover:text-white flex items-center justify-center gap-2 text-lg">
+          <i class="ph-bold ph-phone"></i> Llámanos: 8192453678
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 11. Preguntas Frecuentes (AEO / FAQ Page) -->
+  <section class="py-16 md:py-24 bg-slate-50">
+    <div class="container mx-auto px-4 max-w-3xl">
+      <div class="text-center mb-12">
+        <div class="inline-flex items-center gap-2 px-3 py-1 bg-brand-blue/10 text-brand-blue rounded-full text-sm font-bold mb-4">
+          <i class="ph-fill ph-question text-lg"></i> Resuelve tus dudas
+        </div>
+        <h2 class="text-3xl md:text-4xl font-bold text-brand-blue">Preguntas Frecuentes</h2>
+      </div>
+
+      <div class="space-y-4">
+        {faq.map((item: any, idx: number) => (
+          <details class="glass-card bg-white rounded-2xl border-slate-200 group [&_summary::-webkit-details-marker]:hidden" open={idx === 0}>
+            <summary class="flex items-center justify-between p-6 font-bold text-lg text-slate-800 cursor-pointer">
+              {item.q}
+              <span class="transition group-open:rotate-180 bg-slate-100 text-brand-blue p-2 rounded-full">
+                <i class="ph-bold ph-caret-down"></i>
+              </span>
+            </summary>
+            <div class="p-6 pt-0 text-slate-600 leading-relaxed border-t border-slate-100 mt-2">
+              {item.a}
+            </div>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 12. Servicios Relacionados (Arquitectura SEO) -->
+  <section class="py-12 bg-white border-t border-slate-200">
+    <div class="container mx-auto px-4 max-w-7xl">
+      <h3 class="text-xl font-bold text-slate-800 mb-6 uppercase tracking-wider text-sm flex items-center gap-2">
+        <i class="ph-bold ph-link text-brand-cyan"></i> Áreas Clínicas Relacionadas
+      </h3>
+      <div class="flex flex-wrap gap-3">
+        <a href="/servicios/urgencias" class="px-5 py-2.5 rounded-xl border border-slate-200 text-slate-600 font-medium hover:border-brand-cyan hover:text-brand-cyan hover:bg-slate-50 transition-all text-sm">
+          Urgencias Médicas
+        </a>
+        <a href="/servicios/imagenologia" class="px-5 py-2.5 rounded-xl border border-slate-200 text-slate-600 font-medium hover:border-brand-cyan hover:text-brand-cyan hover:bg-slate-50 transition-all text-sm">
+          Imagenología y Rayos X
+        </a>
+        <a href="/servicios/laboratorio" class="px-5 py-2.5 rounded-xl border border-slate-200 text-slate-600 font-medium hover:border-brand-cyan hover:text-brand-cyan hover:bg-slate-50 transition-all text-sm">
+          Laboratorio Clínico
+        </a>
+        <a href="/especialidades/endocrinologia" class="px-5 py-2.5 rounded-xl border border-slate-200 text-slate-600 font-medium hover:border-brand-cyan hover:text-brand-cyan hover:bg-slate-50 transition-all text-sm">
+          Endocrinología
+        </a>
+        <a href="/servicios/check-ups" class="px-5 py-2.5 rounded-xl border border-slate-200 text-slate-600 font-medium hover:border-brand-cyan hover:text-brand-cyan hover:bg-slate-50 transition-all text-sm">
+          Check-ups Preventivos
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Botón pegajoso móvil (Aparece al hacer scroll en móvil) -->
+  <div class="fixed bottom-0 left-0 w-full p-4 bg-white/90 backdrop-blur-md border-t border-slate-200 md:hidden z-50 transform translate-y-full transition-transform duration-300" id="mobile-cta">
+    <a href="/contacto" class="block w-full text-center bg-brand-cyan text-brand-blue font-bold py-3 rounded-xl shadow-lg ring-1 ring-white/10">
+      Agendar Cita Ahora
+    </a>
+  </div>
+
+  <script is:inline>
+    document.addEventListener("DOMContentLoaded", () => {
+      // Verificar si GSAP está cargado
+      if (typeof window.gsap !== "undefined" && window.ScrollTrigger) {
+        const gsap = window.gsap;
+        const ScrollTrigger = window.ScrollTrigger;
+        
+        gsap.registerPlugin(ScrollTrigger);
+
+        setTimeout(() => {
+
+        // Animaciones de Entrada (Hero)
+        gsap.from(".hero-reveal > *", {
+          y: 30,
+          opacity: 0,
+          stagger: 0.15,
+          duration: 1,
+          ease: "power3.out",
+          delay: 0.2
+        });
+
+        // Stagger para grid de síntomas
+        gsap.from(".symptom-card", {
+          scrollTrigger: {
+            trigger: ".symptom-grid",
+            start: "top 80%",
+          },
+          y: 40,
+          opacity: 0,
+          stagger: 0.1,
+          duration: 0.8,
+          ease: "back.out(1.7)"
+        });
+
+        // Stagger para enfermedades (Bento)
+        gsap.from(".disease-card", {
+          scrollTrigger: {
+            trigger: ".disease-grid",
+            start: "top 90%",
+          },
+          scale: 0.95,
+          opacity: 0,
+          stagger: 0.15,
+          duration: 0.8,
+          ease: "power3.out",
+          clearProps: "all"
+        });
+
+        // Animación de pasos de atención (Stepper)
+        gsap.from(".process-step", {
+          scrollTrigger: {
+            trigger: ".process-grid",
+            start: "top 80%",
+          },
+          y: 30,
+          opacity: 0,
+          stagger: 0.2,
+          duration: 0.8,
+          ease: "power2.out"
+        });
+
+        // Especialistas Hover
+        gsap.from(".specialist-card", {
+          scrollTrigger: {
+            trigger: ".specialist-card",
+            start: "top 85%",
+          },
+          y: 40,
+          opacity: 0,
+          stagger: 0.2,
+          duration: 0.8,
+          ease: "power3.out"
+        });
+        }, 100);
+      }
+
+      // Observador para Mobile CTA
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          const ctaBtn = document.getElementById("mobile-cta");
+          if (ctaBtn) {
+            if (!entry.isIntersecting && window.scrollY > 300) {
+              ctaBtn.classList.remove("translate-y-full");
+            } else {
+              ctaBtn.classList.add("translate-y-full");
+            }
+          }
+        });
+      }, {
+        rootMargin: "0px",
+        threshold: 0.1
+      });
+
+      const heroSection = document.querySelector("header");
+      if (heroSection) {
+        observer.observe(heroSection);
+      }
+    });
+  </script>
+
+  <style>
+    /* Asegurarnos de que el texto marque la pausa correctamente */
+    summary {
+      list-style: none; /* Hide default triangle */
+    }
+  </style>
+
+</Layout>

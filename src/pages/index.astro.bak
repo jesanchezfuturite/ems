@@ -114,7 +114,7 @@ const aeoSchema = {
             ¿Qué especialidades médicas ofrecen?
             <i class="ph ph-caret-down transform group-open:rotate-180 transition-transform text-[#00a3e0] text-2xl"></i>
           </summary>
-          <div class="mt-4 text-slate-600 font-medium leading-relaxed border-t border-slate-100 pt-4 pr-8">
+          <div class="mt-4 text-slate-600 font-medium leading-relaxed border-t border-slate-100 pt-4">
             Contamos con más de 40 especialidades médicas, incluyendo cardiología, gastroenterología, ginecología y traumatología, enfocadas en brindar diagnóstico y tratamiento integral.
           </div>
         </details>
@@ -124,7 +124,7 @@ const aeoSchema = {
             ¿Cómo puedo agendar una consulta con un especialista?
             <i class="ph ph-caret-down transform group-open:rotate-180 transition-transform text-[#00a3e0] text-2xl"></i>
           </summary>
-          <div class="mt-4 text-slate-600 font-medium leading-relaxed border-t border-slate-100 pt-4 pr-8">
+          <div class="mt-4 text-slate-600 font-medium leading-relaxed border-t border-slate-100 pt-4">
             Puedes agendar tu cita directamente desde nuestro sitio web o contactar a nuestro equipo para ayudarte a encontrar al especialista adecuado.
           </div>
         </details>
@@ -134,7 +134,7 @@ const aeoSchema = {
             ¿Aceptan seguros de gastos médicos mayores?
             <i class="ph ph-caret-down transform group-open:rotate-180 transition-transform text-[#00a3e0] text-2xl"></i>
           </summary>
-          <div class="mt-4 text-slate-600 font-medium leading-relaxed border-t border-slate-100 pt-4 pr-8">
+          <div class="mt-4 text-slate-600 font-medium leading-relaxed border-t border-slate-100 pt-4">
             Sí, trabajamos con diversas aseguradoras. Te recomendamos verificar cobertura y condiciones al momento de agendar tu consulta.
           </div>
         </details>
@@ -144,7 +144,7 @@ const aeoSchema = {
             ¿Cómo elegir al especialista adecuado para mi caso?
             <i class="ph ph-caret-down transform group-open:rotate-180 transition-transform text-[#00a3e0] text-2xl"></i>
           </summary>
-          <div class="mt-4 text-slate-600 font-medium leading-relaxed border-t border-slate-100 pt-4 pr-8">
+          <div class="mt-4 text-slate-600 font-medium leading-relaxed border-t border-slate-100 pt-4">
             Depende de tus síntomas o diagnóstico previo. Si tienes dudas, nuestro equipo puede orientarte para canalizarte con el médico correcto.
           </div>
         </details>

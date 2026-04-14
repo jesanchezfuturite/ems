@@ -1,0 +1,518 @@
+---
+import Layout from "../../layouts/Layout.astro";
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "MedicalWebPage",
+      "@id": "https://midominio.com/servicios/cuidados-intensivos",
+      "url": "https://midominio.com/servicios/cuidados-intensivos",
+      "name": "Unidad de Cuidados Intensivos (UCI) en Monterrey",
+      "description": "Atención médica especializada y monitoreo continuo 24/7 para pacientes en estado crítico. Liderazgo en terapia intensiva e infraestructura médica con guardia permanente."
+    },
+    {
+      "@type": "MedicalSpecialty",
+      "name": "Cuidados Intensivos",
+      "description": "Manejo y soporte vital avanzado para pacientes críticamente enfermos."
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Cuándo se necesita la Unidad de Cuidados Intensivos?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Se requiere cuando un paciente enfrenta una condición médica crítica que amenaza su vida, como infartos severos, insuficiencia respiratoria, traumas mayores o durante el postoperatorio de cirugías altamente complejas."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cuál es la política de visitas en Terapia Intensiva?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Para garantizar la bioseguridad y el descanso clínico, las visitas están restringidas a horarios específicos (generalmente dos veces al día) y a un número limitado de familiares directos, siempre bajo autorización del médico tratante."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Qué tipos de pacientes atienden en su UCI en Monterrey?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Atendemos a pacientes con complicaciones cardiovasculares, respiratorias crónicas graves, neurológicas, sepsis severa y post-operados de procedimientos de alta especialidad (como trasplantes o cirugías a corazón abierto)."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Están disponibles las 24 horas?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Nuestra unidad opera rigurosamente bajo un esquema 24/7, contando con médicos intensivistas de guardia permanente, enfermería especializada y todo el soporte vital activo ininterrumpidamente."
+          }
+        }
+      ]
+    }
+  ]
+};
+---
+
+<Layout
+  title="Unidad de Cuidados Intensivos en Monterrey | UCI 24/7"
+  description="Atención médica crítica 24/7. Nuestra Terapia Intensiva cuenta con médicos intensivistas permanentes y tecnología de soporte vital avanzado."
+>
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+
+  <!-- 1. Hero de Confianza Inmediata -->
+  <section class="relative bg-[#004b87] pt-32 pb-20 lg:pt-44 lg:pb-32 overflow-hidden text-white uci-hero">
+    <!-- Fondo Sereno y Controlado -->
+    <div class="absolute inset-0 z-0 bg-slate-900">
+      <!-- Overlay Azul Institucional Transmitiendo Paz y Control -->
+      <img src="/images/img_uci.webp" alt="Terapia Intensiva y Monitoreo" class="w-full h-full object-cover opacity-30 select-none pointer-events-none mix-blend-overlay filter grayscale" />
+      <div class="absolute inset-0 bg-[#004b87]/80"></div>
+      <div class="absolute inset-0 bg-gradient-to-t from-[#004b87] via-transparent to-[#004b87]/40"></div>
+      <div class="absolute bottom-0 w-full h-[20%] bg-gradient-to-t from-slate-50 to-transparent z-10"></div>
+      <!-- Latido sutil visual en el fondo -->
+      <div class="absolute top-[20%] left-1/2 -translate-x-1/2 w-full max-w-4xl opacity-10 monitor-pulse">
+        <svg viewBox="0 0 500 150" preserveAspectRatio="none" class="w-full h-full stroke-white stroke-2 fill-none">
+           <path d="M0,100 L150,100 L170,40 L190,140 L210,10 L230,120 L250,100 L500,100" />
+        </svg>
+      </div>
+    </div>
+    
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20 flex flex-col items-center text-center">
+      <span class="inline-flex items-center gap-2 bg-[#00a3e0]/20 text-[#00a3e0] px-4 py-1.5 rounded-full text-sm font-bold tracking-wide border border-[#00a3e0]/30 mb-8 backdrop-blur-md">
+        <i class="ph ph-heartbeat text-lg"></i> Máxima Capacidad Resolutiva
+      </span>
+      <h1 class="text-4xl md:text-5xl lg:text-7xl font-black text-white mb-6 leading-tight tracking-tight drop-shadow-xl max-w-5xl">
+        Unidad de Cuidados Intensivos 24/7 en Monterrey
+      </h1>
+      <p class="text-xl md:text-2xl text-blue-100 mb-10 max-w-3xl leading-relaxed font-light">
+        Atención médica especializada y monitoreo continuo para pacientes en estado crítico, con tecnología avanzada disponible ininterrumpidamente las 24 horas.
+      </p>
+      <a href="/contacto" class="inline-flex items-center justify-center px-10 py-5 bg-[#00a3e0] text-white text-xl font-bold rounded-2xl hover:bg-white hover:text-[#004b87] transition-all shadow-xl shadow-[#00a3e0]/30 transform hover:-translate-y-1">
+        Línea Directa de Urgencias <i class="ph ph-phone-call text-2xl ml-3"></i>
+      </a>
+    </div>
+  </section>
+
+  <!-- 2. Bloque de Confianza E-E-A-T -->
+  <section class="relative z-30 -mt-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="glass-card rounded-[2rem] p-6 lg:p-10 bg-white/95 border border-slate-200/50 shadow-2xl backdrop-blur-xl">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-8 md:divide-x divide-slate-100">
+        
+        <div class="flex flex-col items-center text-center px-2">
+          <div class="w-14 h-14 rounded-2xl bg-sky-50 flex items-center justify-center text-[#004b87] mb-4">
+            <i class="ph ph-user-md text-3xl"></i>
+          </div>
+          <h3 class="font-bold text-slate-800 text-sm lg:text-base leading-tight">Médicos Intensivistas 24/7</h3>
+        </div>
+
+        <div class="flex flex-col items-center text-center px-2">
+          <div class="w-14 h-14 rounded-2xl bg-sky-50 flex items-center justify-center text-[#004b87] mb-4">
+            <i class="ph ph-activity text-3xl"></i>
+          </div>
+          <h3 class="font-bold text-slate-800 text-sm lg:text-base leading-tight">Monitoreo Hemodinámico Continuo</h3>
+        </div>
+
+        <div class="flex flex-col items-center text-center px-2">
+          <div class="w-14 h-14 rounded-2xl bg-sky-50 flex items-center justify-center text-[#004b87] mb-4">
+            <i class="ph ph-buildings text-3xl"></i>
+          </div>
+          <h3 class="font-bold text-slate-800 text-sm lg:text-base leading-tight">Infraestructura de Vanguardia</h3>
+        </div>
+
+        <div class="flex flex-col items-center text-center px-2 relative">
+          <span class="absolute -top-2 px-2 py-0.5 bg-red-100 text-red-600 text-[10px] font-bold rounded-full uppercase tracking-wider animate-pulse">Crítico</span>
+          <div class="w-14 h-14 rounded-2xl bg-[#004b87] flex items-center justify-center text-[#00a3e0] mb-4">
+            <i class="ph ph-siren text-3xl"></i>
+          </div>
+          <h3 class="font-bold text-slate-800 text-sm lg:text-base leading-tight">Respuesta Inmediata Integral</h3>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. Definición AEO & Alcance -->
+  <section class="py-24 bg-slate-50 relative overflow-hidden">
+    <!-- Accentos visuales -->
+    <div class="absolute top-0 left-0 w-1/3 h-[500px] bg-gradient-to-br from-blue-100/50 to-transparent rounded-r-[100%] blur-[80px]"></div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
+        
+        <div class="order-2 lg:order-1 relative">
+           <div class="absolute inset-0 bg-gradient-to-tr from-[#004b87] to-transparent opacity-10 rounded-[3rem] blur-2xl"></div>
+           <div class="glass-card bg-white p-10 md:p-14 rounded-[3rem] border border-slate-200 shadow-xl relative overflow-hidden h-full">
+              <!-- Elemento decorativo técnico superior derecha -->
+              <div class="absolute top-8 right-8 text-[#00a3e0]/20 font-mono text-sm tracking-widest pointer-events-none">
+                 SYS: OK // UCI-M-01
+              </div>
+              <span class="text-[#00a3e0] font-bold tracking-wider uppercase text-sm mb-4 block">Terminología Clínica</span>
+              <h2 class="text-3xl md:text-4xl font-black text-[#004b87] mb-6 leading-tight">
+                ¿Qué es la Unidad de Cuidados Intensivos (UCI)?
+              </h2>
+              <p class="text-slate-600 text-lg leading-relaxed mb-6 font-medium relative z-10">
+                La UCI es el área de máxima especialización hospitalaria destinada al soporte vital, monitoreo riguroso y tratamiento intensivo de pacientes que atraviesan condiciones de salud críticas o enfermedades potencialmente mortales.
+              </p>
+              <p class="text-slate-600 leading-relaxed max-w-md relative z-10">
+                A diferencia de una habitación regular, aquí la relación paciente-enfermero es casi uno a uno, utilizando farmacología avanzada y soporte orgánico artificial.
+              </p>
+           </div>
+        </div>
+
+        <div class="order-1 lg:order-2">
+           <span class="text-[#00a3e0] font-bold tracking-wider uppercase text-sm mb-4 block">Terapia Intensiva</span>
+           <h2 class="text-4xl md:text-5xl font-black text-[#004b87] mb-6 leading-tight">
+             Atención para pacientes críticos en Monterrey
+           </h2>
+           <p class="text-lg text-slate-600 leading-relaxed mb-8">
+             Diseñada para intervenir durante las fases más inestables y críticas de una enfermedad o proceso traumático. Abordamos crisis vitales con tiempos de respuesta que marcan la diferencia entre la vida y la muerte.
+           </p>
+           
+           <h3 class="text-xl font-bold text-[#004b87] mb-4">Casos de intervención principal:</h3>
+           <ul class="space-y-4">
+             <li class="flex items-start gap-4">
+               <div class="mt-1 w-6 h-6 rounded-full bg-blue-100 text-[#00a3e0] flex justify-center items-center flex-shrink-0"><i class="ph ph-check font-bold"></i></div>
+               <span class="text-slate-700 leading-relaxed"><strong>Postoperatorio Complejo:</strong> Trasplantes, neurocirugías, cirugías cardiovasculares abiertas.</span>
+             </li>
+             <li class="flex items-start gap-4">
+               <div class="mt-1 w-6 h-6 rounded-full bg-blue-100 text-[#00a3e0] flex justify-center items-center flex-shrink-0"><i class="ph ph-check font-bold"></i></div>
+               <span class="text-slate-700 leading-relaxed"><strong>Soporte Orgánico:</strong> Insuficiencia respiratoria aguda, falla renal súbita o cuadros sépticos graves.</span>
+             </li>
+             <li class="flex items-start gap-4">
+               <div class="mt-1 w-6 h-6 rounded-full bg-blue-100 text-[#00a3e0] flex justify-center items-center flex-shrink-0"><i class="ph ph-check font-bold"></i></div>
+               <span class="text-slate-700 leading-relaxed"><strong>Cardiología Crítica:</strong> Infartos agudos al miocardio o arritmias hemodinámicamente inestables.</span>
+             </li>
+           </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. Infraestructura y Monitoreo -->
+  <section class="py-24 bg-white relative border-y border-slate-100 overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      
+      <!-- Grid de Datos Técnicos e Infraestructura (GSAP Reveal) -->
+      <div class="mb-20 text-center max-w-3xl mx-auto">
+        <h2 class="text-3xl md:text-5xl font-black text-[#004b87] mb-4">Capacidad y Equipamiento</h2>
+        <p class="text-slate-600 text-lg">Rigurosamente equipados para asegurar supervivencia y pronta recuperación clínica.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 infra-grid mb-16">
+         <!-- Card 1 -->
+         <div class="infra-card glass-card bg-slate-50 border border-slate-200 p-8 rounded-3xl hover:border-[#00a3e0] transition-colors group">
+            <i class="ph ph-wind text-4xl text-[#00a3e0] mb-4 block group-hover:scale-110 transition-transform origin-left"></i>
+            <h3 class="text-4xl font-black text-[#004b87] mb-2">6</h3>
+            <p class="font-bold text-slate-800 mb-1">Cubículos de Terapia Intensiva</p>
+            <p class="text-sm text-slate-500">Cubículos individuales aislados con máxima bioseguridad.</p>
+         </div>
+         <!-- Card 2 -->
+         <div class="infra-card glass-card bg-slate-50 border border-slate-200 p-8 rounded-3xl hover:border-[#00a3e0] transition-colors group">
+            <i class="ph ph-bed text-4xl text-[#00a3e0] mb-4 block group-hover:scale-110 transition-transform origin-left"></i>
+            <h3 class="text-4xl font-black text-[#004b87] mb-2">10</h3>
+            <p class="font-bold text-slate-800 mb-1">Camas de Terapia Intermedia</p>
+            <p class="text-sm text-slate-500">Diseñadas para el proceso transicional hacia piso hospitalario regular.</p>
+         </div>
+         <!-- Card 3 -->
+         <div class="infra-card glass-card bg-slate-50 border border-slate-200 p-8 rounded-3xl hover:border-[#00a3e0] transition-colors group">
+            <i class="ph ph-fan text-4xl text-[#00a3e0] mb-4 block group-hover:scale-110 transition-transform origin-left"></i>
+            <h3 class="text-3xl font-black text-[#004b87] mb-2 leading-[1.2]">Avanzados</h3>
+            <p class="font-bold text-slate-800 mb-1">Ventiladores Mecánicos</p>
+            <p class="text-sm text-slate-500">Aseguramos la estabilidad ventilatoria mediante tecnología intubada y no invasiva.</p>
+         </div>
+         <!-- Card 4 -->
+         <div class="infra-card glass-card bg-[#004b87] border border-blue-800 p-8 rounded-3xl hover:shadow-xl hover:shadow-[#00a3e0]/20 transition-all group text-white">
+            <i class="ph ph-shield-plus text-4xl text-[#00a3e0] mb-4 block group-hover:scale-110 transition-transform origin-left"></i>
+            <h3 class="text-3xl font-black text-white mb-2 leading-[1.2]">Permanente</h3>
+            <p class="font-bold text-blue-100 mb-1">Guardia Médica 24/7</p>
+            <p class="text-sm text-blue-200">Intensivistas certificados nunca se separan del área de los cubículos.</p>
+         </div>
+      </div>
+
+      <!-- Diferenciador: Monitoreo Constante 24h -->
+      <div class="bg-slate-900 rounded-[3rem] p-10 lg:p-16 relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-12 mt-8 shadow-2xl monitor-block">
+         <!-- EKG Background Decor -->
+         <div class="absolute inset-0 opacity-20 pointer-events-none stroke-[#00a3e0] stroke-1 fill-none monitor-wave">
+            <svg viewBox="0 0 1000 300" preserveAspectRatio="none" class="w-full h-full">
+              <path d="M0,150 L200,150 L220,100 L240,250 L260,30 L280,180 L300,150 L1000,150" vector-effect="non-scaling-stroke"></path>
+              <path d="M0,200 L600,200 L620,150 L640,300 L660,80 L680,230 L700,200 L1000,200" vector-effect="non-scaling-stroke" opacity="0.5"></path>
+            </svg>
+         </div>
+         <div class="absolute top-0 right-0 w-80 h-80 bg-[#00a3e0] blur-[120px] rounded-full opacity-30"></div>
+
+         <div class="md:w-3/5 text-white relative z-10">
+           <h3 class="text-3xl lg:text-5xl font-black mb-6">Monitoreo hemodinámico constante las 24 horas</h3>
+           <p class="text-lg text-slate-300 leading-relaxed mb-6 font-light">
+             Tus signos vitales, gasometría y parámetros cardiovasculares son centralizados en una central de monitoreo. Si existiese la más mínima alteración, las alarmas programadas notifican inmediatamente al cuerpo médico presente. No dependemos de revisiones esporádicas.
+           </p>
+           <ul class="flex flex-wrap gap-4 mt-6">
+             <li class="bg-white/10 backdrop-blur-sm border border-white/20 px-4 py-2 rounded-xl text-sm font-bold text-white flex items-center gap-2"><div class="w-2 h-2 rounded-full bg-green-400 animate-pulse"></div> Signos Vitales Continuos</li>
+             <li class="bg-white/10 backdrop-blur-sm border border-white/20 px-4 py-2 rounded-xl text-sm font-bold text-white flex items-center gap-2"><div class="w-2 h-2 rounded-full bg-green-400 animate-pulse"></div> Frecuencia Cardíaca Exacta</li>
+           </ul>
+         </div>
+
+         <div class="md:w-auto relative z-10 flex justify-center">
+            <div class="w-32 h-32 md:w-48 md:h-48 border-[6px] border-[#00a3e0]/30 rounded-full flex items-center justify-center relative bg-slate-900 shadow-inner">
+               <div class="absolute inset-0 rounded-full border-[2px] border-[#00a3e0] animate-[spin_4s_linear_infinite] border-t-transparent"></div>
+               <span class="text-5xl font-black text-[#00a3e0] monitor-number">24<sub class="text-xl">Hrs</sub></span>
+            </div>
+         </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 5. Proceso de Atención y Enfoque Humano (Stepper) -->
+  <section class="py-24 bg-slate-50 relative process-section border-b border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      
+      <div class="text-center mb-20 max-w-3xl mx-auto">
+        <h2 class="text-3xl md:text-5xl font-black text-[#004b87] mb-6">El Proceso de Atención Crítica</h2>
+        <p class="text-lg text-slate-600">Nuestra logística hospitalaria garantiza que cada segundo sea invertido de manera eficiente y protocolizada.</p>
+      </div>
+
+      <div class="relative max-w-6xl mx-auto mb-24">
+        <!-- Línea conectora Desktop -->
+        <div class="hidden lg:block absolute top-[2.5rem] left-[10%] right-[10%] h-[2px] bg-slate-200 z-0 border-t-2 border-slate-300"></div>
+        <!-- Línea conectora Mobile -->
+        <div class="block lg:hidden absolute top-8 bottom-8 left-[2.4rem] w-[2px] bg-slate-200 z-0 border-l-2 border-slate-300"></div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-5 gap-12 lg:gap-6 relative z-10">
+          
+          <div class="stepper-tr flex lg:flex-col items-start lg:items-center text-left lg:text-center relative gap-6 lg:gap-0">
+             <div class="w-16 h-16 lg:w-20 lg:h-20 bg-white rounded-full shadow-lg border border-slate-100 flex items-center justify-center text-[#00a3e0] flex-shrink-0 z-10 lg:mb-6">
+               <i class="ph ph-clipboard-text text-2xl font-bold"></i>
+             </div>
+             <div>
+                <h4 class="text-lg font-bold text-slate-900 mb-2 mt-1 lg:mt-0">1. Evaluación Inicial</h4>
+                <p class="text-sm text-slate-500 xl:px-4">Valoración urgente en urgencias o piso para determinar el traslado a terapia intensiva.</p>
+             </div>
+          </div>
+
+          <div class="stepper-tr flex lg:flex-col items-start lg:items-center text-left lg:text-center relative gap-6 lg:gap-0">
+             <div class="w-16 h-16 lg:w-20 lg:h-20 bg-white rounded-full shadow-lg border border-slate-100 flex items-center justify-center text-[#00a3e0] flex-shrink-0 z-10 lg:mb-6">
+               <i class="ph ph-hospital text-2xl font-bold"></i>
+             </div>
+             <div>
+                <h4 class="text-lg font-bold text-slate-900 mb-2 mt-1 lg:mt-0">2. Ingreso Controlado</h4>
+                <p class="text-sm text-slate-500 xl:px-4">Asignación de cubículo aislado. Conexión inmediata a soportes vitales e interconsulta.</p>
+             </div>
+          </div>
+
+          <div class="stepper-tr flex lg:flex-col items-start lg:items-center text-left lg:text-center relative gap-6 lg:gap-0">
+             <div class="w-16 h-16 lg:w-20 lg:h-20 bg-[#00a3e0] rounded-full shadow-[0_10px_30px_rgba(0,163,224,0.4)] border-4 border-slate-50 flex items-center justify-center text-white flex-shrink-0 z-10 lg:mb-6 relative">
+               <span class="absolute -top-1 -right-1 w-4 h-4 bg-red-500 rounded-full animate-pulse border-2 border-white"></span>
+               <i class="ph ph-activity text-2xl font-bold"></i>
+             </div>
+             <div>
+                <h4 class="text-lg font-bold text-[#00a3e0] mb-2 mt-1 lg:mt-0">3. Monitoreo</h4>
+                <p class="text-sm text-slate-500 xl:px-4">Vigilancia ininterrumpida de parámetros cardiovasculares, respiratorios y cerebrales.</p>
+             </div>
+          </div>
+
+          <div class="stepper-tr flex lg:flex-col items-start lg:items-center text-left lg:text-center relative gap-6 lg:gap-0">
+             <div class="w-16 h-16 lg:w-20 lg:h-20 bg-white rounded-full shadow-lg border border-slate-100 flex items-center justify-center text-[#00a3e0] flex-shrink-0 z-10 lg:mb-6">
+               <i class="ph ph-first-aid text-2xl font-bold"></i>
+             </div>
+             <div>
+                <h4 class="text-lg font-bold text-slate-900 mb-2 mt-1 lg:mt-0">4. Intervención</h4>
+                <p class="text-sm text-slate-500 xl:px-4">Ajuste de medicamentos, soporte de órganos o cirugías de extrema urgencia en bloque.</p>
+             </div>
+          </div>
+
+          <div class="stepper-tr flex lg:flex-col items-start lg:items-center text-left lg:text-center relative gap-6 lg:gap-0">
+             <div class="w-16 h-16 lg:w-20 lg:h-20 bg-white rounded-full shadow-lg border border-slate-100 flex items-center justify-center text-[#004b87] flex-shrink-0 z-10 lg:mb-6">
+               <i class="ph ph-arrow-u-down-right text-2xl font-bold"></i>
+             </div>
+             <div>
+                <h4 class="text-lg font-bold text-slate-900 mb-2 mt-1 lg:mt-0">5. Seguimiento o Alta</h4>
+                <p class="text-sm text-slate-500 xl:px-4">Superada la crisis, trasladamos al paciente a Terapia Intermedia y luego a habitación.</p>
+             </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Enfoque Centrado en la Familia (Human touch) -->
+      <div class="bg-blue-50/50 border border-blue-100 rounded-3xl p-8 lg:p-12 flex flex-col md:flex-row items-center gap-10">
+         <div class="w-24 h-24 bg-white text-[#00a3e0] rounded-full flex items-center justify-center flex-shrink-0 shadow-md">
+            <i class="ph ph-hands-clapping text-5xl"></i>
+         </div>
+         <div>
+            <h3 class="text-2xl font-bold text-[#004b87] mb-3">Atención Centrada en el Paciente y su Familia</h3>
+            <p class="text-slate-600 leading-relaxed font-medium mb-4">
+              Sabemos que la Terapia Intensiva es un momento generador de angustia e incertidumbre para la familia. Nuestro modelo incluye un <strong>protocolo compasivo de información médica</strong> diaria con informes precisos al familiar designado. No solo tratamos al paciente; guiamos y contenemos emocionalmente a su círculo cercano.
+            </p>
+         </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 6 y 7. FAQ, Servicios Relacionados y CTA Final Urgencias -->
+  <section class="py-24 bg-white relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <!-- CTA Principal -->
+      <div id="contacto" class="bg-[#004b87] rounded-[2.5rem] p-10 md:p-16 relative overflow-hidden mb-24 flex flex-col items-center text-center shadow-2xl">
+         <div class="absolute inset-x-0 bottom-0 top-0 bg-[url('/images/pattern-grid.svg')] opacity-10"></div>
+         <div class="absolute w-80 h-80 bg-[#00a3e0] blur-[120px] rounded-full opacity-40 top-0 left-0 -translate-x-1/2 -translate-y-1/2 pointer-events-none"></div>
+
+         <div class="relative z-10 max-w-3xl">
+           <h2 class="text-3xl md:text-5xl font-black text-white mb-6 leading-tight">
+             ¿Necesitas atención inmediata o coordinar un traslado a UCI?
+           </h2>
+           <p class="text-xl text-blue-100 mb-10">
+             Nuestra línea directa y el equipo administrativo están listos para recibirte o coordinar la ambulancia.
+           </p>
+           
+           <a href="tel:+528192453678" class="inline-flex items-center justify-center px-10 py-5 bg-[#00a3e0] text-white text-xl font-bold rounded-2xl hover:bg-white hover:text-[#004b87] transition-all shadow-xl shadow-[#00a3e0]/30 transform hover:-translate-y-1 w-full sm:w-auto">
+             <i class="ph ph-siren text-2xl mr-3 animate-pulse"></i> Hablar al Módulo ICU Ahora
+           </a>
+         </div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+         
+         <!-- FAQ Acordeón (Columna Izquierda 7) -->
+         <div class="lg:col-span-8">
+            <h3 class="text-3xl font-black text-[#004b87] mb-8">Resolviendo tus Dudas Críticas</h3>
+            
+            <div class="space-y-5">
+              <details class="bg-slate-50 rounded-2xl p-6 group cursor-pointer marker:content-[''] !border-l-[4px] border-slate-200 !border-l-transparent hover:!border-l-[#00a3e0] border shadow-sm transition-all overflow-hidden">
+                <summary class="text-xl font-bold text-[#004b87] flex justify-between items-center outline-none list-none marker:content-none [&::-webkit-details-marker]:hidden">
+                  ¿Cuándo consideramos que se necesita la Terapia Intensiva?
+                  <i class="ph ph-caret-down transform group-open:rotate-180 transition-transform text-[#00a3e0] text-2xl"></i>
+                </summary>
+                <div class="mt-4 text-slate-600 font-medium leading-relaxed border-t border-slate-200 pt-4">
+                  El ingreso se justifica cuando una condición médica amenaza inminentemente la vida del paciente originando falla de órganos. Ejemplos absolutos incluyen evento vascular cerebral hemorrágico, traumatismos severos, choque séptico y cuidado estricto luego de cirugías complejas.
+                </div>
+              </details>
+              
+              <details class="bg-slate-50 rounded-2xl p-6 group cursor-pointer marker:content-[''] !border-l-[4px] border-slate-200 !border-l-transparent hover:!border-l-[#00a3e0] border shadow-sm transition-all overflow-hidden">
+                <summary class="text-xl font-bold text-[#004b87] flex justify-between items-center outline-none list-none marker:content-none [&::-webkit-details-marker]:hidden">
+                  ¿Cuál es la política de visitas y tiempos en UCI?
+                  <i class="ph ph-caret-down transform group-open:rotate-180 transition-transform text-[#00a3e0] text-2xl"></i>
+                </summary>
+                <div class="mt-4 text-slate-600 font-medium leading-relaxed border-t border-slate-200 pt-4">
+                  Por bioseguridad, prevención de infecciones nosocomiales y confort neurocrítico del propio paciente, establecemos 2 turnos fijos de visita al día, exclusivos para un familiar designado por pase, con estricto lavado de manos y bata de asilamiento.
+                </div>
+              </details>
+
+              <details class="bg-slate-50 rounded-2xl p-6 group cursor-pointer marker:content-[''] !border-l-[4px] border-slate-200 !border-l-transparent hover:!border-l-[#00a3e0] border shadow-sm transition-all overflow-hidden">
+                <summary class="text-xl font-bold text-[#004b87] flex justify-between items-center outline-none list-none marker:content-none [&::-webkit-details-marker]:hidden">
+                  ¿Qué cobertura o seguro médico es aceptado?
+                  <i class="ph ph-caret-down transform group-open:rotate-180 transition-transform text-[#00a3e0] text-2xl"></i>
+                </summary>
+                <div class="mt-4 text-slate-600 font-medium leading-relaxed border-t border-slate-200 pt-4">
+                  Al ser una contingencia mayor, trabajamos con casi todas las aseguradoras nacionales operando Pago Directo o Reembolso, según tu póliza y términos de autorización de urgencias médicas.
+                </div>
+              </details>
+            </div>
+         </div>
+
+         <!-- Servicios Relacionados (Columna Derecha 5) -->
+         <div class="lg:col-span-4 glass-card bg-slate-50 p-8 rounded-3xl border border-slate-200 sticky top-32">
+            <h4 class="text-lg font-bold text-[#004b87] mb-6 flex items-center gap-2 border-b border-slate-200 pb-4">
+               <i class="ph ph-link text-[#00a3e0] text-xl"></i> Accesibilidad y Conectividad
+            </h4>
+            <p class="text-sm text-slate-600 mb-6 font-medium">Nuestra Unidad de Terapia Intensiva no trabaja aislada. Posee una interconexión vital de segundos con:</p>
+            
+            <ul class="space-y-4">
+               <li>
+                  <a href="/servicios/urgencias" class="flex gap-4 p-3 rounded-xl hover:bg-white border border-transparent hover:border-slate-200 hover:shadow-sm transition-all group">
+                     <span class="w-10 h-10 bg-red-50 text-red-500 rounded-lg flex justify-center items-center flex-shrink-0 group-hover:bg-red-500 group-hover:text-white transition-colors"><i class="ph ph-ambulance text-xl"></i></span>
+                     <div>
+                        <strong class="block text-slate-800 text-sm group-hover:text-red-500 transition-colors">Urgencias y Trauma</strong>
+                        <span class="text-xs text-slate-500">Acceso rápido directo.</span>
+                     </div>
+                  </a>
+               </li>
+               <li>
+                  <div class="flex gap-4 p-3 rounded-xl hover:bg-white border border-transparent hover:border-slate-200 hover:shadow-sm transition-all group cursor-default">
+                     <span class="w-10 h-10 bg-indigo-50 text-indigo-500 rounded-lg flex justify-center items-center flex-shrink-0 group-hover:bg-indigo-500 group-hover:text-white transition-colors"><i class="ph ph-bandaids text-xl"></i></span>
+                     <div>
+                        <strong class="block text-slate-800 text-sm group-hover:text-indigo-500 transition-colors">Quirófano Central</strong>
+                        <span class="text-xs text-slate-500">A solo puertas de distancia.</span>
+                     </div>
+                  </div>
+               </li>
+               <li>
+                  <div class="flex gap-4 p-3 rounded-xl hover:bg-white border border-transparent hover:border-slate-200 hover:shadow-sm transition-all group cursor-default">
+                     <span class="w-10 h-10 bg-emerald-50 text-emerald-500 rounded-lg flex justify-center items-center flex-shrink-0 group-hover:bg-emerald-500 group-hover:text-white transition-colors"><i class="ph ph-test-tube text-xl"></i></span>
+                     <div>
+                        <strong class="block text-slate-800 text-sm group-hover:text-emerald-500 transition-colors">Laboratorio de Estatística</strong>
+                        <span class="text-xs text-slate-500">Muestras analizadas al momento.</span>
+                     </div>
+                  </div>
+               </li>
+            </ul>
+         </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Animaciones GSAP -->
+  <script is:inline>
+    document.addEventListener("DOMContentLoaded", () => {
+      setTimeout(() => {
+        if (typeof window.gsap !== "undefined" && window.ScrollTrigger) {
+          
+          // Animación Stagger Infraestructura
+          window.gsap.from(".infra-card", {
+            scrollTrigger: {
+              trigger: ".infra-grid",
+              start: "top 80%",
+            },
+            y: 40,
+            opacity: 0,
+            duration: 0.6,
+            stagger: 0.15,
+            ease: "back.out(1.2)",
+            clearProps: "all",
+          });
+
+          // Animación Stepper Proceso Terapia
+          window.gsap.from(".stepper-tr", {
+            scrollTrigger: {
+              trigger: ".process-section",
+              start: "top 75%",
+            },
+            y: 50,
+            opacity: 0,
+            duration: 0.6,
+            stagger: 0.15,
+            ease: "power3.out",
+            clearProps: "all",
+          });
+
+          // Pulso Sutil en Modulo de Monitoreo Fondo Hero
+          window.gsap.to(".monitor-pulse", {
+            opacity: 0.3,
+            scale: 1.05,
+            yoyo: true,
+            repeat: -1,
+            ease: "sine.inOut",
+            duration: 1.5
+          });
+
+          // Pulsos de Ondas EKG
+          window.gsap.to(".monitor-wave", {
+            opacity: 0.6,
+            x: 20,
+            yoyo: true,
+            repeat: -1,
+            ease: "sine.inOut",
+            duration: 2
+          });
+
+        }
+      }, 100);
+    });
+  </script>
+
+</Layout>

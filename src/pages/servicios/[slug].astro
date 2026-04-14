@@ -1,0 +1,403 @@
+---
+import Layout from "../../layouts/Layout.astro";
+
+// Plantilla Maestra (Dynamic Route) para interiores de servicio
+export function getStaticPaths() {
+  return [
+    {
+      params: { slug: "laboratorio" },
+      props: {
+        heroImage: "/images/img_laboratorio.webp",
+        title: "Laboratorio Médico",
+        description: "Análisis clínicos exactos y confiables con tiempos de respuesta reducidos. Nuestra automatización previene errores y garantiza tu tranquilidad.",
+        definition: "El Laboratorio Clínico del Centro de Especialidades Médicas es un área bioanalítica especializada en el procesamiento de muestras biológicas para el diagnóstico, prevención y seguimiento de enfermedades, operando bajo estándares internacionales con una fiabilidad superior al 99.9%.",
+        catalog: [
+          { icon: "ph-drop", name: "Química Sanguínea", desc: "Análisis integral de los niveles metabólicos (Glucosa, Colesterol, Triglicéridos) requeridos en todos los chequeos de rutina." },
+          { icon: "ph-dna", name: "Biología Molecular y PCR", desc: "Detección temprana y precisa de agentes infecciosos por medio de material genético, altamente eficaz para virus y mutaciones." },
+          { icon: "ph-microscope", name: "Inmunología y Serología", desc: "Rastreo de anticuerpos y diagnóstico de enfermedades del sistema inmunológico bajo analizadores automatizados." },
+          { icon: "ph-vial", name: "Exámenes Especiales", desc: "Perfiles hormonales completos, marcadores tumorales y toxicología con resultados respaldados por patólogos expertos." }
+        ],
+        steps: [
+          { icon: "ph-user-focus", title: "Registro Ágil", desc: "Llegada al módulo exclusivo sin filas innecesarias y validación instantánea de órdenes médicas." },
+          { icon: "ph-test-tube", title: "Toma de Muestra", desc: "Procedimiento cuidadoso ejecutado por flebotomistas infantiles y de adultos, buscando que sea un proceso veloz e indoloro." },
+          { icon: "ph-device-mobile", title: "Resultados Digitales", desc: "Notificación directa a tu celular y acceso web protegido para enviar automáticamente a tu médico tratante en menos de 24h." }
+        ],
+        infrastructure: "Nuestra infraestructura clínica cuenta con las mismas plataformas automatizadas utilizadas en los principales centros de investigación a nivel mundial. Al evitar el contacto humano en etapas de reacción mediante robots integradores, minimizamos el margen de error técnico y acortamos radicalmente los tiempos de espera del paciente.",
+        faqs: [
+          { q: "¿Necesito hacer ayuno estricto para mis estudios?", a: "No todos lo requieren. Sin embargo, en estudios como química sanguínea y perfiles de lípidos es mandatorio un ayuno de 8 a 12 horas (solamente puedes ingerir agua natural)." },
+          { q: "¿Aceptan seguros de gastos médicos para procedimientos de laboratorio?", a: "Sí, trabajamos con la mayoría de los seguros bajo modalidad de Pago Directo, sujeto a la validación de tus tabuladores por nuestras ejecutivas de recepción." },
+          { q: "¿Mis estudios estarán disponibles por celular?", a: "Claro que sí. Recibirás una liga segura mediante WhatsApp y correo electrónico apenas el químico responsable valide tus parámetros finales." }
+        ]
+      }
+    },
+    {
+      params: { slug: "imagenologia" },
+      props: {
+        heroImage: "/images/img_imagenologia.webp",
+        title: "Imagenología y Radiología",
+        description: "Diagnóstico por imagen avanzado en resoluciones HD. Tomografías de precisión y resonancias sin claustrofobia para dictámenes exactos.",
+        definition: "El Servicio de Imagenología del hospital es una unidad diagnóstica de alta tecnología que utiliza radiaciones de baja dosis computarizadas, ultrasonido y campos magnéticos para generar imágenes internas del cuerpo humano con una precisión anatómica y estructural milimétrica.",
+        catalog: [
+          { icon: "ph-activity", name: "Resonancia Magnética (Alto Tesla)", desc: "Estudios no radiológicos para visualizar detalladamente ligamentos, cerebro y tumores mediante potente tecnología magnética 3D." },
+          { icon: "ph-disc", name: "Tomografía Computarizada (TAC)", desc: "Tomógrafo Multicorte de altísima velocidad que realiza escaneos cardiovasculares y corporales completos en tiempos récord de apnea respiratoria." },
+          { icon: "ph-waves", name: "Ultrasonido Doppler", desc: "Ecosonogramas maternos y análisis de circulación vascular en tiempo real sin involucrar absolutamente ninguna clase de radiación." },
+          { icon: "ph-skeleton", name: "Rayos X Inteligentes", desc: "Radiología digital de dosis optimizada. Disminuye la exposición de radiación al paciente con una nitidez abismal superior a métodos convencionales." }
+        ],
+        steps: [
+          { icon: "ph-clipboard-text", title: "Preparación", desc: "Recepción de indicaciones según el estudio, colocación de bata y en su caso, abordaje de vena para la administración de medios de contraste." },
+          { icon: "ph-person", title: "Posicionamiento", desc: "Ingreso a la sala guiado por técnicos expertos cuidando tu confort durante el trayecto de la placa, tomografía o resonador." },
+          { icon: "ph-folder-notch", title: "Entrega Médica", desc: "El Médico Radiólogo Especialista redacta su interpretación y te hacemos entrega de informe oficial más las placas o unidad de almacenamiento." }
+        ],
+        infrastructure: "Las salas herméticas están equipadas con bobinas y tomógrafos de las mejores firmas de salud internacional (como Phillips o GE). Poseemos salas especiales de amplio diámetro preparadas para reducir la ansiedad en pacientes que padecen claustrofobia severa.",
+        faqs: [
+          { q: "¿La radiación del TAC o Rayos X es peligrosa?", a: "Gracias al equipamiento digital inteligente de última generación, las dosis de radiación son extremadamenet bajas y están calibradas científicamente para no generar afectaciones al paciente." },
+          { q: "¿Necesito preparación especial para una resonancia magnética?", a: "Principalmente retirar todo elemento metálico, joyas superficiales o reportar si cuentas con implantes electromagnéticos (como marcapasos), además de ayuno solo en caso de usar medos de contraste." },
+          { q: "¿Aceptan seguros médicos para Imagenología?", a: "Efectivamente, aceptamos un amplio portafolio de pagadores y aseguradoras. Si tu estudio ha sido avalado médicamente, procedemos con su trámite internamente antes de ingresarte." }
+        ]
+      }
+    },
+    {
+      params: { slug: "hemodinamia" },
+      props: {
+        heroImage: "/images/img_hemodinamia.webp",
+        title: "Hemodinamia",
+        description: "Salvasmos vidas destapando arterias. La Unidad de Cateterismo ofrece soluciones coronarias de alta especialidad sin requerir cirugía de bisturí.",
+        definition: "La Unidad de Hemodinamia es un área quirúrgica mínimamente invasiva dedicada al diagnóstico y tratamiento percutáneo de anomalías cardiovasculares o estructurales mediante la inserción controlada de catéteres endovasculares guiados por fluroscopia de alta resolución en tiempo real.",
+        catalog: [
+          { icon: "ph-heartbeat", name: "Cateterismo Diagnóstico", desc: "Exploración milimétrica para detectar estenosis, bloqueos arteriales, infartos silentes y medir la funcionalidad exacta del bombeo del corazón." },
+          { icon: "ph-magic-wand", name: "Angioplastia y Stent", desc: "Procedimiento resolutivo para destapar o mantener abiertas arterias estrechadas usando globos miniatura y mallas medicadas." },
+          { icon: "ph-graph", name: "Electrofisiología y Marcapasos", desc: "Mapeo del sistema bioeléctrico del corazón e instalación especializada de marcapasos y dispositivos de rectificación de arritmias severas." },
+          { icon: "ph-arrows-split", name: "Arteriografía Periférica", desc: "Diagnóstico angiográfico para vasos de piernas, brazos, o arterias carótidas enfocados en descartar aneurismas o coágulos circulantes." }
+        ],
+        steps: [
+          { icon: "ph-siren", title: "Recepción Especializada", desc: "Ingreso programado desde urgencias en protocolo de Código Infarto, o por consultorio preparando vías de acceso vascular (brazo o ingle)." },
+          { icon: "ph-eyedropper", title: "Intervención Percutánea", desc: "Navegación del catéter hacia el corazón con anestesia local apoyado por un equipo robótico fluoroscópico sin bisturí de pecho abierto." },
+          { icon: "ph-bed", title: "Recuperación Controlada", desc: "Tránsito directo a Unidad de Cuidados Intermedios o Terapias intensiva para vigilar la hemodinámica hasta que seas estabilizado para el alta." }
+        ],
+        infrastructure: "La tecnología de angiografía que vestimos permite la rotación simultánea de los arcos y detectores bi-plano. Nuestros equipos emiten dosis mínimas y entregan modelos 3D del árbol arterial directo al cirujano mientras estás en la mesa.",
+        faqs: [
+          { q: "¿Un cateterismo requiere cirugía de corazón abierto?", a: "No. El cateterismo es un procedimiento percutáneo (mínimamente invasivo), donde se introduce un catéter generalmente por la muñeca (vía radial) o la ingle, evitando abrir el tórax." },
+          { q: "¿Podré irme a casa el mismo día del cateterismo?", a: "Una gran mayoría de los cateterismos diagnósticos son ambulatorios (de entrada por salida luego de horas de reposo). Sin embargo, si se coloca un Stent o surge de un infarto, deberás pernoctar hospitalizado." },
+          { q: "¿Mi SGMM (Seguro Médico) autoriza esto?", a: "Nuestros coordinadores manejan el enlace directo con la aseguradora previo y posterior a la intervención para soportar el pago directo o facilitar la factura bajo red médica." }
+        ]
+      }
+    },
+    {
+      params: { slug: "quirofano" },
+      props: {
+        heroImage: "/images/img_quirofano.webp",
+        title: "Quirófano Central",
+        description: "Bloque quirúrgico de ultra-alta seguridad. Tecnología anti-infecciones y soporte anestesiológico permanente para cirugías exitosas.",
+        definition: "El área de Quirófanos Centrales es un bloque quirúrgico hermético y de máxima bioseguridad, diseñado para la ejecución clínica de procedimientos desde baja hasta extrema complejidad apoyado por tecnología robótica, soportes vitales avanzados y monitoreo anestesiológico intransigente.",
+        catalog: [
+          { icon: "ph-scissors", name: "Cirugía General y Laparoscopía", desc: "Desde apéndices hasta extirpación biliar. Todo a través de métodos de mínima incisión usando visores y manipuladores ópticos cerrados." },
+          { icon: "ph-bone", name: "Ortopedia y Prótesis", desc: "Clavado, reemplazos articulares e intervenciones de columna. Realizado en salas super aisladas preparadas con flujo de aire laminar." },
+          { icon: "ph-brain", name: "Neurocirugía Altamente Compleja", desc: "Salas equipadas con sistemas de arcos de neuronavegación para preservar milimétricamente el tejido vital nervioso o cerebro espinal del paciente." },
+          { icon: "ph-heart", name: "Cirugía Cardiovascular y Tórax", desc: "Unidades extendidas con consolas integrales de bypass cardiopulmonar permanente apoyando al equipo de cardiocirujanos de alto perfil." }
+        ],
+        steps: [
+          { icon: "ph-calendar-check", title: "Ingreso Quirúrgico", desc: "Llegada al área pre-operatoria. Presentación con tu responsable anestesiólogo, checklist de seguridad y confirmación del Consentimiento Informado." },
+          { icon: "ph-bandaids", title: "Traslado en Sala Estéril", desc: "Tránsito directo al quirófano con ambiente y temperatura controlada. Procedimiento realizado en tiempos optimizados salvaguardando los tejidos." },
+          { icon: "ph-activity", title: "Recuperación Postanestésica", desc: "Monitoreo por personal de enfermería en área de extubación. Una vez que estés consciente, lúcido e indoloro, pasarás a tu habitación privada." }
+        ],
+        infrastructure: "Toda la sección de Quirófanos Centrales opera en presión positiva mediante flujos laminares controlados por Filtros HEPA. Esto impide de facto la entrada de polvo y bacterias ajenas al cuarto, logrando un control de infecciones postquirúrgicas de excelencia estadística.",
+        faqs: [
+          { q: "¿Me puede acompañar alguien hasta adentro por los nervios?", a: "Para mantener la esterilidad del ambiente quirúrgico, los acompañantes deben esperar en las confortables salas conjuntas de hospital. Solo se hace caso de excepción protocolizada para padres en cirugías exclusivamente pediátricas." },
+          { q: "¿El quirófano atiende urgencias o solo cirugías programadas?", a: "El bloque quirúrgico cuenta todo el tiempo con salas reservadas operando 24/7 listas para recibir una emergencia que requiera intervención de supervivencia súbita sin trabas o esperas." },
+          { q: "¿El seguro entra directamente o tengo que cubrir equipo extra?", a: "Todas las salas están blindadas según convenio con las aseguradoras. Para cirugías programadas generamos un presupuesto acoplado, garantizando que entres y salgas de la sala con un trámite 100% administrativo, evitando cobros sorpresas por derechos de quirófano en la red amparada." }
+        ]
+      }
+    }
+  ];
+}
+
+const { title, description, definition, catalog, steps, infrastructure, faqs, heroImage } = Astro.props;
+const { slug } = Astro.params;
+
+// URL SEO Generator
+const currentUrl = `https://midominio.com/servicios/${slug}`;
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Service",
+      "@id": currentUrl,
+      "url": currentUrl,
+      "name": `Servicio de ${title} en Monterrey`,
+      "description": description,
+      "provider": {
+        "@type": "MedicalOrganization",
+        "name": "Centro Médico de Especialidades Monterrey"
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": faqs.map(faq => ({
+        "@type": "Question",
+        "name": faq.q,
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": faq.a
+        }
+      }))
+    }
+  ]
+};
+---
+
+<Layout
+  title={`${title} en Monterrey | Centro de Especialidades`}
+  description={description}
+>
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+
+  <!-- 1. Hero Impactante (AEO & Local SEO) -->
+  <section class="relative bg-slate-900 pt-32 pb-20 lg:pt-40 lg:pb-28 overflow-hidden">
+    <div class="absolute inset-0 z-0">
+      <!-- Overlay estético y clínico -->
+      <img src={heroImage || `/images/imggen_1.webp`} alt={`Interior Médico - ${title}`} class="w-full h-full object-cover opacity-30 mix-blend-overlay filter grayscale" />
+      <div class="absolute inset-0 bg-[#004b87]/80"></div>
+      <div class="absolute inset-0 bg-gradient-to-tr from-slate-900 via-[#004b87]/60 to-[#00a3e0]/20"></div>
+    </div>
+    
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20 flex flex-col items-center lg:items-start text-center lg:text-left">
+      <span class="inline-flex items-center gap-2 bg-[#00a3e0]/20 text-[#00a3e0] px-5 py-2 rounded-full text-sm font-bold tracking-wide border border-[#00a3e0]/40 mb-6 backdrop-blur-md">
+        <i class="ph ph-shield-check text-xl"></i> Calidad Médica
+      </span>
+      <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black text-white mb-6 leading-[1.1] tracking-tight drop-shadow-lg">
+        Servicio de {title} <br class="hidden lg:block"/><span class="text-[#00a3e0]">en Monterrey</span>
+      </h1>
+      <p class="text-lg sm:text-xl text-blue-100 mb-10 max-w-2xl leading-relaxed font-light">
+        {description}
+      </p>
+
+      <div class="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
+         <a href="/contacto" class="inline-flex items-center justify-center px-10 py-4 bg-[#00a3e0] text-white text-lg font-bold rounded-2xl hover:bg-white hover:text-[#004b87] transition-all shadow-xl shadow-[#00a3e0]/30 transform hover:-translate-y-1">
+           Agendar Cita Directa <i class="ph ph-calendar-check text-2xl ml-3"></i>
+         </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. Trust Bar (Bloque de Confianza) -->
+  <div class="bg-white border-b border-slate-200 relative z-30 shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 py-6 text-center md:divide-x divide-slate-100">
+        
+        <div class="flex items-center justify-center gap-4 px-4">
+           <i class="ph ph-certificate text-4xl text-[#00a3e0]"></i>
+           <div class="text-left">
+              <p class="font-bold text-[#004b87]">Protocolos JCI / ISO</p>
+              <p class="text-xs text-slate-500">Bioseguridad auditada internacionalmente.</p>
+           </div>
+        </div>
+        
+        <div class="flex items-center justify-center gap-4 px-4">
+           <i class="ph ph-laptop text-4xl text-[#00a3e0]"></i>
+           <div class="text-left">
+              <p class="font-bold text-[#004b87]">Múltiples Tecnologías</p>
+              <p class="text-xs text-slate-500">Analizadores y equipamiento de Vanguardia.</p>
+           </div>
+        </div>
+
+        <div class="flex items-center justify-center gap-4 px-4">
+           <i class="ph ph-clock text-4xl text-[#00a3e0]"></i>
+           <div class="text-left">
+              <p class="font-bold text-[#004b87]">Respaldo Emergencias</p>
+              <p class="text-xs text-slate-500">Disponibilidad 24/7 ligada a Urgencias.</p>
+           </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. Definición AEO (¿Qué es?) -->
+  <section class="py-20 bg-slate-50 relative overflow-hidden">
+    <div class="absolute -right-20 top-20 w-80 h-80 bg-[#00a3e0]/5 rounded-full blur-[80px]"></div>
+    
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+       <span class="text-[#00a3e0] font-black tracking-widest uppercase text-xs mb-4 block">Diccionario Clínico</span>
+       <h2 class="text-3xl md:text-4xl font-black text-[#004b87] mb-8">
+         ¿Qué es el servicio de {title}?
+       </h2>
+       
+       <!-- Bloque Formato Snippet Elegible Google -->
+       <div class="glass-card bg-white p-8 md:p-12 rounded-[2rem] border border-slate-200 shadow-lg gs-reveal">
+         <i class="ph ph-check-circle text-4xl text-[#00a3e0] mb-4"></i>
+         <p class="text-slate-700 text-lg md:text-xl leading-relaxed font-medium">
+           {definition}
+         </p>
+       </div>
+    </div>
+  </section>
+
+  <!-- 4. Catálogo de Servicios / Especialidades Internas -->
+  <section class="py-24 bg-white relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-5xl font-black text-[#004b87] mb-4">Procedimientos o Estudios</h2>
+        <p class="text-slate-600 text-lg font-medium">El bloque integral se fragmenta en estas ramas tecnológicas y diagnósticas operativas.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        {catalog.map((item) => (
+          <div class="glass-card bg-slate-50 border border-slate-200 p-8 rounded-[2rem] flex flex-col group hover:border-[#00a3e0] hover:shadow-xl transition-all gs-reveal h-full">
+             <div class="w-14 h-14 bg-sky-50 text-[#00a3e0] rounded-xl flex items-center justify-center mb-6 shadow-sm group-hover:bg-[#00a3e0] group-hover:text-white transition-colors">
+                <i class={`ph ${item.icon} text-3xl`}></i>
+             </div>
+             <h3 class="text-xl font-bold text-[#004b87] mb-3">{item.name}</h3>
+             <p class="text-sm text-slate-600 leading-relaxed font-medium flex-grow">
+               {item.desc}
+             </p>
+          </div>
+        ))}
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 5. Experiencia del Paciente (Proceso Fricción Cero) -->
+  <section class="py-24 bg-slate-50 relative border-y border-slate-200 overflow-hidden">
+    <!-- Orb visual para diseño de proceso -->
+    <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-4xl h-[400px] bg-white/40 blur-[100px] rounded-full pointer-events-none"></div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      
+      <div class="text-center mb-20">
+        <h2 class="text-3xl md:text-5xl font-black text-[#004b87] mb-6">El Proceso de Tu {title}</h2>
+        <p class="text-lg text-slate-600 max-w-2xl mx-auto">
+          Sabemos que la vida ajetreada y situaciones médicas requieren eficiencia. Hemos blindado nuestros protocolos logísticos para brindarte la experiencia interactiva más rápida y serena posible.
+        </p>
+      </div>
+
+      <div class="relative max-w-5xl mx-auto">
+        <!-- Línea conectora Desktop -->
+        <div class="hidden lg:block absolute top-[2.5rem] left-[15%] right-[15%] h-[4px] bg-slate-200 z-0"></div>
+        <!-- Línea conectora Mobile -->
+        <div class="block lg:hidden absolute top-8 bottom-8 left-[2.4rem] w-[4px] bg-slate-200 z-0"></div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-12 relative z-10">
+          
+          {steps.map((step, index) => (
+            <div class="gs-reveal flex lg:flex-col items-start lg:items-center text-left lg:text-center relative gap-6 lg:gap-0">
+               <div class={`w-16 h-16 lg:w-20 lg:h-20 rounded-full shadow-xl border-4 border-slate-50 flex items-center justify-center flex-shrink-0 z-10 lg:mb-6 transition-colors ${index === 1 ? 'bg-[#00a3e0] text-white shadow-[#00a3e0]/40' : 'bg-white text-[#004b87]'}`}>
+                 <i class={`ph ${step.icon} text-3xl font-bold`}></i>
+               </div>
+               <div class="glass-card bg-white p-5 lg:p-6 rounded-3xl border border-slate-100 shadow-sm w-full h-full hover:shadow-md transition-shadow">
+                  <h4 class="text-lg font-black text-slate-900 mb-2">{index + 1}. {step.title}</h4>
+                  <p class="text-sm text-slate-600 leading-relaxed font-medium">{step.desc}</p>
+               </div>
+            </div>
+          ))}
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 6. Infraestructura y Tecnología Tecnológica -->
+  <section class="py-24 bg-white relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="bg-[#004b87] rounded-[3rem] p-10 lg:p-16 relative flex flex-col md:flex-row items-center gap-12 shadow-2xl overflow-hidden gs-reveal">
+        
+        <div class="absolute right-0 top-0 h-full w-full bg-[url('/images/pattern-grid.svg')] opacity-10 pointer-events-none"></div>
+        <div class="absolute bottom-[-50px] right-[-50px] w-96 h-96 bg-[#00a3e0] blur-[150px] rounded-full opacity-50 pointer-events-none"></div>
+
+        <div class="md:w-[55%] relative z-10 text-white">
+           <i class="ph ph-cpu text-5xl text-[#00a3e0] mb-6"></i>
+           <h2 class="text-3xl md:text-5xl font-black mb-6 leading-tight">
+             Respaldo Tecnológico e Infraestructura
+           </h2>
+           <p class="text-blue-100 text-lg leading-relaxed mb-6 font-light">
+             {infrastructure}
+           </p>
+           <ul class="space-y-3 font-medium">
+             <li class="flex items-center gap-3"><i class="ph ph-check-circle text-[#00a3e0] text-xl"></i> Precisión clínica certificada y avalada externamente.</li>
+             <li class="flex items-center gap-3"><i class="ph ph-check-circle text-[#00a3e0] text-xl"></i> Eliminación drástica del error humano operativo.</li>
+             <li class="flex items-center gap-3"><i class="ph ph-check-circle text-[#00a3e0] text-xl"></i> Integración instantánea al expediente electrónico y web.</li>
+           </ul>
+        </div>
+        
+        <!-- Elemento Gráfico Innovación -->
+        <div class="md:w-[45%] relative z-10 flex justify-center lg:justify-end w-full">
+           <div class="w-full max-w-sm aspect-[4/3] bg-slate-900/60 backdrop-blur-xl rounded-[2rem] border border-white/20 p-2 shadow-2xl overflow-hidden">
+               <img src={`/images/imggen_1.webp`} alt={`Tecnología - ${title}`} class="w-full h-full object-cover rounded-xl" />
+           </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 7. CTA de Conversión -->
+  <section id="contacto" class="py-24 bg-slate-100 relative">
+     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <h2 class="text-3xl md:text-5xl font-black text-[#004b87] mb-6">¿Estás listo para resolver tus dudas de manera efectiva?</h2>
+        <p class="text-lg text-slate-600 mb-10 font-medium">
+          Mantenemos diferentes canales interactivos de comunicación rápida y continua para agendamientos.
+        </p>
+
+        <div class="flex justify-center">
+           <a href="/contacto" class="inline-flex items-center justify-center px-10 py-5 bg-[#00a3e0] text-white text-xl font-bold rounded-2xl hover:bg-[#004b87] transition-all shadow-xl shadow-[#00a3e0]/30 transform hover:-translate-y-1">
+               <i class="ph ph-calendar-check text-2xl mr-3"></i> Agendar Cita Ahora
+           </a>
+        </div>
+     </div>
+  </section>
+
+  <!-- 8. Sección FAQ Estratégica (AEO) -->
+  <section class="py-24 bg-white border-y border-slate-200">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center mb-12">
+        <h3 class="text-3xl font-black text-[#004b87]">Dudas Comunes sobre el Servicio</h3>
+      </div>
+      
+      <div class="space-y-4">
+        {faqs.map((faq) => (
+          <details class="bg-slate-50 rounded-2xl p-6 group cursor-pointer marker:content-[''] !border-l-[4px] border-slate-200 !border-l-transparent hover:!border-l-[#00a3e0] border shadow-sm transition-all overflow-hidden data-[open]:!border-l-[#00a3e0] data-[open]:shadow-md">
+            <summary class="text-lg md:text-xl font-bold text-[#004b87] flex justify-between items-center outline-none list-none marker:content-none [&::-webkit-details-marker]:hidden">
+              {faq.q}
+              <i class="ph ph-caret-down transform group-open:rotate-180 transition-transform text-[#00a3e0] text-2xl"></i>
+            </summary>
+            <div class="mt-4 text-slate-600 font-medium leading-relaxed border-t border-slate-200 pt-4 text-base">
+              {faq.a}
+            </div>
+          </details>
+        ))}
+      </div>
+
+    </div>
+  </section>
+
+  <!-- GSAP Animaciones de Fade-In Elegante -->
+  <script is:inline>
+    document.addEventListener("DOMContentLoaded", () => {
+      setTimeout(() => {
+        if (typeof window.gsap !== "undefined" && window.ScrollTrigger) {
+          
+          window.gsap.from(".gs-reveal", {
+            scrollTrigger: {
+              trigger: ".gs-reveal",
+              start: "top 80%",
+            },
+            y: 40,
+            opacity: 0,
+            duration: 0.8,
+            stagger: 0.15,
+            ease: "power2.out",
+            clearProps: "all",
+          });
+
+        }
+      }, 100);
+    });
+  </script>
+
+</Layout>

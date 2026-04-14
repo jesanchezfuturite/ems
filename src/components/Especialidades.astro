@@ -3,108 +3,77 @@
 ---
 
 <section class="relative bg-slate-50 py-24 overflow-hidden" id="especialidades-section">
-  <!-- Elementos decorativos para el glassmorphism (Background glows) -->
-  <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-brand-cyan/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3"></div>
-  <div class="absolute bottom-0 left-0 w-[600px] h-[600px] bg-brand-blue/5 rounded-full blur-3xl translate-y-1/3 -translate-x-1/4"></div>
+  <!-- Glowing background orbs -->
+  <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-[#00a3e0]/10 rounded-full blur-[80px] -translate-y-1/2 translate-x-1/3"></div>
+  <div class="absolute bottom-0 left-0 w-[600px] h-[600px] bg-[#004b87]/5 rounded-full blur-[100px] translate-y-1/3 -translate-x-1/4"></div>
 
   <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 z-10">
     
-    <div class="text-center max-w-2xl mx-auto mb-16 espp-header">
-      <h2 class="text-brand-blue font-bold tracking-widest uppercase text-sm mb-2">Servicios Principales</h2>
-      <h3 class="text-3xl md:text-5xl font-black text-slate-800 tracking-tight">Atención médica orientada a <span class="text-brand-cyan">resultados</span>.</h3>
+    <div class="text-center max-w-3xl mx-auto mb-16 espp-header">
+      <h2 class="text-3xl md:text-5xl font-black text-[#004b87] tracking-tight mb-4">Nuestras Especialidades Médicas</h2>
+      <p class="text-slate-600 text-lg md:text-xl font-medium">Médicos avalados y tecnología de punta para un diagnóstico y tratamiento eficaz.</p>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+    <!-- Bento Grid - 4 Especialidades Principales -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 relative">
       
-      <!-- Card A: Cirugía Avanzada (2 col) glassmorphism -->
-      <div class="bento-espp md:col-span-2 bg-white/80 backdrop-blur-md rounded-[2rem] p-8 md:p-12 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_20px_40px_rgb(0,0,0,0.08)] border border-white/60 hover:-translate-y-2 transition-all duration-500 flex flex-col justify-between relative overflow-hidden min-h-[360px] group">
-        <div class="z-10 relative md:w-1/2 md:pr-6">
-          <div class="bg-brand-blue/10 w-14 h-14 rounded-2xl flex items-center justify-center mb-8 text-brand-blue group-hover:scale-110 transition-transform duration-500">
-            <i class="ph ph-activity text-3xl" aria-label="Icono de Cirugía"></i>
-          </div>
-          <h3 class="text-3xl md:text-4xl font-bold text-slate-800 mb-4 tracking-tight">Cirugía de Alta Especialidad</h3>
-          <p class="text-slate-600 text-lg md:text-xl font-light mb-8 leading-relaxed">
-            Líderes en cirugía bariátrica y laparoscopía con mínima invasión. Tecnología robótica disponible.
-          </p>
-          <a href="/cirugias" class="inline-flex items-center text-brand-blue font-bold hover:text-brand-cyan transition-colors mt-auto text-lg group/link">
-            Conoce nuestros quirófanos 
-            <i class="ph ph-arrow-right ml-2 group-hover/link:translate-x-2 transition-transform" aria-label="Flecha derecha"></i>
-          </a>
+      <!-- Cardiología -->
+      <a href="/directorio?especialidad=cardiologia" class="glass-card p-8 group hover:-translate-y-2 hover:shadow-[0_0_25px_#00a3e0] transition-all duration-300 flex flex-col items-center text-center bento-espp">
+        <div class="w-16 h-16 bg-blue-50 text-[#00a3e0] rounded-2xl flex items-center justify-center mb-6 border border-blue-100 group-hover:bg-[#00a3e0] group-hover:text-white transition-colors duration-300">
+          <i class="ph ph-heartbeat text-3xl"></i>
         </div>
-        <!-- Mantenemos la imagen absolutisada -->
-        <img src="/images/surgery-hub.webp" alt="Quirófano de alta tecnología" class="absolute right-0 bottom-0 w-[45%] h-full object-cover rounded-tl-[100px] opacity-90 hidden md:block transition-transform duration-700 group-hover:scale-105" />
-      </div>
+        <h3 class="text-xl font-bold text-[#004b87] mb-3">Cardiología</h3>
+        <p class="text-slate-600 text-sm flex-grow">Diagnóstico oportuno de enfermedades cardiovasculares con estudios no invasivos.</p>
+      </a>
 
-      <!-- Card B: Maternidad (1 col) glassmorphism -->
-      <div class="bento-espp bg-white/80 backdrop-blur-md rounded-[2rem] p-8 md:p-10 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_20px_40px_rgb(0,0,0,0.08)] border border-white/60 hover:-translate-y-2 transition-all duration-500 flex flex-col group">
-        <div class="bg-pink-500/10 w-14 h-14 rounded-2xl flex items-center justify-center mb-8 text-pink-500 group-hover:scale-110 transition-transform duration-500">
-          <i class="ph ph-baby text-3xl" aria-label="Icono Maternidad"></i>
+      <!-- Gastroenterología -->
+      <a href="/directorio?especialidad=gastroenterologia" class="glass-card p-8 group hover:-translate-y-2 hover:shadow-[0_0_25px_#00a3e0] transition-all duration-300 flex flex-col items-center text-center bento-espp">
+        <div class="w-16 h-16 bg-blue-50 text-[#00a3e0] rounded-2xl flex items-center justify-center mb-6 border border-blue-100 group-hover:bg-[#00a3e0] group-hover:text-white transition-colors duration-300">
+          <i class="ph ph-stethoscope text-3xl"></i>
         </div>
-        <h3 class="text-2xl md:text-3xl font-bold text-slate-800 mb-4 tracking-tight">Maternidad Sur</h3>
-        <p class="text-slate-600 font-light mb-8 flex-grow text-lg leading-relaxed">
-          Momentos únicos, seguridad absoluta para ti y tu bebé con UCIN de puertas abiertas.
-        </p>
-        <a href="/maternidad" class="inline-flex items-center text-pink-500 font-bold hover:text-pink-600 transition-colors text-lg group/link">
-          Ver paquetes <i class="ph ph-arrow-right ml-2 group-hover/link:translate-x-2 transition-transform" aria-label="Ir a Maternidad"></i>
-        </a>
-      </div>
+        <h3 class="text-xl font-bold text-[#004b87] mb-3">Gastroenterología</h3>
+        <p class="text-slate-600 text-sm flex-grow">Endoscopía de vanguardia y tratamientos integrales del sistema digestivo.</p>
+      </a>
 
-      <!-- Card C: Urgencias (1 col) Dark Theme -->
-      <div class="bento-espp bg-slate-900 rounded-[2rem] p-8 md:p-10 shadow-[0_20px_40px_rgba(15,23,42,0.2)] hover:shadow-[0_25px_50px_rgba(15,23,42,0.4)] border border-slate-700 hover:-translate-y-2 transition-all duration-500 flex flex-col justify-center text-center group relative overflow-hidden">
-        <!-- Glow interno rojo sutil -->
-        <div class="absolute inset-0 bg-red-500/5 transition-opacity duration-500 group-hover:bg-red-500/10"></div>
-        
-        <div class="relative z-10 flex flex-col items-center">
-          <div class="bg-red-500/20 w-20 h-20 rounded-full flex items-center justify-center mb-6 text-red-500 border border-red-500/30">
-            <i class="ph ph-heartbeat text-4xl animate-pulse" aria-label="Icono Pulso"></i>
-          </div>
-          <h3 class="text-3xl font-black text-white mb-3 tracking-tight">Urgencias</h3>
-          <p class="text-red-400 font-medium text-lg tracking-wide">
-            ATENCIÓN 24/7
-          </p>
+      <!-- Ginecología -->
+      <a href="/directorio?especialidad=ginecologia" class="glass-card p-8 group hover:-translate-y-2 hover:shadow-[0_0_25px_#00a3e0] transition-all duration-300 flex flex-col items-center text-center bento-espp">
+        <div class="w-16 h-16 bg-pink-50 text-pink-500 rounded-2xl flex items-center justify-center mb-6 border border-pink-100 group-hover:bg-pink-500 group-hover:text-white transition-colors duration-300">
+           <i class="ph ph-gender-female text-3xl"></i>
         </div>
-      </div>
+        <h3 class="text-xl font-bold text-[#004b87] mb-3">Ginecología</h3>
+        <p class="text-slate-600 text-sm flex-grow">Acompañamiento especializado en todas las etapas de la mujer y embarazo.</p>
+      </a>
 
-      <!-- Card D: Especialidades (2 col) -->
-      <div class="bento-espp md:col-span-2 bg-gradient-to-br from-brand-blue to-blue-900 rounded-[2rem] p-8 md:p-10 shadow-[0_20px_40px_rgba(30,58,138,0.2)] hover:shadow-[0_25px_50px_rgba(30,58,138,0.3)] hover:-translate-y-2 transition-all duration-500 text-white relative overflow-hidden group">
-        <div class="absolute top-0 right-0 w-64 h-64 bg-brand-cyan/20 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
-        
-        <div class="relative z-10 flex flex-col h-full justify-between">
-          <div>
-            <h3 class="text-2xl md:text-3xl font-bold mb-4 tracking-tight">Directorio Médico</h3>
-            <p class="text-blue-100 font-light text-lg max-w-xl">Encuentra al especialista ideal para ti entre nuestro cuerpo médico de más de 40 especialidades.</p>
-          </div>
-          
-          <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mt-8">
-            <div class="flex items-center space-x-3 bg-white/10 hover:bg-white/20 transition-colors rounded-2xl p-4 backdrop-blur-md border border-white/5">
-              <i class="ph ph-heart text-brand-cyan text-2xl" aria-label="Cardiología"></i>
-              <span class="font-semibold text-sm">Cardiología</span>
-            </div>
-            <div class="flex items-center space-x-3 bg-white/10 hover:bg-white/20 transition-colors rounded-2xl p-4 backdrop-blur-md border border-white/5">
-              <i class="ph ph-bone text-brand-cyan text-2xl" aria-label="Traumatología"></i>
-              <span class="font-semibold text-sm">Traumatología</span>
-            </div>
-            <div class="flex items-center space-x-3 bg-white/10 hover:bg-white/20 transition-colors rounded-2xl p-4 backdrop-blur-md border border-white/5">
-              <i class="ph ph-gender-female text-brand-cyan text-2xl" aria-label="Ginecología"></i>
-              <span class="font-semibold text-sm">Ginecología</span>
-            </div>
-            <a href="/directorio" class="flex items-center justify-center space-x-2 bg-transparent hover:bg-white/10 transition-colors rounded-2xl p-4 border border-brand-cyan/30 text-brand-cyan group/btn">
-              <span class="font-semibold text-sm">Ver todas</span>
-              <i class="ph ph-arrow-right group-hover/btn:translate-x-1 transition-transform"></i>
-            </a>
-          </div>
+      <!-- Traumatología -->
+      <a href="/directorio?especialidad=traumatologia" class="glass-card p-8 group hover:-translate-y-2 hover:shadow-[0_0_25px_#00a3e0] transition-all duration-300 flex flex-col items-center text-center bento-espp">
+        <div class="w-16 h-16 bg-blue-50 text-[#00a3e0] rounded-2xl flex items-center justify-center mb-6 border border-blue-100 group-hover:bg-[#00a3e0] group-hover:text-white transition-colors duration-300">
+          <i class="ph ph-bone text-3xl"></i>
         </div>
-      </div>
+        <h3 class="text-xl font-bold text-[#004b87] mb-3">Traumatología</h3>
+        <p class="text-slate-600 text-sm flex-grow">Cirugías articulares y recuperación de lesiones musculoesqueléticas deportivas.</p>
+      </a>
 
     </div>
+
+    <!-- SEO AEO List (Visualmente disimulado pero accesible al DOM para bots) -->
+    <div class="mt-8 text-center" aria-label="Especialidades adicionales">
+      <p class="sr-only">
+        También contamos con más de 40 especialidades médicas adicionales, como: Pediatría, Neurología, Urología, Oftalmología, Dermatología, Otorrinolaringología, Oncología, Cirugía General, Medicina Interna, Endocrinología, Neumología, Reumatología, Hematología, Nefrología, Psiquiatría y Nutrición, entre otras.
+      </p>
+      <!-- Botón visible para descubrir el resto -->
+      <a href="/especialidades" class="inline-block mt-4 text-[#00a3e0] font-bold hover:text-[#004b87] transition-colors border-b-2 border-transparent hover:border-[#004b87] pb-1">
+        Explorar más de 40 especialidades médicas &rarr;
+      </a>
+    </div>
+
   </div>
 </section>
 
 <script is:inline>
   document.addEventListener('DOMContentLoaded', () => {
-    if (typeof gsap !== 'undefined' && gsap.plugins && gsap.plugins.ScrollTrigger) {
+    if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
       
-      // Animación para el header de la sección
+      // Animación de Header de Especialidades
       gsap.fromTo(".espp-header", 
         { y: 30, opacity: 0 },
         { 
@@ -116,14 +85,14 @@
         }
       );
 
-      // Animación en Stagger para las tarjetas
+      // Stagger de las Cards
       gsap.fromTo(".bento-espp", 
         { y: 50, opacity: 0 },
         { 
-          y: 0, opacity: 1, duration: 1, stagger: 0.15, ease: "power3.out",
+          y: 0, opacity: 1, duration: 0.8, stagger: 0.15, ease: "power3.out",
           scrollTrigger: {
             trigger: ".espp-header",
-            start: "top 70%",
+            start: "top 75%",
           }
         }
       );

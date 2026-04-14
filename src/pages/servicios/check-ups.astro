@@ -1,0 +1,551 @@
+---
+import Layout from "../../layouts/Layout.astro";
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "MedicalWebPage",
+      "@id": "https://midominio.com/servicios/check-ups",
+      "url": "https://midominio.com/servicios/check-ups",
+      "name": "Check Up Médico Preventivo en Monterrey",
+      "description": "Evalúa tu estado de salud con estudios clínicos completos, diagnóstico oportuno y acompañamiento médico. Nuestros paquetes incluyen opciones para todas las edades."
+    },
+    {
+      "@type": "Service",
+      "name": "Check Up Médico Preventivo",
+      "serviceType": "Medicina Preventiva",
+      "provider": {
+        "@type": "MedicalOrganization",
+        "name": "Centro Médico de Especialidades"
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Cómo agendar una cita para un Check Up?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Puedes agendar tu cita directamente a través de nuestro sitio web, mediante nuestro botón de WhatsApp o llamando a nuestra línea telefónica."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cuál es la duración promedio de un Check Up Médico?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "El proceso completo, que incluye toma de muestras, estudios de imagen y consultas, suele tener una duración aproximada de 3 a 5 horas, dependiendo del paquete elegido."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cuántas horas de ayuno necesito?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Se requiere un ayuno estricto de 8 a 12 horas previas a la toma de muestras de laboratorio. Solo se permite beber agua natural."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿El paquete incluye la consulta de resultados?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sí, todos nuestros paquetes incluyen una consulta médica final donde un especialista en medicina preventiva interpreta tus resultados y te brinda recomendaciones."
+          }
+        }
+      ]
+    }
+  ]
+};
+---
+
+<Layout
+  title="Check Ups Médicos | Detección Oportuna y Medicina Preventiva"
+  description="Chequeos médicos integrales en Monterrey. Tecnología avanzada, diagnóstico en el mismo día y atención por especialistas certificados. Conoce nuestros paquetes."
+>
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+
+  <!-- 1. Hero Preventivo -->
+  <section class="relative bg-slate-50 pt-32 pb-20 lg:pt-40 lg:pb-28 overflow-hidden">
+    <!-- Decoración de fondo suave -->
+    <div class="absolute top-0 right-0 w-[800px] h-[800px] bg-[#00a3e0]/10 rounded-full blur-[120px] pointer-events-none translate-x-1/3 -translate-y-1/3"></div>
+    <div class="absolute bottom-0 left-0 w-[600px] h-[600px] bg-[#004b87]/5 rounded-full blur-[100px] pointer-events-none -translate-x-1/2 translate-y-1/3"></div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 flex flex-col xl:flex-row items-center gap-12 lg:gap-16">
+      
+      <div class="w-full xl:w-1/2 flex flex-col items-start text-left z-10">
+        <span class="inline-flex items-center gap-2 bg-[#00a3e0]/10 text-[#00a3e0] px-4 py-1.5 rounded-full text-sm font-bold tracking-wide border border-[#00a3e0]/20 mb-6">
+          <i class="ph ph-shield-check text-lg"></i> Fricción Cero • Diagnóstico Oportuno
+        </span>
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-black text-[#004b87] mb-6 leading-tight tracking-tight">
+          Check Up Médico Preventivo: Detecta a Tiempo, Vive Mejor
+        </h1>
+        <p class="text-xl text-slate-600 mb-10 max-w-2xl leading-relaxed font-medium">
+          Evalúa tu estado de salud con estudios completos, diagnóstico oportuno y acompañamiento médico especializado en un solo lugar.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
+           <a href="#paquetes" class="inline-flex items-center justify-center px-8 py-4 bg-[#00a3e0] text-white text-lg font-bold rounded-2xl hover:bg-[#004b87] transition-colors shadow-lg shadow-[#00a3e0]/30 transform hover:-translate-y-1">
+             Ver Paquetes <i class="ph ph-arrow-down text-2xl ml-2"></i>
+           </a>
+           <!-- Persistencia del botón agendar simulada con anclaje a Contacto -->
+           <a href="/contacto" class="btn-agendar-persistent inline-flex items-center justify-center px-8 py-4 bg-white text-[#004b87] text-lg font-bold rounded-2xl hover:bg-slate-50 transition-colors border border-slate-200 shadow-sm">
+             Agendar Aquí <i class="ph ph-calendar-plus text-2xl ml-2"></i>
+           </a>
+        </div>
+      </div>
+
+      <div class="w-full xl:w-1/2 relative">
+        <div class="relative rounded-[3rem] overflow-hidden shadow-2xl shadow-slate-200 border border-white">
+           <img src="/images/img_checkup.webp" alt="Paciente en Check Up Médico preventivo" class="w-full h-full object-cover object-center aspect-[4/3] scale-100 hover:scale-105 transition-transform duration-700" />
+           <div class="absolute inset-0 bg-gradient-to-t from-[#004b87]/40 via-transparent to-transparent"></div>
+        </div>
+        <!-- Card Flotante Hero -->
+        <div class="absolute -bottom-8 -left-8 bg-white p-6 rounded-2xl shadow-xl border border-slate-100 flex items-center gap-4 animate-bounce-slow">
+           <div class="w-12 h-12 bg-green-100 text-green-600 rounded-full flex items-center justify-center">
+             <i class="ph ph-check-circle text-2xl"></i>
+           </div>
+           <div>
+             <p class="text-sm font-bold text-slate-900">Resultados Seguros</p>
+             <p class="text-xs text-slate-500">Mismo día</p>
+           </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 2. Propuesta de Valor -->
+  <section class="py-16 bg-white border-y border-slate-100 relative z-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-2 md:grid-cols-5 gap-8 text-center divide-x divide-slate-100">
+        
+        <div class="flex flex-col items-center group">
+           <i class="ph ph-clock text-4xl text-[#00a3e0] mb-3 group-hover:scale-110 transition-transform"></i>
+           <p class="font-bold text-[#004b87] text-sm lg:text-base">Diagnóstico 1 Día</p>
+        </div>
+        
+        <div class="flex flex-col items-center group">
+           <i class="ph ph-users text-4xl text-[#00a3e0] mb-3 group-hover:scale-110 transition-transform"></i>
+           <p class="font-bold text-[#004b87] text-sm lg:text-base">Múltiples Especialistas</p>
+        </div>
+
+        <div class="flex flex-col items-center group">
+           <i class="ph ph-laptop text-4xl text-[#00a3e0] mb-3 group-hover:scale-110 transition-transform"></i>
+           <p class="font-bold text-[#004b87] text-sm lg:text-base">Tecnología Avanzada</p>
+        </div>
+
+        <div class="flex flex-col items-center group">
+           <i class="ph ph-file-text text-4xl text-[#00a3e0] mb-3 group-hover:scale-110 transition-transform"></i>
+           <p class="font-bold text-[#004b87] text-sm lg:text-base">Resultados Precisos</p>
+        </div>
+
+        <div class="flex flex-col items-center group col-span-2 md:col-span-1 border-x-0 md:border-l">
+           <i class="ph ph-user-focus text-4xl text-[#00a3e0] mb-3 group-hover:scale-110 transition-transform"></i>
+           <p class="font-bold text-[#004b87] text-sm lg:text-base">Plan Personalizado</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. Definición AEO y 6. Guía de Preparación -->
+  <section class="py-24 bg-slate-50 relative overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="grid grid-cols-1 lg:grid-cols-5 gap-12 items-start">
+        
+        <!-- Bloque Izquierdo: Definición Técnica -->
+        <div class="lg:col-span-3 pb-8">
+           <span class="text-[#00a3e0] font-bold tracking-wider uppercase text-sm mb-4 block">Prevención Clínica</span>
+           <h2 class="text-3xl md:text-5xl font-black text-[#004b87] mb-6 leading-tight">
+             ¿Qué es un check up médico?
+           </h2>
+           <p class="text-slate-600 text-lg leading-relaxed mb-6 font-medium">
+             Un check up médico es una evaluación de salud integral y preventiva, diseñada para identificar biomarcadores de riesgo y diagnosticar patologías silenciosas (como diabetes, hipertensión o alteraciones oncológicas tempranas) antes de que presenten sintomatología clínica.
+           </p>
+           <p class="text-slate-600 leading-relaxed mb-6">
+             Involucra una batería de pruebas de laboratorio, estudios de imagenología avanzada y la evaluación somatométrica y cardíaca, coronada con la interpretación experta de un médico especialista para brindarte un diagnóstico accionable.
+           </p>
+
+           <div class="flex items-center gap-4 mt-8 bg-sky-50 p-6 rounded-2xl border border-sky-100 text-[#004b87]">
+              <i class="ph ph-info text-4xl text-[#00a3e0]"></i>
+              <p class="font-bold">El 70% de las enfermedades crónicas pueden evitarse o controlarse si son detectadas en una revisión preventiva temprana.</p>
+           </div>
+        </div>
+
+        <!-- Bloque Derecho: Guía de Preparación (Checklist) -->
+        <div class="lg:col-span-2">
+           <div class="glass-card bg-white/90 p-8 rounded-[2rem] border border-slate-200 shadow-xl relative sticky top-32">
+              <h3 class="text-2xl font-black text-[#004b87] mb-6 flex items-center gap-3">
+                <i class="ph ph-clipboard-text text-[#00a3e0] text-3xl"></i> ¿Cómo prepararte?
+              </h3>
+              
+              <ul class="space-y-4">
+                 <li class="flex items-start gap-4 p-4 rounded-xl hover:bg-slate-50 transition-colors">
+                    <i class="ph ph-coffee text-[#004b87] text-2xl mt-1"></i>
+                    <div>
+                       <strong class="block text-slate-800">Ayuno de 8 a 12 horas</strong>
+                       <span class="text-sm text-slate-500">Estricto para muestras de laboratorio. Sólo está permitido tomar agua natural.</span>
+                    </div>
+                 </li>
+                 <li class="flex items-start gap-4 p-4 rounded-xl hover:bg-slate-50 transition-colors">
+                    <i class="ph ph-wine text-[#004b87] text-2xl mt-1"></i>
+                    <div>
+                       <strong class="block text-slate-800">Cero Alcohol</strong>
+                       <span class="text-sm text-slate-500">Evita el consumo de bebidas alcohólicas al menos 48h antes de tu estudio.</span>
+                    </div>
+                 </li>
+                 <li class="flex items-start gap-4 p-4 rounded-xl hover:bg-slate-50 transition-colors">
+                    <i class="ph ph-folder text-[#004b87] text-2xl mt-1"></i>
+                    <div>
+                       <strong class="block text-slate-800">Estudios Previos</strong>
+                       <span class="text-sm text-slate-500">Si cuentas con estudios médicos previos, tráelos para comparativa médica.</span>
+                    </div>
+                 </li>
+                 <li class="flex items-start gap-4 p-4 rounded-xl hover:bg-slate-50 transition-colors">
+                    <i class="ph ph-t-shirt text-[#004b87] text-2xl mt-1"></i>
+                    <div>
+                       <strong class="block text-slate-800">Ropa Cómoda</strong>
+                       <span class="text-sm text-slate-500">Selecciona ropa y calzado que faciliten las pruebas físicas y ultrasonidos.</span>
+                    </div>
+                 </li>
+              </ul>
+           </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. Catálogo de Paquetes -->
+  <section id="paquetes" class="py-24 bg-white relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center mb-16 max-w-3xl mx-auto">
+        <h2 class="text-3xl md:text-5xl font-black text-[#004b87] tracking-tight mb-4">Nuestros Paquetes</h2>
+        <p class="text-slate-600 text-lg md:text-xl font-medium">Contamos con planes de revisión diseñados para cubrir cada etapa de tu vida y tus necesidades específicas de salud.</p>
+      </div>
+
+      <!-- Bento Grid / Cards -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 pkg-grid">
+        
+        <!-- Paquete 1 -->
+        <a href="/contacto" class="pkg-card glass-card bg-slate-50 border border-slate-200 p-8 rounded-3xl group hover:border-[#00a3e0] hover:shadow-xl transition-all hover:-translate-y-2 flex flex-col justify-between h-full">
+           <div>
+              <div class="w-14 h-14 bg-white text-[#00a3e0] shadow-sm rounded-xl flex items-center justify-center mb-6 group-hover:bg-[#00a3e0] group-hover:text-white transition-colors">
+                 <i class="ph ph-drop text-2xl"></i>
+              </div>
+              <h3 class="text-xl font-bold text-[#004b87] mb-2">Check Up Tiroides</h3>
+              <p class="text-sm text-slate-600 mb-4 h-16">Análisis detallado del metabolismo basal. Incluye monitoreo hormonal de TSH, T3 y T4 libre.</p>
+           </div>
+           <span class="text-[#00a3e0] font-bold text-sm flex items-center gap-2 group-hover:text-[#004b87] transition-colors">Agendar revisión <i class="ph ph-arrow-right"></i></span>
+        </a>
+
+        <!-- Paquete 2 -->
+        <a href="/contacto" class="pkg-card glass-card bg-slate-50 border border-slate-200 p-8 rounded-3xl group hover:border-[#00a3e0] hover:shadow-xl transition-all hover:-translate-y-2 flex flex-col justify-between h-full">
+           <div>
+              <div class="w-14 h-14 bg-white text-green-500 shadow-sm rounded-xl flex items-center justify-center mb-6 group-hover:bg-green-500 group-hover:text-white transition-colors">
+                 <i class="ph ph-baby text-2xl"></i>
+              </div>
+              <h3 class="text-xl font-bold text-[#004b87] mb-2">Check Up Infantil</h3>
+              <p class="text-sm text-slate-600 mb-4 h-16">Asegura el crecimiento sano de tus hijos. Incluye biometría hemática completa y evaluación de desarrollo cognitivo.</p>
+           </div>
+           <span class="text-[#00a3e0] font-bold text-sm flex items-center gap-2 group-hover:text-[#004b87] transition-colors">Agendar revisión <i class="ph ph-arrow-right"></i></span>
+        </a>
+
+        <!-- Paquete 3 -->
+        <a href="/contacto" class="pkg-card glass-card bg-slate-50 border border-slate-200 p-8 rounded-3xl group hover:border-[#00a3e0] hover:shadow-xl transition-all hover:-translate-y-2 flex flex-col justify-between h-full">
+           <div>
+              <div class="w-14 h-14 bg-white text-blue-600 shadow-sm rounded-xl flex items-center justify-center mb-6 group-hover:bg-blue-600 group-hover:text-white transition-colors">
+                 <i class="ph ph-gender-male text-2xl"></i>
+              </div>
+              <h3 class="text-xl font-bold text-[#004b87] mb-2">Masculino Plus</h3>
+              <p class="text-sm text-slate-600 mb-4 h-16">Prevención prostática integral. Contempla PSA específico, testosterona y perfil de lípidos avanzado.</p>
+           </div>
+           <span class="text-[#00a3e0] font-bold text-sm flex items-center gap-2 group-hover:text-[#004b87] transition-colors">Agendar revisión <i class="ph ph-arrow-right"></i></span>
+        </a>
+
+        <!-- Paquete 4 -->
+        <a href="/contacto" class="pkg-card glass-card bg-slate-50 border border-slate-200 p-8 rounded-3xl group hover:border-pink-500 hover:shadow-xl transition-all hover:-translate-y-2 flex flex-col justify-between h-full">
+           <div>
+              <div class="w-14 h-14 bg-white text-pink-500 shadow-sm rounded-xl flex items-center justify-center mb-6 group-hover:bg-pink-500 group-hover:text-white transition-colors">
+                 <i class="ph ph-gender-female text-2xl"></i>
+              </div>
+              <h3 class="text-xl font-bold text-[#004b87] mb-2">Ginecológico Plus</h3>
+              <p class="text-sm text-slate-600 mb-4 h-16">Cuidado esencial femenino. Papanicolaou profundo, revisión de mamografía y ultrasonido de matriz.</p>
+           </div>
+           <span class="text-pink-500 font-bold text-sm flex items-center gap-2 group-hover:text-pink-600 transition-colors">Agendar revisión <i class="ph ph-arrow-right"></i></span>
+        </a>
+
+        <!-- Paquete 5 -->
+        <a href="/contacto" class="pkg-card glass-card bg-slate-50 border border-slate-200 p-8 rounded-3xl group hover:border-[#00a3e0] hover:shadow-xl transition-all hover:-translate-y-2 flex flex-col justify-between h-full">
+           <div>
+              <div class="w-14 h-14 bg-white text-[#00a3e0] shadow-sm rounded-xl flex items-center justify-center mb-6 group-hover:bg-[#00a3e0] group-hover:text-white transition-colors">
+                 <i class="ph ph-bone text-2xl"></i>
+              </div>
+              <h3 class="text-xl font-bold text-[#004b87] mb-2">Osteoporosis</h3>
+              <p class="text-sm text-slate-600 mb-4 h-16">Detección de fragilidad ósea a tiempo. Incluye densitometría ósea especializada y niveles de calcio.</p>
+           </div>
+           <span class="text-[#00a3e0] font-bold text-sm flex items-center gap-2 group-hover:text-[#004b87] transition-colors">Agendar revisión <i class="ph ph-arrow-right"></i></span>
+        </a>
+
+        <!-- Paquete 6 -->
+        <a href="/contacto" class="pkg-card relative bg-[#004b87] text-white p-8 rounded-3xl group hover:shadow-xl shadow-blue-900/20 transition-all hover:-translate-y-2 flex flex-col justify-between h-full overflow-hidden">
+           <div class="absolute inset-0 bg-[url('/images/pattern-grid.svg')] opacity-10"></div>
+           <div class="relative z-10">
+              <div class="w-14 h-14 bg-white/10 backdrop-blur-sm rounded-xl flex items-center justify-center mb-6 text-[#00a3e0]">
+                 <i class="ph ph-briefcase text-2xl"></i>
+              </div>
+              <h3 class="text-xl font-bold mb-2">Ejecutivo &lt;40 años</h3>
+              <p class="text-sm text-blue-100 mb-4 h-16">Prevención temprana del estrés. Perfil general de laboratorio, electrocardiograma en reposo y química clínica.</p>
+           </div>
+           <span class="text-[#00a3e0] font-bold text-sm flex items-center gap-2 transition-colors relative z-10">Paquete Platinum <i class="ph ph-arrow-right"></i></span>
+        </a>
+
+        <!-- Paquete 7 -->
+        <a href="/contacto" class="pkg-card relative bg-slate-900 text-white p-8 rounded-3xl group hover:shadow-xl shadow-slate-900/20 transition-all hover:-translate-y-2 flex flex-col justify-between h-full overflow-hidden">
+           <div class="absolute inset-0 bg-[#00a3e0]/10 blur-xl"></div>
+           <div class="relative z-10">
+              <div class="w-14 h-14 bg-white/10 backdrop-blur-sm rounded-xl flex items-center justify-center mb-6 text-[#00a3e0]">
+                 <i class="ph ph-briefcase text-2xl"></i>
+              </div>
+              <h3 class="text-xl font-bold mb-2">Ejecutivo &gt;40 años</h3>
+              <p class="text-sm text-slate-300 mb-4 h-16">Análisis profundo cardiovascular y tamizaje oncológico temprano. Ultrasonido extenso, prueba de esfuerzo vital.</p>
+           </div>
+           <span class="text-[#00a3e0] font-bold text-sm flex items-center gap-2 transition-colors relative z-10">Paquete Elite <i class="ph ph-arrow-right"></i></span>
+        </a>
+
+        <!-- Paquete 8 -->
+        <a href="/contacto" class="pkg-card glass-card bg-slate-50 border border-slate-200 p-8 rounded-3xl group hover:border-[#00a3e0] hover:shadow-xl transition-all hover:-translate-y-2 flex flex-col justify-between h-full">
+           <div>
+              <div class="w-14 h-14 bg-white text-purple-600 shadow-sm rounded-xl flex items-center justify-center mb-6 group-hover:bg-purple-600 group-hover:text-white transition-colors">
+                 <i class="ph ph-heart text-2xl"></i>
+              </div>
+              <h3 class="text-xl font-bold text-[#004b87] mb-2">Salud Sexual</h3>
+              <p class="text-sm text-slate-600 mb-4 h-16">Tranquilidad absoluta. Panel completo y ultra confidencial para detección de Infecciones de Transmisión Sexual (ITS).</p>
+           </div>
+           <span class="text-[#00a3e0] font-bold text-sm flex items-center gap-2 group-hover:text-[#004b87] transition-colors">Agendar revisión <i class="ph ph-arrow-right"></i></span>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. Experiencia del Paciente (Stepper) -->
+  <section class="py-24 bg-slate-50 relative process-section border-t border-slate-200 overflow-hidden">
+    <!-- Orb de fondo -->
+    <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[300px] bg-[#00a3e0]/5 rounded-[100%] blur-[80px]"></div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div class="text-center mb-20 max-w-3xl mx-auto">
+        <h2 class="text-3xl md:text-5xl font-black text-[#004b87] mb-6">
+          La Experiencia "Fricción Cero"
+        </h2>
+        <p class="text-lg text-slate-600">
+          Hemos rediseñado el proceso de revisión médica para que sea fluido, eficiente y completamente libre de ansiedad. Todo en el mismo día.
+        </p>
+      </div>
+
+      <div class="relative max-w-6xl mx-auto">
+        <!-- Línea conectora Desktop -->
+        <div class="hidden lg:block absolute top-[3rem] left-[12%] right-[12%] h-[2px] bg-slate-300 z-0 border-t-2 border-dashed border-slate-300"></div>
+        <!-- Línea conectora Mobile -->
+        <div class="block lg:hidden absolute top-12 bottom-12 left-[2.9rem] w-[2px] bg-slate-300 z-0 border-l-2 border-dashed border-slate-300"></div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-4 gap-12 lg:gap-8 relative z-10">
+          
+          <!-- Paso 1 -->
+          <div class="stepper-chk flex lg:flex-col items-start lg:items-center text-left lg:text-center relative gap-6 lg:gap-0">
+             <div class="w-16 h-16 lg:w-24 lg:h-24 bg-white rounded-full shadow-lg border-4 border-slate-50 flex items-center justify-center text-[#004b87] flex-shrink-0 z-10 lg:mb-6">
+               <i class="ph ph-map-pin-line text-3xl lg:text-4xl"></i>
+             </div>
+             <div>
+                <h4 class="text-xl font-bold text-slate-900 mb-2 mt-2 lg:mt-0">1. Llegada y Registro</h4>
+                <p class="text-sm text-slate-500 max-w-xs lg:max-w-none lg:mx-auto leading-relaxed">Asistencia VIP agilizada desde tu arribo. Confirmación inmediata de protocolo y asignación de cubículo.</p>
+             </div>
+          </div>
+
+          <!-- Paso 2 -->
+          <div class="stepper-chk flex lg:flex-col items-start lg:items-center text-left lg:text-center relative gap-6 lg:gap-0">
+             <div class="w-16 h-16 lg:w-24 lg:h-24 bg-[#00a3e0] rounded-full shadow-[0_10px_20px_rgba(0,163,224,0.3)] border-4 border-slate-50 flex items-center justify-center text-white flex-shrink-0 z-10 lg:mb-6">
+               <i class="ph ph-test-tube text-3xl lg:text-4xl"></i>
+             </div>
+             <div>
+                <h4 class="text-xl font-bold text-slate-900 mb-2 mt-2 lg:mt-0">2. Toma de Muestras</h4>
+                <p class="text-sm text-slate-500 max-w-xs lg:max-w-none lg:mx-auto leading-relaxed">Fase de laboratorio en un entorno sin estrés con extracciones indoloras de sangre, fluidos y monitoreo biofísico.</p>
+             </div>
+          </div>
+
+          <!-- Paso 3 -->
+          <div class="stepper-chk flex lg:flex-col items-start lg:items-center text-left lg:text-center relative gap-6 lg:gap-0">
+             <div class="w-16 h-16 lg:w-24 lg:h-24 bg-white rounded-full shadow-lg border-4 border-slate-50 flex items-center justify-center text-[#004b87] flex-shrink-0 z-10 lg:mb-6">
+               <i class="ph ph-scan text-3xl lg:text-4xl"></i>
+             </div>
+             <div>
+                <h4 class="text-xl font-bold text-slate-900 mb-2 mt-2 lg:mt-0">3. Estudios de Imagen</h4>
+                <p class="text-sm text-slate-500 max-w-xs lg:max-w-none lg:mx-auto leading-relaxed">Radiología, mamografía y resonancia según el paquete. Tránsito rápido gracias a nuestro equipo centralizado.</p>
+             </div>
+          </div>
+
+          <!-- Paso 4 -->
+          <div class="stepper-chk flex lg:flex-col items-start lg:items-center text-left lg:text-center relative gap-6 lg:gap-0">
+             <div class="w-16 h-16 lg:w-24 lg:h-24 bg-white rounded-full shadow-lg border-4 border-slate-50 flex items-center justify-center text-[#004b87] flex-shrink-0 z-10 lg:mb-6">
+               <i class="ph ph-stethoscope text-3xl lg:text-4xl"></i>
+             </div>
+             <div>
+                <h4 class="text-xl font-bold text-slate-900 mb-2 mt-2 lg:mt-0">4. Consulta e Interpretación</h4>
+                <p class="text-sm text-slate-500 max-w-xs lg:max-w-none lg:mx-auto leading-relaxed">Lectura integral de biomarcadores por un especialista, entrega de reporte y recomendaciones nutricionales/físicas.</p>
+             </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. Tecnología y Precisión (E-E-A-T) -->
+  <section class="py-24 bg-white relative overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="bg-[#004b87] rounded-[3rem] p-10 lg:p-16 relative flex flex-col md:flex-row items-center gap-12 shadow-2xl overflow-hidden">
+        
+        <!-- Elemento Gráfico -->
+        <div class="absolute right-0 top-0 h-full w-1/2 bg-[url('/images/pattern-grid.svg')] opacity-20 pointer-events-none"></div>
+        <div class="absolute -right-20 -bottom-20 w-80 h-80 bg-[#00a3e0] blur-[100px] rounded-full opacity-50 pointer-events-none"></div>
+
+        <div class="md:w-1/2 relative z-10 text-white">
+           <span class="inline-block bg-[#00a3e0]/20 text-[#00a3e0] px-4 py-1.5 rounded-full text-sm font-bold tracking-wide border border-[#00a3e0]/40 mb-6 backdrop-blur-sm">
+             Certificación Internacional
+           </span>
+           <h2 class="text-3xl md:text-5xl font-black mb-6 leading-tight">
+             Diagnóstico con tecnología de alta precisión
+           </h2>
+           <p class="text-blue-100 text-lg leading-relaxed mb-6 font-light">
+             Elimina la incertidumbre. No tercerizamos ningún proceso. Toda tu evaluación se corre en nuestros propios laboratorios y centros de imagenología de última generación.
+           </p>
+           <ul class="space-y-3">
+             <li class="flex items-center gap-3"><i class="ph ph-check-circle text-[#00a3e0] text-xl"></i> Tomógrafos de 256 cortes para perfil cardíaco.</li>
+             <li class="flex items-center gap-3"><i class="ph ph-check-circle text-[#00a3e0] text-xl"></i> Laboratorio de biomarcadores robotizado.</li>
+             <li class="flex items-center gap-3"><i class="ph ph-check-circle text-[#00a3e0] text-xl"></i> Resonancia magnética cerrada de alto tesla.</li>
+           </ul>
+        </div>
+        
+        <!-- Decorative Placeholder for Machine -->
+        <div class="md:w-1/2 relative z-10 flex justify-center lg:justify-end">
+           <div class="w-full max-w-sm aspect-square bg-slate-900/50 backdrop-blur-md rounded-[2rem] border border-white/10 flex items-center justify-center p-8 shadow-inner relative">
+              <div class="absolute inset-0 bg-gradient-to-tr from-[#00a3e0]/20 to-transparent rounded-[2rem]"></div>
+              <i class="ph ph-heartbeat text-9xl text-white/80 animate-pulse"></i>
+           </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. y 9. Sección de Cierre y FAQ -->
+  <section class="py-24 bg-slate-50 border-t border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <!-- CTA Banner -->
+      <div class="bg-gradient-to-r from-sky-50 to-white border border-sky-100 rounded-3xl p-10 text-center shadow-lg mb-20 relative overflow-hidden">
+         <div class="absolute inset-0 opacity-40 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-sky-200 via-transparent to-transparent"></div>
+         <h2 class="text-3xl font-black text-[#004b87] mb-4 relative z-10">Tu salud es lo único que no se posterga</h2>
+         <p class="text-slate-600 font-medium mb-8 max-w-lg mx-auto relative z-10">Agenda tu Check Up Hoy. Un día invertido en ti puede adicionar décadas a tu esperanza de vida funcional.</p>
+         <a href="/contacto" class="inline-flex items-center justify-center px-10 py-4 bg-[#00a3e0] text-white text-xl font-bold rounded-2xl hover:bg-[#004b87] transition-all shadow-xl shadow-[#00a3e0]/30 transform hover:-scale-105 relative z-10">
+           Agendar mi Check Up <i class="ph ph-calendar-check text-2xl ml-3"></i>
+         </a>
+      </div>
+
+      <!-- FAQ Acordeón -->
+      <div class="max-w-3xl mx-auto">
+        <h3 class="text-2xl md:text-4xl font-black text-[#004b87] text-center mb-10">Dudas Comunes sobre Check Ups</h3>
+        
+        <div class="space-y-5">
+          
+          <details class="bg-white rounded-2xl p-6 group cursor-pointer marker:content-[''] !border-l-[4px] border-slate-200 !border-l-transparent hover:!border-l-[#00a3e0] border shadow-sm hover:shadow-md transition-all overflow-hidden">
+            <summary class="text-xl font-bold text-[#004b87] flex justify-between items-center outline-none list-none marker:content-none [&::-webkit-details-marker]:hidden">
+              ¿Cómo agendar una cita para un Check Up?
+              <i class="ph ph-caret-down transform group-open:rotate-180 transition-transform text-[#00a3e0] text-2xl"></i>
+            </summary>
+            <div class="mt-4 text-slate-600 font-medium leading-relaxed border-t border-slate-100 pt-4 pr-8">
+              Puedes agendar tu cita directamente a través de nuestro botón de WhatsApp, llamando por teléfono o acudiendo a los módulos de recepción física de medicina preventiva en el hospital.
+            </div>
+          </details>
+          
+          <details class="bg-white rounded-2xl p-6 group cursor-pointer marker:content-[''] !border-l-[4px] border-slate-200 !border-l-transparent hover:!border-l-[#00a3e0] border shadow-sm hover:shadow-md transition-all overflow-hidden">
+            <summary class="text-xl font-bold text-[#004b87] flex justify-between items-center outline-none list-none marker:content-none [&::-webkit-details-marker]:hidden">
+              ¿Cuál es la duración promedio de un Check Up Médico?
+              <i class="ph ph-caret-down transform group-open:rotate-180 transition-transform text-[#00a3e0] text-2xl"></i>
+            </summary>
+            <div class="mt-4 text-slate-600 font-medium leading-relaxed border-t border-slate-100 pt-4 pr-8">
+              Gracias a nuestra red optimizada, el recorrido completo de estudios toma aproximadamente entre 3 y 5 horas en el mismo día, garantizando comodidad absoluta sin tener que cambiar de clínica para laboratorios o radiologías.
+            </div>
+          </details>
+
+          <details class="bg-white rounded-2xl p-6 group cursor-pointer marker:content-[''] !border-l-[4px] border-slate-200 !border-l-transparent hover:!border-l-[#00a3e0] border shadow-sm hover:shadow-md transition-all overflow-hidden">
+            <summary class="text-xl font-bold text-[#004b87] flex justify-between items-center outline-none list-none marker:content-none [&::-webkit-details-marker]:hidden">
+              ¿Cuántas horas de ayuno necesito?
+              <i class="ph ph-caret-down transform group-open:rotate-180 transition-transform text-[#00a3e0] text-2xl"></i>
+            </summary>
+            <div class="mt-4 text-slate-600 font-medium leading-relaxed border-t border-slate-100 pt-4 pr-8">
+              Para garantizar la pureza y precisión analítica de la muestra hemática se requiere rigurosamente un ayuno de entre 8 a 12 horas. Solamente se permite el consumo moderado de agua simple.
+            </div>
+          </details>
+
+          <details class="bg-white rounded-2xl p-6 group cursor-pointer marker:content-[''] !border-l-[4px] border-slate-200 !border-l-transparent hover:!border-l-[#00a3e0] border shadow-sm hover:shadow-md transition-all overflow-hidden">
+            <summary class="text-xl font-bold text-[#004b87] flex justify-between items-center outline-none list-none marker:content-none [&::-webkit-details-marker]:hidden">
+              ¿El paquete incluye consulta de interpretación?
+              <i class="ph ph-caret-down transform group-open:rotate-180 transition-transform text-[#00a3e0] text-2xl"></i>
+            </summary>
+            <div class="mt-4 text-slate-600 font-medium leading-relaxed border-t border-slate-100 pt-4 pr-8">
+              Sí, todos nuestros programas preventivos cierran el ciclo de atención mediante una consulta presencial con un Especialista en Medicina Interna o Preventiva, donde se entrega la interpretación médica de cada valor.
+            </div>
+          </details>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Animaciones GSAP -->
+  <script is:inline>
+    document.addEventListener("DOMContentLoaded", () => {
+      setTimeout(() => {
+        if (typeof window.gsap !== "undefined" && window.ScrollTrigger) {
+          
+          // Animación Stagger Paquetes Check Up
+          window.gsap.from(".pkg-card", {
+            scrollTrigger: {
+              trigger: ".pkg-grid",
+              start: "top 80%",
+            },
+            y: 40,
+            scale: 0.95,
+            opacity: 0,
+            duration: 0.6,
+            stagger: 0.1,
+            ease: "back.out(1.2)",
+            clearProps: "all",
+          });
+
+          // Animación Stepper Proceso Check Up
+          window.gsap.from(".stepper-chk", {
+            scrollTrigger: {
+              trigger: ".process-section",
+              start: "top 75%",
+            },
+            y: 50,
+            opacity: 0,
+            duration: 0.6,
+            stagger: 0.15,
+            ease: "power3.out",
+            clearProps: "all",
+          });
+
+        }
+      }, 100);
+    });
+  </script>
+
+</Layout>
