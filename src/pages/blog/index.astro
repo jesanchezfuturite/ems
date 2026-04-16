@@ -48,7 +48,7 @@ const getAuthorDoc = (postTags: string[]) => {
 
 // Separación y Variables Core
 const featuredPosts = articles.slice(0, 4);
-const regularPosts = articles.length > 4 ? articles.slice(4) : articles;
+const regularPosts = articles;
 
 // Extracción de Categorías
 const allTagsSet = new Set<string>();
