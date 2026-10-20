@@ -1,24 +1,12 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import { getArticles } from '../../lib/api';
 
-// Llamada al API
-let articles: any[] = [];
-try {
-  const res = await fetch('https://hospital.futurite.info/api/v1/public/blog-articles');
-  const json = await res.json();
-  if (json.Code === 200 && json.data) {
-    articles = json.data;
-  } else if (Array.isArray(json)) {
-    articles = json;
-  }
-} catch (err) {
-  console.error("Error fetching articles", err);
-}
+// Se renderiza bajo demanda y queda en caché (ISR). Si el API falla, la página responde 500
+// y Vercel sigue sirviendo la última versión en caché.
+export const prerender = false;
 
-// Asegurar ordenamiento (más reciente primero) si existe created_at
-if (articles.length > 0 && articles[0].created_at) {
-  articles.sort((a, b) => new Date(b.created_at).valueOf() - new Date(a.created_at).valueOf());
-}
+const articles = await getArticles();
 
 // Helper functions (Utilities)
 const stripHtml = (html: string) => {

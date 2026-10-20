@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { searchDoctors } from '../lib/api';
 
 // AEO: JSON-LD FAQ Schema
 const faqSchema = {
@@ -50,20 +51,8 @@ const faqSchema = {
 };
 
 // Fetch Especialistas de Ginecología (ID 18)
-let gineDoctors = [];
-try {
-  const res = await fetch('https://administrador.especialidadesmedicassur.com.mx/api/directorio-medico/search?especialidad_id=18&per_page=3');
-  const data = await res.json();
-  if (data && data.data && data.data.data) {
-    gineDoctors = data.data.data;
-  } else if (data && data.data) {
-    gineDoctors = Array.isArray(data.data) ? data.data : [];
-  } else if (Array.isArray(data)) {
-    gineDoctors = data.slice(0, 3);
-  }
-} catch (error) {
-  console.error("Error fetching ginecology doctors:", error);
-}
+// Se ejecuta en el build: si el API no responde, el build falla en lugar de publicar la sección vacía.
+const gineDoctors = (await searchDoctors({ especialidad_id: 18, per_page: 3 })).slice(0, 3);
 
 // Helper para mayúsculas
 const toTitleCase = (str) => {
