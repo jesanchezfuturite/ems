@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { API_URL } from '../lib/api';
 
 const seoTitle = "Contacto y Ubicación | Centro de Especialidades Médicas en Monterrey";
 const seoDescription = "Agenda tu consulta, resuelve tus dudas y encuentra cómo llegar a nuestras instalaciones.";
@@ -418,7 +419,7 @@ const schema = {
   <script is:inline src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
   <script is:inline src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
   
-  <script is:inline>
+  <script is:inline define:vars={{ API_URL }}>
     document.addEventListener('DOMContentLoaded', () => {
       // --- GSAP ANIMATIONS ---
       gsap.registerPlugin(ScrollTrigger);
@@ -520,7 +521,7 @@ const schema = {
           submitBtn.classList.add('opacity-75', 'cursor-not-allowed');
 
           try {
-            const response = await fetch('https://hospital.futurite.info/api/v1/public/contact', {
+            const response = await fetch(`${API_URL}/api/v1/public/contact`, {
               method: 'POST',
               headers: {
                 'Content-Type': 'application/json',

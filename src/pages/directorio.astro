@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { API_URL } from '../lib/api';
 
 // AEO: JSON-LD FAQ Schema
 const faqSchema = {
@@ -219,7 +220,7 @@ const faqSchema = {
   </section>
 
   <!-- JS Engine Logics -->
-  <script is:inline>
+  <script is:inline define:vars={{ API_URL }}>
     document.addEventListener('DOMContentLoaded', async () => {
       const grid = document.getElementById('doctors-grid');
       const searchInput = document.getElementById('search-input');
@@ -262,7 +263,7 @@ const faqSchema = {
       // Extracción API
       const fetchEspecialidades = async () => {
         try {
-          const res = await fetch('https://administrador.especialidadesmedicassur.com.mx/api/especialidad/get-all');
+          const res = await fetch(`${API_URL}/api/especialidad/get-all`);
           const data = await res.json();
           let clean = (Array.isArray(data.data || data) ? (data.data || data) : []).filter(e => e.estatus === 1);
           clean = clean.map(esp => ({ ...esp, nombre: toTitleCase(esp.nombre) })).sort((a,b) => a.nombre.localeCompare(b.nombre, 'es'));
@@ -335,7 +336,7 @@ const faqSchema = {
               <a href="/contacto" class="block w-full text-center bg-brand-cyan text-white py-3.5 rounded-full font-bold hover:bg-cyan-500 hover:shadow-lg hover:shadow-brand-cyan/30 active:scale-95 transition-all text-[0.95rem]">
                 Agendar Cita
               </a>
-              <a href="/directorio/${slugify(doc.nombre)}" class="flex w-full items-center justify-center text-sm font-bold text-slate-400 hover:text-brand-blue transition-colors py-2 group/link">
+              <a href="/directorio/${doc.id}-${slugify(doc.nombre)}" class="flex w-full items-center justify-center text-sm font-bold text-slate-400 hover:text-brand-blue transition-colors py-2 group/link">
                 Ver Perfil Completo 
                 <i class="ph ph-arrow-right ml-1.5 transform group-hover/link:translate-x-1 group-hover/link:text-brand-cyan transition-all"></i>
               </a>
@@ -381,7 +382,7 @@ const faqSchema = {
           if (especialidadId) urlParams.append('especialidad_id', especialidadId);
           urlParams.append('per_page', '12'); urlParams.append('page', currentPage.toString());
           
-          const ep = 'https://administrador.especialidadesmedicassur.com.mx/api/directorio-medico/search?' + urlParams.toString();
+          const ep = `${API_URL}/api/directorio-medico/search?${urlParams}`;
           const res = await fetch(ep);
           const data = await res.json();
           let results = []; let lastPage = 1;
@@ -396,6 +397,7 @@ const faqSchema = {
           if (currentPage < lastPage) loadMoreContainer.classList.remove('hidden');
           else loadMoreContainer.classList.add('hidden');
         } catch (error) {
+          console.error('Error buscando médicos:', error);
           if (!isLoadMore) { grid.innerHTML = ''; emptyState.classList.remove('hidden'); countEl.textContent = "Error de conexión temporal."; }
         }
       };

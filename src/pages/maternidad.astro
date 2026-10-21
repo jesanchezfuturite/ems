@@ -1,5 +1,9 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { doctorPath, searchDoctors } from '../lib/api';
+
+// ISR: se genera en la primera visita y se regenera cuando el backend avisa que cambió un médico (/api/revalidate).
+export const prerender = false;
 
 // AEO: JSON-LD FAQ Schema
 const faqSchema = {
@@ -50,20 +54,8 @@ const faqSchema = {
 };
 
 // Fetch Especialistas de Ginecología (ID 18)
-let gineDoctors = [];
-try {
-  const res = await fetch('https://administrador.especialidadesmedicassur.com.mx/api/directorio-medico/search?especialidad_id=18&per_page=3');
-  const data = await res.json();
-  if (data && data.data && data.data.data) {
-    gineDoctors = data.data.data;
-  } else if (data && data.data) {
-    gineDoctors = Array.isArray(data.data) ? data.data : [];
-  } else if (Array.isArray(data)) {
-    gineDoctors = data.slice(0, 3);
-  }
-} catch (error) {
-  console.error("Error fetching ginecology doctors:", error);
-}
+// Si el API no responde se lanza el error (página 500) en lugar de guardar en caché la sección vacía.
+const gineDoctors = (await searchDoctors({ especialidad_id: 18, per_page: 3 })).slice(0, 3);
 
 // Helper para mayúsculas
 const toTitleCase = (str) => {
@@ -202,7 +194,7 @@ const toTitleCase = (str) => {
         <!-- Grid de Médicos -->
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12" id="especialistas-grid">
           {gineDoctors.length > 0 ? gineDoctors.map((doc) => (
-            <div class="glass-card p-8 border border-slate-100 text-center doctor-card">
+            <a href={doctorPath(doc)} class="glass-card p-8 border border-slate-100 text-center doctor-card block hover:shadow-xl transition-shadow">
               <div class="w-32 h-32 mx-auto rounded-full bg-slate-200 overflow-hidden mb-6 border-4 border-white shadow-lg">
                 <img src={doc.foto || "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect fill='%23f1f5f9' width='100' height='100'/><path fill='%23cbd5e1' d='M50 50c11.046 0 20-8.954 20-20s-8.954-20-20-20-20 8.954-20 20 8.954 20 20 20zm0 10c-13.314 0-40 6.671-40 20v10h80V80c0-13.329-26.686-20-40-20z'/></svg>"} alt={`Dr. ${toTitleCase(doc.nombre)}`} loading="lazy" class="w-full h-full object-cover border border-slate-100" />
               </div>
@@ -211,7 +203,7 @@ const toTitleCase = (str) => {
               <div class="inline-flex items-center justify-center px-4 py-2 bg-blue-50 text-[#004b87] rounded-lg text-sm font-bold w-full">
                 <i class="ph-fill ph-seal-check text-[#00a3e0] mr-2"></i> Certificado Especialista
               </div>
-            </div>
+            </a>
           )) : (
             <div class="col-span-full text-center text-slate-500 py-8">
               No se pudieron cargar los especialistas en este momento.

@@ -1,0 +1,26 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Página no encontrada | Centro de Especialidades Médicas" description="La página que buscas no existe o fue movida.">
+  <section class="min-h-[70vh] flex items-center bg-slate-50 py-24">
+    <div class="max-w-2xl mx-auto px-4 text-center">
+      <p class="text-brand-cyan font-bold text-sm uppercase tracking-widest mb-4">Error 404</p>
+      <h1 class="text-3xl md:text-5xl font-bold text-brand-blue mb-6">No encontramos esta página</h1>
+      <p class="text-slate-600 text-lg mb-10">
+        Es posible que el enlace haya cambiado o que el contenido ya no esté disponible.
+      </p>
+      <div class="flex flex-wrap gap-4 justify-center">
+        <a href="/" class="inline-flex items-center px-6 py-3 rounded-full font-bold text-white bg-brand-cyan hover:bg-cyan-600 transition-colors shadow-lg shadow-brand-cyan/30">
+          Ir al inicio
+        </a>
+        <a href="/directorio" class="inline-flex items-center px-6 py-3 rounded-full font-bold text-slate-600 bg-white border border-slate-200 hover:bg-slate-50 transition-colors">
+          Directorio médico
+        </a>
+        <a href="/blog" class="inline-flex items-center px-6 py-3 rounded-full font-bold text-slate-600 bg-white border border-slate-200 hover:bg-slate-50 transition-colors">
+          Blog
+        </a>
+      </div>
+    </div>
+  </section>
+</Layout>

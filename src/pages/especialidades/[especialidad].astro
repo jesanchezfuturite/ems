@@ -1,5 +1,6 @@
 ---
 import Layout from "../../layouts/Layout.astro";
+import { API_URL } from "../../lib/api";
 
 // Generar rutas estáticas para las especialidades
 export async function getStaticPaths() {
@@ -381,7 +382,7 @@ const faqSchema = {
     </div>
   </section>
 
-  <script define:vars={{ especialidad }}>
+  <script define:vars={{ especialidad, API_URL }}>
     (async () => {
       const grid = document.getElementById('specialists-grid');
       const noSpec = document.getElementById('no-specialists');
@@ -401,7 +402,7 @@ const faqSchema = {
 
       try {
         // 1. Buscar el ID de la especialidad desde la lista de especialidades
-        const espRes = await fetch('https://administrador.especialidadesmedicassur.com.mx/api/especialidad/get-all');
+        const espRes = await fetch(`${API_URL}/api/especialidad/get-all`);
         const espData = await espRes.json();
         const allEsp = Array.isArray(espData.data || espData) ? (espData.data || espData) : [];
         const match = allEsp.find(e => normalizeSlug(e.nombre) === normalizeSlug(especialidad));
@@ -409,7 +410,7 @@ const faqSchema = {
         let doctors = [];
         if (match) {
           // 2. Buscar médicos por el ID encontrado
-          const docRes = await fetch(`https://administrador.especialidadesmedicassur.com.mx/api/directorio-medico/search?especialidad_id=${match.id}&per_page=4`);
+          const docRes = await fetch(`${API_URL}/api/directorio-medico/search?especialidad_id=${match.id}&per_page=4`);
           const docData = await docRes.json();
           if (docData.data?.data) doctors = docData.data.data;
           else if (Array.isArray(docData.data)) doctors = docData.data;

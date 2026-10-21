@@ -1,57 +1,33 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import { doctorPath, getDoctor, searchDoctors, slugify } from '../../lib/api';
 
-export async function getStaticPaths() {
-  try {
-    const res = await fetch('https://administrador.especialidadesmedicassur.com.mx/api/directorio-medico/search?per_page=1000');
-    const items = await res.json();
-    let doctors: any[] = [];
-    if (Array.isArray(items)) {
-      doctors = items;
-    } else if (items.data && Array.isArray(items.data)) {
-      doctors = items.data;
-    } else if (items.data && items.data.data && Array.isArray(items.data.data)) {
-      doctors = items.data.data;
-    }
-    
-    // Helper list to slugify
-    const slugify = (text: string) => {
-      if (!text) return '';
-      return text.toString().toLowerCase().trim()
-        .normalize('NFD')
-        .replace(/[\u0300-\u036f]/g, '')
-        .replace(/\s+/g, '-')
-        .replace(/[^\w\-]+/g, '')
-        .replace(/\-\-+/g, '-');
-    };
+// Se renderiza bajo demanda y queda en caché (ISR). La URL es /directorio/{id}-{nombre}:
+// el ID evita que dos médicos con el mismo nombre compartan página.
+export const prerender = false;
 
-    return doctors.map((doc: any) => {
-      return {
-        params: { nombre: slugify(doc.nombre || '') },
-        props: { id: doc.id.toString() }
-      };
-    });
-  } catch(error) {
-    console.error("Error fetching getStaticPaths in directorio/[nombre].astro", error);
-    return [];
-  }
-}
+const param = Astro.params.nombre ?? '';
+const idMatch = param.match(/^(\d+)(?:-|$)/);
 
-const { id } = Astro.props;
-
-// Traer perfil completo
 let profile: any = null;
-try {
-  const profileRes = await fetch(`https://administrador.especialidadesmedicassur.com.mx/api/directorio-medico/get/${id}`);
-  const profileJson = await profileRes.json();
-  // Validamos si la respuesta viene dentro de Code y data según el formato proporcionado.
-  profile = profileJson.data ? profileJson.data : profileJson;
-} catch (e) {
-  console.error("Error al traer el perfil completo", e);
+if (idMatch) {
+  profile = await getDoctor(idMatch[1]);
+} else {
+  // URL anterior (/directorio/{nombre}): se busca el médico por nombre y se redirige a la nueva.
+  const doctors = await searchDoctors({ per_page: 1000 });
+  const match = doctors.find((doc: any) => slugify(doc.nombre) === param);
+  if (match) return Astro.redirect(doctorPath(match), 301);
 }
 
-if (!profile || Object.keys(profile).length === 0) {
-  return Astro.redirect('/directorio');
+if (!profile) {
+  // Astro responde con la página 404 (src/pages/404.astro).
+  return new Response(null, { status: 404 });
+}
+
+// Si el nombre en la URL no coincide (cambió el nombre o la URL viene incompleta), redirigir a la canónica.
+const canonicalPath = doctorPath(profile);
+if (decodeURIComponent(Astro.url.pathname).replace(/\/$/, '') !== canonicalPath) {
+  return Astro.redirect(canonicalPath, 301);
 }
 
 // Variables útiles e interpolaciones seguras
