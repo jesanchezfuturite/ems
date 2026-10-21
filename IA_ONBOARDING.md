@@ -12,7 +12,7 @@ El proyecto en Astro genera casi todo el sitio en el build (SSG). El blog y los 
 * **Revalidación al guardar:** el backend llama a `POST /api/revalidate` con `Authorization: Bearer <ISR_BYPASS_TOKEN>` y `Content-Type: application/json`:
   * Médico: `{ "type": "doctor", "id": 261, "nombre": "<nombre anterior, opcional>" }`
   * Artículo: `{ "type": "article", "slug": "<slug>", "previousSlug": "<opcional>" }`
-* **Páginas estáticas que leen el API en el build** (por ejemplo `/maternidad`): si el API no responde, el build falla a propósito para no publicar secciones vacías.
+* **`/maternidad`** también usa ISR: el webhook la regenera con cualquier `{ "type": "doctor" }`, porque su sección de especialistas sale del API.
 * **Variables de entorno** (ver `.env.example`): `PUBLIC_API_URL` e `ISR_BYPASS_TOKEN` (secreto de 32 caracteres o más, configurado en Vercel).
 
 ### 2. Módulo: Directorio Médico (`src/pages/directorio.astro`)

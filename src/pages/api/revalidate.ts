@@ -47,6 +47,8 @@ export const POST: APIRoute = async ({ request, url }) => {
   if (paths.size === 0) {
     return json({ error: 'El médico no existe en el API; envía también "nombre" para limpiar su página' }, 422);
   }
+  // /maternidad muestra ginecólogos del API; se regenera con cualquier cambio de médico.
+  if (body.type === 'doctor') paths.add('/maternidad');
 
   const results = await Promise.all(
     [...paths].map(async (path) => {

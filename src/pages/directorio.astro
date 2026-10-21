@@ -397,6 +397,7 @@ const faqSchema = {
           if (currentPage < lastPage) loadMoreContainer.classList.remove('hidden');
           else loadMoreContainer.classList.add('hidden');
         } catch (error) {
+          console.error('Error buscando médicos:', error);
           if (!isLoadMore) { grid.innerHTML = ''; emptyState.classList.remove('hidden'); countEl.textContent = "Error de conexión temporal."; }
         }
       };
