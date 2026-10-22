@@ -1,6 +1,6 @@
 import type { APIRoute } from 'astro';
 import { ISR_BYPASS_TOKEN } from 'astro:env/server';
-import { doctorPath, getDoctor } from '../../lib/api';
+import { doctorPath, getDoctor, slugify } from '../../lib/api';
 
 /**
  * Webhook para el backend: regenera las páginas en caché (ISR) de un médico o artículo al guardarlo.
@@ -10,8 +10,9 @@ import { doctorPath, getDoctor } from '../../lib/api';
  *   { "type": "doctor", "id": 261, "nombre": "JOSE EDUARDO RIVERA GONZALEZ" }
  *   { "type": "article", "slug": "nuevo-slug", "previousSlug": "slug-anterior" }
  *
- * `nombre` y `previousSlug` son opcionales: sirven para limpiar la URL anterior cuando cambia el
- * nombre o el slug, o cuando el médico se desactiva y el API ya no lo devuelve.
+ * En un médico se regeneran su URL con ID y la anterior por nombre. `nombre` y `previousSlug` son
+ * opcionales: sirven para limpiar la URL anterior cuando cambia el nombre o el slug, o cuando el
+ * médico se desactiva y el API ya no lo devuelve.
  */
 export const prerender = false;
 
@@ -37,9 +38,14 @@ export const POST: APIRoute = async ({ request, url }) => {
     paths.add(`/blog/${body.slug}`);
     if (body.previousSlug) paths.add(`/blog/${body.previousSlug}`);
   } else if (body?.type === 'doctor' && body.id) {
+    // Además de la URL con ID, la anterior (/directorio/{nombre}), que redirige al primer médico con ese nombre.
+    const addDoctor = (doc: { id: number | string; nombre: string }) => {
+      paths.add(doctorPath(doc));
+      paths.add(`/directorio/${slugify(doc.nombre)}`);
+    };
     const doctor = await getDoctor(body.id);
-    if (doctor) paths.add(doctorPath(doctor));
-    if (body.nombre) paths.add(doctorPath({ id: body.id, nombre: body.nombre }));
+    if (doctor) addDoctor(doctor);
+    if (body.nombre) addDoctor({ id: body.id, nombre: body.nombre });
   } else {
     return json({ error: 'Se esperaba { type: "doctor", id } o { type: "article", slug }' }, 400);
   }
